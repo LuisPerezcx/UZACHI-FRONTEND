@@ -19,6 +19,7 @@ project-root/
 │   ├── store/                # Configuración de estado global (e.g., Redux, Context)
 │   ├── utils/                # Funciones y utilidades
 │   ├── App.js                # Componente principal de la aplicación
+|   ├── index.css             # CSS 
 │   ├── index.js              # Punto de entrada de la aplicación
 │   └── routes.js             # Configuración de rutas
 ├── .env                      # Variables de entorno
