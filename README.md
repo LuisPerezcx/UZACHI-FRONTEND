@@ -5,6 +5,7 @@ Repositorio del codigo fuente del frontend de la aplicacion web para UZACHI.
 
 La estructura de carpetas del proyecto se organiza de la siguiente manera:
 
+```
 project-root/
 ├── public/                   # Archivos públicos como index.html, favicon, etc.
 │   └── index.html            # Archivo principal de HTML
@@ -24,7 +25,7 @@ project-root/
 ├── .gitignore                # Archivos a ignorar por Git
 ├── package.json              # Dependencias y scripts
 └── README.md                 # Documentación del proyecto
-
+```
 
 ### Descripción de cada carpeta
 
