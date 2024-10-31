@@ -3,7 +3,7 @@ Repositorio del codigo fuente del frontend de la aplicacion web para UZACHI.
 
 ## Estructura a seguir en el repositorio
 
-###La nomenclatura a seguir es snake_case
+### La nomenclatura a seguir es snake_case
 
 La estructura de carpetas del proyecto se organiza de la siguiente manera:
 
