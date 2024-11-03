@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import NavAdmin from '../components/NavAdmin';
 import { BreadCrumb } from '../components/BreadCrumb';
-import { Modal, Button } from 'react-bootstrap';
+import { Link } from 'react-router-dom'; // Importa Link
+import { Modal } from 'react-bootstrap';
 
 // Importacion de los iconos para la pagia
 import iconFormulario from '../assets/icon-formulario.png';
@@ -82,7 +83,9 @@ export const PrincipalAdmin = () => {
             <div className='col tarjeta-border ms-2 me-2' > 
             <img src={iconInformeInterno}  style={{width: '120px'}}></img>
                 <h2 className='size-font-subsubtitle mt-2' style={{color: 'black'}}>Administración de los informes internos de UZACHI</h2>
-                <button className='style-button'>Administrar</button>
+                <Link to="ReportesInternos">
+                  <button className='style-button'>Administrar</button>
+                </Link>
             </div>
         </div>
         </Modal.Body>
