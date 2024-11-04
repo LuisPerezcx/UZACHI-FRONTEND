@@ -36,3 +36,43 @@
     transform: rotate(360deg);
   }
 }
+
+
+
+/*vista reportes semarnat*/
+
+.footer-logo {
+  width: 100px;
+  height: auto;
+}
+
+.social-icon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+}
+
+.social-image {
+  width: 32px;
+  height: 32px;
+}
+
+
+.text-blue {
+  color: rgb(55, 177, 221);
+  font-size: 1.2em;
+}
+
+.logo {
+  color: rgb(255, 255, 255);
+  font-size: 2.5em;
+}
+
+.barra_inferior {
+  background-color: #14C3A2;
+}
+
+
+
+/*vista reportes semarnat*/
