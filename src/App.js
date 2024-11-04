@@ -1,12 +1,12 @@
 import logo from './logo.svg';
 import './App.css';
+import { GestionTransporte } from './pages/GestionTransporte';
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <h1>UZACHI</h1>
+       
       </header>
     </div>
   );
