@@ -4,9 +4,9 @@ import { BreadCrumb } from '../components/BreadCrumb';
 import { Modal, Button } from 'react-bootstrap';
 
 // Importacion de los iconos para la pagia
-import iconFormulario from '../assets/icon-formulario.png';
+import iconFormulario from '../assets/icon-formuario.png';
 import iconUsuarioAdd from '../assets/icon-add-user.png';
-import iconInformes from '../assets/icon-informes.png';
+import iconInforme from '../assets/icon-informe.png';
 import iconFolios from '../assets/icon-folios.png';
 import iconInformeSemarnat from '../assets/icon-informe-semarnat.png'
 import iconInformeInterno from '../assets/icon-informe-interno.png'
@@ -51,7 +51,7 @@ export const PrincipalAdmin = () => {
             />
 
             <TarjetaAdmin
-                imgSrc={iconInformes}
+                imgSrc={iconInforme}
                 title="Informes"
                 description="Administra los informes internos e informes SEMARNAT"
                 buttons={[
