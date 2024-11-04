@@ -36,6 +36,7 @@ import './usuario.css';
     )}
 
 
+
     useEffect(() => { 
         
     },[])
@@ -57,6 +58,7 @@ import './usuario.css';
     <div className="form-group">
       <label htmlFor="userType">Tipo de usuario:</label>
       <select id="userType" value={tipoUsuario} onChange={(event )=>{setTipoUsuario(event.target.value)}}>
+      <option id='0'>Selecciona la opcion que quieres</option>
         <option id='1'>Usuario</option>
         <option id='2'>Administrador</option>
       </select>
@@ -66,7 +68,6 @@ import './usuario.css';
     </div>
   </div>
 </div>
-
 
 
 
