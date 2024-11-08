@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios'
 import SimulatedData from '../utils/SimulatedData';
 import InputWithClearButton from './InputWithClearButton/InputWithClearButton';
+import Footer from './Footer';
 
 /*
 Este componente recibe el endpoint del backend para los datos
@@ -40,7 +41,7 @@ function TableSearch({ endpoint, columns, filters, actions }) {
     }, []);
 
     return (
-        <div className='container-fluid'>
+        <div className='container-fluid mx-auto'>
             <div className="rounded mb-3 d-flex justify-content-center w-50 mx-auto">
                 <InputWithClearButton onInputChange={handleInputChange}></InputWithClearButton>
                 {filters && (
@@ -97,6 +98,7 @@ function TableSearch({ endpoint, columns, filters, actions }) {
                     ))}
                 </tbody>
             </table>
+            <Footer></Footer>
         </div>
     )
 }

@@ -4,19 +4,20 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import perfiIcon from '../assets/icon-perfil.png'
+import { Link } from 'react-router-dom'; 
 
 export const NavAdmin = () => {
   return (
     <div className='colorNav m-4' style={{borderRadius: 12}}>
       <Navbar expand="lg" style={{ color: 'white' }}>
         <Container>
-          <Navbar.Brand href="#home" className='size-font-title-nav' style={{color: 'white',}}>U Z A C H I</Navbar.Brand>
+          <Navbar.Brand href="/" className='size-font-title-nav' style={{color: 'white',}}>U Z A C H I</Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="ms-auto">
 
               <NavDropdown className='size-font-subtitle ' title={<span style={{ color: 'white' }}>Catalogos</span>}>
-                <NavDropdown.Item href="#Liga" className='dropdown-item'>Transporte</NavDropdown.Item>
+                <NavDropdown.Item href="/GestionTransporte" className='dropdown-item'>Transporte</NavDropdown.Item>
                 <NavDropdown.Item href="#Liga" className='dropdown-item'>Comunidades</NavDropdown.Item>
                 <NavDropdown.Item href="#Liga" className='dropdown-item'>Clientes frecuentes</NavDropdown.Item>
               </NavDropdown>

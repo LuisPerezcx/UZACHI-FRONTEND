@@ -3,6 +3,7 @@ import NavAdmin from '../components/NavAdmin';
 import { BreadCrumb } from '../components/BreadCrumb';
 import { Link } from 'react-router-dom'; // Importa Link
 import { Modal } from 'react-bootstrap';
+import Footer from '../components/Footer'
 
 // Importacion de los iconos para la pagia
 import iconFormulario from '../assets/icon-formuario.png';
@@ -78,7 +79,9 @@ export const PrincipalAdmin = () => {
             <div className='col tarjeta-border ms-2 me-2' > 
                 <img src={iconInformeSemarnat} style={{width: '120px'}}></img>
                 <h2 className='size-font-subsubtitle mt-2' style={{color: 'black'}}>Administración de los informes para SEMARNAT</h2>
-                <button className='style-button'>Administrar</button>
+                <Link to="ReportesSemarnat">
+                  <button className='style-button'>Administrar</button>
+                </Link>
             </div>
             <div className='col tarjeta-border ms-2 me-2' > 
             <img src={iconInformeInterno}  style={{width: '120px'}}></img>
@@ -90,6 +93,7 @@ export const PrincipalAdmin = () => {
         </div>
         </Modal.Body>
       </Modal>
+      <Footer></Footer>
     </div>
   );
 };

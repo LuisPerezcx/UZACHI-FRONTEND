@@ -1,7 +1,9 @@
 import React from 'react';
 import { Container, Row, Col, Table, Button, InputGroup, FormControl, Dropdown, DropdownButton } from 'react-bootstrap';
 
-function ReportsPage() {
+
+export const ReportesPage = () =>{
+
   return (
     <Container fluid className="reports-page">
       {/* Header */}
@@ -176,4 +178,3 @@ function ReportsPage() {
   );
 }
 
-export default ReportsPage;
