@@ -14,14 +14,13 @@
 }
 
 .App-header {
-  background-color: #282c34;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
+  color: black;
 }
 
 .App-link {
@@ -36,6 +35,137 @@
     transform: rotate(360deg);
   }
 }
+
+/* INICIO DE ESTILOS PARA PROYECTO UZACHI */
+
+/* VARIABLES DE COLOR, LLAMAR LA VARIABLE EN LUGAR DE AGREGAR EL CODIGO DE COLOR */
+:root {
+  --color-nav: #343A40;
+  --color-verde: #14C3A2;
+  --color-rojo: #FA4444;
+  --color-azul: #0192C7;
+  --color-gris: #595B5A;
+  --color-gris-opaco: #DEE2E6;
+}
+
+/* COLOR DE FONDO DEL NAV */
+.colorNav {
+  background-color: var(--color-nav);
+}
+
+/* TAMANO DE LOS TITULO */
+.size-font-title-nav{
+  font-size:3em !important;
+  color: black;
+  font-weight: bold;
+}
+
+.size-font-title{
+  font-size:2em !important;
+  color: var(--color-gris);
+}
+
+/* TAMANO DE LOS SUBTITULOS */
+.size-font-subtitle{
+  font-size:1.4em !important; 
+  color: white;
+  font-weight: bold !important;
+}
+
+/* TAMANO DE LOS SUBSUBTITULOS */
+.size-font-subsubtitle{
+  font-size: 0.9em;
+  font-weight:500;
+}
+
+/* COLOR DE LETRA DE LOS DROPDOWN */
+.dropdown-toggle::after {
+  color: white !important; 
+}
+
+.color-verde{
+  background-color: var(--color-verde);
+}
+
+/* HOVER PARA LOS ITEMS DEL DROPDOWN */
+.dropdown-item:hover {
+  background-color: var(--color-verde) !important;
+  color: white !important; 
+}
+
+
+/* ESTILO PARA BREADCRUMB */
+
+.breadcrumb {
+  background-color: #f8f9fa; /* Color de fondo */
+  padding: 10px; /* Espaciado */
+  border-radius: 10px; /* Bordes redondeados */
+  display: inline-block; /* Permitir que el fondo se ajuste al contenido */
+}
+
+.breadcrumb ul {
+  list-style-type: none; /* Eliminar viñetas */
+  padding: 0; /* Sin padding */
+  margin: 0; /* Sin margen */
+  display: flex; /* Flexbox para alinear en línea */
+}
+
+.breadcrumb-item {
+  padding: 5px 10px; /* Espaciado dentro de cada enlace */
+  border: 1px solid var(--color-gris-opaco); /* Borde alrededor de cada enlace */
+  border-radius: 5px; /* Bordes redondeados para los enlaces */
+  transition: background-color 0.4s; /* Efecto de transición */
+}
+
+.breadcrumb-item a {
+  text-decoration: none; /* Sin subrayado en el enlace */
+  color: var(--color-gris);
+}
+
+.breadcrumb-item:hover a {
+  color: white !important;
+}
+
+.breadcrumb-item:hover {
+  background-color: var(--color-verde); /* Color de fondo al pasar el mouse */
+}
+
+.breadcrumb-item:last-child {
+  border-bottom: none; /* Quita el borde inferior */
+}
+
+.breadcrumb-item:last-child a {
+  color: var(--color-verde);
+}
+
+/* FIN DE ESTILOS DE BREADCRUMB */
+
+
+/* ESITLO DE BORDE DE LAS TARJETAS */
+
+.tarjeta-border{
+  border-style: solid; 
+  border-radius: 5px;
+  border-color: var(--color-gris-opaco);
+  border-width: 1px;
+  padding-top: 1.5em;
+  padding-bottom: 1.5em;
+  padding-left: 10px;
+  padding-right: 10px;
+
+}
+
+/* FIN ESTILO DE LAS TARJETAS */
+
+/* ESTILO DE LOS BOTONES */
+.style-button{
+  background-color: var(--color-verde);
+  color: white;
+  border-radius: 5px;
+  padding: 6px;
+
+}
+/* FIN ESTILO DE LOS BOTONES */
 
 
 /* Login.css */
