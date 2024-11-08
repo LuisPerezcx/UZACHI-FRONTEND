@@ -4,6 +4,7 @@ import { ArrowRight, Pencil, Trash } from 'react-bootstrap-icons';
 import { json, Link, useNavigate, useOutletContext } from 'react-router-dom';
 import './usuario.css';
 
+
     export const Usuario = () => {
     const [usuarios, setUsuarios] = useState([{  
         id: 1,
@@ -45,33 +46,23 @@ import './usuario.css';
     return(
     <>  
 
-<div className="form-wrapper">
-  <div className="form-container">
-    <div className="form-group">
-      <label htmlFor="username">Nombre usuario:</label>
-      <input type="text" id="username" placeholder="" value={nombreUsuario} onChange={(event )=>{setNombreUsuario(event.target.value)}}/>
+<div class="container">
+    <h1>AGREGAR USUARIOS</h1>
+    <div class="form-group">
+        <label for="nombre">Nombre usuario:</label>
+        <input type="text" id="nombre" name="nombre"/>
+        <label for="contrasena">Contraseña:</label>
+        <input type="password" id="contrasena" name="contrasena"/>
+        <label for="tipo">Tipo de usuario:</label>
+        <select id="tipo" name="tipo">
+            <option value="" selected>Selecione una opcion</option>
+            <option value="Usuario">Usuario</option>
+            <option value="Administrador">Administrador</option>
+        </select>
     </div>
-    <div className="form-group">
-      <label htmlFor="password">Contraseña:</label>
-      <input type="password" id="password" placeholder="" value={contrasena} onChange={(event )=>{setContrasena(event.target.value);console.log(event.target.value)}}/>
-    </div>
-    <div className="form-group">
-      <label htmlFor="userType">Tipo de usuario:</label>
-      <select id="userType" value={tipoUsuario} onChange={(event )=>{setTipoUsuario(event.target.value)}}>
-      <option id='0'>Selecciona la opcion que quieres</option>
-        <option id='1'>Usuario</option>
-        <option id='2'>Administrador</option>
-      </select>
-    </div>
-    <div className="button-container">
-      <button type="submit" className="add-user-button">Agregar usuario</button>
-    </div>
-  </div>
-</div>
+    <button class="btn">Agregar usuario</button>
 
-
-
-<div className="form-wrapper">
+    <div className="form-wrapper">
   <div className="form-containertable">
   
     <table className='table table-striped table-hover'>
@@ -96,6 +87,9 @@ import './usuario.css';
     </table>
     </div>
     </div>
+    </div>
+
+
     </>)
   
 }
