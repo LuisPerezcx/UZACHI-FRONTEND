@@ -3,7 +3,7 @@ import { Routes, Route } from 'react-router-dom';
 import { PrincipalAdmin } from './pages/PrincipalAdmin';
 import { ReportesInternos } from './pages/ReportesInternos';
 import { ReportesPage } from './pages/ReportsPageSemarnat';
-import { GestionTransporte } from './pages/GestionTransporte';
+import { GestionTransporte } from './components/GestionTransporte';
 
 
 const AppRoutes = () => {

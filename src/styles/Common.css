@@ -1,0 +1,34 @@
+/* ESTILOS GENERALES PARA LOS BOTONES */
+.btn {
+    border-radius: 5px;
+    padding: 7px 8px;
+    font-weight: bold;
+    color: white;
+    cursor: pointer;
+    border: none;
+    transition: background-color 0.3s;
+}
+
+.btn-success {
+    background-color: var(--color-verde);
+}
+
+.btn-success:hover {
+    background-color: #28a183;
+}
+
+.btn-cancelar {
+    background-color: var(--color-rojo);
+}
+
+.btn-cancelar:hover {
+    background-color: #D73A3A;
+}
+
+.btn-regresar {
+    background-color: var(--color-azul);
+}
+
+.btn-regresar:hover {
+    background-color: #0078A0;
+}

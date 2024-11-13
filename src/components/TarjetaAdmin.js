@@ -9,7 +9,7 @@ export const TarjetaAdmin = ({ imgSrc, title, description, buttons }) => {
                 <p className='size-font-subsubtitle'>{description}</p>
                 <div>
                     {buttons.map((button, index) => (
-                        <button key={index} className='style-button' onClick={button.onClick}>
+                        <button key={index} className='btn btn-success' onClick={button.onClick}>
                             {button.label}
                         </button>
                     ))}

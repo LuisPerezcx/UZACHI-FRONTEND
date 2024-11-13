@@ -52,7 +52,7 @@ export const ReportesInternos = () => {
       <div className='justify-content-center container'>
         <h2 className='text-center mb-5'>REPORTES INTERNOS</h2>
         <div className='d-flex justify-content-end mb-3'>
-          <button className='style-button me-2' onClick={handleShow}>Generar reporte</button>
+          <button className='btn btn-success me-2' onClick={handleShow}>Generar reporte</button>
           <img src={excel} alt='excel'></img>
         </div>
         <div>
@@ -101,7 +101,7 @@ export const ReportesInternos = () => {
             {/* Botón Generar */}
             <div className='row mt-3'>
               <div className='col text-center'>
-                <button className='style-button' onClick={() => console.log("Generar reporte")}>
+                <button className='btn btn-success' onClick={() => console.log("Generar reporte")}>
                   Generar
                 </button>
               </div>
