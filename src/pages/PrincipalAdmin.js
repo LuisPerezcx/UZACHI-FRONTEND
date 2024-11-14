@@ -33,13 +33,13 @@ export const PrincipalAdmin = () => {
       <BreadCrumb links={links} />
       <h1 className='size-font-title text-center mb-4'>ADMINISTRADOR</h1>
       <div className='container align-items-center justify-content-center text-center'>
-        <div className='row'>
+        <div className='row' >
             <TarjetaAdmin
                 imgSrc={iconFormulario}
                 title="Formulario"
                 description="Registro de Remisión y Reembarque: Formulario"
                 buttons={[
-                { label: 'Acceder', onClick: () => console.log('Formulario clicado') }
+                    { label: 'Acceder', link: '/Formulario' } // Redirige a la ruta /Formulario
                 ]}
             />
 

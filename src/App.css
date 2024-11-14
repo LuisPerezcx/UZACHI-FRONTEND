@@ -154,6 +154,11 @@
   font-weight:500;
 }
 
+/* TAMANO DE LA LETRA DE LOS CAMPOS PARA LLENAR */
+.size-font-campo{
+  font-size: 1.2em;
+}
+
 /* COLOR DE LETRA DE LOS DROPDOWN */
 .dropdown-toggle::after {
   color: white !important; 
@@ -168,7 +173,6 @@
   background-color: var(--color-verde) !important;
   color: white !important; 
 }
-
 
 /* ESTILO PARA BREADCRUMB */
 
