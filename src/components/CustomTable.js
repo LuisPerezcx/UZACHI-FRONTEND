@@ -1,25 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Table from 'react-bootstrap/Table';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import basura from '../assets/basura.png';
-import lapiz from '../assets/lapiz.png';
 
 // Componente de tabla reutilizable
-function CustomTable({ data, columns, onEdit, onDelete, searchPlaceholder = 'Buscar...' }) {
+export function CustomTable({ data, columns, onEdit, onDelete, searchPlaceholder = 'Buscar...' }) {
 
-    // Estado para la búsqueda y el estado de carga
+    // Estado para la búsqueda
     const [searchQuery, setSearchQuery] = useState('');
-    const [loading, setLoading] = useState(true);
-
-    // Simulamos la carga de datos (puedes eliminar el useEffect si no se necesita simulación de carga)
-    useEffect(() => {
-        const loadData = async () => {
-            // Simular un retraso en la carga
-            await new Promise(resolve => setTimeout(resolve, 500));
-            setLoading(false);
-        };
-        loadData();
-    }, []);
 
     // Filtrado de datos según el criterio de búsqueda
     const filteredData = data.filter(item =>
@@ -27,11 +14,6 @@ function CustomTable({ data, columns, onEdit, onDelete, searchPlaceholder = 'Bus
             item[column.accessor].toLowerCase().includes(searchQuery.toLowerCase())
         )
     );
-
-    // Mostrar mensaje de carga mientras los datos se cargan
-    if (loading) {
-        return <div>Cargando...</div>;
-    }
 
     return (
         <div className="container">
@@ -51,8 +33,8 @@ function CustomTable({ data, columns, onEdit, onDelete, searchPlaceholder = 'Bus
                             {columns.map((column, index) => (
                                 <th key={index}>{column.header}</th>
                             ))}
-                            <th style={{ width: '50px' }}></th>
-                            <th style={{ width: '50px' }}></th>
+                            <th className="celda-icono"></th>
+                            <th className="celda-icono"></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -61,21 +43,21 @@ function CustomTable({ data, columns, onEdit, onDelete, searchPlaceholder = 'Bus
                                 {columns.map((column, colIndex) => (
                                     <td key={colIndex}>{item[column.accessor]}</td>
                                 ))}
-                                <td style={{ width: '50px', textAlign: 'center' }}>
-                                    <img
-                                        src={lapiz}
-                                        alt="Editar"
-                                        style={{ cursor: 'pointer'}}
-                                        onClick={() => onEdit(item)}
-                                    />
+                                <td className="celda-icono">
+                                    <button
+                                        className="boton-icono"
+                                        onClick={() => onEdit(item)}  
+                                        title="Editar">
+                                        <i className="bi bi-pencil-square icono-editar"></i>
+                                    </button>
                                 </td>
-                                <td style={{ width: '50px', textAlign: 'center' }}>
-                                    <img
-                                        src={basura}
-                                        alt="Eliminar"
-                                        style={{ cursor: 'pointer',marginRight: 30 }}
+                                <td className="celda-icono">
+                                    <button
+                                        className="boton-icono"
                                         onClick={() => onDelete(item)}
-                                    />
+                                        title="Eliminar">
+                                        <i className="bi bi-trash3 icono-basura"></i>
+                                    </button>
                                 </td>
                             </tr>
                         ))}
@@ -85,5 +67,3 @@ function CustomTable({ data, columns, onEdit, onDelete, searchPlaceholder = 'Bus
         </div>
     );
 }
-
-export default CustomTable;

@@ -1,10 +1,8 @@
 import React from 'react';
-import { Breadcrumb } from 'react-bootstrap'; // Make sure to import Breadcrumb
-import TablaTransporte from './TablaTransporte';
 import { FormularioTransporte } from './FormularioTransporte';
 import NavAdmin from './NavAdmin';
 import Footer from './Footer';
-import CustomTable from './CustomTable';
+import { CustomTable } from './CustomTable';
 
 export const GestionTransporte = () => {
 
@@ -30,6 +28,7 @@ export const GestionTransporte = () => {
   const handleDelete = (item) => {
     console.log('Eliminar', item);
   };
+  
   return (
     <div>
       <NavAdmin></NavAdmin>
@@ -37,8 +36,6 @@ export const GestionTransporte = () => {
       <div className="container my-5">
         <h2 className="text-center mb-4">Gestión de Transporte</h2>
       </div>
-      <TablaTransporte />
-
       <CustomTable
         data={transportData}
         columns={columns}
