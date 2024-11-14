@@ -14,14 +14,13 @@
 }
 
 .App-header {
-  background-color: #282c34;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
+  color: black;
 }
 
 .App-link {
@@ -36,3 +35,464 @@
     transform: rotate(360deg);
   }
 }
+
+
+
+/*vista reportes semarnat*/
+
+.footer-logo {
+  width: 100px;
+  height: auto;
+}
+
+.social-icon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+}
+
+.social-image {
+  width: 32px;
+  height: 32px;
+}
+
+
+.text-blue {
+  color: rgb(55, 177, 221);
+  font-size: 1.2em;
+}
+
+.logo {
+  color: rgb(255, 255, 255);
+  font-size: 2.5em;
+}
+
+.barra_inferior {
+  background-color: #14C3A2;
+}
+
+
+
+/*vista reportes semarnat*/
+
+/*Formulario de folios autorizados*/
+/* src/App.css */
+.App {
+  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.header {
+  background-color: #333;
+  color: white;
+  padding: 1em;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header h1 {
+  margin: 0;
+}
+
+.header nav a {
+  color: white;
+  margin: 0 1em;
+  text-decoration: none;
+}
+
+.content {
+  padding: 2em;
+}
+
+.footer {
+  background-color: #00b894;
+  color: white;
+  padding: 1em;
+  text-align: center;
+}
+
+/* INICIO DE ESTILOS PARA PROYECTO UZACHI */
+
+/* VARIABLES DE COLOR, LLAMAR LA VARIABLE EN LUGAR DE AGREGAR EL CODIGO DE COLOR */
+:root {
+  --color-nav: #343A40;
+  --color-verde: #14C3A2;
+  --color-rojo: #FA4444;
+  --color-azul: #0192C7;
+  --color-gris: #595B5A;
+  --color-gris-opaco: #DEE2E6;
+}
+
+/* COLOR DE FONDO DEL NAV */
+.colorNav {
+  background-color: var(--color-nav);
+}
+
+/* TAMANO DE LOS TITULO */
+.size-font-title-nav{
+  font-size:3em !important;
+  color: black;
+  font-weight: bold;
+}
+
+.size-font-title{
+  font-size:2em !important;
+  color: var(--color-gris);
+}
+
+/* TAMANO DE LOS SUBTITULOS */
+.size-font-subtitle{
+  font-size:1.4em !important; 
+  color: white;
+  font-weight: bold !important;
+}
+
+/* TAMANO DE LOS SUBSUBTITULOS */
+.size-font-subsubtitle{
+  font-size: 0.9em;
+  font-weight:500;
+}
+
+/* COLOR DE LETRA DE LOS DROPDOWN */
+.dropdown-toggle::after {
+  color: white !important; 
+}
+
+.color-verde{
+  background-color: var(--color-verde);
+}
+
+/* HOVER PARA LOS ITEMS DEL DROPDOWN */
+.dropdown-item:hover {
+  background-color: var(--color-verde) !important;
+  color: white !important; 
+}
+
+
+/* ESTILO PARA BREADCRUMB */
+
+.breadcrumb {
+  background-color: #f8f9fa; /* Color de fondo */
+  padding: 10px; /* Espaciado */
+  border-radius: 10px; /* Bordes redondeados */
+  display: inline-block; /* Permitir que el fondo se ajuste al contenido */
+}
+
+.breadcrumb ul {
+  list-style-type: none; /* Eliminar viñetas */
+  padding: 0; /* Sin padding */
+  margin: 0; /* Sin margen */
+  display: flex; /* Flexbox para alinear en línea */
+}
+
+.breadcrumb-item {
+  padding: 5px 10px; /* Espaciado dentro de cada enlace */
+  border: 1px solid var(--color-gris-opaco); /* Borde alrededor de cada enlace */
+  border-radius: 5px; /* Bordes redondeados para los enlaces */
+  transition: background-color 0.4s; /* Efecto de transición */
+}
+
+.breadcrumb-item a {
+  text-decoration: none; /* Sin subrayado en el enlace */
+  color: var(--color-gris);
+}
+
+.breadcrumb-item:hover a {
+  color: white !important;
+}
+
+.breadcrumb-item:hover {
+  background-color: var(--color-verde); /* Color de fondo al pasar el mouse */
+}
+
+.breadcrumb-item:last-child {
+  border-bottom: none; /* Quita el borde inferior */
+}
+
+.breadcrumb-item:last-child a {
+  color: var(--color-verde);
+}
+
+/* FIN DE ESTILOS DE BREADCRUMB */
+
+
+/* ESITLO DE BORDE DE LAS TARJETAS */
+
+.tarjeta-border{
+  border-style: solid; 
+  border-radius: 5px;
+  border-color: var(--color-gris-opaco);
+  border-width: 1px;
+  padding-top: 1.5em;
+  padding-bottom: 1.5em;
+  padding-left: 10px;
+  padding-right: 10px;
+
+}
+
+/* FIN ESTILO DE LAS TARJETAS */
+
+/* ESTILO DE LOS BOTONES */
+.style-button{
+  background-color: var(--color-verde);
+  color: white;
+  border-radius: 5px;
+  padding: 6px;
+
+}
+/* FIN ESTILO DE LOS BOTONES */
+
+
+/* Login.css */
+.login-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background-color: #ffffff;
+}
+
+.login-box {
+  background-color: #F6F6F6;
+  padding: 50px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.login-logo {
+  width: 135px;
+  border-radius: 10px 10px 0 0;
+  margin-left: 120px;
+}
+
+.position-relative {
+  position: relative;
+  margin-bottom: 30px;
+}
+
+.session-title {
+  position: absolute;
+  bottom: -10%;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: 'Poppins', sans-serif;
+  font-size: 32px;
+  color: white;
+  font-weight: bold;
+  display: inline-flex;
+  gap: 14px;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+}
+
+.iniciar-text {
+  color: #6C757D;
+}
+
+.form-check-label {
+  font-size: 12px;
+  color: #6C757D;
+}
+/*Texto de correo y contraseña*/
+.block-label {
+  display: block;
+  margin-bottom: 9px;
+}
+
+.form-label, small {
+  font-size: 24px;
+  color: #595B5A;
+}
+
+.text-center small {
+  font-size: 16px;
+  color: #6C757D;
+}
+.formulario{
+  margin-top: -19px;
+}
+.calculadora{
+  margin-top: -10px;
+  display: block;
+}
+
+.mostrar{
+  margin-top: -19px;
+  margin-left: -100px;
+}
+
+.ingresar{
+  margin-top: 20px;
+}
+
+.invitado{
+  margin-top: 20px;
+}
+.btn-success {
+  background-color: #14C3A2;
+  border-color: #14C3A2;
+  color: white;
+  font-weight: 800;
+  text-align: center;
+}
+
+.rounded-input {
+  border-radius: 5px;
+  padding: 3px;
+  font-size: 18px;
+  margin-bottom: 19px;
+}
+
+
+/*------------------------------FOOTER--------------------------------------*/
+
+.footer {
+  background-color: #ffffff; 
+  color:#595B5A; 
+  padding: 20px;
+  text-align: left;
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+}
+
+.footer-logo h1 {
+  font-size: 2em;
+  margin: 0;
+}
+
+.footer-logo p {
+  margin: 5px 0;
+}
+
+.footer-contact{
+  flex: 1;
+  margin-left: 80px;;
+}
+.footer-socials{
+  flex:1;
+  margin-left: 230px;
+}
+
+.footer-socials .social-links a {
+  margin-right: 10px;
+  color: #6C757D;
+  text-decoration: none;
+}
+
+.footer-bottom {
+  background-color: #14C3A2;
+  text-align: center;
+  color: white;
+  margin-top: 20px;
+  font-size: 1.5em;
+}
+/*liena de footer*/
+.footer-line {
+  height: 2px; 
+  background-color: #A5B4FC; 
+  margin: 10px 0; 
+}
+
+.footer-socials .social-images img {
+  width: 25px; 
+  height: 25px; 
+  margin-right: 10px;
+  margin-left:20px; 
+}
+
+.footer-socials .social-images .instagram {
+  margin-left: 42px; 
+}
+
+.footer-socials .social-images .whatsapp {
+  margin-left: 50px; 
+}
+
+.footer-socials .redes-socials{
+  margin-left: 40px;
+}
+.footer-contact p {
+  margin: 2px 0; 
+  white-space: nowrap;
+}
+.footer-contact h3{
+  margin-left: 100px;
+}
+
+.footer-logo img {
+  width: 100px; 
+  height: 140px; 
+  margin-right: 10px; 
+  margin-left: 40px;
+}
+
+
+/* ESTILOS PARA LA TABLA DE GESTION DE TRANSPORTE */
+.table thead th {
+  color: #14C3A2; 
+  font-weight: bold;
+  font-size: 1.2em; 
+}
+
+.table {
+  width: 60%; 
+  table-layout: auto; 
+}
+
+.table th,
+.table td {
+  padding: 12px; 
+  border: none;
+
+}
+.table img {
+  width: 27px; 
+  height: 27px; 
+  cursor: pointer; 
+}
+
+.buscar-input {
+  max-width: 300px;
+  margin-left: 130px; 
+}
+
+.form-wrapper {
+  max-width: 1000px; 
+  margin: 0 auto; 
+}
+
+.form-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.form-label {
+  font-size: 1rem;
+  margin-bottom: 10px;
+  margin-right: 20px;
+}
+
+.form-control {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s; 
+}
+
+.form-control:focus {
+  box-shadow: 0 4px 12px rgba(20, 195, 162, 0.5); 
+  border-color: #14C3A2; 
+}
+
+.btn-custom {
+  background-color: #14C3A2; 
+  border: none; 
+}
+
+.btn-custom:hover {
+  background-color: #12B28A; 
+}
+
+/* FIN DE LOS ESTILOS PARA LA TABLA DE GESTION DE TRANSPORTE */

@@ -1,0 +1,8 @@
+
+.input-group .input-group-text,
+.input-group .form-control {
+    color: var(--color-verde);
+}
+.input-group .input-group-text:hover {
+    cursor: pointer;
+}
