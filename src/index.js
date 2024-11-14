@@ -2,9 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
-import { Usuario } from './components/Usuario';
-import { ModificarUsuario } from './components/ModificarUsuario';
-import { EliminarUsuario } from './components/EliminarUsuario';
+import { Usuario } from './pages/Usuarios';
+import { ModificarUsuario } from './pages/ModificarUsuario';
+import { EliminarUsuario } from './pages/EliminarUsuario';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 
@@ -14,8 +14,8 @@ const router = createBrowserRouter([
       element: <Usuario />,
       children: [
         { path: "/usuario", element: <Usuario /> },
-        { path: "/usuario/modificar/:id", element: <ModificarUsuario /> },
-        { path: "/usuario/eliminar/:id", element: <EliminarUsuario /> }
+        { path: "/pages/modificar/:id", element: <ModificarUsuario /> },
+        { path: "/pages/eliminar/:id", element: <EliminarUsuario /> }
       ]
     }
   ])
@@ -25,3 +25,5 @@ const router = createBrowserRouter([
       <RouterProvider router={router} />
     </React.StrictMode>
   );
+
+  
