@@ -16,7 +16,7 @@ export function CustomTable({ data, columns, onEdit, onDelete, searchPlaceholder
     );
 
     return (
-        <div className="container">
+        <div className="container p-3">
             <div className="d-flex justify-content-start mb-3">
                 <input
                     type="text"
@@ -26,7 +26,7 @@ export function CustomTable({ data, columns, onEdit, onDelete, searchPlaceholder
                     onChange={e => setSearchQuery(e.target.value)}
                 />
             </div>
-            <div className="d-flex justify-content-center">
+            <div className="d-flex justify-content-center table-responsive">
                 <Table className="table" striped bordered hover >
                     <thead>
                         <tr>

@@ -46,6 +46,7 @@ export const GestionTransporte = () => {
        
        <FormularioTransporte/>
 
+  
        <Footer></Footer>
     </div>
   );

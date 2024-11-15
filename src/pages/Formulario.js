@@ -17,7 +17,6 @@ export const Formulario = () => {
                   </div>
                 </div>
                 <InformacionDocumento></InformacionDocumento>
-                
             </div>
         <Footer></Footer>
     </div>
