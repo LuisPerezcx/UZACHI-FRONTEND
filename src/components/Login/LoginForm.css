@@ -1,0 +1,52 @@
+/* Cambiar el tamaño y color de los textos de los campos (Correo Electrónico y Contraseña) */
+.form-label {
+    font-size: 3rem; 
+    color: var(--color-gris);  
+  }
+  
+  /* Cambiar el tamaño y color del texto de "Mostrar contraseña" */
+  .form-check-label {
+    font-size: 0.8rem; 
+    color: var(--color-gris); 
+  }
+  
+  /* Eliminar el espacio entre el checkbox y la etiqueta */
+  .form-check {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem; 
+    margin-left: 50px;
+  }
+  
+  /* Estilo del botón "Ingresar" */
+  .btn-success {
+    font-weight: bold;
+    background-color: var(--color-verde);
+    border-color: var(--color-verde); 
+  }
+  /* Ajustar el tamaño de las etiquetas y campos de texto */
+  .form-control {
+    font-size: 1.1rem; 
+    color: #6c757d; 
+  }
+  /* Para el formulario "Acceso a formulario" */
+  small {
+    color: #6c757d; 
+    font-size: 0.9rem;
+    font-weight: normal;
+  }
+
+  input.form-control {
+    max-width: 250px;
+    margin: 0 auto;
+  }
+  label.form-label {
+    font-size: 1.3rem; 
+    color: #333; 
+    font-family: 'Poppins', sans-serif;
+
+  }
+.card{
+    border-radius: 6%;
+}
+  
