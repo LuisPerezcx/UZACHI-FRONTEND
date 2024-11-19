@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './Formulario3.css';
+import '../styles/Formulario3.css';
 
 function Formulario3() {
   // Estados para manejar datos en ambas secciones
