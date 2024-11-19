@@ -3,6 +3,7 @@ import NavAdmin from '../components/NavAdmin'
 import { BreadCrumb } from '../components/BreadCrumb'
 import TableSearch from '../components/TableSearch';
 import { Modal } from 'react-bootstrap';
+import Footer from '../components/Footer';
 
 import excel from '../assets/excel.png'
 
@@ -55,7 +56,7 @@ export const ReportesInternos = () => {
           <button className='style-button me-2' onClick={handleShow}>Generar reporte</button>
           <img src={excel} alt='excel'></img>
         </div>
-        <div>
+        <div className="d-flex justify-content-center">
           <TableSearch
             endpoint={null}
             columns={columns}
@@ -109,6 +110,7 @@ export const ReportesInternos = () => {
           </div>
         </Modal.Body>
       </Modal>
+      <Footer></Footer>
     </div>
   )
 }

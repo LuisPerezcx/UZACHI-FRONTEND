@@ -4,6 +4,7 @@ import { PrincipalAdmin } from './pages/PrincipalAdmin';
 import { ReportesInternos } from './pages/ReportesInternos';
 import { ReportesPage } from './pages/ReportsPageSemarnat';
 import { GestionTransporte } from './pages/GestionTransporte';
+import { InformacionDestinatario } from './components/InformacionDestinatario/InformacionDestinatario';
 
 
 const AppRoutes = () => {
