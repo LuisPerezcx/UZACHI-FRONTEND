@@ -248,7 +248,6 @@
 
 /* FIN ESTILO DE LAS TARJETAS */
 
-<<<<<<< HEAD
 /* ESTILO DE LOS BOTONES */
 .style-button{
   background-color: var(--color-verde);
@@ -258,7 +257,6 @@
 
 }
 /* FIN ESTILO DE LOS BOTONES */
-=======
 /* Login.css */
 .login-container {
   display: flex;
@@ -443,7 +441,6 @@ small {
   margin-right: 10px;
   margin-left: 40px;
 }
->>>>>>> Desarrollo
 
 
 /* ESTILOS PARA LA TABLA DE GESTION DE TRANSPORTE */
