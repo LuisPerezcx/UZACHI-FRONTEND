@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios'
 import SimulatedData from '../utils/SimulatedData';
 import InputWithClearButton from './InputWithClearButton/InputWithClearButton';
-import Footer from './Footer';
 
 /*
 Este componente recibe el endpoint del backend para los datos
@@ -47,7 +46,7 @@ function TableSearch({ endpoint, columns, filters, actions }) {
                 {filters && (
                     <div className='dropdown'>
                         <button className='btn btn-sm' type="button" id={`dropdownMenuButtonFilter`} data-bs-toggle="dropdown" aria-expanded="false">
-                            <i className='bi bi-filter fs-3' style={{color:'var(--color-verde)'}}></i>
+                            <i className='bi bi-filter fs-3' style={{ color: 'var(--color-verde)' }}></i>
                         </button>
                         <ul className='dropdown-menu' aria-labelledby={`dropdownMenuButtonFilter`}>
                             {filters.map((action, actionIndex) => (
@@ -61,44 +60,45 @@ function TableSearch({ endpoint, columns, filters, actions }) {
                     </div>
                 )}
             </div>
-            <table className='table table-striped teble-hover shadow-lg text-center rounded-4 overflow-hidden'>
-                <thead>
-                    <tr>
-                        {columns.map((col, index) => (
-                            <th key={index}>{col.label}</th>
-                        ))}
-                        {actions && <th>Acciones</th>}
-                    </tr>
-                </thead>
-                <tbody>
-                    {filteredData.map((item, index) => (
-                        <tr key={index}>
-                            {columns.map((col, colIndex) => (
-                                <td key={colIndex}>{item[col.key]}</td>
+            <div className='d-flex justify-content-center'>
+                <table className='table table-striped teble-hover shadow-lg text-center rounded-4 overflow-hidden'>
+                    <thead>
+                        <tr>
+                            {columns.map((col, index) => (
+                                <th key={index}>{col.label}</th>
                             ))}
-                            {actions && (
-                                <td>
-                                    <div className='dropdown'>
-                                        <button className='btn  btn-sm' type="button" id={`dropdownMenuButton-${index}`} data-bs-toggle="dropdown" aria-expanded="false">
-                                            <i className='bi bi-three-dots-vertical'></i>
-                                        </button>
-                                        <ul className='dropdown-menu' aria-labelledby={`dropdownMenuButton-${index}`}>
-                                            {actions.map((action, actionIndex) => (
-                                                <li key={actionIndex}>
-                                                    <button onClick={() => action.handler(item)} className='dropdown-item' >
-                                                        {action.label}
-                                                    </button>
-                                                </li>
-                                            ))}
-                                        </ul>
-                                    </div>
-                                </td>
-                            )}
+                            {actions && <th>Acciones</th>}
                         </tr>
-                    ))}
-                </tbody>
-            </table>
-            <Footer></Footer>
+                    </thead>
+                    <tbody>
+                        {filteredData.map((item, index) => (
+                            <tr key={index}>
+                                {columns.map((col, colIndex) => (
+                                    <td key={colIndex}>{item[col.key]}</td>
+                                ))}
+                                {actions && (
+                                    <td>
+                                        <div className='dropdown'>
+                                            <button className='btn  btn-sm' type="button" id={`dropdownMenuButton-${index}`} data-bs-toggle="dropdown" aria-expanded="false">
+                                                <i className='bi bi-three-dots-vertical'></i>
+                                            </button>
+                                            <ul className='dropdown-menu' aria-labelledby={`dropdownMenuButton-${index}`}>
+                                                {actions.map((action, actionIndex) => (
+                                                    <li key={actionIndex}>
+                                                        <button onClick={() => action.handler(item)} className='dropdown-item' >
+                                                            {action.label}
+                                                        </button>
+                                                    </li>
+                                                ))}
+                                            </ul>
+                                        </div>
+                                    </td>
+                                )}
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            </div>
         </div>
     )
 }

@@ -1,40 +1,69 @@
-import React from 'react';
-import { Container, Row, Col, Table, Button, InputGroup, FormControl, Dropdown, DropdownButton } from 'react-bootstrap';
+import React, { useState } from 'react';
+import Footer from '../components/Footer';
+import NavAdmin from '../components/NavAdmin';
+
+import { Modal, Container, Row, Col, Table, Button, InputGroup, FormControl, Dropdown, DropdownButton, Pagination } from 'react-bootstrap';
+import PaginationTable from '../components/PaginationTable';
+
+export const ReportesPage = () => {
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
+  // Datos ficticios
+  const reportsData = [
+    { id: 1, name: "MOVIMIENTO DE MADERA ENE-JUN 2024", community: "Santiago Xiacuí", period: "2019 - 2020" },
+    { id: 2, name: "MOVIMIENTO DE MADERA JUL-DIC 2024", community: "San Juan Bautista", period: "2020 - 2021" },
+    { id: 3, name: "REPORTE DE ACTIVIDADES 2023", community: "Santa María Yolotepec", period: "2022 - 2023" },
+    { id: 4, name: "INFORME AMBIENTAL", community: "San Pedro Juchatengo", period: "2021 - 2022" },
+    { id: 5, name: "INVENTARIO DE BOSQUE 2022", community: "San José del Progreso", period: "2018 - 2019" },
+    { id: 6, name: "MOVIMIENTO DE MADERA ENE-JUN 2023", community: "Santo Domingo Albarradas", period: "2020 - 2021" },
+    { id: 7, name: "ANÁLISIS DE SUELO", community: "San Agustín Etla", period: "2023 - 2024" },
+    { id: 8, name: "REPORTE DE RESIDUOS", community: "San Bartolo Coyotepec", period: "2017 - 2018" },
+    { id: 9, name: "EVALUACIÓN DE IMPACTO", community: "Santa Catarina Juquila", period: "2016 - 2017" },
+    { id: 10, name: "REPORTE DE AGUA", community: "San Pablo Etla", period: "2021 - 2022" },
+    { id: 1, name: "MOVIMIENTO DE MADERA ENE-JUN 2024", community: "Santiago Xiacuí", period: "2019 - 2020" },
+    { id: 2, name: "MOVIMIENTO DE MADERA JUL-DIC 2024", community: "San Juan Bautista", period: "2020 - 2021" },
+    { id: 3, name: "REPORTE DE ACTIVIDADES 2023", community: "Santa María Yolotepec", period: "2022 - 2023" },
+    { id: 4, name: "INFORME AMBIENTAL", community: "San Pedro Juchatengo", period: "2021 - 2022" },
+    { id: 5, name: "INVENTARIO DE BOSQUE 2022", community: "San José del Progreso", period: "2018 - 2019" },
+    { id: 6, name: "MOVIMIENTO DE MADERA ENE-JUN 2023", community: "Santo Domingo Albarradas", period: "2020 - 2021" },
+    { id: 7, name: "ANÁLISIS DE SUELO", community: "San Agustín Etla", period: "2023 - 2024" },
+    { id: 8, name: "REPORTE DE RESIDUOS", community: "San Bartolo Coyotepec", period: "2017 - 2018" },
+    { id: 9, name: "EVALUACIÓN DE IMPACTO", community: "Santa Catarina Juquila", period: "2016 - 2017" },
+    { id: 10, name: "REPORTE DE AGUA", community: "San Pablo Etla", period: "2021 - 2022" },
+    { id: 1, name: "MOVIMIENTO DE MADERA ENE-JUN 2024", community: "Santiago Xiacuí", period: "2019 - 2020" },
+    { id: 2, name: "MOVIMIENTO DE MADERA JUL-DIC 2024", community: "San Juan Bautista", period: "2020 - 2021" },
+    { id: 3, name: "REPORTE DE ACTIVIDADES 2023", community: "Santa María Yolotepec", period: "2022 - 2023" },
+    { id: 4, name: "INFORME AMBIENTAL", community: "San Pedro Juchatengo", period: "2021 - 2022" },
+    { id: 5, name: "INVENTARIO DE BOSQUE 2022", community: "San José del Progreso", period: "2018 - 2019" },
+    { id: 6, name: "MOVIMIENTO DE MADERA ENE-JUN 2023", community: "Santo Domingo Albarradas", period: "2020 - 2021" },
+    { id: 7, name: "ANÁLISIS DE SUELO", community: "San Agustín Etla", period: "2023 - 2024" },
+    { id: 8, name: "REPORTE DE RESIDUOS", community: "San Bartolo Coyotepec", period: "2017 - 2018" },
+    { id: 9, name: "EVALUACIÓN DE IMPACTO", community: "Santa Catarina Juquila", period: "2016 - 2017" },
+    { id: 10, name: "REPORTE DE AGUA", community: "San Pablo Etla", period: "2021 - 2022" },
+  ];
 
 
-export const ReportesPage = () =>{
+  const columns = [
+    { header: 'ID', accessor: 'id' },
+    { header: 'Nombre documento', accessor: 'name' },
+    { header: 'Comunidad', accessor: 'community' },
+    { header: 'Periodo', accessor: 'period' },
+  ];
 
   return (
     <Container fluid className="reports-page">
-      {/* Header */}
-      <Row className="bg-dark text-white py-3 mx-3 mt-3 rounded">
-        <Col md={2}>
-          <h2 className="logo">UZACHI</h2>
-        </Col>
-        <Col md={10} className="d-flex justify-content-end align-items-center">
-          <Button variant="link" className="text-white">Informes</Button>
-          <Button variant="link" className="text-white">Historial</Button>
-          <Button variant="link" className="text-white">Contacto</Button>
-          <img src="usuario 1.png" alt="Usuario" className="user-profile ms-3" />
-          </Col>
-      </Row>
-
-      <Row className="mx-3">
-        <Col md={2} className="text-blue">
-          <span>Inicio</span> | <span>Informes</span>
-        </Col>
-      </Row>
-
-      <br/>
+      <NavAdmin/>
 
       {/* Reportes SEMARNAT */}
       <Row className="text-center my-4">
         <Col>
           <h3>REPORTES SEMARNAT</h3>
         </Col>
-      </Row>  
+      </Row>
 
-      <br/> 
+      <br/>
 
       {/* Barra de búsqueda y filtro */}
       <Row className="justify-content-center mb-4">
@@ -49,132 +78,53 @@ export const ReportesPage = () =>{
           </InputGroup>
         </Col>
         <Col md={2} className=" d-flex justify-content-center">
-        <Button style={{ backgroundColor: '#14C3A2', color: '#fff' }}>Generar reporte</Button>
-        </Col>  
+          <Button style={{ backgroundColor: '#14C3A2', color: '#fff' }} onClick={handleShow}>Generar reporte</Button>
+        </Col>
       </Row>
+
+      {/* Modal */}
+      <Modal show={show} onHide={handleClose} centered>
+        <Modal.Body>
+          <div className='container'>
+            {/* Fila de Fecha de Inicio */}
+            <div className='row mb-3'>
+              <div className='col-4 text-start'>
+                <label htmlFor="fechaInicio" className='form-label'>Fecha de inicio:</label>
+              </div>
+              <div className='col-8'>
+                <input type="date" id="fechaInicio" className='form-control' placeholder='Selecciona la fecha de inicio' />
+              </div>
+            </div>
+
+            {/* Fila de Fecha Final */}
+            <div className='row mb-3'>
+              <div className='col-4 text-start'>
+                <label htmlFor="fechaFinal" className='form-label'>Fecha final:</label>
+              </div>
+              <div className='col-8'>
+                <input type="date" id="fechaFinal" className='form-control' placeholder='Selecciona la fecha final' />
+              </div>
+            </div>
+
+            {/* Botón Generar */}
+            <div className='row mt-3'>
+              <div className='col text-center'>
+                <button className='style-button' onClick={() => console.log("Generar reporte")}>Generar</button>
+              </div>
+            </div>
+          </div>
+        </Modal.Body>
+      </Modal>
 
       {/* Tabla de informes */}
-      <Row className="justify-content-center">
+     {/* Tabla de informes */}
+     <Row className="justify-content-center">
         <Col md={10}>
-          <Table striped bordered hover>
-            <thead>
-              <tr>
-                <th>ID</th>
-                <th>Nombre documento</th>
-                <th>Comunidad</th>
-                <th>Periodo</th>
-                <th></th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>1</td>
-                <td>MOVIMIENTO DE MADERA ENE-JUN 2024</td>
-                <td>Santiago Xiacuí</td>
-                <td>2019 - 2020</td>
-                <td>
-                  <Dropdown align="end">
-                    <Dropdown.Toggle variant="link" id="dropdown-basic" className="text-dark">
-                      <i className="bi bi-three-dots-vertical"></i>
-                    </Dropdown.Toggle>
-                    <Dropdown.Menu>
-                      <Dropdown.Item>Descargar</Dropdown.Item>
-                      <Dropdown.Item>Imprimir</Dropdown.Item>
-                    </Dropdown.Menu>
-                  </Dropdown>
-                </td>
-              </tr>
-
-
-              <tr>
-                <td>1</td>
-                <td>MOVIMIENTO DE MADERA ENE-JUN 2024</td>
-                <td>Santiago Xiacuí</td>
-                <td>2019 - 2020</td>
-                <td>
-                  <Dropdown align="end">
-                    <Dropdown.Toggle variant="link" id="dropdown-basic" className="text-dark">
-                      <i className="bi bi-three-dots-vertical"></i>
-                    </Dropdown.Toggle>
-                    <Dropdown.Menu>
-                      <Dropdown.Item>Descargar</Dropdown.Item>
-                      <Dropdown.Item>Imprimir</Dropdown.Item>
-                    </Dropdown.Menu>
-                  </Dropdown>
-                </td>
-              </tr>
-              
-              
-              
-              <tr>
-                <td>1</td>
-                <td>MOVIMIENTO DE MADERA ENE-JUN 2024</td>
-                <td>Santiago Xiacuí</td>
-                <td>2019 - 2020</td>
-                <td>
-                  <Dropdown align="end">
-                    <Dropdown.Toggle variant="link" id="dropdown-basic" className="text-dark">
-                      <i className="bi bi-three-dots-vertical"></i>
-                    </Dropdown.Toggle>
-                    <Dropdown.Menu>
-                      <Dropdown.Item>Descargar</Dropdown.Item>
-                      <Dropdown.Item>Imprimir</Dropdown.Item>
-                    </Dropdown.Menu>
-                  </Dropdown>
-                </td>
-              </tr>
-            </tbody>
-          </Table>
+          <PaginationTable columns={columns} data={reportsData} itemsPerPage={5} />
         </Col>
       </Row>
 
-
-      {/* Footer */}
-      <Row className="bg-light text-center py-4 mt-4">
-      <Col md={4} className="d-flex align-items-center">
-        <p>Unión de Comunidades Productoras Forestales Zapotecos-Chinantecos de la Sierra Juárez</p>
-        <img src="logo_UZACHI.png" alt="Logo" className="footer-logo me-2" />
-      </Col>
-
-
-        <Col md={4}>
-          <p><strong>Contacto</strong></p>
-          <p>Teléfono: 951 539 2008</p>
-          <p>Correo: uzachi89@gmail.com</p>
-          <p>Dirección: Av. Hidalgo, 68760 Capulálpam de Méndez, Oax.</p>
-        </Col>
-
-        <Col md={4} className="text-center">
-          <p><strong>Redes Sociales</strong></p>
-
-          <div className="d-flex justify-content-center gap-3">
-            
-            <Button variant="link" href="" target="_blank" className="text-center social-icon">
-              <img src="facebook 9.png" alt="Facebook" className="social-image" />
-              <p className="text-black">Facebook</p>
-            </Button>
-
-            <Button variant="link" href="" target="_blank" className="text-center social-icon">
-              <img src="instagram 1.png" alt="Instagram" className="social-image" />
-              <p className="text-black">Instagram</p>
-            </Button>
-
-            <Button variant="link" href="" target="_blank" className="text-center social-icon">
-              <img src="whatsapp 24.png" alt="WhatsApp" className="social-image" />
-              <p className="text-black">WhatsApp</p>
-            </Button>
-          </div>
-        </Col>
-
-
-      </Row>
-
-       <Row className="barra_inferior text-white text-center py-3 mt-4">
-        <Col>
-          <p className="mb-0">@ 2024 Copyright: UZACHI</p>
-        </Col>
-      </Row>
+      <Footer/>
     </Container>
   );
-}
-
+};
