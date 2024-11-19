@@ -85,10 +85,10 @@ ESTILOS PARA LAS TABLAS DE REGISTROS*/
     justify-content: center; /* Centra la tabla en el contenedor */
 }
 
-/* Estilos para mejorar la responsividad de la tabla en pantallas pequeñas */
+/* Estilos para mejorar la responsividad de la tabla en pantallas pequeñas 
 .container {
     max-width: 100%;
-}
+}*/
 
 .buscar-input {
     width: 100%;
