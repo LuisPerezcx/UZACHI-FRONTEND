@@ -39,7 +39,7 @@ export const PrincipalAdmin = () => {
                 title="Formulario"
                 description="Registro de Remisión y Reembarque: Formulario"
                 buttons={[
-                { label: 'Acceder', onClick: () => console.log('Formulario clicado') }
+                { label: 'Acceder', onClick: () => console.log('Formulario clicado')   }
                 ]}
             />
 
@@ -79,7 +79,7 @@ export const PrincipalAdmin = () => {
             <div className='col tarjeta-border ms-2 me-2' > 
                 <img src={iconInformeSemarnat} style={{width: '120px'}}></img>
                 <h2 className='size-font-subsubtitle mt-2' style={{color: 'black'}}>Administración de los informes para SEMARNAT</h2>
-                <Link to="ReportesSemarnat">
+                <Link to="ReportesPage">
                   <button className='style-button'>Administrar</button>
                 </Link>
             </div>
