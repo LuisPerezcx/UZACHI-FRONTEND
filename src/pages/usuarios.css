@@ -4,7 +4,7 @@ body {
     align-items: center;
     /*  min-height: 100vh;*/
     margin: 0;
-    background-color: #ffffff;
+    /*background-color: #ffffff;*/
   }
   
   .container-center {
@@ -21,7 +21,7 @@ body {
     left: 50%;*/
     text-align: center;
     /*  width: 60%;*/
-    background-color: #ffffff;
+    /*background-color: #ffffff;*/
     /*padding: 200px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     */
