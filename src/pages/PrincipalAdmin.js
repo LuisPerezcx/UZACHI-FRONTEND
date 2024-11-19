@@ -80,14 +80,14 @@ export const PrincipalAdmin = () => {
                 <img src={iconInformeSemarnat} style={{width: '120px'}}></img>
                 <h2 className='size-font-subsubtitle mt-2' style={{color: 'black'}}>Administración de los informes para SEMARNAT</h2>
                 <Link to="ReportesSemarnat">
-                  <button className='style-button'>Administrar</button>
+                  <button className='btn btn-success'>Administrar</button>
                 </Link>
             </div>
             <div className='col tarjeta-border ms-2 me-2' > 
             <img src={iconInformeInterno}  style={{width: '120px'}}></img>
                 <h2 className='size-font-subsubtitle mt-2' style={{color: 'black'}}>Administración de los informes internos de UZACHI</h2>
                 <Link to="ReportesInternos">
-                  <button className='style-button'>Administrar</button>
+                  <button className='btn btn-success'>Administrar</button>
                 </Link>
             </div>
         </div>
