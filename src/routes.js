@@ -4,7 +4,7 @@ import { PrincipalAdmin } from './pages/PrincipalAdmin';
 import { ReportesInternos } from './pages/ReportesInternos';
 import { ReportesPage } from './pages/ReportsPageSemarnat';
 import { GestionTransporte } from './pages/GestionTransporte';
-import { InformacionDestinatario } from './components/InformacionDestinatario/InformacionDestinatario';
+import Formulario3 from './pages/Formulario3';
 
 
 const AppRoutes = () => {
@@ -14,6 +14,8 @@ const AppRoutes = () => {
       <Route path="/ReportesInternos" element={<ReportesInternos />} />
       <Route path='/ReportesSemarnat' element={<ReportesPage />}/>
       <Route path='/GestionTransporte' element={<GestionTransporte/>} />
+      <Route path='/Formulario3' element={<Formulario3/>} />
+
     </Routes>
   );
 };
