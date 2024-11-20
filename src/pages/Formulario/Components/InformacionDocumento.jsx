@@ -1,5 +1,5 @@
 import React from 'react'
-import { SelectCombo } from './SelectCombo'
+import { SelectCombo } from '../../../components/SelectCombo'
 
 export const InformacionDocumento = () => {
 
@@ -31,6 +31,7 @@ export const InformacionDocumento = () => {
 
   return (
     <div className='tarjeta-border px-5'> 
+        <h5 className="card-title size-font-title" style={{color:'var(--color-gris)',fontWeight:'bold'}}>Información del documento</h5> <br/>
         <div className='row'>
             <div className='col-md-6 col-lg-3 col-xxl-2 mt-3'>
                 <label className='size-font-campo'>Tipo de documento:</label>

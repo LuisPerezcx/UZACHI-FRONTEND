@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import '../styles/Formulario3.css';
+import '../../../styles/Formulario3.css';
 
 export const Formulario3 = () => {
   // Estados para manejar datos en ambas secciones
@@ -23,7 +23,7 @@ export const Formulario3 = () => {
   };
 
   return (
-    <div className="formulario3-container">
+    <div className="mt-4 justify-content-betwen">
       {/* Contenedor*/}
       <div className="formulario3-sections">
         {/* Sección Información sobre la materia */}

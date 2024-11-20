@@ -5,6 +5,7 @@ import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import perfiIcon from '../assets/icon-perfil.png'
 import { Link } from 'react-router-dom'; 
+import '../styles/NavAdmin.css'
 
 export const NavAdmin = () => {
   return (

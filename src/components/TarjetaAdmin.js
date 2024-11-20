@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import '../styles/TarjetaAdmin.css'
 
 export const TarjetaAdmin = ({ imgSrc, title, description, buttons }) => {
     return (
