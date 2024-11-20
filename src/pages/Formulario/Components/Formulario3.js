@@ -25,33 +25,47 @@ export const Formulario3 = () => {
   return (
     <div className="mt-4 justify-content-betwen">
       {/* Contenedor*/}
-      <div className="formulario3-sections">
+      <div className="formulario3-sections d-flex justify-content-between">
         {/* Sección Información sobre la materia */}
         <div className="formulario3-section materia-section">
           <h2>Información sobre la materia.</h2>
-          <div className="formulario3-field">
-            <label>Número y/o cantidad:</label>
-            <input
-              type="text"
-              value={numeroCantidad}
-              onChange={(e) => setNumeroCantidad(e.target.value)}
-            />
-          </div>
-          <div className="formulario3-field">
-            <label>Unidad de medida:</label>
-            <input
-              type="text"
-              value={unidadMedida}
-              onChange={(e) => setUnidadMedida(e.target.value)}
-            />
-          </div>
-          <div className="formulario3-field">
-            <label>Volumen y/o peso amparado:</label>
-            <input
-              type="text"
-              value={volumenPeso}
-              onChange={(e) => setVolumenPeso(e.target.value)}
-            />
+          <div className='row'>
+            <div className='col'>
+              <div className='row'>
+                <div className="formulario3-field">
+                  <label>Número y/o cantidad:</label>
+                  <input
+                    type="text"
+                    value={numeroCantidad}
+                    onChange={(e) => setNumeroCantidad(e.target.value)}
+                  />
+                </div>
+                <div className="formulario3-field">
+                  <label>Unidad de medida:</label>
+                  <input
+                    type="text"
+                    value={unidadMedida}
+                    onChange={(e) => setUnidadMedida(e.target.value)}
+                  />
+                </div>
+                <div className="formulario3-field">
+                  <label>Volumen y/o peso amparado:</label>
+                  <input
+                    type="text"
+                    value={volumenPeso}
+                    onChange={(e) => setVolumenPeso(e.target.value)}
+                  />
+                </div>
+              </div>
+            </div>
+            <div className='col'>
+              <div className='row' style={{height:'100%'}}>
+                <div className="col formulario3-field">
+                  <label>Agregar descripción:</label>
+                  <textarea placeholder="Escribe aquí..." style={{height: '100%'}} rows="3"></textarea>
+                </div>
+              </div>
+            </div>
           </div>
           <div className="formulario3-field">
             <label>Cantidad que ampara este documento con letra:</label>
@@ -61,10 +75,7 @@ export const Formulario3 = () => {
               onChange={(e) => setCantidadLetra(e.target.value)}
             />
           </div>
-          <div className="formulario3-field">
-            <label>Agregar descripción:</label>
-            <textarea placeholder="Escribe aquí..." rows="3"></textarea>
-          </div>
+          
 
           <div className="formulario3-actions">
             <button onClick={calcular}>Calculadora</button>
