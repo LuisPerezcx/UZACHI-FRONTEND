@@ -12,6 +12,7 @@ ESTILOS PARA LAS TABLAS DE REGISTROS*/
     cursor: pointer;
     border: none;
     transition: background-color 0.3s;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
 }
 
 .btn-success {
@@ -56,6 +57,24 @@ ESTILOS PARA LAS TABLAS DE REGISTROS*/
     font-size: 25px;
 }
 
+
+/* Estilos específicos para los botones de los íconos */
+#eye-icon-newPassword, #eye-icon-confirmPassword {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+    background: transparent;
+    border: none;
+  }
+  
+  /* Ajusta el padding de los inputs correspondientes */
+  #newPassword, #confirmPassword {
+    padding-right: 40px; /* Ajusta el valor según el espacio necesario */
+  }
+
+  
 /* ESTILOS PARA LAS TABLAS*/
 
 /* Clase para las celdas que contienen los íconos de editar y eliminar */
@@ -101,7 +120,7 @@ ESTILOS PARA LAS TABLAS DE REGISTROS*/
 
 .table th, .table td {
     padding: 8px;
-    font-size: 14px;
+    font-size: 17px;
     border: none;
     white-space: nowrap;
 }
