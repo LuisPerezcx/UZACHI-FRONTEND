@@ -1,7 +1,10 @@
 import React from 'react'
-import NavAdmin from '../components/NavAdmin'
-import Footer from '../components/Footer'
-import { InformacionDocumento } from '../components/InformacionDocumento'
+import NavAdmin from '../../components/NavAdmin'
+import Footer from '../../components/Footer'
+import { InformacionDocumento } from './Components/InformacionDocumento'
+import { InformacionTitular } from './Components/InformacionTitular'
+import {InformacionDestinatario} from './Components/InformacionDestinatario'
+import { Formulario3 } from './Components/Formulario3'
 
 export const Formulario = () => {
   return (
@@ -17,6 +20,9 @@ export const Formulario = () => {
                   </div>
                 </div>
                 <InformacionDocumento></InformacionDocumento>
+                <InformacionTitular></InformacionTitular>
+                <InformacionDestinatario></InformacionDestinatario>
+                <Formulario3></Formulario3>
             </div>
         <Footer></Footer>
     </div>

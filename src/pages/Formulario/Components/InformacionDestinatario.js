@@ -2,12 +2,10 @@ import React from 'react'
 
 export const InformacionDestinatario = () => {
     return (
-        <div className="container mt-5">
-            <div className="card">
-                <div className="card-body">
+        <div className="tarjeta-border px-5 mt-5">
                     <div className="row">
                         <div className="col-12 d-flex justify-content-between align-items-center mb-3">
-                            <h5 className="card-title">Información del destinatario</h5>
+                        <h5 className="card-title size-font-title" style={{color:'var(--color-gris)',fontWeight:'bold'}}>Información destinatario</h5> <br/>
                             <div className="d-flex align-items-center">
                                 <span className="me-2">Agregar datos de un cliente frecuente</span>
                                 <button className="btn btn-success btn-sm">Seleccionar cliente</button>
@@ -57,8 +55,6 @@ export const InformacionDestinatario = () => {
                             </div>
                         </div>
                     </form>
-                </div>
-            </div>
         </div>
     )
 }

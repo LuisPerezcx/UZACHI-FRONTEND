@@ -1,5 +1,5 @@
-import React from 'react'
-import { SelectCombo } from './SelectCombo'
+    import React from 'react'
+import { SelectCombo } from '../../../components/SelectCombo'
 
 export const InformacionDocumento = () => {
 
@@ -31,11 +31,12 @@ export const InformacionDocumento = () => {
 
   return (
     <div className='tarjeta-border px-5'> 
+        <h5 className="card-title size-font-title" style={{color:'var(--color-gris)',fontWeight:'bold'}}>Información del documento</h5> <br/>
         <div className='row'>
             <div className='col-md-6 col-lg-3 col-xxl-2 mt-3'>
-                <label className='size-font-campo'>Tipo de documento:</label>
+                <label className='form-label'>Tipo de documento:</label>
             </div>
-            <div className='col-md-6 col-lg-3 col-xxl-2 mt-3'>
+            <div className='col-md-6 col-lg-3 col-xxl-4 mt-3'>
             <SelectCombo 
                 para="ciudad" 
                 name="ciudad" 
@@ -44,9 +45,9 @@ export const InformacionDocumento = () => {
             />
             </div>
             <div className='col-md-6 col-lg-3 col-xxl-2 mt-3'>
-                <label className='size-font-campo'>Tipo de producto:</label>
+                <label className='form-label'>Tipo de producto:</label>
             </div>
-            <div className='col-md-6 col-lg-3 col-xxl-2 mt-3'>
+            <div className='col-md-6 col-lg-3 col-xxl-4 mt-3'>
                 <SelectCombo 
                     para="ciudad" 
                     name="ciudad" 
@@ -55,9 +56,9 @@ export const InformacionDocumento = () => {
                 />
             </div>
             <div className='col-md-6 col-lg-3 col-xxl-2 mt-3'>
-                <label className='size-font-campo'>Tipo de genero:</label>
+                <label className='form-label'>Tipo de genero:</label>
             </div>
-            <div className='col-md-6 col-lg-3 col-xxl-2 mt-3'>
+            <div className='col-md-6 col-lg-3 col-xxl-4 mt-3'>
                 <SelectCombo 
                     para="ciudad" 
                     name="ciudad" 
@@ -66,29 +67,29 @@ export const InformacionDocumento = () => {
                 />
             </div>
         </div>
-        <div className='row mt-5'>
-            <div className='col-md-6 col-lg-3  col-xxl-2'>
-                <p className='size-font-campo'>Fecha de exedicion:</p>
+        <div className='row'>
+            <div className='col-md-6 col-lg-3  col-xxl-2 mt-3'>
+                <label className='form-label'>Fecha de exedicion:</label>
             </div>
-            <div className='col-md-6 col-lg-3  col-xxl-1'>
+            <div className='col-md-6 col-lg-3  col-xxl-2 mt-3'>
                 <input type="date" class="form-control" id="calendarInput" onChange={fechaSeleccionada}/>
             </div>
-            <div className='col-md-6 col-lg-3  col-xxl-2'>
-                <p className='size-font-campo'>Hora expedicion:</p>
+            <div className='col-md-6 col-lg-3  col-xxl-2 mt-3'>
+                <label className='form-label'>Hora expedicion:</label>
             </div>
-            <div className='col-md-6 col-lg-3  col-xxl-1'>
+            <div className='col-md-6 col-lg-3  col-xxl-1 mt-3'>
                 <input type="time" class="form-control" id="timeInput"  onChange={horaSeleccionada}/>
             </div>
-            <div className='col-md-6 col-lg-3  col-xxl-2'>
-                <p className='size-font-campo'>Fecha vencimiento:</p>
+            <div className='col-md-6 col-lg-3  col-xxl-2 mt-3'>
+                <label className='form-label'>Fecha vencimiento:</label>
             </div>
-            <div className='col-md-6 col-lg-3  col-xxl-1'>
+            <div className='col-md-6 col-lg-3  col-xxl-3 mt-3'>
                 <input type="date" class="form-control" id="calendarInput" onChange={fechaSeleccionada}/>
             </div>
-            <div className='col-md-6 col-lg-3  col-xxl-2'>
-                <p className='size-font-campo'>Hora vencimiento:</p>
+            <div className='col-md-6 col-lg-3  col-xxl-2 mt-3'>
+                <label className='form-label'>Hora vencimiento:</label>
             </div>
-            <div className='col-md-6 col-lg-3 col-xxl-1'>
+            <div className='col-md-6 col-lg-3 col-xxl-1 mt-3'>
                 <input type="time" class="form-control" id="timeInput" onChange={horaSeleccionada}/>
             </div>
         </div>
