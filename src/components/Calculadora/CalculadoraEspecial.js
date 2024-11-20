@@ -2,7 +2,9 @@ import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 export const CalculadoraEspecial = () => {
+    //Estado para almacenar y mostrar los resultados
     const [resultado, setResultado] = useState('');
+    //Funcion para realizar el calculo 
     const calcular = () => {
         setResultado('Resultado del cálculo');
     };

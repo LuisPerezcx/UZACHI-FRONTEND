@@ -1,13 +1,23 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom'; 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './LoginForm.css';  
 import logo from '../../assets/Iniciar_sesion.png';
 
-function LoginForm() {
+export const LoginForm = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
 
+  const navigate = useNavigate();
+
+  const handleLogin = () => {
+    if (email && password) {
+      navigate('/');
+    } else {
+      alert('Por favor, completa los campos de usuario y contraseña');
+    }
+  };
   return (
     <div className="container d-flex align-items-center justify-content-center vh-100">
       <div
@@ -57,12 +67,15 @@ function LoginForm() {
               Mostrar contraseña
             </label>
           </div>
-          <button 
-            type="button" 
-            className="btn btn-success w-45 btn-sm mt-3" 
-            style={{ backgroundColor: 'var(--color-verde)', fontWeight: 'bold', border: 'var(--color-verde)' }}>
-            Ingresar
-          </button>
+          <div style={{ display: 'flex', justifyContent: 'center' }}>
+            <button 
+                onClick={handleLogin}
+                type="button" 
+                className="btn btn-success w-45 btn-sm mt-3" 
+                style={{ backgroundColor: 'var(--color-verde)', fontWeight: 'bold', border: 'var(--color-verde)' }}>
+                Ingresar
+            </button>
+           </div>
         </form>
         <small className="d-block text-muted mt-1">
           Acceso a formulario
@@ -72,4 +85,3 @@ function LoginForm() {
   );
 }
 
-export default LoginForm;

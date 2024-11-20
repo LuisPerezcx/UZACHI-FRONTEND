@@ -1,7 +1,7 @@
 import React from 'react';
 import { FormularioTransporte } from './FormularioTransporte';
 import NavAdmin from './NavAdmin';
-import Footer from './Footer';
+import { Footer } from './Footer';
 import { CustomTable } from './CustomTable';
 
 export const GestionTransporte = () => {

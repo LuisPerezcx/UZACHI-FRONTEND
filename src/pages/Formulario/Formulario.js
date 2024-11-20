@@ -1,6 +1,6 @@
 import React from 'react'
 import NavAdmin from '../../components/NavAdmin'
-import Footer from '../../components/Footer'
+import { Footer } from '../../components/Footer'
 import { InformacionDocumento } from './Components/InformacionDocumento'
 import { InformacionTitular } from './Components/InformacionTitular'
 import {InformacionDestinatario} from './Components/InformacionDestinatario'

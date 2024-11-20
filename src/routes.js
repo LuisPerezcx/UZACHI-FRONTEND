@@ -6,10 +6,7 @@ import { ReportesPage } from './pages/ReportsPageSemarnat';
 import { GestionTransporte } from './components/GestionTransporte';
 import { Formulario3 } from './pages/Formulario/Components/Formulario3';
 import { Formulario } from './pages/Formulario/Formulario';
-import { CalculadoraEspecial } from './components/Calculadora/CalculadoraEspecial';
-import { CalculadoraEstandar } from './components/Calculadora/CalculadoraEstandar';
-import { Calculadoras } from './pages/Calculadoras';
-import { InformacionRemitente } from './components/informacionRemitente/InformacionRemitente';
+import { AgregarComunidades } from './pages/Comunidades/AgregarComunidades';
 
 
 const AppRoutes = () => {
@@ -21,7 +18,8 @@ const AppRoutes = () => {
       <Route path='/GestionTransporte' element={<GestionTransporte/>} />
       <Route path='/Formulario' element={<Formulario/>} />
       <Route path='/Formulario3' element={<Formulario3/>} />
-      
+      <Route path='/AgregarComunidades' element={<AgregarComunidades/>} />
+
     </Routes>
   );
 };
