@@ -2,6 +2,7 @@ import React from 'react'
 import NavAdmin from '../components/NavAdmin'
 import Footer from '../components/Footer'
 import { InformacionDocumento } from '../components/InformacionDocumento'
+import { FormularioTransporte } from '../components/FormularioTransporte'
 
 export const Formulario = () => {
   return (
@@ -17,6 +18,7 @@ export const Formulario = () => {
                   </div>
                 </div>
                 <InformacionDocumento></InformacionDocumento>
+                <FormularioTransporte titulo="Transporte empleado" formularioForm={true} />
             </div>
         <Footer></Footer>
     </div>

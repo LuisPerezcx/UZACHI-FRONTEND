@@ -44,7 +44,14 @@ export const GestionTransporte = () => {
         searchPlaceholder="Buscar transporte..."
       />
        
-       <FormularioTransporte/>
+      <div className="d-flex justify-content-center">
+        <div style={{ width: '70%' }}>
+        <FormularioTransporte titulo="Formulario de Transporte" formularioForm={false} />
+
+
+        </div>
+      </div>
+
 
   
        <Footer></Footer>
