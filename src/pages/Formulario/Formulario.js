@@ -5,7 +5,7 @@ import { InformacionDocumento } from './Components/InformacionDocumento'
 import { InformacionTitular } from './Components/InformacionTitular'
 import {InformacionDestinatario} from './Components/InformacionDestinatario'
 import { Formulario3 } from './Components/Formulario3'
-import { FormularioTransporte } from '../components/FormularioTransporte'
+import { FormularioTransporte } from '../../components/FormularioTransporte'
 
 export const Formulario = () => {
   return (

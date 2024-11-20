@@ -3,7 +3,7 @@ import { Pencil, Trash } from "react-bootstrap-icons";
 
 import { Link } from "react-router-dom";
 
-const TablaUsuarios = ({ user }) => {
+export const TablaUsuarios = ({ user }) => {
   const [usuarios, setUsuarios] = useState([
     {
       id: 1,
@@ -65,7 +65,5 @@ const TablaUsuarios = ({ user }) => {
         </table>
       </div>
     </>
-  );
-};
-
-export default TablaUsuarios;
+  )
+}
