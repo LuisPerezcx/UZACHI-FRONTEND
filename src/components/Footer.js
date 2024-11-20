@@ -7,7 +7,7 @@ import instagramIcon from '../assets/instagram.png';
 import whatsappIcon from '../assets/whatsapp.jpeg';
 import logo from '../assets/logo.jpeg';
 
-const Footer = () => {
+export const Footer = () => {
   return (
     <footer className="text-center text-md-left" style={{backgroundColor: 'white'}}>
       <div style={{ borderTop: '1px solid #A5B4FC' }}></div>
@@ -54,4 +54,3 @@ const Footer = () => {
   );
 };
 
-export default Footer;

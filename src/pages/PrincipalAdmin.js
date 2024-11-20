@@ -3,7 +3,7 @@ import NavAdmin from '../components/NavAdmin';
 import { BreadCrumb } from '../components/BreadCrumb';
 import { Link } from 'react-router-dom'; // Importa Link
 import { Modal } from 'react-bootstrap';
-import Footer from '../components/Footer'
+import { Footer } from '../components/Footer'
 
 // Importacion de los iconos para la pagia
 import iconFormulario from '../assets/icon-formuario.png';

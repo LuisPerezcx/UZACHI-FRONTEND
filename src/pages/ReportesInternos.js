@@ -3,7 +3,7 @@ import NavAdmin from '../components/NavAdmin'
 import { BreadCrumb } from '../components/BreadCrumb'
 import TableSearch from '../components/TableSearch';
 import { Modal } from 'react-bootstrap';
-import Footer from '../components/Footer';
+import { Footer } from '../components/Footer';
 
 import excel from '../assets/excel.png'
 
