@@ -26,7 +26,7 @@ export const NavAdmin = () => {
               <NavDropdown className='size-font-subtitle ' title={<span style={{ color: 'white' }}>Catalogos</span>}>
                 <NavDropdown.Item href="/GestionTransporte" className='dropdown-item'>Transporte</NavDropdown.Item>
                 <NavDropdown.Item href="/AgregarComunidades" className='dropdown-item'>Comunidades</NavDropdown.Item>
-                <NavDropdown.Item href="#Liga" className='dropdown-item'>Clientes frecuentes</NavDropdown.Item>
+                <NavDropdown.Item href="/ClientesFrecuentes" className='dropdown-item'>Clientes frecuentes</NavDropdown.Item>
               </NavDropdown>
 
               <Nav.Link href="#home" className='size-font-subtitle mx-3' style={{ color: 'white' }}>Historial</Nav.Link>

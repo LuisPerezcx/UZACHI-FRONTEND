@@ -7,6 +7,7 @@ import { GestionTransporte } from './components/GestionTransporte';
 import { Formulario3 } from './pages/Formulario/Components/Formulario3';
 import { Formulario } from './pages/Formulario/Formulario';
 import { AgregarComunidades } from './pages/Comunidades/AgregarComunidades';
+import ClientesFrecuentes from './pages/ClientesFrecuentes/ClientesFrecuentes';
 
 
 const AppRoutes = () => {
@@ -16,6 +17,7 @@ const AppRoutes = () => {
       <Route path="/ReportesInternos" element={<ReportesInternos />} />
       <Route path='/ReportesSemarnat' element={<ReportesPage />}/>
       <Route path='/GestionTransporte' element={<GestionTransporte/>} />
+      <Route path='/ClientesFrecuentes' element={<ClientesFrecuentes/>} />
       <Route path='/Formulario' element={<Formulario/>} />
       <Route path='/Formulario3' element={<Formulario3/>} />
       <Route path='/AgregarComunidades' element={<AgregarComunidades/>} />
