@@ -9,6 +9,7 @@ import { Formulario } from './pages/Formulario';
 import { CalculadoraEspecial } from './components/Calculadora/CalculadoraEspecial';
 import { CalculadoraEstandar } from './components/Calculadora/CalculadoraEstandar';
 import { Calculadoras } from './pages/Calculadoras';
+import ClientesFrecuentes from './pages/ClientesFrecuentes/ClientesFrecuentes';
 
 
 const AppRoutes = () => {
@@ -18,6 +19,8 @@ const AppRoutes = () => {
       <Route path="/ReportesInternos" element={<ReportesInternos />} />
       <Route path='/ReportesSemarnat' element={<ReportesPage />}/>
       <Route path='/GestionTransporte' element={<GestionTransporte/>} />
+      <Route path='/ClientesFrecuentes' element={<ClientesFrecuentes/>} />
+
       <Route path='/Formulario' element={<Formulario/>} />
       <Route path='/Formulario3' element={<Formulario3/>} />
 
