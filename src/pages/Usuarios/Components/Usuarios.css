@@ -1,5 +1,5 @@
 body {
-    font-family: Arial, sans-serif;
+    font-family: Arial, sans-serif !important;
     justify-content: center;
     align-items: center;
     /*  min-height: 100vh;*/
@@ -16,15 +16,15 @@ body {
   
   .container {
     /*
-    position: absolute;
-    top: 50%;
-    left: 50%;*/
+      position: absolute;
+      top: 50%;
+      left: 50%;*/
     text-align: center;
     /*  width: 60%;*/
     /*background-color: #ffffff;*/
     /*padding: 200px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    */
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      */
   }
   
   h1 {
@@ -42,12 +42,21 @@ body {
     /*margin-right: 10px;*/
   }
   
+  .form-label2 {
+    white-space: nowrap;
+    white-space: nowrap;
+    color: #595b5a;
+  }
+  
+  .button-center {
+    margin-left: 0% !important;
+  }
   .form-group input,
   .form-group select {
     flex: 1;
     /*padding: 8px;
-    font-size: 16px;
-    margin-left: 10px;*/
+      font-size: 16px;
+      margin-left: 10px;*/
   }
   
   .form-group select {
@@ -58,22 +67,22 @@ body {
     background-color: #28a745;
     color: white;
     /*padding: 10px 20px;
-    font-size: 16px;*/
+      font-size: 16px;*/
     border: none;
     cursor: pointer;
   }
   
   table {
     /*width: 100%;
-    margin-top: 20px;
-  */
+      margin-top: 20px;
+    */
   }
   
   table,
   th,
   td {
     /*border: 1px solid #ddd;
-    padding: 10px;*/
+      padding: 10px;*/
     text-align: left;
   }
   
@@ -84,8 +93,8 @@ body {
   
   .actions img {
     /*width: 24px;
-    height: 24px;
-    margin: 0 5px;*/
+      height: 24px;
+      margin: 0 5px;*/
     cursor: pointer;
   }
   

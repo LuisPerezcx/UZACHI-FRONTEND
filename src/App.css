@@ -31,12 +31,21 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
 }
 
-
+/* VARIABLES DE COLOR, LLAMAR LA VARIABLE EN LUGAR DE AGREGAR EL CODIGO DE COLOR */
+:root {
+  --color-nav: #343A40;
+  --color-verde: #14C3A2;
+  --color-rojo: #FA4444;
+  --color-azul: #0192C7;
+  --color-gris: #595B5A;
+  --color-gris-opaco: #DEE2E6;
+}
 
 /*vista reportes semarnat*/
 
@@ -57,7 +66,6 @@
   height: 32px;
 }
 
-
 .text-blue {
   color: rgb(55, 177, 221);
   font-size: 1.2em;
@@ -72,14 +80,12 @@
   background-color: #14C3A2;
 }
 
-
-
 /*vista reportes semarnat*/
 
 /*Formulario de folios autorizados*/
 /* src/App.css */
 .App {
-  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
 .header {
@@ -114,87 +120,94 @@
 
 /* INICIO DE ESTILOS PARA PROYECTO UZACHI */
 
-/* VARIABLES DE COLOR, LLAMAR LA VARIABLE EN LUGAR DE AGREGAR EL CODIGO DE COLOR */
-:root {
-  --color-nav: #343A40;
-  --color-verde: #14C3A2;
-  --color-rojo: #FA4444;
-  --color-azul: #0192C7;
-  --color-gris: #595B5A;
-  --color-gris-opaco: #DEE2E6;
-}
-
 /* COLOR DE FONDO DEL NAV */
 .colorNav {
   background-color: var(--color-nav);
 }
 
 /* TAMANO DE LOS TITULO */
-.size-font-title-nav{
-  font-size:3em !important;
+.size-font-title-nav {
+  font-size: 3em !important;
   color: black;
   font-weight: bold;
 }
 
-.size-font-title{
-  font-size:2em !important;
+.size-font-title {
+  font-size: 2em !important;
   color: var(--color-gris);
 }
 
 /* TAMANO DE LOS SUBTITULOS */
-.size-font-subtitle{
-  font-size:1.4em !important; 
+.size-font-subtitle {
+  font-size: 1.4em !important;
   color: white;
   font-weight: bold !important;
 }
 
 /* TAMANO DE LOS SUBSUBTITULOS */
-.size-font-subsubtitle{
+.size-font-subsubtitle {
   font-size: 0.9em;
-  font-weight:500;
+  font-weight: 500;
+}
+
+/* TAMANO DE LA LETRA DE LOS CAMPOS PARA LLENAR */
+.size-font-campo{
+  font-size: 1.2em;
 }
 
 /* COLOR DE LETRA DE LOS DROPDOWN */
 .dropdown-toggle::after {
-  color: white !important; 
+  color: white !important;
 }
 
-.color-verde{
+.color-verde {
   background-color: var(--color-verde);
 }
 
 /* HOVER PARA LOS ITEMS DEL DROPDOWN */
 .dropdown-item:hover {
   background-color: var(--color-verde) !important;
-  color: white !important; 
+  color: white !important;
 }
-
 
 /* ESTILO PARA BREADCRUMB */
 
 .breadcrumb {
-  background-color: #f8f9fa; /* Color de fondo */
-  padding: 10px; /* Espaciado */
-  border-radius: 10px; /* Bordes redondeados */
-  display: inline-block; /* Permitir que el fondo se ajuste al contenido */
+  background-color: #f8f9fa;
+  /* Color de fondo */
+  padding: 10px;
+  /* Espaciado */
+  border-radius: 10px;
+  /* Bordes redondeados */
+  display: inline-block;
+  /* Permitir que el fondo se ajuste al contenido */
 }
 
 .breadcrumb ul {
-  list-style-type: none; /* Eliminar viñetas */
-  padding: 0; /* Sin padding */
-  margin: 0; /* Sin margen */
-  display: flex; /* Flexbox para alinear en línea */
+  list-style-type: none;
+  /* Eliminar viñetas */
+  padding: 0;
+  /* Sin padding */
+  margin: 0;
+  /* Sin margen */
+  display: flex;
+  /* Flexbox para alinear en línea */
 }
 
 .breadcrumb-item {
-  padding: 5px 10px; /* Espaciado dentro de cada enlace */
-  border: 1px solid var(--color-gris-opaco); /* Borde alrededor de cada enlace */
-  border-radius: 5px; /* Bordes redondeados para los enlaces */
-  transition: background-color 0.4s; /* Efecto de transición */
+  padding: 5px 10px;
+  /* Espaciado dentro de cada enlace */
+  border: 1px solid var(--color-gris-opaco);
+  /* Borde alrededor de cada enlace */
+  border-radius: 5px;
+  /* Bordes redondeados para los enlaces */
+  transition: background-color 0.4s;
+  /* Efecto de transición */
 }
 
 .breadcrumb-item a {
-  text-decoration: none; /* Sin subrayado en el enlace */
+  text-decoration: none;
+  /* Sin subrayado en el enlace */
   color: var(--color-gris);
 }
 
@@ -203,11 +216,13 @@
 }
 
 .breadcrumb-item:hover {
-  background-color: var(--color-verde); /* Color de fondo al pasar el mouse */
+  background-color: var(--color-verde);
+  /* Color de fondo al pasar el mouse */
 }
 
 .breadcrumb-item:last-child {
-  border-bottom: none; /* Quita el borde inferior */
+  border-bottom: none;
+  /* Quita el borde inferior */
 }
 
 .breadcrumb-item:last-child a {
@@ -219,8 +234,8 @@
 
 /* ESITLO DE BORDE DE LAS TARJETAS */
 
-.tarjeta-border{
-  border-style: solid; 
+.tarjeta-border {
+  border-style: solid;
   border-radius: 5px;
   border-color: var(--color-gris-opaco);
   border-width: 1px;
@@ -242,8 +257,6 @@
 
 }
 /* FIN ESTILO DE LOS BOTONES */
-
-
 /* Login.css */
 .login-container {
   display: flex;
@@ -294,13 +307,15 @@
   font-size: 12px;
   color: #6C757D;
 }
+
 /*Texto de correo y contraseña*/
 .block-label {
   display: block;
   margin-bottom: 9px;
 }
 
-.form-label, small {
+.form-label,
+small {
   font-size: 24px;
   color: #595B5A;
 }
@@ -309,32 +324,27 @@
   font-size: 16px;
   color: #6C757D;
 }
-.formulario{
+
+.formulario {
   margin-top: -19px;
 }
-.calculadora{
+
+.calculadora {
   margin-top: -10px;
   display: block;
 }
 
-.mostrar{
+.mostrar {
   margin-top: -19px;
   margin-left: -100px;
 }
 
-.ingresar{
+.ingresar {
   margin-top: 20px;
 }
 
-.invitado{
+.invitado {
   margin-top: 20px;
-}
-.btn-success {
-  background-color: #14C3A2;
-  border-color: #14C3A2;
-  color: white;
-  font-weight: 800;
-  text-align: center;
 }
 
 .rounded-input {
@@ -343,13 +353,11 @@
   font-size: 18px;
   margin-bottom: 19px;
 }
-
-
 /*------------------------------FOOTER--------------------------------------*/
 
 .footer {
-  background-color: #ffffff; 
-  color:#595B5A; 
+  background-color: #ffffff;
+  color: #595B5A;
   padding: 20px;
   text-align: left;
 }
@@ -368,12 +376,13 @@
   margin: 5px 0;
 }
 
-.footer-contact{
+.footer-contact {
   flex: 1;
-  margin-left: 80px;;
+  margin-left: 80px;
 }
-.footer-socials{
-  flex:1;
+
+.footer-socials {
+  flex: 1;
   margin-left: 230px;
 }
 
@@ -390,79 +399,59 @@
   margin-top: 20px;
   font-size: 1.5em;
 }
+
 /*liena de footer*/
 .footer-line {
-  height: 2px; 
-  background-color: #A5B4FC; 
-  margin: 10px 0; 
+  height: 2px;
+  background-color: #A5B4FC;
+  margin: 10px 0;
 }
 
 .footer-socials .social-images img {
-  width: 25px; 
-  height: 25px; 
+  width: 25px;
+  height: 25px;
   margin-right: 10px;
-  margin-left:20px; 
+  margin-left: 20px;
 }
 
 .footer-socials .social-images .instagram {
-  margin-left: 42px; 
+  margin-left: 42px;
 }
 
 .footer-socials .social-images .whatsapp {
-  margin-left: 50px; 
+  margin-left: 50px;
 }
 
-.footer-socials .redes-socials{
+.footer-socials .redes-socials {
   margin-left: 40px;
 }
+
 .footer-contact p {
-  margin: 2px 0; 
+  margin: 2px 0;
   white-space: nowrap;
 }
-.footer-contact h3{
+
+.footer-contact h3 {
   margin-left: 100px;
 }
 
 .footer-logo img {
-  width: 100px; 
-  height: 140px; 
-  margin-right: 10px; 
+  width: 100px;
+  height: 140px;
+  margin-right: 10px;
   margin-left: 40px;
 }
 
 
 /* ESTILOS PARA LA TABLA DE GESTION DE TRANSPORTE */
-.table thead th {
-  color: #14C3A2; 
-  font-weight: bold;
-  font-size: 1.2em; 
-}
-
-.table {
-  width: 60%; 
-  table-layout: auto; 
-}
-
-.table th,
-.table td {
-  padding: 12px; 
-  border: none;
-
-}
-.table img {
-  width: 27px; 
-  height: 27px; 
-  cursor: pointer; 
-}
-
 .buscar-input {
   max-width: 300px;
-  margin-left: 130px; 
+  margin-left: 130px;
 }
 
 .form-wrapper {
-  max-width: 1000px; 
-  margin: 0 auto; 
+  max-width: 1000px;
+  margin: 0 auto;
 }
 
 .form-title {
@@ -478,21 +467,20 @@
 
 .form-control {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  transition: box-shadow 0.3s; 
+  transition: box-shadow 0.3s;
 }
 
 .form-control:focus {
-  box-shadow: 0 4px 12px rgba(20, 195, 162, 0.5); 
-  border-color: #14C3A2; 
+  box-shadow: 0 4px 12px rgba(20, 195, 162, 0.5);
+  border-color: #14C3A2;
 }
 
-.btn-custom {
-  background-color: #14C3A2; 
-  border: none; 
+/* Estilo para evitar que los textos largos se dividan en varias líneas */
+.form-label {
+  white-space: nowrap;  /* Evita que el texto se divida */
+  overflow: hidden;     /* Oculta el desbordamiento si el texto es demasiado largo */
+  text-overflow: ellipsis; /* Muestra puntos suspensivos (...) si el texto es demasiado largo */
 }
 
-.btn-custom:hover {
-  background-color: #12B28A; 
-}
 
 /* FIN DE LOS ESTILOS PARA LA TABLA DE GESTION DE TRANSPORTE */

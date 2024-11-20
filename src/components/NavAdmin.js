@@ -12,7 +12,7 @@ export const NavAdmin = () => {
       <Navbar expand="lg" style={{ color: 'white' }}>
         <Container>
           <Navbar.Brand href="/" className='size-font-title-nav' style={{color: 'white',}}>U Z A C H I</Navbar.Brand>
-          <Navbar.Toggle aria-controls="basic-navbar-nav" />
+          <Navbar.Toggle aria-controls="basic-navbar-nav" style={{backgroundColor: 'white'}}/>
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="ms-auto">
 

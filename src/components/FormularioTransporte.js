@@ -56,12 +56,7 @@ export const FormularioTransporte = () => {
           </Row>
 
           <div className="text-center">
-            <Button 
-              variant="success" 
-              className="btn-custom" 
-              type="submit" 
-              size="sm"
-            >
+            <Button variant="success" className="btn btn-success" type="submit" size="sm">
               Agregar
             </Button>
           </div>
