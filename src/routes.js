@@ -4,6 +4,7 @@ import { PrincipalAdmin } from './pages/PrincipalAdmin';
 import { ReportesInternos } from './pages/ReportesInternos/ReportesInternos';
 import { ReportesPage } from './pages/ReportsPageSemarnat';
 import { GestionTransporte } from './components/GestionTransporte';
+import { Usuario } from './pages/Usuarios/Usuarios';
 import { Formulario3 } from './pages/Formulario/Components/Formulario3';
 import { Formulario } from './pages/Formulario/Formulario';
 import { AgregarComunidades } from './pages/Comunidades/AgregarComunidades';
@@ -18,6 +19,7 @@ const AppRoutes = () => {
       <Route path='/ReportesSemarnat' element={<ReportesPage />}/>
       <Route path='/GestionTransporte' element={<GestionTransporte/>} />
       <Route path='/ClientesFrecuentes' element={<ClientesFrecuentes/>} />
+      <Route path='/Usuarios' element={<Usuario/>} />
       <Route path='/Formulario' element={<Formulario/>} />
       <Route path='/Formulario3' element={<Formulario3/>} />
       <Route path='/AgregarComunidades' element={<AgregarComunidades/>} />
