@@ -4,15 +4,15 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import perfiIcon from '../assets/icon-perfil.png'
-import { CambioContraseñaModal } from './CambiarContraseña';
+import { CambioContraseñaModal } from './Usuario/CambiarContraseña';
 import { Link } from 'react-router-dom'; 
 import '../styles/NavAdmin.css'
 
 export const NavAdmin = () => {
   const [showModal, setShowModal] = useState(false);
 
-  const handleOpenModal = () => setShowModal(true);  // Función para abrir el modal
-  const handleCloseModal = () => setShowModal(false);  // Función para cerrar el modal
+  const handleOpenModal = () => setShowModal(true); 
+  const handleCloseModal = () => setShowModal(false);  
 
   return (
     <div className='colorNav m-4' style={{borderRadius: 12}}>
