@@ -3,7 +3,7 @@ import { Routes, Route } from 'react-router-dom';
 import { PrincipalAdmin } from './pages/PrincipalAdmin';
 import { ReportesInternos } from './pages/ReportesInternos/ReportesInternos';
 import { ReportesPage } from './pages/ReportsPageSemarnat';
-import { GestionTransporte } from './components/GestionTransporte';
+import { GestionTransporte } from './pages/Transporte/GestionTransporte';
 import { Usuario } from './pages/Usuarios/Usuarios';
 import { Formulario3 } from './pages/Formulario/Components/Formulario3';
 import { Formulario } from './pages/Formulario/Formulario';
