@@ -1,7 +1,7 @@
 import React from 'react';
 import { FormularioTransporte } from './FormularioTransporte';
 import NavAdmin from './NavAdmin';
-import Footer from './Footer';
+import { Footer } from './Footer';
 import { CustomTable } from './CustomTable';
 
 export const GestionTransporte = () => {
@@ -44,7 +44,14 @@ export const GestionTransporte = () => {
         searchPlaceholder="Buscar transporte..."
       />
        
-       <FormularioTransporte/>
+      <div className="d-flex justify-content-center">
+        <div style={{ width: '70%' }}>
+        <FormularioTransporte titulo="Formulario de Transporte" formularioForm={false} />
+
+
+        </div>
+      </div>
+
 
   
        <Footer></Footer>
