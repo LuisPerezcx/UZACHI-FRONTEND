@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { FormularioTransporte } from './FormularioTransporte';
 import NavAdmin from './NavAdmin';
 import Footer from './Footer';
@@ -7,17 +7,14 @@ import { CustomTable } from './CustomTable';
 export const GestionTransporte = () => {
 
   // Datos simulados
-  const transportData = [
-    { propietario: 'David Pérez', tipo: 'Tortón', capacidad: '3 Toneladas' },
-    { propietario: 'Efren Jiménez', tipo: 'Trocero', capacidad: '4 Toneladas' },
-    { propietario: 'Luis Hernández', tipo: 'Tortón', capacidad: '2 Toneladas' }
-  ];
+  const [transportData, setTransportData] = useState([]);
 
   // Configuración de columnas
   const columns = [
     { header: 'Propietario', accessor: 'propietario' },
     { header: 'Tipo', accessor: 'tipo' },
-    { header: 'Capacidad', accessor: 'capacidad' }
+    { header: 'Capacidad', accessor: 'capacidad' },
+    { header: 'placas', accessor: 'placas' }
   ];
 
   // Funciones para manejar la edición y eliminación
@@ -29,6 +26,11 @@ export const GestionTransporte = () => {
     console.log('Eliminar', item);
   };
   
+
+  const agregarTransporte = (newTransport) => {
+    setTransportData([...transportData, newTransport]);
+  };
+
   return (
     <div>
       <NavAdmin></NavAdmin>
@@ -44,7 +46,7 @@ export const GestionTransporte = () => {
         searchPlaceholder="Buscar transporte..."
       />
        
-       <FormularioTransporte/>
+       <FormularioTransporte onAdd={agregarTransporte} />
 
   
        <Footer></Footer>
