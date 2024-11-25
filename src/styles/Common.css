@@ -6,7 +6,7 @@ ESTILOS PARA LAS TABLAS DE REGISTROS*/
 /* ESTILOS GENERALES PARA LOS BOTONES */
 .btn {
     border-radius: 5px;
-    padding: 7px 8px;
+    padding: 6px 8px;
     font-weight: bold;
     color: white;
     cursor: pointer;
@@ -57,7 +57,12 @@ ESTILOS PARA LAS TABLAS DE REGISTROS*/
     font-size: 25px;
 }
 
-
+.icono-puntos-vertical {
+    color: black;
+}
+.icono-filtro {
+    color: var(--color-verde);
+}
 /* Estilos específicos para los botones de los íconos */
 #eye-icon-newPassword, #eye-icon-confirmPassword {
     position: absolute;

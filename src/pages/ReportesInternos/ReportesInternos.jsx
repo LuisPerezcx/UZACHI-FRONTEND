@@ -1,14 +1,14 @@
-import React, { useState } from 'react'
-import NavAdmin from '../../components/NavAdmin'
-import { BreadCrumb } from '../../components/BreadCrumb'
+// src/pages/ReportesInternos.js
+import React, { useState } from 'react';
+import NavAdmin from '../../components/NavAdmin';
+import { BreadCrumb } from '../../components/BreadCrumb';
 import { TableSearch } from '../../components/TableSearch';
-import { Modal } from 'react-bootstrap';
 import { Footer } from '../../components/Footer';
+import { GenerarReporteModal } from './ModalGenerarReporte'; 
 
-import excel from '../../assets/excel.png'
+import excel from '../../assets/excel.png';
 
 export const ReportesInternos = () => {
-
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -28,7 +28,7 @@ export const ReportesInternos = () => {
   const filters = [
     { label: 'No.', value: 'id' },
     { label: 'Nombre documento', value: 'name' },
-    { label: 'Periodo inicio', value: 'email' }
+    { label: 'Periodo inicio', value: 'filtropInicio' }
   ];
 
   const actions = [
@@ -39,22 +39,18 @@ export const ReportesInternos = () => {
     {
       label: 'Eliminar',
       handler: (item) => console.log('Delete item:', item),
-    },
-    {
-      label: 'Hola',
-      handler: (item) => console.log('hola item', item),
     }
   ];
 
   return (
     <div>
-      <NavAdmin></NavAdmin>
-      <BreadCrumb links={links}></BreadCrumb>
+      <NavAdmin />
+      <BreadCrumb links={links} />
       <div className='justify-content-center container'>
         <h2 className='text-center mb-5'>REPORTES INTERNOS</h2>
-        <div className='d-flex justify-content-end mb-3'>
-          <button className='btn btn-success me-2' onClick={handleShow}>Generar reporte</button>
-          <img src={excel} alt='excel'></img>
+        <div className='d-flex justify-content-end '>
+          <button className='btn btn-success me-3'  onClick={handleShow}>Generar reporte</button>
+          <img src={excel} alt='excel' />
         </div>
         <div className="d-flex justify-content-center">
           <TableSearch
@@ -65,52 +61,8 @@ export const ReportesInternos = () => {
           />
         </div>
       </div>
-      {/* Modal */}
-      <Modal show={show} onHide={handleClose} centered>
-        <Modal.Body>
-          <div className='container'>
-            {/* Fila de Fecha de Inicio */}
-            <div className='row mb-3'>
-              <div className='col-4 text-start'>
-                <label htmlFor="fechaInicio" className='form-label'>Fecha de inicio:</label>
-              </div>
-              <div className='col-8'>
-                <input
-                  type="date"
-                  id="fechaInicio"
-                  className='form-control'
-                  placeholder='Selecciona la fecha de inicio'
-                />
-              </div>
-            </div>
-
-            {/* Fila de Fecha Final */}
-            <div className='row mb-3'>
-              <div className='col-4 text-start'>
-                <label htmlFor="fechaFinal" className='form-label'>Fecha final:</label>
-              </div>
-              <div className='col-8'>
-                <input
-                  type="date"
-                  id="fechaFinal"
-                  className='form-control'
-                  placeholder='Selecciona la fecha final'
-                />
-              </div>
-            </div>
-
-            {/* Botón Generar */}
-            <div className='row mt-3'>
-              <div className='col text-center'>
-                <button className='btn btn-success' onClick={() => console.log("Generar reporte")}>
-                  Generar
-                </button>
-              </div>
-            </div>
-          </div>
-        </Modal.Body>
-      </Modal>
-      <Footer></Footer>
+      <GenerarReporteModal show={show} handleClose={handleClose} />
+      <Footer />
     </div>
-  )
-}
+  );
+};

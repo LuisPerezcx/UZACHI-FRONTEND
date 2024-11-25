@@ -2,7 +2,7 @@ import React from 'react';
 import { FormularioTransporte } from '../Formulario/Components/FormularioTransporte';
 import NavAdmin from '../../components/NavAdmin';
 import { Footer } from '../../components/Footer';
-import { CustomTable } from '../../components/CustomTable';
+import { CustomTable } from '../../components/TablaIconos';
 
 export const GestionTransporte = () => {
 

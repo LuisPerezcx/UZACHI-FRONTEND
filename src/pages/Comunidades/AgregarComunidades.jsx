@@ -2,7 +2,7 @@ import React from 'react'
 import { GestionComunidades } from '../../components/Comunidades/GestionComunidades'
 import { Footer } from '../../components/Footer'
 import NavAdmin from '../../components/NavAdmin'
-import { CustomTable } from '../../components/CustomTable'
+import { CustomTable } from '../../components/TablaIconos'
 
 export const AgregarComunidades = () => {
       // Datos simulados
