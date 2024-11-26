@@ -5,7 +5,7 @@ import { Footer } from './Footer';
 import { CustomTable } from './CustomTable';
 
 export const GestionTransporte = () => {
-  const [transportData, setTransportData] = useState([]);
+  const [datosTransporte, setDatosTransporte] = useState([]);
   const [editingTransport, setEditingTransport] = useState(null); // Transporte en edición
 
   const columns = [
@@ -20,22 +20,22 @@ export const GestionTransporte = () => {
   };
 
   const handleDelete = (item) => {
-    const updatedData = transportData.filter((data) => data !== item);
-    setTransportData(updatedData);
+    const updatedData = datosTransporte.filter((data) => data !== item);
+    setDatosTransporte(updatedData);
     console.log('Elemento eliminado:', item);
   };
 
   const handleSave = (newTransport) => {
     if (editingTransport) {
       // Actualizar transporte existente
-      const updatedData = transportData.map((data) =>
+      const updatedData = datosTransporte.map((data) =>
         data === editingTransport ? newTransport : data
       );
-      setTransportData(updatedData);
+      setDatosTransporte(updatedData);
       setEditingTransport(null); // Salir del modo de edición
     } else {
       // Agregar nuevo transporte
-      setTransportData([...transportData, newTransport]);
+      setDatosTransporte([...datosTransporte, newTransport]);
     }
   };
 
@@ -46,24 +46,17 @@ export const GestionTransporte = () => {
         <h2 className="text-center mb-4">Gestión de Transporte</h2>
       </div>
       <CustomTable
-        data={transportData}
+        data={datosTransporte}
         columns={columns}
         onEdit={handleEdit}
         onDelete={handleDelete}
         searchPlaceholder="Buscar transporte..."
       />
-       
-      <div className="d-flex justify-content-center">
-        <div style={{ width: '70%' }}>
-        <FormularioTransporte titulo="Formulario de Transporte" formularioForm={false} />
-
-
-        </div>
-      </div>
-
-
-  
-       <Footer></Footer>
+      <FormularioTransporte
+        onAdd={handleSave}
+        editingTransport={editingTransport}
+      />
+      <Footer />
     </div>
   );
 };
