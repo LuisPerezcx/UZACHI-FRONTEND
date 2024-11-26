@@ -10,7 +10,7 @@ import { CalculadoraEspecial } from './components/Calculadora/CalculadoraEspecia
 import { CalculadoraEstandar } from './components/Calculadora/CalculadoraEstandar';
 import { Calculadoras } from './pages/Calculadoras';
 import ClientesFrecuentes from './pages/ClientesFrecuentes/ClientesFrecuentes';
-
+import FoliosAsignados from './pages/FoliosAsignados/FoliosAsigandos';
 
 const AppRoutes = () => {
   return (
@@ -23,6 +23,8 @@ const AppRoutes = () => {
 
       <Route path='/Formulario' element={<Formulario/>} />
       <Route path='/Formulario3' element={<Formulario3/>} />
+
+      <Route path='/FoliosAsignados' element={<FoliosAsignados/>} />
 
     </Routes>
   );

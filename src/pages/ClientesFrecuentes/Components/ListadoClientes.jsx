@@ -40,6 +40,7 @@ const ListadoClientes = () => {
                   title="Eliminar"
                 >
                   <FaTrashAlt />
+                  
                 </button>
                 <button
                   className="btn btn-primary"
