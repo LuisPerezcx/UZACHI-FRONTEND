@@ -1,41 +1,157 @@
 import React, { useState } from 'react';
-import { SelectCombo } from './SelectCombo';
-import { Button } from './Boton';
+import { Form, Button, Row, Col } from 'react-bootstrap';
 
-export const FormularioTransporte = ({ titulo, formularioForm }) => {
-  const [formularioFormatoField, setFormularioFormatoField] = useState(formularioForm);
+export const FormularioTransporte = ({ onAdd, editingTransport }) => {
+  const [formData, setFormData] = useState({
+    medio: '',
+    marca: '',
+    modelo: '',
+    propietario: '',
+    capacidad: '',
+    placas: '',
+    otro: '',
+    tipo: '',
+  });
 
-  const opcionesTipoTransporte = [
-    { value: '', label: 'Selecciona un tipo de transporte' },
-    { value: 'torton', label: 'Tortón' },
-    { value: 'trocer', label: 'Trocer' },
-  ];
+  // Efecto para cargar los datos del transporte en edición
+  React.useEffect(() => {
+    if (editingTransport) {
+      setFormData(editingTransport);
+    }
+  }, [editingTransport]);
 
-  const handleInputChange = (event) => {
-    console.log(`${event.target.name}: ${event.target.value}`);
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
   };
 
-  console.log(formularioFormatoField); // Esto debería mostrar "true" cuando formularioForm es true
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (!formData.propietario || !formData.tipo || !formData.capacidad) {
+      alert('Por favor llena todos los campos requeridos.');
+      return;
+    }
+
+    onAdd(formData); // Llamar a la función `onAdd` con los datos del formulario
+
+    // Reiniciar el formulario
+    setFormData({
+      medio: '',
+      marca: '',
+      modelo: '',
+      propietario: '',
+      capacidad: '',
+      placas: '',
+      otro: '',
+      tipo: '',
+    });
+  };
 
   return (
-    <div className="tarjeta-border px-5">
-      <div className="row">
-        {/* Columna para centrar el título */}
-        <div className="col-12 text-center">
-          <h2 id="tituloFormulario">{titulo}</h2>
-        </div>
-      </div>
+    <div className="container mt-5">
+      <div className="form-wrapper">
+        <Form onSubmit={handleSubmit} className="p-4 border rounded shadow-sm bg-white small">
+          <h4 className="text-center mb-4 form-title">
+            {editingTransport ? 'Actualizar transporte' : 'Agregar transporte'}
+          </h4>
 
-      {/* Fila para el label y el botón */}
-      {formularioFormatoField && (
-        <div className="row">
-          <div className="col-12 text-end mt-2">
-            <label className="texto-pequeno-negrita mb-1">Agregar datos de un carro registrado</label>
-            <Button
-              label="Seleccionar carro"
-              onClick={() => { console.log('Botón seleccionar carro clickeado'); }}
-              className="btn-success"
-            />
+          <Row className="mb-3">
+            <Col md={4}>
+              <Form.Label>Medio de transporte</Form.Label>
+              <Form.Control
+                type="text"
+                name="medio"
+                value={formData.medio}
+                onChange={handleChange}
+                size="sm"
+              />
+            </Col>
+            <Col md={4}>
+              <Form.Label>Marca</Form.Label>
+              <Form.Control
+                type="text"
+                name="marca"
+                value={formData.marca}
+                onChange={handleChange}
+                size="sm"
+              />
+            </Col>
+            <Col md={4}>
+              <Form.Label>Modelo</Form.Label>
+              <Form.Control
+                type="text"
+                name="modelo"
+                value={formData.modelo}
+                onChange={handleChange}
+                size="sm"
+              />
+            </Col>
+          </Row>
+
+          <Row className="mb-3">
+            <Col md={8}>
+              <Form.Label>Propietario</Form.Label>
+              <Form.Control
+                type="text"
+                name="propietario"
+                value={formData.propietario}
+                onChange={handleChange}
+                size="sm"
+              />
+            </Col>
+            <Col md={4}>
+              <Form.Label>Capacidad</Form.Label>
+              <Form.Control
+                type="number"
+                name="capacidad"
+                value={formData.capacidad}
+                onChange={handleChange}
+                size="sm"
+              />
+            </Col>
+          </Row>
+
+          <Row className="mb-3">
+            <Col md={4}>
+              <Form.Label>Placas o matrícula</Form.Label>
+              <Form.Control
+                type="text"
+                name="placas"
+                value={formData.placas}
+                onChange={handleChange}
+                size="sm"
+              />
+            </Col>
+            <Col md={4}>
+              <Form.Label>Otro</Form.Label>
+              <Form.Control
+                type="text"
+                name="otro"
+                value={formData.otro}
+                onChange={handleChange}
+                size="sm"
+              />
+            </Col>
+            <Col md={4}>
+              <Form.Label>Tipo</Form.Label>
+              <Form.Select
+                name="tipo"
+                value={formData.tipo}
+                onChange={handleChange}
+                size="sm"
+              >
+                <option value="">Selecciona un tipo</option>
+                <option value="Torton">Tortón</option>
+                <option value="Trocer">Trocer</option>
+              </Form.Select>
+            </Col>
+          </Row>
+
+          <div className="text-center">
+            <Button variant="success" type="submit" size="sm">
+              {editingTransport ? 'Actualizar' : 'Agregar'}
+            </Button>
           </div>
         </div>
       )}
