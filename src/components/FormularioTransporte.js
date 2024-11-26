@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { Form, Button, Row, Col } from 'react-bootstrap';
 
-export const FormularioTransporte = ({onAdd}) => {
-
+export const FormularioTransporte = ({ onAdd, editingTransport }) => {
   const [formData, setFormData] = useState({
     medio: '',
     marca: '',
@@ -14,33 +13,27 @@ export const FormularioTransporte = ({onAdd}) => {
     tipo: '',
   });
 
+  // Efecto para cargar los datos del transporte en edición
+  React.useEffect(() => {
+    if (editingTransport) {
+      setFormData(editingTransport);
+    }
+  }, [editingTransport]);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
-  // Manejar el envío del formulario
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Validar datos básicos
     if (!formData.propietario || !formData.tipo || !formData.capacidad) {
       alert('Por favor llena todos los campos requeridos.');
       return;
     }
 
-    // Llamar a la función onAdd con los datos del formulario
-    onAdd({
-      medio: formData.medio,
-      marca: formData.marca,
-      modelo: formData.modelo,
-      propietario: formData.propietario,
-      capacidad: formData.capacidad,
-      placas: formData.placas,
-      otro: formData.otro,
-      tipo: formData.tipo,
-      capacidad: formData.capacidad,
-    });
+    onAdd(formData); // Llamar a la función `onAdd` con los datos del formulario
 
     // Reiniciar el formulario
     setFormData({
@@ -59,7 +52,9 @@ export const FormularioTransporte = ({onAdd}) => {
     <div className="container mt-5">
       <div className="form-wrapper">
         <Form onSubmit={handleSubmit} className="p-4 border rounded shadow-sm bg-white small">
-          <h4 className="text-center mb-4 form-title">Agregar transporte</h4>
+          <h4 className="text-center mb-4 form-title">
+            {editingTransport ? 'Actualizar transporte' : 'Agregar transporte'}
+          </h4>
 
           <Row className="mb-3">
             <Col md={4}>
@@ -121,7 +116,7 @@ export const FormularioTransporte = ({onAdd}) => {
             <Col md={4}>
               <Form.Label>Placas o matrícula</Form.Label>
               <Form.Control
-                type="number"
+                type="text"
                 name="placas"
                 value={formData.placas}
                 onChange={handleChange}
@@ -155,7 +150,7 @@ export const FormularioTransporte = ({onAdd}) => {
 
           <div className="text-center">
             <Button variant="success" type="submit" size="sm">
-              Agregar
+              {editingTransport ? 'Actualizar' : 'Agregar'}
             </Button>
           </div>
         </Form>

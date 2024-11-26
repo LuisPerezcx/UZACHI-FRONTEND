@@ -5,36 +5,43 @@ import Footer from './Footer';
 import { CustomTable } from './CustomTable';
 
 export const GestionTransporte = () => {
-
-  // Datos simulados
   const [transportData, setTransportData] = useState([]);
+  const [editingTransport, setEditingTransport] = useState(null); // Transporte en edición
 
-  // Configuración de columnas
   const columns = [
     { header: 'Propietario', accessor: 'propietario' },
     { header: 'Tipo', accessor: 'tipo' },
     { header: 'Capacidad', accessor: 'capacidad' },
-    { header: 'placas', accessor: 'placas' }
+    { header: 'Placas', accessor: 'placas' },
   ];
 
-  // Funciones para manejar la edición y eliminación
   const handleEdit = (item) => {
-    console.log('Editar', item);
+    setEditingTransport(item); // Establecer el transporte en edición
   };
 
   const handleDelete = (item) => {
-    console.log('Eliminar', item);
+    const updatedData = transportData.filter((data) => data !== item);
+    setTransportData(updatedData);
+    console.log('Elemento eliminado:', item);
   };
-  
 
-  const agregarTransporte = (newTransport) => {
-    setTransportData([...transportData, newTransport]);
+  const handleSave = (newTransport) => {
+    if (editingTransport) {
+      // Actualizar transporte existente
+      const updatedData = transportData.map((data) =>
+        data === editingTransport ? newTransport : data
+      );
+      setTransportData(updatedData);
+      setEditingTransport(null); // Salir del modo de edición
+    } else {
+      // Agregar nuevo transporte
+      setTransportData([...transportData, newTransport]);
+    }
   };
 
   return (
     <div>
-      <NavAdmin></NavAdmin>
-
+      <NavAdmin />
       <div className="container my-5">
         <h2 className="text-center mb-4">Gestión de Transporte</h2>
       </div>
@@ -45,11 +52,11 @@ export const GestionTransporte = () => {
         onDelete={handleDelete}
         searchPlaceholder="Buscar transporte..."
       />
-       
-       <FormularioTransporte onAdd={agregarTransporte} />
-
-  
-       <Footer></Footer>
+      <FormularioTransporte
+        onAdd={handleSave}
+        editingTransport={editingTransport}
+      />
+      <Footer />
     </div>
   );
 };
