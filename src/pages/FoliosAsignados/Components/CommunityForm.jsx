@@ -123,7 +123,7 @@ function CommunityForm({ onAddCommunity }) {
           </div>
         </div>
         <div className="d-flex justify-content-center mt-4 me-4">
-          <button type="submit" className="btn btn-primary">
+          <button type="submit" className="boton-guardar">
             Guardar Folio
           </button>
         </div>

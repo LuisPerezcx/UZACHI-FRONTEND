@@ -33,7 +33,7 @@ function FoliosAsignados() {
 
       {/* Botón para abrir el modal */}
       <div className="d-flex justify-content-center mb-4">
-        <button className="btn btn-primary" onClick={handleOpenModal}>
+        <button className="boton-guardar" onClick={handleOpenModal}>
           Agregar Comunidad
         </button>
       </div>
