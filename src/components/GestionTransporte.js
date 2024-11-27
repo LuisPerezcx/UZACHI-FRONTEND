@@ -52,10 +52,14 @@ export const GestionTransporte = () => {
         onDelete={handleDelete}
         searchPlaceholder="Buscar transporte..."
       />
-      <FormularioTransporte
-        onAdd={handleSave}
-        editingTransport={editingTransport}
-      />
+      <div className='px-5'>
+        <FormularioTransporte
+          onAdd={handleSave}
+          editingTransport={editingTransport}
+          title={'Hola'}
+          formularioForm={false}
+        />
+      </div>
       <Footer />
     </div>
   );
