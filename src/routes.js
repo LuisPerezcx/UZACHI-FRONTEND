@@ -9,7 +9,7 @@ import { Formulario3 } from './pages/Formulario/Components/Formulario3';
 import { Formulario } from './pages/Formulario/Formulario';
 import { AgregarComunidades } from './pages/Comunidades/AgregarComunidades';
 import ClientesFrecuentes from './pages/ClientesFrecuentes/ClientesFrecuentes';
-
+import FoliosAsignados from './pages/FoliosAsignados/FoliosAsigandos';
 
 const AppRoutes = () => {
   return (
@@ -23,6 +23,8 @@ const AppRoutes = () => {
       <Route path='/Formulario' element={<Formulario/>} />
       <Route path='/Formulario3' element={<Formulario3/>} />
       <Route path='/AgregarComunidades' element={<AgregarComunidades/>} />
+
+      <Route path='/FoliosAsignados' element={<FoliosAsignados/>} />
 
     </Routes>
   );

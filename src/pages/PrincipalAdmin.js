@@ -84,7 +84,7 @@ export const PrincipalAdmin = () => {
                 title="Folios"
                 description="Administra y asigna los folios asignado para cada comunidad"
                 buttons={[
-                { label: 'Asignar folios', onClick: () => console.log('Folios clicado')}
+                { label: 'Asignar folios', link: '/FoliosAsignados'}
                 ]}
             />
         </div>
