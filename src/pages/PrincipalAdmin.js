@@ -33,12 +33,14 @@ export const PrincipalAdmin = () => {
       icon: iconInformeSemarnat,
       title: 'Administración de los informes para SEMARNAT',
       buttonLabel: 'Administrar',
+      route: '/ReportesSemarnat',
       onClick: () => console.log('Administrar informes SEMARNAT')
     },
     {
       icon: iconInformeInterno,
       title: 'Administración de los informes internos de UZACHI',
       buttonLabel: 'Administrar',
+      route: '/ReportesInternos',
       onClick: () => console.log('Administrar informes internos')
     }
   ];
