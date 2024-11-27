@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { FaEdit, FaTrashAlt } from "react-icons/fa";
-import { CustomTable } from "../../../components/CustomTable";
+import { CustomTable } from "../../../components/TablaIconos";
 import FormularioCliente from "./FormularioCliente";
 
 const ListadoClientes = () => {
