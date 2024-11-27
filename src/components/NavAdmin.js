@@ -1,12 +1,25 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import perfiIcon from '../assets/icon-perfil.png'
-import { Link } from 'react-router-dom'; 
+import AccountModal from './MiPerfil/ProfileModal ';
 
 export const NavAdmin = () => {
+
+  const [showModal, setShowModal] = useState(false);
+
+  const handleShowModal = () => setShowModal(true);
+  const handleCloseModal = () => setShowModal(false);
+
+  // Datos simulados del usuario
+  const user = {
+    name: "Luis Alberto Hernandez",
+    email: "WichoHernandez@gmail.com",
+    profileImage: perfiIcon,
+  };
+
   return (
     <div className='colorNav m-4' style={{borderRadius: 12}}>
       <Navbar expand="lg" style={{ color: 'white' }}>
@@ -25,14 +38,15 @@ export const NavAdmin = () => {
               <Nav.Link href="#home" className='size-font-subtitle mx-3' style={{ color: 'white' }}>Historial</Nav.Link>
               <Nav.Link href="#link"  className='size-font-subtitle' style={{ color: 'white' }}>Contacto</Nav.Link>
               <NavDropdown className='ms-3' title={<img src={perfiIcon} style={{width: '40px'}}></img>}>
-                <NavDropdown.Item href="#Liga" className='dropdown-item'>Mi cuenta</NavDropdown.Item>
-                <NavDropdown.Item href="#Liga" className='dropdown-item'>Cambiar contraseña</NavDropdown.Item>
+              <NavDropdown.Item onClick={handleShowModal} className='dropdown-item'>Mi cuenta</NavDropdown.Item>
+              <NavDropdown.Item href="#Liga" className='dropdown-item'>Cambiar contraseña</NavDropdown.Item>
                 <NavDropdown.Item href="#Liga" className='dropdown-item'>Cerrar sesión</NavDropdown.Item>
               </NavDropdown>
             </Nav>
           </Navbar.Collapse>
         </Container>
-      </Navbar>
+      </Navbar> 
+      <AccountModal show={showModal} handleClose={handleCloseModal} user={user} />
     </div>
   );
 };
