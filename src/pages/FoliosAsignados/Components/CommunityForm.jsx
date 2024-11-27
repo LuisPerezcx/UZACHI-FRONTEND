@@ -47,7 +47,7 @@ function CommunityForm({ onAddCommunity }) {
               className="form-control"
               value={formData.name}
               onChange={handleChange}
-              placeholder="Capulalpam de Méndez"
+              placeholder=" Agregue nombre de la comunidad"
               required
             />
           </div>
@@ -62,7 +62,7 @@ function CommunityForm({ onAddCommunity }) {
               className="form-control"
               value={formData.initialFolio}
               onChange={handleChange}
-              placeholder="305"
+              placeholder=" "
             />
           </div>
 
@@ -76,7 +76,7 @@ function CommunityForm({ onAddCommunity }) {
               className="form-control"
               value={formData.municipality}
               onChange={handleChange}
-              placeholder="Capulalpam de Méndez"
+              placeholder="Agregue nombre del municipio"
             />
           </div>
 
@@ -90,7 +90,7 @@ function CommunityForm({ onAddCommunity }) {
               className="form-control"
               value={formData.finalFolio}
               onChange={handleChange}
-              placeholder="317"
+              placeholder=" "
             />
           </div>
 
@@ -118,7 +118,7 @@ function CommunityForm({ onAddCommunity }) {
               className="form-control"
               value={formData.assignedVol}
               onChange={handleChange}
-              placeholder="345623 m3"
+              placeholder="m3"
             />
           </div>
         </div>
