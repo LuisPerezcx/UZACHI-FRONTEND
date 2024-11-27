@@ -3,7 +3,17 @@ import { SelectCombo } from './SelectCombo';
 import { Button } from './Boton';
 import { Col, Form, Row } from 'react-bootstrap';
 
-export const FormularioTransporte = ({ onAdd, editingTransport }) => {
+export const FormularioTransporte = ({ onAdd, editingTransport, titulo, formularioForm }) => {
+  const [formularioFormatoField, setFormularioFormatoField] = useState(formularioForm);
+
+  const seleccionarCarro = () => {
+    console.log('Seleccionar carro clickeado');
+  };
+
+  const handleInputChange = (event) => {
+    console.log("${event.target.name}: ${event.target.value}");
+  };
+
   const [formData, setFormData] = useState({
     medio: '',
     marca: '',
@@ -51,13 +61,27 @@ export const FormularioTransporte = ({ onAdd, editingTransport }) => {
   };
 
   return (
-    <div className="container mt-5">
-      <div className="form-wrapper">
-        <Form onSubmit={handleSubmit} className="p-4 border rounded shadow-sm bg-white small">
-          <h4 className="text-center mb-4 form-title">
-            {editingTransport ? 'Actualizar transporte' : 'Agregar transporte'}
-          </h4>
+    <div className="tarjeta-border  mt-5 mb-5">
+      {/* Título del formulario */}
+      <div className="row">
+        <div className="col-12 text-center mb-4">
+          <h5 className="card-title size-font-title" style={{color:'var(--color-gris)',fontWeight:'bold'}}>
+            {titulo}
+          </h5>
+        </div>
+      </div>
 
+      {/* Agregar datos de carro registrado */}
+      {formularioFormatoField && (
+        <div className="row">
+          <div className="col-12 text-end mt-2">
+          <span className="me-2 form-label">Agregar datos de un carro registrado</span>
+            <Button label="Seleccionar carro" onClick={seleccionarCarro} className="btn-success" />
+          </div>
+        </div>
+      )}
+
+        <Form onSubmit={handleSubmit} >
           <Row className="mb-3">
             <Col md={4}>
               <Form.Label>Medio de transporte</Form.Label>
@@ -118,7 +142,7 @@ export const FormularioTransporte = ({ onAdd, editingTransport }) => {
             <Col md={4}>
               <Form.Label>Placas o matrícula</Form.Label>
               <Form.Control
-                type="text"
+                type="number"
                 name="placas"
                 value={formData.placas}
                 onChange={handleChange}
@@ -150,13 +174,27 @@ export const FormularioTransporte = ({ onAdd, editingTransport }) => {
             </Col>
           </Row>
 
+          {/* Campo conductor (condicional) */}
+        {formularioFormatoField && (
+          <div className="row g-3 mt-3">
+            <div className="col-md-4">
+              <label className="form-label">Conductor:</label>
+              <input
+                type="text"
+                className="form-control"
+                name="conductor"
+                onChange={handleInputChange}
+              />
+            </div>
+          </div>
+        )}
+
           <div className="text-center">
             <button variant="success" type="submit" size="sm">
               {editingTransport ? 'Actualizar' : 'Agregar'}
             </button>
           </div>
         </Form>
-      </div>
     </div>
   );
 };
