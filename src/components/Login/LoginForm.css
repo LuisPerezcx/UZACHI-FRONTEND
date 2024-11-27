@@ -1,7 +1,7 @@
 /* Cambiar el tamaño y color de los textos de los campos (Correo Electrónico y Contraseña) */
 .form-label {
     font-size: 3rem; 
-    color: var(--color-gris);  
+    color: var(--color-gris); 
   }
   
   /* Cambiar el tamaño y color del texto de "Mostrar contraseña" */

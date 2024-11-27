@@ -1,19 +1,15 @@
 import React, { Component } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { PrincipalAdmin } from './pages/PrincipalAdmin';
-import { ReportesInternos } from './pages/ReportesInternos';
-import { ReportesPage } from './pages/ReportsPageSemarnat';
-import { GestionTransporte } from './components/GestionTransporte';
-import { Formulario3 } from './pages/Formulario3';
-import { Formulario } from './pages/Formulario';
-import { CalculadoraEspecial } from './components/Calculadora/CalculadoraEspecial';
-import { CalculadoraEstandar } from './components/Calculadora/CalculadoraEstandar';
-import { Calculadoras } from './pages/Calculadoras';
-import { LoginForm } from './components/Login/LoginForm';
-import { Login } from './pages/Login';
-import { GestionComunidades } from './components/Comunidades/GestionComunidades';
+import { ReportesInternos } from './pages/ReportesInternos/ReportesInternos';
+import { ReportesPage } from './pages/ReportesSemarnat/ReportsPageSemarnat';
+import { GestionTransporte } from './pages/Transporte/GestionTransporte';
+import { Usuario } from './pages/Usuarios/Usuarios';
+import { Formulario3 } from './pages/Formulario/Components/Formulario3';
+import { Formulario } from './pages/Formulario/Formulario';
 import { AgregarComunidades } from './pages/Comunidades/AgregarComunidades';
-
+import ClientesFrecuentes from './pages/ClientesFrecuentes/ClientesFrecuentes';
+import FoliosAsignados from './pages/FoliosAsignados/FoliosAsigandos';
 
 const AppRoutes = () => {
   return (
@@ -22,10 +18,13 @@ const AppRoutes = () => {
       <Route path="/ReportesInternos" element={<ReportesInternos />} />
       <Route path='/ReportesSemarnat' element={<ReportesPage />}/>
       <Route path='/GestionTransporte' element={<GestionTransporte/>} />
+      <Route path='/ClientesFrecuentes' element={<ClientesFrecuentes/>} />
+      <Route path='/Usuarios' element={<Usuario/>} />
       <Route path='/Formulario' element={<Formulario/>} />
       <Route path='/Formulario3' element={<Formulario3/>} />
       <Route path='/prueba' element={<Calculadoras/>} />
       <Route path='/AgregarComunidades' element={<AgregarComunidades/>} />
+      <Route path='/FoliosAsignados' element={<FoliosAsignados/>} />
 
     </Routes>
   );

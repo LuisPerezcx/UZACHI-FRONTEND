@@ -10,7 +10,7 @@ el placeholder para el input del search
 y un array con los filtros de busqueda
 */
 
-function TableSearch({ endpoint, columns, filters, actions }) {
+export const TableSearch = ({ endpoint, columns, filters, actions }) => {
 
     const [data, setData] = useState([]);
     const [filteredData, setFilteredData] = useState([]);
@@ -45,8 +45,8 @@ function TableSearch({ endpoint, columns, filters, actions }) {
                 <InputWithClearButton onInputChange={handleInputChange}></InputWithClearButton>
                 {filters && (
                     <div className='dropdown'>
-                        <button className='btn btn-sm' type="button" id={`dropdownMenuButtonFilter`} data-bs-toggle="dropdown" aria-expanded="false">
-                            <i className='bi bi-filter fs-3' style={{ color: 'var(--color-verde)' }}></i>
+                        <button className='boton-icono' type="button" id={`dropdownMenuButtonFilter`} data-bs-toggle="dropdown" aria-expanded="false">
+                            <i className='bi icono-filtro bi-filter fs-1 ' ></i>
                         </button>
                         <ul className='dropdown-menu' aria-labelledby={`dropdownMenuButtonFilter`}>
                             {filters.map((action, actionIndex) => (
@@ -61,13 +61,13 @@ function TableSearch({ endpoint, columns, filters, actions }) {
                 )}
             </div>
             <div className='d-flex justify-content-center'>
-                <table className='table table-striped teble-hover shadow-lg text-center rounded-4 overflow-hidden'>
+                <table className='table table-striped teble-hover shadow-lg text-center rounded-4 overflow-hidden ' style={{ marginBottom: '100px' }}>
                     <thead>
                         <tr>
                             {columns.map((col, index) => (
                                 <th key={index}>{col.label}</th>
                             ))}
-                            {actions && <th>Acciones</th>}
+                            {actions && <th></th>}
                         </tr>
                     </thead>
                     <tbody>
@@ -79,8 +79,8 @@ function TableSearch({ endpoint, columns, filters, actions }) {
                                 {actions && (
                                     <td>
                                         <div className='dropdown'>
-                                            <button className='btn  btn-sm' type="button" id={`dropdownMenuButton-${index}`} data-bs-toggle="dropdown" aria-expanded="false">
-                                                <i className='bi bi-three-dots-vertical'></i>
+                                            <button className='boton-icono ' type="button" id={`dropdownMenuButton-${index}`} data-bs-toggle="dropdown" aria-expanded="false">
+                                                <i className='bi icono-puntos-vertical bi-three-dots-vertical'></i>
                                             </button>
                                             <ul className='dropdown-menu' aria-labelledby={`dropdownMenuButton-${index}`}>
                                                 {actions.map((action, actionIndex) => (
@@ -102,5 +102,4 @@ function TableSearch({ endpoint, columns, filters, actions }) {
         </div>
     )
 }
-export default TableSearch;
 

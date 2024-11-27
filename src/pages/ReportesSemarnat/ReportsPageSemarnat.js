@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { Footer } from '../components/Footer';
-import NavAdmin from '../components/NavAdmin';
+import { Footer } from '../../components/Footer';
+import NavAdmin from '../../components/NavAdmin';
 
 import { Modal, Container, Row, Col, Table, Button, InputGroup, FormControl, Dropdown, DropdownButton, Pagination } from 'react-bootstrap';
-import PaginationTable from '../components/PaginationTable';
+import PaginationTable from '../../components/PaginationTable';
 
 export const ReportesPage = () => {
   const [show, setShow] = useState(false);

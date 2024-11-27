@@ -1,4 +1,5 @@
 import React from 'react'
+import '../styles/BreadCrumb.css'
 
 export const BreadCrumb = ({links}) => {
   return (

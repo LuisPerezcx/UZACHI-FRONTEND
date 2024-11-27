@@ -1,0 +1,39 @@
+.custom-btn-red {
+    background-color: red;
+    border-color: red;
+    color: white;
+  }
+  
+  .custom-btn-green {
+    background-color: #14C3A2;
+    border-color: #14C3A2;
+    color: white;
+  }
+  .centrar{
+    justify-content: left;
+    text-align: center;
+    
+    color: #14C3A2;
+  }
+
+  .boton-guardar{
+    margin-top: 2%;
+    background-color: #14C3A2;
+    border-radius: 2%;
+    border-radius: 5px;
+    justify-content: center;
+    font-weight: bold;
+    margin-left: 1%;
+  }
+  
+  .boton-guardar {
+    background-color: #14C3A2;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
+  
