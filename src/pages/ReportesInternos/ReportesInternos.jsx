@@ -1,10 +1,11 @@
 import React, { useState } from 'react'
-import NavAdmin from '../components/NavAdmin'
-import { BreadCrumb } from '../components/BreadCrumb'
-import TableSearch from '../components/TableSearch';
+import NavAdmin from '../../components/NavAdmin'
+import { BreadCrumb } from '../../components/BreadCrumb'
+import { TableSearch } from '../../components/TableSearch';
 import { Modal } from 'react-bootstrap';
+import { Footer } from '../../components/Footer';
 
-import excel from '../assets/excel.png'
+import excel from '../../assets/excel.png'
 
 export const ReportesInternos = () => {
 
@@ -52,10 +53,10 @@ export const ReportesInternos = () => {
       <div className='justify-content-center container'>
         <h2 className='text-center mb-5'>REPORTES INTERNOS</h2>
         <div className='d-flex justify-content-end mb-3'>
-          <button className='style-button me-2' onClick={handleShow}>Generar reporte</button>
+          <button className='btn btn-success me-2' onClick={handleShow}>Generar reporte</button>
           <img src={excel} alt='excel'></img>
         </div>
-        <div>
+        <div className="d-flex justify-content-center">
           <TableSearch
             endpoint={null}
             columns={columns}
@@ -101,7 +102,7 @@ export const ReportesInternos = () => {
             {/* Botón Generar */}
             <div className='row mt-3'>
               <div className='col text-center'>
-                <button className='style-button' onClick={() => console.log("Generar reporte")}>
+                <button className='btn btn-success' onClick={() => console.log("Generar reporte")}>
                   Generar
                 </button>
               </div>
@@ -109,6 +110,7 @@ export const ReportesInternos = () => {
           </div>
         </Modal.Body>
       </Modal>
+      <Footer></Footer>
     </div>
   )
 }

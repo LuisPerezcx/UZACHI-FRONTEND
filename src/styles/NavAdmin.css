@@ -1,0 +1,17 @@
+/* COLOR DE FONDO DEL NAV */
+.colorNav {
+    background-color: var(--color-nav);
+}
+
+.header nav a {
+    color: white;
+    margin: 0 1em;
+    text-decoration: none;
+}
+
+/* TAMANO DE LOS TITULO del NAV*/
+.size-font-title-nav {
+    font-size: 3em !important;
+    color: black;
+    font-weight: bold;
+}

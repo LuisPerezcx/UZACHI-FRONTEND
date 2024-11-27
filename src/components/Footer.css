@@ -1,0 +1,46 @@
+footer {
+    background-color: white;
+  }
+  
+  .custom-footer-line {
+    background-color: var(--color-verde);
+    color: white;             
+  }
+
+
+.text-left p {
+    text-align: left !important;
+}
+.footer-title {
+  color:  var(--color-gris); 
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 1rem; 
+}
+
+.social-icons {
+  margin-top: 0.5rem; 
+  display: flex;
+  justify-content: center;
+}
+
+.social-icons a img {
+  margin: 0 10px;
+  width: 30px; 
+}
+
+.email-link {
+  text-decoration: none; 
+  color: inherit;
+  border-bottom: 1px solid #292929;
+}
+
+.email-link:hover {
+  color: inherit; 
+}
+.paragraph-spacing {
+  margin-top: 40px; 
+  text-align: left !important;
+
+}
+

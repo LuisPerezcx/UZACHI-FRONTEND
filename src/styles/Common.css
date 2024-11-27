@@ -1,0 +1,159 @@
+/*AQUI ENCONTRARAS LOS ESTILOS COMUNES COMO: 
+ESTILOS PARA LOS BOTONES
+ESTILOS PARA LOS ICONOS DE BOOSTRAP
+ESTILOS PARA LAS TABLAS DE REGISTROS*/
+
+/* ESTILOS GENERALES PARA LOS BOTONES */
+.btn {
+    border-radius: 5px;
+    padding: 7px 8px;
+    font-weight: bold;
+    color: white;
+    cursor: pointer;
+    border: none;
+    transition: background-color 0.3s;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.btn-success {
+    background-color: var(--color-verde);
+}
+
+.btn-success:hover {
+    background-color: #28a183;
+}
+
+.btn-cancelar {
+    background-color: var(--color-rojo);
+}
+
+.btn-cancelar:hover {
+    background-color: #D73A3A;
+}
+
+.btn-regresar {
+    background-color: var(--color-azul);
+}
+
+.btn-regresar:hover {
+    background-color: #0078A0;
+}
+/* ESTILOS GENERALES PARA LOS ICONOS DE BOOSTRAP */
+.boton-icono {
+    cursor: pointer;
+    background-color: transparent;
+    border: none;   
+}
+
+.icono-basura {
+    color: red; 
+}
+
+.icono-editar {
+    color: rgb(91, 162, 202);  
+}
+
+.icono-editar, .icono-basura {
+    font-size: 25px;
+}
+
+
+/* Estilos específicos para los botones de los íconos */
+#eye-icon-newPassword, #eye-icon-confirmPassword {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+    background: transparent;
+    border: none;
+  }
+  
+  /* Ajusta el padding de los inputs correspondientes */
+  #newPassword, #confirmPassword {
+    padding-right: 40px; /* Ajusta el valor según el espacio necesario */
+  }
+
+  
+/* ESTILOS PARA LAS TABLAS*/
+
+/* Clase para las celdas que contienen los íconos de editar y eliminar */
+.icono .celda-icono {
+    width: 10px; 
+    text-align: center; 
+    padding: 0; 
+}
+
+.table {
+    table-layout: auto; 
+    width: 60%;
+    max-width: 100%;
+}
+
+.table tbody td:first-child {
+    padding-left: 30px; 
+}
+
+.table thead th:first-child {
+    padding-left: 25px; 
+}
+
+.table-responsive {
+    overflow-x: auto;
+    display: flex;
+    justify-content: center; /* Centra la tabla en el contenedor */
+}
+
+/* Estilos para mejorar la responsividad de la tabla en pantallas pequeñas 
+.container {
+    max-width: 100%;
+}*/
+
+.buscar-input {
+    width: 100%;
+    max-width: 400px;
+}
+
+.table-responsive {
+    overflow-x: auto;
+}
+
+.table th, .table td {
+    padding: 8px;
+    font-size: 17px;
+    border: none;
+    white-space: nowrap;
+}
+
+.table thead th {
+    color: #14C3A2;
+    font-weight: bold;
+    font-size: 19px;
+  }
+  
+.boton-icono {
+    padding: 4px;
+    font-size: 16px;
+}
+
+@media (max-width: 576px) {
+    .table th, .table td {
+        font-size: 13px;
+        padding: 6px;
+    }
+
+    .table th {
+        font-size: 14px;
+        font-weight: bold;
+        color: #14C3A2;
+    }
+
+    .boton-icono {
+        padding: 2px;
+        font-size: 14px;
+    }
+
+    .icono-editar, .icono-basura {
+        font-size: 14px;
+    }
+}
