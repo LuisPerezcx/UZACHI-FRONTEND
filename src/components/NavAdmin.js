@@ -4,6 +4,7 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import perfiIcon from '../assets/icon-perfil.png'
+import AccountModal from './MiPerfil/ProfileModal ';
 import { CambioContraseñaModal } from './CambiarContraseña';
 import AccountModal from './MiPerfil/ProfileModal ';
 import '../styles/NavAdmin.css'
@@ -49,6 +50,7 @@ export const NavAdmin = () => {
         </Container>
       </Navbar> 
       <AccountModal show={showModal} handleClose={handleCloseModal} user={user} />
+
       <CambioContraseñaModal showModal={showModal} handleClose={handleCloseModal} />
     </div>
   );
