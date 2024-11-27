@@ -50,7 +50,7 @@ const ListadoClientes = () => {
       onDelete={eliminarCliente}
       searchPlaceholder="Buscar nombre..."
       />
-
+ 
       <FormularioCliente
         onAdd={guardarDatos}
         editarClientesFrecuentes={editarClientesFrecuentes}

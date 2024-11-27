@@ -19,7 +19,7 @@ export const GestionComunidades = () => {
                   id="nombreComunidad"
                 />
               </div>
-            </div>
+            </div> 
 
             {/* Municipio y Entidad en la misma línea */}
             <div className="row mb-3 justify-content-center">
