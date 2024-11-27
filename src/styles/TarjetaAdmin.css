@@ -1,0 +1,15 @@
+/* ESITLO DE BORDE DE LAS TARJETAS */
+
+.tarjeta-border {
+    border-style: solid;
+    border-radius: 5px;
+    border-color: var(--color-gris-opaco);
+    border-width: 1px;
+    padding-top: 1.5em;
+    padding-bottom: 1.5em;
+    padding-left: 10px;
+    padding-right: 10px;
+  
+  }
+  
+  /* FIN ESTILO DE LAS TARJETAS */

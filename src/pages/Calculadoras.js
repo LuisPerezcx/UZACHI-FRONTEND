@@ -1,7 +1,7 @@
 import React from 'react';
 import { CalculadoraEstandar } from '../components/Calculadora/CalculadoraEstandar';
 import { CalculadoraEspecial } from '../components/Calculadora/CalculadoraEspecial';
-import Footer from '../components/Footer';
+import { Footer } from '../components/Footer';
 import NavAdmin from '../components/NavAdmin';
 
 export const Calculadoras = () => {

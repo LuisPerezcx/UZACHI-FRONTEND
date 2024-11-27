@@ -2,14 +2,17 @@ import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import ListadoClientes from "./Components/ListadoClientes";
 import FormularioCliente from "./Components/FormularioCliente";
+import NavAdmin from "../../components/NavAdmin";
+import { Footer } from "../../components/Footer";
 
 const ClientesFrecuentes = () => {
   return (
-    <div className="container mt-5">
+    <div>
+      <NavAdmin></NavAdmin>
       <h2 className="text-center mb-4">CLIENTES FRECUENTES</h2>
       <ListadoClientes />
 
-      <FormularioCliente />
+      <Footer></Footer>
     </div>
   );
 };

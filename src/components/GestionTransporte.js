@@ -1,53 +1,66 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { FormularioTransporte } from './FormularioTransporte';
 import NavAdmin from './NavAdmin';
-import Footer from './Footer';
+import { Footer } from './Footer';
 import { CustomTable } from './CustomTable';
 
 export const GestionTransporte = () => {
+  const [datosTransporte, setDatosTransporte] = useState([]);
+  const [editingTransport, setEditingTransport] = useState(null); // Transporte en edición
 
-  // Datos simulados
-  const transportData = [
-    { propietario: 'David Pérez', tipo: 'Tortón', capacidad: '3 Toneladas' },
-    { propietario: 'Efren Jiménez', tipo: 'Trocero', capacidad: '4 Toneladas' },
-    { propietario: 'Luis Hernández', tipo: 'Tortón', capacidad: '2 Toneladas' }
-  ];
-
-  // Configuración de columnas
   const columns = [
     { header: 'Propietario', accessor: 'propietario' },
     { header: 'Tipo', accessor: 'tipo' },
-    { header: 'Capacidad', accessor: 'capacidad' }
+    { header: 'Capacidad', accessor: 'capacidad' },
+    { header: 'Placas', accessor: 'placas' },
   ];
 
-  // Funciones para manejar la edición y eliminación
   const handleEdit = (item) => {
-    console.log('Editar', item);
+    setEditingTransport(item); // Establecer el transporte en edición
   };
 
   const handleDelete = (item) => {
-    console.log('Eliminar', item);
+    const updatedData = datosTransporte.filter((data) => data !== item);
+    setDatosTransporte(updatedData);
+    console.log('Elemento eliminado:', item);
   };
-  
+
+  const handleSave = (newTransport) => {
+    if (editingTransport) {
+      // Actualizar transporte existente
+      const updatedData = datosTransporte.map((data) =>
+        data === editingTransport ? newTransport : data
+      );
+      setDatosTransporte(updatedData);
+      setEditingTransport(null); // Salir del modo de edición
+    } else {
+      // Agregar nuevo transporte
+      setDatosTransporte([...datosTransporte, newTransport]);
+    }
+  };
+
   return (
     <div>
-      <NavAdmin></NavAdmin>
-
+      <NavAdmin />
       <div className="container my-5">
         <h2 className="text-center mb-4">Gestión de Transporte</h2>
       </div>
       <CustomTable
-        data={transportData}
+        data={datosTransporte}
         columns={columns}
         onEdit={handleEdit}
         onDelete={handleDelete}
         searchPlaceholder="Buscar transporte..."
       />
-       
-       <FormularioTransporte/>
-
-  
-       <Footer></Footer>
+      <div className='px-5'>
+        <FormularioTransporte
+          onAdd={handleSave}
+          editingTransport={editingTransport}
+          title={'Hola'}
+          formularioForm={false}
+        />
+      </div>
+      <Footer />
     </div>
   );
 };

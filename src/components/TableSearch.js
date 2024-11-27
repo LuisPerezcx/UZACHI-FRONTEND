@@ -10,7 +10,7 @@ el placeholder para el input del search
 y un array con los filtros de busqueda
 */
 
-function TableSearch({ endpoint, columns, filters, actions }) {
+export const TableSearch = ({ endpoint, columns, filters, actions }) => {
 
     const [data, setData] = useState([]);
     const [filteredData, setFilteredData] = useState([]);
@@ -102,5 +102,4 @@ function TableSearch({ endpoint, columns, filters, actions }) {
         </div>
     )
 }
-export default TableSearch;
 

@@ -3,7 +3,7 @@ import NavAdmin from '../components/NavAdmin';
 import { BreadCrumb } from '../components/BreadCrumb';
 import { Link } from 'react-router-dom'; // Importa Link
 import { Modal } from 'react-bootstrap';
-import Footer from '../components/Footer'
+import { Footer } from '../components/Footer'
 
 // Importacion de los iconos para la pagia
 import iconFormulario from '../assets/icon-formuario.png';
@@ -13,6 +13,7 @@ import iconFolios from '../assets/icon-folios.png';
 import iconInformeSemarnat from '../assets/icon-informe-semarnat.png'
 import iconInformeInterno from '../assets/icon-informe-interno.png'
 import { TarjetaAdmin } from '../components/TarjetaAdmin';
+import { ModalC } from '../components/ModalC';
 
 export const PrincipalAdmin = () => {
   // Estado para manejar el modal
@@ -27,6 +28,23 @@ export const PrincipalAdmin = () => {
     { url: '/', label: 'Administrador' }
   ];
 
+  const modalContent = [
+    {
+      icon: iconInformeSemarnat,
+      title: 'Administración de los informes para SEMARNAT',
+      buttonLabel: 'Administrar',
+      route: '/ReportesSemarnat',
+      onClick: () => console.log('Administrar informes SEMARNAT')
+    },
+    {
+      icon: iconInformeInterno,
+      title: 'Administración de los informes internos de UZACHI',
+      buttonLabel: 'Administrar',
+      route: '/ReportesInternos',
+      onClick: () => console.log('Administrar informes internos')
+    }
+  ];
+
   return (
     <div>
       <NavAdmin />
@@ -39,7 +57,7 @@ export const PrincipalAdmin = () => {
                 title="Formulario"
                 description="Registro de Remisión y Reembarque: Formulario"
                 buttons={[
-                { label: 'Acceder', onClick: () => console.log('Formulario clicado') }
+                { label: 'Acceder', link: '/Formulario'}
                 ]}
             />
 
@@ -71,28 +89,8 @@ export const PrincipalAdmin = () => {
             />
         </div>
       </div>
-
-      {/* Modal */}
-      <Modal show={show} onHide={handleClose} centered>
-        <Modal.Body>
-        <div className='row justify-content-center text-center'>
-            <div className='col tarjeta-border ms-2 me-2' > 
-                <img src={iconInformeSemarnat} style={{width: '120px'}}></img>
-                <h2 className='size-font-subsubtitle mt-2' style={{color: 'black'}}>Administración de los informes para SEMARNAT</h2>
-                <Link to="ReportesSemarnat">
-                  <button className='btn btn-success'>Administrar</button>
-                </Link>
-            </div>
-            <div className='col tarjeta-border ms-2 me-2' > 
-            <img src={iconInformeInterno}  style={{width: '120px'}}></img>
-                <h2 className='size-font-subsubtitle mt-2' style={{color: 'black'}}>Administración de los informes internos de UZACHI</h2>
-                <Link to="ReportesInternos">
-                  <button className='btn btn-success'>Administrar</button>
-                </Link>
-            </div>
-        </div>
-        </Modal.Body>
-      </Modal>
+      <ModalC show={show} onClose={handleClose} content={modalContent} />
+      
       <Footer></Footer>
     </div>
   );

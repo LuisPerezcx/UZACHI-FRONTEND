@@ -1,24 +1,73 @@
-import React from "react";
+import React, { useState } from "react";
+import { Form } from "react-bootstrap";
 
-const FormularioCliente = () => {
+const FormularioCliente = ({onAdd, editarClientesFrecuentes}) => {
+
+  const [formData, setFormData] = useState({
+    nombre: '',
+    domicilioDestinatario: '',
+    poblacion: '',
+    entidad: '',
+    curp: '',
+    rfn: '',
+    municipio: '',
+    domicilio: ''
+  })
+
+  React.useEffect(() => {
+    if (editarClientesFrecuentes) {
+      setFormData(editarClientesFrecuentes);
+    }
+  }, [editarClientesFrecuentes]);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    // if (!formData.propietario || !formData.tipo || !formData.capacidad) {
+    //   alert('Por favor llena todos los campos requeridos.');
+    //   return;
+    // }
+
+    onAdd(formData); // Llamar a la función `onAdd` con los datos del formulario
+
+    // Reiniciar el formulario
+    setFormData({
+      nombre: '',
+      domicilioDestinatario: '',
+      poblacion: '',
+      entidad: '',
+      curp: '',
+      rfn: '',
+      municipio: '',
+      domicilio: ''
+    });
+  };
+
   const formContainerStyle = {
     backgroundColor: "white",
     border: "none",
     boxShadow: "0 4px 8px rgba(0, 0, 1, 0.4)",
     borderRadius: "8px",
     padding: "5px",
-    
+
   };
 
   const interletradoStyle = {
     letterSpacing: "2px",
   };
+
+  // onAdd(formData);
   return (
     <div className="container mt-4 mb-4">
       <div style={formContainerStyle}>
         <div className="form-container p-3">
           <h5 className="text-center mb-3 fw-bold" style={interletradoStyle}>Agregar nuevo cliente</h5>
-          <form>
+          <form onSubmit={handleSubmit}>
             <div className="row">
               {/* Columna 1 */}
               <div className="col-md-6">
@@ -29,8 +78,10 @@ const FormularioCliente = () => {
                   <input
                     type="text"
                     className="form-control"
-                    id="nombre"
+                    name="nombre"
+                    value = {formData.nombre}
                     placeholder="Ingrese el nombre"
+                    onChange={handleChange}
                   />
                 </div>
                 <div className="mb-3 d-flex align-items-center">
@@ -44,8 +95,10 @@ const FormularioCliente = () => {
                   <input
                     type="text"
                     className="form-control"
-                    id="domicilioDestinatario"
+                    name="domicilioDestinatario"
+                    value = {formData.domicilioDestinatario}
                     placeholder="Ingrese el domicilio"
+                    onChange={handleChange}
                   />
                 </div>
                 <div className="mb-3 d-flex align-items-center">
@@ -55,8 +108,10 @@ const FormularioCliente = () => {
                   <input
                     type="text"
                     className="form-control"
-                    id="poblacion"
+                    name="poblacion"
+                    value = {formData.poblacion}
                     placeholder="Ingrese la población"
+                    onChange={handleChange}
                   />
                 </div>
                 <div className="mb-3 d-flex align-items-center">
@@ -66,8 +121,10 @@ const FormularioCliente = () => {
                   <input
                     type="text"
                     className="form-control"
-                    id="entidad"
+                    name="entidad"
+                    value = {formData.entidad}
                     placeholder="Ingrese la entidad"
+                    onChange={handleChange}
                   />
                 </div>
               </div>
@@ -81,8 +138,10 @@ const FormularioCliente = () => {
                   <input
                     type="text"
                     className="form-control"
-                    id="curp"
+                    name="curp"
+                    value = {formData.curp}
                     placeholder="Ingrese la CURP"
+                    onChange={handleChange}
                   />
                 </div>
                 <div className="mb-3 d-flex align-items-center">
@@ -92,8 +151,10 @@ const FormularioCliente = () => {
                   <input
                     type="text"
                     className="form-control"
-                    id="rfn"
+                    name="rfn"
+                    value = {formData.rfn}
                     placeholder="Ingrese el RFN"
+                    onChange={handleChange}
                   />
                 </div>
                 <div className="mb-3 d-flex align-items-center">
@@ -103,8 +164,10 @@ const FormularioCliente = () => {
                   <input
                     type="text"
                     className="form-control"
-                    id="municipio"
+                    name="municipio"
+                    value = {formData.municipio}
                     placeholder="Ingrese el municipio"
+                    onChange={handleChange}
                   />
                 </div>
                 <div className="mb-3 d-flex align-items-center">
@@ -114,17 +177,18 @@ const FormularioCliente = () => {
                   <input
                     type="text"
                     className="form-control"
-                    id="domicilio"
+                    name="domicilio"
+                    value = {formData.domicilio}
                     placeholder="Ingrese el domicilio"
+                    onChange={handleChange}
                   />
                 </div>
               </div>
             </div>
 
-            {/* Botón Agregar */}
-            <div className="d-flex justify-content-center mt-3 me-4">
-              <button type="submit" className="btn btn-success">
-                Agregar
+            <div className="text-center">
+              <button variant="success" type="submit" size="sm">
+                {editarClientesFrecuentes ? 'Actualizar' : 'Agregar'}
               </button>
             </div>
           </form>
