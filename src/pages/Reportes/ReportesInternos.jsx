@@ -4,7 +4,7 @@ import NavAdmin from '../../components/NavAdmin';
 import { BreadCrumb } from '../../components/BreadCrumb';
 import { TableSearch } from '../../components/TableSearch';
 import { Footer } from '../../components/Footer';
-import { GenerarReporteModal } from './ModalGenerarReporte'; 
+import { GenerarReporteModal } from './Components/ModalGenerarReporte'; 
 
 import excel from '../../assets/excel.png';
 
@@ -12,6 +12,7 @@ export const ReportesInternos = () => {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
 
   const links = [
     { url: '/', label: 'Inicio' },
@@ -42,6 +43,15 @@ export const ReportesInternos = () => {
     }
   ];
 
+  const SimulatedData = [
+    { id: 1, nombre: 'TransporteMadera 21-22', pInicio: '2023-10-23', pFin: '2024-10-23' },
+    { id: 2, nombre: 'TransporteMadera 22-23', pInicio: '2022-10-23', pFin: '2023-10-23' },
+    { id: 3, nombre: 'TransporteMadera 21-22', pInicio: '2021-10-23', pFin: '2022-10-23'},
+    { id: 4, nombre: 'TransporteMadera 21-22', pInicio: '2023-10-23', pFin: '2024-10-23' },
+    { id: 5, nombre: 'TransporteMadera 22-23', pInicio: '2022-10-23', pFin: '2023-10-23' },
+    { id: 6, nombre: 'TransporteMadera 21-22', pInicio: '2021-10-23', pFin: '2022-10-23'}
+];
+
   return (
     <div>
       <NavAdmin />
@@ -58,6 +68,7 @@ export const ReportesInternos = () => {
             columns={columns}
             filters={filters}
             actions={actions}
+            data={SimulatedData}
           />
         </div>
       </div>
