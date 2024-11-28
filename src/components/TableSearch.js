@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios'
-import SimulatedData from '../utils/SimulatedData';
+
 import InputWithClearButton from './InputWithClearButton/InputWithClearButton';
 
 /*
@@ -10,9 +10,9 @@ el placeholder para el input del search
 y un array con los filtros de busqueda
 */
 
-export const TableSearch = ({ endpoint, columns, filters, actions }) => {
+export const TableSearch = ({ endpoint, columns, filters, actions, data }) => {
 
-    const [data, setData] = useState([]);
+    const [tableData, setTableData] = useState([]);
     const [filteredData, setFilteredData] = useState([]);
     const [search, setSearch] = useState('');
     const [filter, setFilter] = useState(filters[0].value);
@@ -35,8 +35,8 @@ export const TableSearch = ({ endpoint, columns, filters, actions }) => {
     */
 
     useEffect(() => {
-        setData(SimulatedData);
-        setFilteredData(SimulatedData);
+        setTableData(data);
+        setFilteredData(data);
     }, []);
 
     return (
