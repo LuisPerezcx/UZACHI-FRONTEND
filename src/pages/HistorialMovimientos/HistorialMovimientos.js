@@ -4,11 +4,15 @@ import NavAdmin from '../../components/NavAdmin';
 import { TableSearch } from '../../components/TableSearch';
 import { Footer } from '../../components/Footer';
 import { BreadCrumb } from '../../components/BreadCrumb';
+import { AlertDialog } from '../../components/AlertDialog';
+
 
 export const HistorialMovimientos = () => {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+  const [showDialog, setShowDialog] = useState(false);
+  const [selectedDocument, setSelectedDocument] = useState(null);
 
   const links = [
     { url: '/', label: 'Inicio' },
@@ -17,20 +21,42 @@ export const HistorialMovimientos = () => {
 
   const communityData = [
     {
-      folio: '001',
-      nombreDocumento: 'Acta de Asamblea',
-      tipo: 'Oaxaca',
-      fecha: '2023-11-01',
-      estado: 'Aprobado',
+      folio: '12321',
+      nombreDocumento: 'RemisiónXiacui',
+      tipo: 'Remisión',
+      fecha: '2024-10-23',
+      estado: 'Aceptado',
     },
     {
-      folio: '002',
-      nombreDocumento: 'Acta de Comunidad',
-      tipo: 'Oaxaca',
-      fecha: '2023-11-02',
-      estado: 'Pendiente',
+      folio: '45231',
+      nombreDocumento: 'ReembarqueCapu',
+      tipo: 'Reembarque',
+      fecha: '2024-10-23',
+      estado: 'Anulado',
+    },
+    {
+      folio: '65436',
+      nombreDocumento: 'DatosIxtlan',
+      tipo: 'Remisión',
+      fecha: '2024-10-23',
+      estado: 'Anulado',
     },
   ];
+  // Transforma los datos para estilizar el estado
+  const styledCommunityData = communityData.map((item) => ({
+    ...item,
+    estado: (
+      <span
+        style={{
+          color: item.estado === 'Aceptado' ? 'green' : item.estado === 'Anulado' ? 'red' : 'black',
+        
+        }}
+      >
+        {item.estado}
+      </span>
+    ),
+  }));
+
   const columns = [
     { label: 'Folio', key: 'folio' },
     { label: 'Nombre documento', key: 'nombreDocumento' },
@@ -45,6 +71,16 @@ export const HistorialMovimientos = () => {
     { label: 'Nombre', value: 'nombreDocumento' },
     { label: 'Folio', value: 'folio' },
   ];
+  const handleAnular = (item) => {
+    setSelectedDocument(item);
+    setShowDialog(true);
+  };
+
+  const handleConfirmAnular = () => {
+    console.log('Documento anulado:', selectedDocument);
+    setShowDialog(false);
+    setSelectedDocument(null);
+  };
 
   const actions = [
     {
@@ -53,7 +89,7 @@ export const HistorialMovimientos = () => {
     },
     {
       label: 'Anular',
-      handler: (item) => console.log('Anulando:', item),
+      handler: handleAnular,
     },
     {
       label: 'Imprimir',
@@ -91,13 +127,23 @@ export const HistorialMovimientos = () => {
         </div>
         <TableSearch
           columns={columns}
-          data={communityData}
+          data={styledCommunityData}
           filters={filters}
           actions={actions}
           endpoint={null} // Configura tu endpoint aquí
         />
       </div>
       <Footer/>
+      <AlertDialog
+        show={showDialog}
+        title="Confirmación de anulación"
+        message={`¿Está seguro que quiere anular el documento "${selectedDocument?.nombreDocumento}"?`}
+        onConfirm={handleConfirmAnular}
+        onCancel={() => setShowDialog(false)}
+        confirmText="Anular"
+        cancelText="Cancelar"
+      />
+
       {/* Modal */}
       <Modal show={show} onHide={handleClose} centered>
         <Modal.Body>
