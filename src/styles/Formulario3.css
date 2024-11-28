@@ -1,37 +1,11 @@
-/* Contenedor principal */
-.formulario3-container {
-    display: flex;
-    justify-content: center;
-    padding: 20px;
-    background-color: #f9f9f9;
-  }
-  
-  /* Contenedor de los dos cuadros */
-  .formulario3-sections {
-    display: flex;
-    gap: 40px; /* Espaciado entre las dos */
-    max-width: 1200px;
-  }
-  
-  /* Sección general */
-  .formulario3-section {
-    border: 1px solid #ddd;
-    padding: 20px;
-    border-radius: 8px;
-    width: 500px;
-    background-color: #fff;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  }
-  
-  /* Encabezado */
-  .formulario3-section h2 {
-    font-size: 18px;
-    margin-bottom: 20px;
-    text-align: center;
-    font-weight: bold;
-    color: #595B5A;
-  }
-  
+.card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%; /* Ajusta la altura para que sea igual entre columnas */
+}
+
+
   /* Alineación para locampos */
   .formulario3-field {
     display: flex;
@@ -40,7 +14,7 @@
   }
   
   .formulario3-field label {
-    font-size: 14px;
+    font-size: 14px; /*Revisar tamaño de fuente*/
     color: #555;
     margin-bottom: 5px;
   }

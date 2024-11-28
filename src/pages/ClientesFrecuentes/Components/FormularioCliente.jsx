@@ -55,7 +55,7 @@ const FormularioCliente = ({onAdd, editarClientesFrecuentes}) => {
     borderRadius: "8px",
     padding: "5px",
 
-  };
+  }; 
 
   const interletradoStyle = {
     letterSpacing: "2px",
