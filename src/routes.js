@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { PrincipalAdmin } from './pages/PrincipalAdmin';
-import { ReportesInternos } from './pages/ReportesInternos/ReportesInternos';
-import { ReportesPage } from './pages/ReportesSemarnat/ReportsPageSemarnat';
+import { ReportesInternos } from './pages/Reportes/ReportesInternos';
+import { ReportesPage } from './pages/Reportes/ReportsPageSemarnat';
 import { GestionTransporte } from './pages/Transporte/GestionTransporte';
 import { Usuario } from './pages/Usuarios/Usuarios';
 import { Formulario3 } from './pages/Formulario/Components/Formulario3';
