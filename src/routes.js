@@ -10,6 +10,8 @@ import { Formulario } from './pages/Formulario/Formulario';
 import { AgregarComunidades } from './pages/Comunidades/AgregarComunidades';
 import ClientesFrecuentes from './pages/ClientesFrecuentes/ClientesFrecuentes';
 import FoliosAsignados from './pages/FoliosAsignados/FoliosAsigandos';
+import { Calculadoras } from './pages/Calculadoras';
+import { HistorialMovimientos } from './pages/HistorialMovimientos/HistorialMovimientos';
 
 const AppRoutes = () => {
   return (
@@ -22,9 +24,10 @@ const AppRoutes = () => {
       <Route path='/Usuarios' element={<Usuario/>} />
       <Route path='/Formulario' element={<Formulario/>} />
       <Route path='/Formulario3' element={<Formulario3/>} />
-      <Route path='/prueba' element={<Calculadoras/>} />
+      <Route path='/prueba' element={<HistorialMovimientos/>} />
       <Route path='/AgregarComunidades' element={<AgregarComunidades/>} />
       <Route path='/FoliosAsignados' element={<FoliosAsignados/>} />
+      <Route path='/HistorialMovimientos' element={<HistorialMovimientos/>} />
 
     </Routes>
   );

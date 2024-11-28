@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { Modal } from 'react-bootstrap';
-import NavAdmin from '../components/NavAdmin';
-import Footer from '../components/Footer';
-import TableSearch from '../components/TableSearch';
+import NavAdmin from '../../components/NavAdmin';
+import { TableSearch } from '../../components/TableSearch';
+import { Footer } from '../../components/Footer';
+import { BreadCrumb } from '../../components/BreadCrumb';
 
 export const HistorialMovimientos = () => {
   const [show, setShow] = useState(false);
@@ -14,6 +15,22 @@ export const HistorialMovimientos = () => {
     { url: '/HistorialMovimientos', label: 'Historial' },
   ];
 
+  const communityData = [
+    {
+      folio: '001',
+      nombreDocumento: 'Acta de Asamblea',
+      tipo: 'Oaxaca',
+      fecha: '2023-11-01',
+      estado: 'Aprobado',
+    },
+    {
+      folio: '002',
+      nombreDocumento: 'Acta de Comunidad',
+      tipo: 'Oaxaca',
+      fecha: '2023-11-02',
+      estado: 'Pendiente',
+    },
+  ];
   const columns = [
     { label: 'Folio', key: 'folio' },
     { label: 'Nombre documento', key: 'nombreDocumento' },
@@ -46,15 +63,9 @@ export const HistorialMovimientos = () => {
 
   return (
     <div>
-      <NavAdmin />
-      <div className="breadcrumb">
-        {links.map((link, index) => (
-          <span key={index}>
-            <a href={link.url}>{link.label}</a>
-            {index < links.length - 1 && ' > '}
-          </span>
-        ))}
-      </div>
+      <NavAdmin/>
+      <BreadCrumb links={links} />
+      
       <div className="container">
         <h2 className="text-center mb-4">HISTORIAL DE MOVIMIENTOS</h2>
         <div className="d-flex justify-content-between align-items-center mb-3">
@@ -80,12 +91,13 @@ export const HistorialMovimientos = () => {
         </div>
         <TableSearch
           columns={columns}
+          data={communityData}
           filters={filters}
           actions={actions}
           endpoint={null} // Configura tu endpoint aquí
         />
       </div>
-      <Footer />
+      <Footer/>
       {/* Modal */}
       <Modal show={show} onHide={handleClose} centered>
         <Modal.Body>
