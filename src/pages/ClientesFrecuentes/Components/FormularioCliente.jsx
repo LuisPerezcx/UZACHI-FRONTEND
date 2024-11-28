@@ -11,7 +11,7 @@ const FormularioCliente = ({onAdd, editarClientesFrecuentes}) => {
     curp: '',
     rfn: '',
     municipio: '',
-    domicilio: ''
+    domicilio: '' 
   })
 
   React.useEffect(() => {

@@ -11,7 +11,7 @@ export const AgregarComunidades = () => {
 
   // Configuración de columnas
   const columns = [
-    { header: 'Comunidad', accessor: 'comunidad' },
+    { header: 'Comunidad', accessor: 'nombreComunidad' }, 
     { header: 'Municipio', accessor: 'municipio' },
     { header: 'Entidad', accessor: 'entidad' },
   ];
@@ -27,7 +27,7 @@ export const AgregarComunidades = () => {
   };
 
   const guardarDatosComunidades = (nuevaComunidad) => {
-    if (editarComunidad) {
+    if (editarComunidades) {
       // Actualizar transporte existente
       const updatedData = listaComunidades.map((data) =>
         data === editarComunidades ? nuevaComunidad : data
@@ -35,7 +35,6 @@ export const AgregarComunidades = () => {
       setListaComunidades(updatedData);
       setEditarComunidades(null); // Salir del modo de edición
     } else {
-      // Agregar nuevo transporte
       setListaComunidades([...listaComunidades, { ...nuevaComunidad, id: Date.now() }]);
     }
   }
