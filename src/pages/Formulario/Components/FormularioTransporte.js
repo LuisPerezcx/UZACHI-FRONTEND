@@ -1,26 +1,67 @@
-import React, { useState } from 'react';
-import { SelectCombo } from '../../../components/SelectCombo';
-import { Button } from '../../../components/Boton';
+import React, {useState } from 'react';
+import { Col, Form, Row } from 'react-bootstrap';
+import { Button } from 'C:/Users/luisa/OneDrive/Escritorio/UZACHI-FRONTEND/src/components/Boton.js';
+//C:\Users\luisa\OneDrive\Escritorio\UZACHI-FRONTEND\src\components\Boton.js
 
-export const FormularioTransporte = ({ titulo, formularioForm }) => {
+export const FormularioTransporte = ({ onAdd, editingTransport, titulo, formularioForm }) => {
   const [formularioFormatoField, setFormularioFormatoField] = useState(formularioForm);
-
-  const opcionesTipoTransporte = [
-    { value: '', label: 'Selecciona un tipo de transporte' },
-    { value: 'torton', label: 'Tortón' },
-    { value: 'trocer', label: 'Trocer' },
-  ];
-
-  const handleInputChange = (event) => {
-    console.log(`${event.target.name}: ${event.target.value}`);
-  };
 
   const seleccionarCarro = () => {
     console.log('Seleccionar carro clickeado');
   };
 
+  const handleInputChange = (event) => {
+    console.log("${event.target.name}: ${event.target.value}");
+  };
+
+  const [formData, setFormData] = useState({
+    medio: '',
+    marca: '',
+    modelo: '',
+    propietario: '',
+    capacidad: '',
+    placas: '',
+    otro: '',
+    tipo: '',
+  });
+
+  // Efecto para cargar los datos del transporte en edición
+  React.useEffect(() => {
+    if (editingTransport) {
+      setFormData(editingTransport);
+    }
+  }, [editingTransport]);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (!formData.propietario || !formData.tipo || !formData.capacidad) {
+      alert('Por favor llena todos los campos requeridos.');
+      return;
+    }
+
+    onAdd(formData); // Llamar a la función `onAdd` con los datos del formulario
+
+    // Reiniciar el formulario
+    setFormData({
+      medio: '',
+      marca: '',
+      modelo: '',
+      propietario: '',
+      capacidad: '',
+      placas: '',
+      otro: '',
+      tipo: '',
+    });
+  };
+
   return (
-    <div className="tarjeta-border px-5 mt-5 mb-5">
+    <div className="tarjeta-border  mt-5 mb-5">
       {/* Título del formulario */}
       <div className="row">
         <div className="col-12 text-center mb-4">
@@ -34,85 +75,106 @@ export const FormularioTransporte = ({ titulo, formularioForm }) => {
       {formularioFormatoField && (
         <div className="row">
           <div className="col-12 text-end mt-2">
-          <span className="me-2">Agregar datos de un carro registrado</span>
+          <span className="me-2 form-label">Agregar datos de un carro registrado</span>
             <Button label="Seleccionar carro" onClick={seleccionarCarro} className="btn-success" />
           </div>
         </div>
       )}
 
-      {/* Formulario */}
-      <form>
-        {/* Primera fila: 3 columnas */}
-        <div className="row g-3">
-          <div className="col-md-4">
-            <label className="form-label">Medio de transporte:</label>
-            <input
-              type="text"
-              className="form-control"
-              name="medioTransporte"
-              onChange={handleInputChange}
-            />
-          </div>
-          <div className="col-md-4">
-            <label className="form-label">Marca:</label>
-            <input
-              type="text"
-              className="form-control"
-              name="marca"
-              onChange={handleInputChange}
-            />
-          </div>
-          <div className="col-md-4">
-            <label className="form-label">Modelo:</label>
-            <input
-              type="text"
-              className="form-control"
-              name="modelo"
-              onChange={handleInputChange}
-            />
-          </div>
-        </div>
+        <Form onSubmit={handleSubmit} >
+          <Row className="mb-3">
+            <Col md={4}>
+              <Form.Label>Medio de transporte</Form.Label>
+              <Form.Control
+                type="text"
+                name="medio"
+                value={formData.medio}
+                onChange={handleChange}
+                size="sm"
+              />
+            </Col>
+            <Col md={4}>
+              <Form.Label>Marca</Form.Label>
+              <Form.Control
+                type="text"
+                name="marca"
+                value={formData.marca}
+                onChange={handleChange}
+                size="sm"
+              />
+            </Col>
+            <Col md={4}>
+              <Form.Label>Modelo</Form.Label>
+              <Form.Control
+                type="text"
+                name="modelo"
+                value={formData.modelo}
+                onChange={handleChange}
+                size="sm"
+              />
+            </Col>
+          </Row>
 
-        {/* Segunda fila: 4 columnas */}
-        <div className="row g-3 mt-3">
-          <div className="col-md-3">
-            <label className="form-label">Propietario:</label>
-            <input
-              type="text"
-              className="form-control"
-              name="propietario"
-              onChange={handleInputChange}
-            />
-          </div>
-          <div className="col-md-3">
-            <label className="form-label">Capacidad:</label>
-            <input
-              type="text"
-              className="form-control"
-              name="capacidad"
-              onChange={handleInputChange}
-            />
-          </div>
-          <div className="col-md-3">
-            <label className="form-label">Placas o matrícula:</label>
-            <input
-              type="text"
-              className="form-control"
-              name="placas"
-              onChange={handleInputChange}
-            />
-          </div>
-          <div className="col-md-3">
-            <label className="form-label">Tipo de transporte:</label>
-            <SelectCombo
-              name="tipoTransporte"
-              id="tipoTransporte"
-              options={opcionesTipoTransporte}
-            />
-          </div>
-        </div>
+          <Row className="mb-3">
+            <Col md={8}>
+              <Form.Label>Propietario</Form.Label>
+              <Form.Control
+                type="text"
+                name="propietario"
+                value={formData.propietario}
+                onChange={handleChange}
+                size="sm"
+              />
+            </Col>
+            <Col md={4}>
+              <Form.Label>Capacidad</Form.Label>
+              <Form.Control
+                type="number"
+                name="capacidad"
+                value={formData.capacidad}
+                onChange={handleChange}
+                size="sm"
+              />
+            </Col>
+          </Row>
 
-        {/* Campo conductor (condicional) */}
+          <Row className="mb-3">
+            <Col md={4}>
+              <Form.Label>Placas o matrícula</Form.Label>
+              <Form.Control
+                type="number"
+                name="placas"
+                value={formData.placas}
+                onChange={handleChange}
+                size="sm"
+              />
+            </Col>
+            <Col md={4}>
+              <Form.Label>Otro</Form.Label>
+              <Form.Control
+                type="text"
+                name="otro"
+                value={formData.otro}
+                onChange={handleChange}
+                size="sm"
+              />
+            </Col>
+            <Col md={4}>
+              <Form.Label>Tipo</Form.Label>
+              <Form.Select
+                name="tipo"
+                value={formData.tipo}
+                onChange={handleChange}
+                size="sm"
+              >
+                <option value="">Selecciona un tipo</option>
+                <option value="Torton">Tortón</option>
+                <option value="Trocer">Trocer</option>
+              </Form.Select>
+            </Col>
+          </Row>
+
+          {/* Campo conductor (condicional) */}
         {formularioFormatoField && (
           <div className="row g-3 mt-3">
             <div className="col-md-4">
@@ -127,19 +189,13 @@ export const FormularioTransporte = ({ titulo, formularioForm }) => {
           </div>
         )}
 
-        {/* Botón Agregar (condicional) */}
-        {!formularioFormatoField && (
-          <div className="row mt-4">
-            <div className="col-12 text-center">
-              <Button
-                label="Agregar"
-                onClick={() => console.log('Botón agregar clickeado')}
-                className="btn-success"
-              />
-            </div>
+          <div className="text-center">
+            <button variant="success" type="submit" size="sm">
+              {editingTransport ? 'Actualizar' : 'Agregar'}
+            </button>
           </div>
-        )}
-      </form>
+        </Form>
     </div>
   );
 };
+
