@@ -1,8 +1,8 @@
 /* Cambiar el tamaño y color de los textos de los campos (Correo Electrónico y Contraseña) */
 .form-label {
-    font-size: 3rem; 
-    color: var(--color-gris);  
-  }
+  font-size: 1.2rem; /* Ajuste menor para móviles */
+  color: var(--color-gris);
+}
   
   /* Cambiar el tamaño y color del texto de "Mostrar contraseña" */
   .form-check-label {
@@ -14,8 +14,8 @@
   .form-check {
     display: flex;
     align-items: center;
-    gap: 0.5rem; 
-    margin-left: 50px;
+    gap: 0.5rem;
+    margin-left: 0; /* Evitar desplazamiento en pantallas pequeñas */
   }
   
   /* Estilo del botón "Ingresar" */
@@ -25,9 +25,9 @@
     border-color: var(--color-verde); 
   }
   /* Ajustar el tamaño de las etiquetas y campos de texto */
-  .form-control {
-    font-size: 1.1rem; 
-    color: #6c757d; 
+  input.form-control {
+    max-width: 100%; /* Expandir para pantallas pequeñas */
+    margin: 0 auto;
   }
   /* Para el formulario "Acceso a formulario" */
   small {
@@ -46,12 +46,49 @@
     font-family: 'Poppins', sans-serif;
 
   }
-.card{
+  .card {
     border-radius: 6%;
-}
+    max-width: 400px; /* Máximo ancho en pantallas grandes */
+    width: 90%; /* Utilizar casi todo el ancho en móviles */
+  }
 
 .button-container {
     display: flex;
     justify-content: center;
+  }
+
+
+
+  @media (max-width: 576px) {
+    .form-label {
+      font-size: 1rem;
+    }
+  
+    .form-check-label {
+      font-size: 0.8rem;
+    }
+  
+    .btn-success {
+      font-size: 0.9rem;
+      padding: 0.4rem 0.8rem;
+    }
+  
+    .card {
+      padding: 1rem;
+      border-radius: 10px;
+    }
+  
+    img {
+      width: 100%; /* Imagen ajustada al contenedor */
+    }
+  }
+  
+  /* Acceso a formulario */
+  small {
+    color: #6c757d;
+    font-size: 0.8rem;
+    font-weight: normal;
+    text-align: center;
+    display: block;
   }
     
