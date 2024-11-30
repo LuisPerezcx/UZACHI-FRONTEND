@@ -6,7 +6,6 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import perfiIcon from '../assets/icon-perfil.png'
 import AccountModal from './MiPerfil/ProfileModal ';
 import { CambioContraseñaModal } from './CambiarContraseña';
-import AccountModal from './MiPerfil/ProfileModal ';
 import '../styles/NavAdmin.css'
 
 export const NavAdmin = () => {
@@ -42,7 +41,7 @@ export const NavAdmin = () => {
               <Nav.Link href="#link"  className='size-font-subtitle' style={{ color: 'white' }}>Contacto</Nav.Link>
               <NavDropdown className='ms-3' title={<img src={perfiIcon} style={{width: '40px'}}></img>}>
               <NavDropdown.Item onClick={handleShowModal} className='dropdown-item'>Mi cuenta</NavDropdown.Item>
-              <NavDropdown.Item onClick={handleOpenModal} className='dropdown-item'>Cambiar contraseña</NavDropdown.Item>
+              <NavDropdown.Item className='dropdown-item'>Cambiar contraseña</NavDropdown.Item>
                 <NavDropdown.Item href="#Liga" className='dropdown-item'>Cerrar sesión</NavDropdown.Item>
               </NavDropdown>
             </Nav>

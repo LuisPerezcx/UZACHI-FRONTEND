@@ -51,13 +51,6 @@ export const CalculadoraEstandar = () => {
               >
                 {selectedClass}
               </button>
-              <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <div className="dropdown-item" onClick={() => setSelectedClass("Primera")}>Primera</div>
-                <div className="dropdown-item" onClick={() => setSelectedClass("Secundaria")}>Secundaria</div>
-                <div className="dropdown-item" onClick={() => setSelectedClass("Terciaria")}>Terciaria</div>
-                <div className="dropdown-item" onClick={() => setSelectedClass("Bolo")}>Bolo</div>
-                <div className="dropdown-item" onClick={() => setSelectedClass("Seco")}>Seco</div>
-              </div>
             </div>
           </div>
           <div className="mt-3 border p-2 rounded">

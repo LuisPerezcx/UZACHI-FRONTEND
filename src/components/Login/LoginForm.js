@@ -11,9 +11,17 @@ export const LoginForm = () => {
 
   const navigate = useNavigate();
 
+
   const handleLogin = () => {
-    if (email && password) {
-      navigate('/');
+    const adminUser = {
+      email: 'admin',
+      password: 'admin123',
+      role: 'admin',
+    };
+
+
+    if (email === adminUser.email && password === adminUser.password) {
+      navigate('/PrincipalAdmin');
     } else {
       alert('Por favor, completa los campos de usuario y contraseña');
     }
