@@ -1,94 +1,72 @@
-/* Cambiar el tamaño y color de los textos de los campos (Correo Electrónico y Contraseña) */
+/* Ajustes responsivos generales */
+.card {
+  border-radius: 6%;
+  max-width: 400px; /* Máximo ancho en pantallas grandes */
+  width: 100%; /* Usar todo el ancho en móviles */
+  padding: 1rem; /* Ajustar el espaciado en dispositivos pequeños */
+  background-color: #F6F5F5;
+}
+
 .form-label {
-  font-size: 1.2rem; /* Ajuste menor para móviles */
+  font-size: 1.2rem;
   color: var(--color-gris);
 }
-  
-  /* Cambiar el tamaño y color del texto de "Mostrar contraseña" */
+
+.form-check-label {
+  font-size: 0.9rem;
+  color: var(--color-gris);
+}
+
+.btn-success {
+  font-size: 1rem;
+  font-weight: bold;
+  background-color: var(--color-verde);
+  border-color: var(--color-verde);
+  width: 100%; /* Botón ocupa todo el ancho */
+}
+
+input.form-control {
+  max-width: 100%; /* Expandir para pantallas pequeñas */
+  margin: 0 auto;
+  padding: 0.5rem;
+}
+
+img {
+  width: 75%; /* Imagen adaptativa */
+  max-width: 100%;
+  height: auto;
+  margin: 0 auto;
+  display: block;
+}
+
+small {
+  color: #6c757d;
+  font-size: 0.9rem;
+  text-align: center;
+  display: block;
+}
+
+/* Media Queries para dispositivos pequeños */
+@media (max-width: 576px) {
+  .form-label {
+    font-size: 1rem;
+  }
+
   .form-check-label {
-    font-size: 0.8rem; 
-    color: var(--color-gris); 
-  }
-  
-  /* Eliminar el espacio entre el checkbox y la etiqueta */
-  .form-check {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    margin-left: 0; /* Evitar desplazamiento en pantallas pequeñas */
-  }
-  
-  /* Estilo del botón "Ingresar" */
-  .btn-success {
-    font-weight: bold;
-    background-color: var(--color-verde);
-    border-color: var(--color-verde); 
-  }
-  /* Ajustar el tamaño de las etiquetas y campos de texto */
-  input.form-control {
-    max-width: 100%; /* Expandir para pantallas pequeñas */
-    margin: 0 auto;
-  }
-  /* Para el formulario "Acceso a formulario" */
-  small {
-    color: #6c757d; 
-    font-size: 0.9rem;
-    font-weight: normal;
-  }
-
-  input.form-control {
-    max-width: 250px;
-    margin: 0 auto;
-  }
-  label.form-label {
-    font-size: 1.3rem; 
-    color: #333; 
-    font-family: 'Poppins', sans-serif;
-
-  }
-  .card {
-    border-radius: 6%;
-    max-width: 400px; /* Máximo ancho en pantallas grandes */
-    width: 90%; /* Utilizar casi todo el ancho en móviles */
-  }
-
-.button-container {
-    display: flex;
-    justify-content: center;
-  }
-
-
-
-  @media (max-width: 576px) {
-    .form-label {
-      font-size: 1rem;
-    }
-  
-    .form-check-label {
-      font-size: 0.8rem;
-    }
-  
-    .btn-success {
-      font-size: 0.9rem;
-      padding: 0.4rem 0.8rem;
-    }
-  
-    .card {
-      padding: 1rem;
-      border-radius: 10px;
-    }
-  
-    img {
-      width: 100%; /* Imagen ajustada al contenedor */
-    }
-  }
-  
-  /* Acceso a formulario */
-  small {
-    color: #6c757d;
     font-size: 0.8rem;
-    font-weight: normal;
-    text-align: center;
-    display: block;
   }
-    
+
+  .card {
+    padding: 1.5rem;
+    border-radius: 10px;
+  }
+
+  img {
+    width: 100%; /* Imagen ajustada al contenedor */
+  }
+
+  .btn-success {
+    font-size: 0.9rem;
+    padding: 0.5rem 1rem;
+  }
+}

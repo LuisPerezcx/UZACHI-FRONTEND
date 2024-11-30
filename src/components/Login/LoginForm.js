@@ -19,15 +19,30 @@ export const LoginForm = () => {
       role: 'admin',
     };
 
+    switch (true) {
+      case !email || !password:
+        alert('Por favor, completa todos los campos.');
+        break;
 
-    if (email === adminUser.email && password === adminUser.password) {
-      navigate('/PrincipalAdmin');
-    } else {
-      alert('Por favor, completa los campos de usuario y contraseña');
+        case !password:
+        alert('Por favor, completa el campo "Contraseña".');
+        break;
+
+        case !email :
+        alert('Por favor, completa el campo "Email".');
+        break;
+  
+      case email === adminUser.email && password === adminUser.password:
+        navigate('/PrincipalAdmin');
+        break;
+  
+      default:
+        alert('Por favor, ingresa un usuario válido.');
+        break;
     }
   };
   return (
-    <div className="container d-flex align-items-center justify-content-center vh-100">
+    <div className="container d-flex align-items-center justify-content-center vh-flex">
       <div
         className="card shadow-lg p-4 text-center"
         style={{ maxWidth: '400px', width: '100%', backgroundColor: '#F6F5F5' }}
