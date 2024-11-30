@@ -4,8 +4,8 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import perfiIcon from '../assets/icon-perfil.png'
-import AccountModal from './MiPerfil/ProfileModal ';
-import { CambioContraseñaModal } from './CambiarContraseña';
+// import AccountModal from './MiPerfil/ProfileModal ';
+import { CambioContraseñaModal } from './Usuario/CambiarContraseña';
 import '../styles/NavAdmin.css'
 
 export const NavAdmin = () => {
@@ -37,7 +37,7 @@ export const NavAdmin = () => {
                 <NavDropdown.Item href="/ClientesFrecuentes" className='dropdown-item'>Clientes frecuentes</NavDropdown.Item>
               </NavDropdown>
 
-              <Nav.Link href="#home" className='size-font-subtitle mx-3' style={{ color: 'white' }}>Historial</Nav.Link>
+              <Nav.Link href="/HistorialMovimientos" className='size-font-subtitle mx-3' style={{ color: 'white' }}>Historial</Nav.Link>
               <Nav.Link href="#link"  className='size-font-subtitle' style={{ color: 'white' }}>Contacto</Nav.Link>
               <NavDropdown className='ms-3' title={<img src={perfiIcon} style={{width: '40px'}}></img>}>
               <NavDropdown.Item onClick={handleShowModal} className='dropdown-item'>Mi cuenta</NavDropdown.Item>

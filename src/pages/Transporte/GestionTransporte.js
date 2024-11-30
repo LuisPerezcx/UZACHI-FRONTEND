@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { FormularioTransporte } from './FormularioTransporte';
-import NavAdmin from './NavAdmin';
-import { Footer } from './Footer';
-import { CustomTable } from './CustomTable';
+import { FormularioTransporte } from '../Formulario/Components/FormularioTransporte';
+import NavAdmin from '../../components/NavAdmin';
+import { Footer } from '../../components/Footer';
+import { CustomTable } from '../../components/TablaIconos';
 
 export const GestionTransporte = () => {
   const [datosTransporte, setDatosTransporte] = useState([]);

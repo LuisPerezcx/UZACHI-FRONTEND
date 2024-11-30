@@ -1,6 +1,8 @@
 import React, {useState } from 'react';
-import { Button } from './Boton';
 import { Col, Form, Row } from 'react-bootstrap';
+import { Button } from '../../../components/Boton';
+// import { Button } from '../src/components/Boton.js';
+//C:\Users\luisa\OneDrive\Escritorio\UZACHI-FRONTEND\src\components\Boton.js
 
 export const FormularioTransporte = ({ onAdd, editingTransport, titulo, formularioForm }) => {
   const [formularioFormatoField, setFormularioFormatoField] = useState(formularioForm);

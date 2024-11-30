@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Modal } from 'react-bootstrap';
-import { Button } from './Boton';
+import { Button } from '../Boton';
 import 'font-awesome/css/font-awesome.min.css';
 
 export const CambioContraseñaModal = ({ showModal, handleClose }) => {
@@ -53,12 +53,12 @@ export const CambioContraseñaModal = ({ showModal, handleClose }) => {
   return (
     <Modal show={showModal} onHide={handleClose}>
       <Modal.Header closeButton className="text-center">
-        <Modal.Title style={{ color: 'var(--color-verde)' }}>Cambiar Contraseña</Modal.Title>
+        <Modal.Title style={{ color: 'var(--color-verde)', fontWeight: 'bold' }}>Cambiar Contraseña</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <form onSubmit={handleSubmit}>
           <div className="mb-3">
-            <label htmlFor="currentPassword" className="form-label">Contraseña Actual</label>
+            <label htmlFor="currentPassword" className="formulario3-field">Contraseña Actual</label>
             <div className="input-group">
               <input
                 type={showPassword.currentPassword ? 'text' : 'password'}
@@ -81,7 +81,7 @@ export const CambioContraseñaModal = ({ showModal, handleClose }) => {
           </div>
 
           <div className="mb-3">
-            <label htmlFor="newPassword" className="form-label">Nueva Contraseña</label>
+            <label htmlFor="newPassword" className="formulario3-field">Nueva Contraseña</label>
             <div className="input-group">
               <input
                 type={showPassword.newPassword ? 'text' : 'password'}
@@ -103,7 +103,7 @@ export const CambioContraseñaModal = ({ showModal, handleClose }) => {
           </div>
 
           <div className="mb-3">
-            <label htmlFor="confirmPassword" className="form-label">Confirmar Nueva Contraseña</label>
+            <label htmlFor="confirmPassword" className="formulario3-field">Confirmar Nueva Contraseña</label>
             <div className="input-group">
               <input
                 type={showPassword.confirmPassword ? 'text' : 'password'}

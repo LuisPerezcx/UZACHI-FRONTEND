@@ -1,18 +1,61 @@
 import React, { useState } from 'react';
 import { Modal } from 'react-bootstrap';
-import NavAdmin from '../components/NavAdmin';
-import Footer from '../components/Footer';
-import TableSearch from '../components/TableSearch';
+import NavAdmin from '../../components/NavAdmin';
+import { TableSearch } from '../../components/TableSearch';
+import { Footer } from '../../components/Footer';
+import { BreadCrumb } from '../../components/BreadCrumb';
+import { AlertDialog } from '../../components/AlertDialog';
+
 
 export const HistorialMovimientos = () => {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+  const [showDialog, setShowDialog] = useState(false);
+  const [selectedDocument, setSelectedDocument] = useState(null);
 
   const links = [
     { url: '/', label: 'Inicio' },
     { url: '/HistorialMovimientos', label: 'Historial' },
   ];
+
+  const communityData = [
+    {
+      folio: '12321',
+      nombreDocumento: 'RemisiónXiacui',
+      tipo: 'Remisión',
+      fecha: '2024-10-23',
+      estado: 'Aceptado',
+    },
+    {
+      folio: '45231',
+      nombreDocumento: 'ReembarqueCapu',
+      tipo: 'Reembarque',
+      fecha: '2024-10-23',
+      estado: 'Anulado',
+    },
+    {
+      folio: '65436',
+      nombreDocumento: 'DatosIxtlan',
+      tipo: 'Remisión',
+      fecha: '2024-10-23',
+      estado: 'Anulado',
+    },
+  ];
+  // Transforma los datos para estilizar el estado
+  const styledCommunityData = communityData.map((item) => ({
+    ...item,
+    estado: (
+      <span
+        style={{
+          color: item.estado === 'Aceptado' ? 'green' : item.estado === 'Anulado' ? 'red' : 'black',
+        
+        }}
+      >
+        {item.estado}
+      </span>
+    ),
+  }));
 
   const columns = [
     { label: 'Folio', key: 'folio' },
@@ -28,6 +71,16 @@ export const HistorialMovimientos = () => {
     { label: 'Nombre', value: 'nombreDocumento' },
     { label: 'Folio', value: 'folio' },
   ];
+  const handleAnular = (item) => {
+    setSelectedDocument(item);
+    setShowDialog(true);
+  };
+
+  const handleConfirmAnular = () => {
+    console.log('Documento anulado:', selectedDocument);
+    setShowDialog(false);
+    setSelectedDocument(null);
+  };
 
   const actions = [
     {
@@ -36,7 +89,7 @@ export const HistorialMovimientos = () => {
     },
     {
       label: 'Anular',
-      handler: (item) => console.log('Anulando:', item),
+      handler: handleAnular,
     },
     {
       label: 'Imprimir',
@@ -46,15 +99,9 @@ export const HistorialMovimientos = () => {
 
   return (
     <div>
-      <NavAdmin />
-      <div className="breadcrumb">
-        {links.map((link, index) => (
-          <span key={index}>
-            <a href={link.url}>{link.label}</a>
-            {index < links.length - 1 && ' > '}
-          </span>
-        ))}
-      </div>
+      <NavAdmin/>
+      <BreadCrumb links={links} />
+      
       <div className="container">
         <h2 className="text-center mb-4">HISTORIAL DE MOVIMIENTOS</h2>
         <div className="d-flex justify-content-between align-items-center mb-3">
@@ -80,12 +127,23 @@ export const HistorialMovimientos = () => {
         </div>
         <TableSearch
           columns={columns}
+          data={styledCommunityData}
           filters={filters}
           actions={actions}
           endpoint={null} // Configura tu endpoint aquí
         />
       </div>
-      <Footer />
+      <Footer/>
+      <AlertDialog
+        show={showDialog}
+        title="Confirmación de anulación"
+        message={`¿Está seguro que quiere anular el documento "${selectedDocument?.nombreDocumento}"?`}
+        onConfirm={handleConfirmAnular}
+        onCancel={() => setShowDialog(false)}
+        confirmText="Anular"
+        cancelText="Cancelar"
+      />
+
       {/* Modal */}
       <Modal show={show} onHide={handleClose} centered>
         <Modal.Body>

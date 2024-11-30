@@ -1,8 +1,7 @@
 import React from "react";
 import { useEffect, useState } from "react";
-import "../Usuarios/Components/Usuarios.css";
 import { Footer } from "../../components/Footer";
-import { FormularioUsuarios } from "../Usuarios/Components/FormularioUsuarios";
+import FormularioUsuarios from '../Usuarios/Components/FormularioUsuarios';
 import { TablaUsuarios } from "../Usuarios/Components/TablaUsuarios";
 
 export const Usuario = () => {
