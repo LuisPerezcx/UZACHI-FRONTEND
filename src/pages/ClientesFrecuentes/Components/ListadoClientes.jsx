@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { CustomTable } from "../../../components/TablaIconos";
 import FormularioCliente from "./FormularioCliente";
+import Swal from "sweetalert2"; 
+
 
 const ListadoClientes = () => {
   // Estados estaticos por ahora 
@@ -19,6 +21,19 @@ const ListadoClientes = () => {
   const eliminarCliente = (item) => {
     const nuevosClientes = clientes.filter((data) => data !== item);
     setClientes(nuevosClientes);
+
+    Swal.fire({
+      title: 'Eliminado',
+      text: `Cliente eliminado de manera exitosa`,
+      icon: 'success',
+      confirmButtonText: 'Aceptar',
+      timer: 3000,
+      timerProgressBar: true,
+      didOpen: () => {
+        const confirmButton = Swal.getConfirmButton();
+        confirmButton.style.backgroundColor = 'var(--color-verde)'; // Color verde
+      }
+    });
   };
 
   // editar cliente (ejemplo básico)
@@ -48,6 +63,7 @@ const ListadoClientes = () => {
       onEdit={editarCliente}
       onDelete={eliminarCliente}
       searchPlaceholder="Buscar nombre..."
+      edicion={editarClientesFrecuentes}
       />
  
       <FormularioCliente

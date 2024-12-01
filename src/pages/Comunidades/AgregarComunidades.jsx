@@ -3,6 +3,9 @@ import { GestionComunidades } from '../../components/Comunidades/GestionComunida
 import { Footer } from '../../components/Footer'
 import NavAdmin from '../../components/NavAdmin'
 import { CustomTable } from '../../components/TablaIconos'
+import Swal from "sweetalert2"; 
+import { BreadCrumb } from '../../components/BreadCrumb'
+
 
 export const AgregarComunidades = () => {
       // Datos simulados
@@ -19,6 +22,19 @@ export const AgregarComunidades = () => {
   const eliminarComunidades = (item) => {
     const nuevaComunidad = listaComunidades.filter((data) => data != item);
     setListaComunidades(nuevaComunidad)
+
+    Swal.fire({
+      title: 'Eliminado',
+      text: `Comunidad eliminada de manera exitosa`,
+      icon: 'success',
+      confirmButtonText: 'Aceptar',
+      timer: 3000,
+      timerProgressBar: true,
+      didOpen: () => {
+        const confirmButton = Swal.getConfirmButton();
+        confirmButton.style.backgroundColor = 'var(--color-verde)'; // Color verde
+      }
+    });
   };
 
 
@@ -39,11 +55,17 @@ export const AgregarComunidades = () => {
     }
   }
 
+  const links = [
+    { url: '/PrincipalAdmin', label: 'Inicio' },
+    { url: '/AgregarComunidades', label: 'Comunidades' }
+  ];
+
   return ( 
     <>
         <NavAdmin></NavAdmin>
+        <BreadCrumb links={links} />
         <div className="container my-5">
-            <h2 className="text-center mb-4">Comunidades</h2>
+            <h2 className="size-font-title text-center mb-4">Comunidades</h2>
         </div>
         <CustomTable
             data={listaComunidades}
@@ -51,6 +73,7 @@ export const AgregarComunidades = () => {
             onEdit={editarComunidad}
             onDelete={eliminarComunidades}
             searchPlaceholder='Buscar comunidad'
+            edicion={editarComunidades}
         />
         <GestionComunidades
           onAdd={guardarDatosComunidades}

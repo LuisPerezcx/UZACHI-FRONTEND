@@ -24,8 +24,7 @@ export const PrincipalAdmin = () => {
   const handleShow = () => setShow(true);
 
   const links = [
-    { url: '/', label: 'Inicio' },
-    { url: '/', label: 'Administrador' }
+    { url: '/PrincipalAdmin', label: 'Inicio' }
   ];
 
   const modalContent = [

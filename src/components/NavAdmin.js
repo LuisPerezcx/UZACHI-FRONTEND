@@ -22,6 +22,7 @@ export const NavAdmin = () => {
     profileImage: perfiIcon,
   };
 
+  
   return (
     <div className='colorNav m-4' style={{borderRadius: 12}}>
       <Navbar expand="lg" style={{ color: 'white' }}>
@@ -37,12 +38,10 @@ export const NavAdmin = () => {
                 <NavDropdown.Item href="/ClientesFrecuentes" className='dropdown-item'>Clientes frecuentes</NavDropdown.Item>
               </NavDropdown>
 
-              <Nav.Link href="/HistorialMovimientos" className='size-font-subtitle mx-3' style={{ color: 'white' }}>Historial</Nav.Link>
-              <Nav.Link href="#link"  className='size-font-subtitle' style={{ color: 'white' }}>Contacto</Nav.Link>
-              <NavDropdown className='ms-3' title={<img src={perfiIcon} style={{width: '40px'}}></img>}>
-              <NavDropdown.Item onClick={handleShowModal} className='dropdown-item'>Mi cuenta</NavDropdown.Item>
-              <NavDropdown.Item className='dropdown-item'>Cambiar contraseña</NavDropdown.Item>
-                <NavDropdown.Item href="#Liga" className='dropdown-item'>Cerrar sesión</NavDropdown.Item>
+              <NavDropdown className='ms-3 custom-dropdown' title={<img src={perfiIcon} style={{width: '40px'}}></img>}>
+                <NavDropdown.Item className='dropdown-item'>Mi cuenta</NavDropdown.Item>
+                <NavDropdown.Item onClick={handleShowModal} className='dropdown-item'>Cambiar contraseña</NavDropdown.Item>
+                <NavDropdown.Item href="/" className='dropdown-item'>Cerrar sesión</NavDropdown.Item>
               </NavDropdown>
             </Nav>
           </Navbar.Collapse>
