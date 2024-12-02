@@ -22,7 +22,7 @@ export const Formulario3 = () => {
       <div className='row'>
         {/* Sección Información sobre la materia */}
         <div className='col-lg-7 mt-5'>
-          <div className='card p-5'>
+          <div className='tarjeta-border p-5'>
             <div className="materia-section">
               <h2>Información sobre la materia.</h2>
               <div className='row'>
@@ -96,7 +96,7 @@ export const Formulario3 = () => {
 
         {/* Sección Información sobre saldos */}
         <div className='col-lg-5 mt-5'>
-          <div className="card p-5">
+          <div className="tarjeta-border card-formulario3 p-5">
             <h2>Información sobre saldos</h2>
             <div className="formulario3-field">
               <label>Saldo disponible según el documento anterior:</label>
