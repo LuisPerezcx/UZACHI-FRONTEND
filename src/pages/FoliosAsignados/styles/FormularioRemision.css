@@ -1,0 +1,12 @@
+.container {
+    max-width: 1200px;
+  }
+  
+  label {
+    font-weight: bold;
+  }
+  
+  input, select {
+    border-radius: 5px;
+  }
+  

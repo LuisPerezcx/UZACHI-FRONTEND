@@ -1,7 +1,12 @@
 import React, { useState } from "react";
 import CommunityList from "./Components/CommunityList";
-import CommunityModal from "./Components/CommunityModal";
 import CommunityForm from "./Components/CommunityForm";
+import CommunityModal from "./Components/CommunityModal";
+import FormularioRemision from "./Components/FormularioRemision";
+import NavAdmin from '../../components/NavAdmin'
+import { Footer } from '../../components/Footer'
+
+
 
 function FoliosAsignados() {
   const [communities, setCommunities] = useState([]);
@@ -20,11 +25,20 @@ function FoliosAsignados() {
   };
 
   return (
-    
-    <div className="container my-4">
+    <div>
+      <NavAdmin></NavAdmin>
+      <div className="container my-4">
       <div className="col-md-12">
-      <h2 className="text-center mb-4">Asignar Folios Autorizados</h2>
-        <CommunityForm communities={communities} />
+      {
+        /*
+        */ 
+      }
+      <h2 className="text-center size-font-title">Asignacion de Folios</h2>
+      <FormularioRemision/>
+        {/*<CommunityForm communities={communities} />*/}
+        {
+          /*<FormularioRemision/> */
+        }
       </div>
 
       <div className="col-md-12">
@@ -41,7 +55,11 @@ function FoliosAsignados() {
       {/* Modal */}
       <CommunityModal showModal={showModal} handleClose={handleCloseModal} onSave={handleAddCommunity} />
 
+      </div>
+      <Footer></Footer>
     </div>
+
+    
   );
 }
 

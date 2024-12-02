@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Swal from "sweetalert2"; 
 
 export const GestionComunidades = ({onAdd, editarComunidades}) => {
 
@@ -22,12 +23,38 @@ export const GestionComunidades = ({onAdd, editarComunidades}) => {
   const agregarComunidades = (e) => {
     e.preventDefault();
 
-    // if (!formData.propietario || !formData.tipo || !formData.capacidad) {
-    //   alert('Por favor llena todos los campos requeridos.');
-    //   return;
-    // }
+    if (!formData.nombreComunidad || !formData.municipio || !formData.entidad) {
+      Swal.fire({
+        title: 'Datos incompletos',
+        text: `Por favor, llena todos los campos requeridos.`,
+        icon: 'warning',
+        confirmButtonText: 'Aceptar',
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: () => {
+          const confirmButton = Swal.getConfirmButton();
+          confirmButton.style.backgroundColor = 'var(--color-verde)'; // Color verde
+        }
+      });
+      return;
+    }
 
     onAdd(formData); // Llamar a la función `onAdd` con los datos del formulario
+
+    Swal.fire({
+      title: editarComunidades ? 'Comunidad actualizada' : 'Comunidad agregada',
+      text: editarComunidades
+        ? `La comunidad "${formData.nombreComunidad}" ha sido actualizada correctamente.`
+        : `La comunidad "${formData.nombreComunidad}" ha sido agregada correctamente.`,
+      icon: 'success',
+      confirmButtonText: 'Aceptar',
+      timer: 3000, // Cerrar automáticamente después de 3 segundos
+      timerProgressBar: true,
+      didOpen: () => {
+        const confirmButton = Swal.getConfirmButton();
+        confirmButton.style.backgroundColor = 'var(--color-verde)'; // Color verde
+      }
+    });
 
     // Reiniciar el formulario
     setFormData({
@@ -42,15 +69,15 @@ export const GestionComunidades = ({onAdd, editarComunidades}) => {
 
   return (
     <div className="container mt-5">
-      <div className="card shadow-sm mx-auto" style={{ maxWidth: "95%", borderRadius: "12px" }}>
-        <div className="card-body">
-          <h4 className="card-title text-center mb-4">Agregar comunidad</h4>
+      <div className="mx-auto" style={{ maxWidth: "95%", borderRadius: "12px" }}>
+        <div className="tarjeta-border">
+          <h4 className="size-font-title text-center mb-4">Agregar comunidad</h4>
           <form onSubmit={agregarComunidades}>
             {/* Nombre de la comunidad */}
             <div className="row mb-3 justify-content-center">
               <div className="col-md-6 d-flex align-items-center">
                 <label htmlFor="nombreComunidad" className="form-label me-2 " >
-                  Nombre de la comunidad: 
+                  Nombre de la comunidad: <span className="text-danger">*</span>
                 </label>
                 <input
                   type="text"
@@ -66,7 +93,7 @@ export const GestionComunidades = ({onAdd, editarComunidades}) => {
             <div className="row mb-3 justify-content-center">
               <div className="col-auto d-flex aling-items-center gap2">
                 <label htmlFor="municipio" className="form-label mb-0">
-                  Municipio:
+                  Municipio: <span className="text-danger">*</span>
                 </label>
                 <div>
                   <input
@@ -80,7 +107,7 @@ export const GestionComunidades = ({onAdd, editarComunidades}) => {
               </div>
               <div className="col-auto d-flex align-items-center gap-2 ms-2">
                 <label htmlFor="entidad" className="form-label mb-0">
-                  Entidad:
+                  Entidad: <span className="text-danger">*</span>
                 </label>
                 <div>
                   <input

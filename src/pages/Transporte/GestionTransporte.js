@@ -3,6 +3,9 @@ import { FormularioTransporte } from '../Formulario/Components/FormularioTranspo
 import NavAdmin from '../../components/NavAdmin';
 import { Footer } from '../../components/Footer';
 import { CustomTable } from '../../components/TablaIconos';
+import Swal from "sweetalert2"; 
+import { BreadCrumb } from '../../components/BreadCrumb';
+
 
 export const GestionTransporte = () => {
   const [datosTransporte, setDatosTransporte] = useState([]);
@@ -22,7 +25,19 @@ export const GestionTransporte = () => {
   const handleDelete = (item) => {
     const updatedData = datosTransporte.filter((data) => data !== item);
     setDatosTransporte(updatedData);
-    console.log('Elemento eliminado:', item);
+
+    Swal.fire({
+      title: 'Eliminado',
+      text: `Transporte eliminado de manera exitosa`,
+      icon: 'success',
+      confirmButtonText: 'Aceptar',
+      timer: 3000,
+      timerProgressBar: true,
+      didOpen: () => {
+        const confirmButton = Swal.getConfirmButton();
+        confirmButton.style.backgroundColor = 'var(--color-verde)'; // Color verde
+      }
+    });
   };
 
   const handleSave = (newTransport) => {
@@ -39,11 +54,17 @@ export const GestionTransporte = () => {
     }
   };
 
+  const links = [
+    { url: '/PrincipalAdmin', label: 'Inicio' },
+    { url: '/GestionTransporte', label: 'Transportes' }
+  ];
+
   return (
     <div>
       <NavAdmin />
+      <BreadCrumb links={links} />
       <div className="container my-5">
-        <h2 className="text-center mb-4">Gestión de Transporte</h2>
+        <h2 className="size-font-title text-center mb-4">Transportes</h2>
       </div>
       <CustomTable
         data={datosTransporte}
@@ -51,12 +72,12 @@ export const GestionTransporte = () => {
         onEdit={handleEdit}
         onDelete={handleDelete}
         searchPlaceholder="Buscar transporte..."
+        edicion={editingTransport}
       />
       <div className='px-5'>
         <FormularioTransporte
           onAdd={handleSave}
           editingTransport={editingTransport}
-          title={'Hola'}
           formularioForm={false}
         />
       </div>
