@@ -2,7 +2,7 @@ import React from 'react'
 
 export const InformacionTitular = () => {
     return (
-        <div className="px-3 tarjeta-border mt-5">
+        <div className="tarjeta-border mt-5 p-5">
             <h5 className="card-title size-font-title" style={{color:'var(--color-gris)',fontWeight:'bold'}}>Información del titular</h5> <br/>
             <form>
                 <div className="row">
