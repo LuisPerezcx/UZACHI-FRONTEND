@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import '../../../styles/Formulario3.css';
-
+import {CalculadoraEspecial}  from '../../../components/Calculadora/CalculadoraEspecial';
+import {CalculadoraEstandar} from '../../../components/Calculadora/CalculadoraEstandar';
 export const Formulario3 = () => {
   // Estados para manejar datos en ambas secciones
   const [numeroCantidad, setNumeroCantidad] = useState('');
@@ -13,14 +14,8 @@ export const Formulario3 = () => {
   const [cantidadAmparada, setCantidadAmpara] = useState('');
   const [saldoSiguiente, setSaldoSiguiente] = useState('');
 
-  // Función para calcular saldo
-  const calcularSaldo = () => {
-    return saldoAnterior + cantidadAmparada;
-  };
-
-  const calcular = () => {
-    alert('Realizando cálculo...');
-  };
+  // Estado para controlar la calculadora activa
+  const [calculadoraActiva, setCalculadoraActiva] = useState(null);
 
   return (
     <>
@@ -77,9 +72,8 @@ export const Formulario3 = () => {
                 />
               </div>
 
-
               <div className="formulario3-actions">
-                <button onClick={calcular}>Calculadora</button>
+                <button onClick={() => setCalculadoraActiva(tipo)}>Abrir Calculadora</button>
                 <select
                   value={tipo}
                   onChange={(e) => setTipo(e.target.value)}
@@ -131,6 +125,10 @@ export const Formulario3 = () => {
           </div>
         </div>
       </div>
+    
+      {/* Render de calculadora basado en el tipo */}
+      {calculadoraActiva === 'Especial' && <CalculadoraEspecial />}
+      {calculadoraActiva === 'Volumen A & B' && <CalculadoraEstandar />}
     </>
-  )
-}
+  );
+};

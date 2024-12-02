@@ -100,9 +100,6 @@ export const LoginForm = () => {
             </button>
            </div>
         </form>
-        <small className="d-block text-muted mt-1">
-          Acceso a formulario
-        </small>
       </div>
     </div>
   );
