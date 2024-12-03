@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import NavAdmin from '../../components/NavAdmin';
 import { BreadCrumb } from '../../components/BreadCrumb';
-import { TableSearch } from '../../components/TableSearch';
+import { TableSearch } from './Components/TableSearch';
 import { Footer } from '../../components/Footer';
 import { GenerarReporteModal } from './Components/ModalGenerarReporte'; 
 
@@ -34,7 +34,7 @@ export const ReportesInternos = () => {
 
   const actions = [
     {
-      label: 'Editar',
+      label: 'Descargar',
       handler: (item) => console.log('Edit item:', item),
     },
     {

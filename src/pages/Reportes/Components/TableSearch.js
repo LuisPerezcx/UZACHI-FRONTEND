@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios'
 
-import InputWithClearButton from './InputWithClearButton/InputWithClearButton';
+import InputWithClearButton from '../../../components/InputWithClearButton/InputWithClearButton';
 
 /*
 Este componente recibe el endpoint del backend para los datos
@@ -45,9 +45,7 @@ export const TableSearch = ({ endpoint, columns, filters, actions, data }) => {
                 <InputWithClearButton onInputChange={handleInputChange}></InputWithClearButton>
                 {filters && (
                     <div className='dropdown'>
-                        <button className='boton-icono' type="button" id={`dropdownMenuButtonFilter`} data-bs-toggle="dropdown" aria-expanded="false">
-                            <i className='bi icono-filtro bi-filter fs-1 ' ></i>
-                        </button>
+                    
                         <ul className='dropdown-menu' aria-labelledby={`dropdownMenuButtonFilter`}>
                             {filters.map((action, actionIndex) => (
                                 <li key={actionIndex}>
