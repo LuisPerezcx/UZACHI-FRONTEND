@@ -14,15 +14,20 @@ import iconInformeSemarnat from '../assets/icon-informe-semarnat.png'
 import iconInformeInterno from '../assets/icon-informe-interno.png'
 import { TarjetaAdmin } from '../components/TarjetaAdmin';
 import { ModalC } from '../components/ModalC';
+import { ModalFolio } from '../pages/FoliosAsignados/Components/ModalFolio'; // Nuevo modal
+
 
 export const PrincipalAdmin = () => {
   // Estado para manejar el modal
   const [show, setShow] = useState(false);
+  const [showFoliosModal, setShowFoliosModal] = useState(false);
 
   // Funciones para abrir y cerrar el modal
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
+  const handleCloseFolios = () => setShowFoliosModal(false);
+  const handleShowFolios = () => setShowFoliosModal(true);
   const links = [
     { url: '/PrincipalAdmin', label: 'Inicio' }
   ];
@@ -83,13 +88,14 @@ export const PrincipalAdmin = () => {
                 title="Folios"
                 description="Administra y asigna los folios asignado para cada comunidad"
                 buttons={[
-                { label: 'Asignar folios', link: '/FoliosAsignados'}
+                { label: 'Asignar folios', onClick: handleShowFolios}
                 ]}
             />
         </div>
       </div>
       <ModalC show={show} onClose={handleClose} content={modalContent} />
-      
+      <ModalFolio show={showFoliosModal} onClose={handleCloseFolios} />
+
       <Footer></Footer>
     </div>
   );
