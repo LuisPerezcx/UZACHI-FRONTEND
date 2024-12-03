@@ -24,7 +24,7 @@ export const Formulario = () => {
                 </div>
                 <InformacionDocumento></InformacionDocumento>
                 <InformacionTitular></InformacionTitular>
-                <FormularioCliente/>
+                <FormularioCliente formularioForm={true}/>
                 <Formulario3></Formulario3>
                 <FormularioTransporte titulo="Transporte empleado" formularioForm={true} />
             </div>

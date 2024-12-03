@@ -27,7 +27,7 @@ export const NavAdmin = () => {
     <div className='colorNav m-4' style={{borderRadius: 12}}>
       <Navbar expand="lg" style={{ color: 'white' }}>
         <Container>
-          <Navbar.Brand href="/" className='size-font-title-nav' style={{color: 'white',}}>U Z A C H I</Navbar.Brand>
+          <Navbar.Brand href="/PrincipalAdmin" className='size-font-title-nav' style={{color: 'white',}}>U Z A C H I</Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" style={{backgroundColor: 'white'}}/>
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="ms-auto">

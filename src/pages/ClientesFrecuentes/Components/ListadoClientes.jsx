@@ -66,10 +66,14 @@ const ListadoClientes = () => {
       edicion={editarClientesFrecuentes}
       />
  
+    <div className="px-5">
       <FormularioCliente
         onAdd={guardarDatos}
         editarClientesFrecuentes={editarClientesFrecuentes}
+        formularioForm={false}
       />
+    </div>
+      
     </div>
   );
 };

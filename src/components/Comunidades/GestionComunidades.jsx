@@ -81,6 +81,7 @@ export const GestionComunidades = ({onAdd, editarComunidades}) => {
                 </label>
                 <input
                   type="text"
+                  maxLength={30}
                   className="form-control"
                   name="nombreComunidad"
                   value = {formData.nombreComunidad}
@@ -98,6 +99,7 @@ export const GestionComunidades = ({onAdd, editarComunidades}) => {
                 <div>
                   <input
                     type="text"
+                    maxLength={30}
                     className="form-control"
                     name="municipio"
                     value = {formData.municipio}
@@ -112,6 +114,7 @@ export const GestionComunidades = ({onAdd, editarComunidades}) => {
                 <div>
                   <input
                     type="text"
+                    maxLength={6}
                     className="form-control"
                     name="entidad"
                     value = {formData.entidad}
