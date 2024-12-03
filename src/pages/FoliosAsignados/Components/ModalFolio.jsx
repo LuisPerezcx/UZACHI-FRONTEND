@@ -1,31 +1,30 @@
 import React from 'react';
-import { Modal, Button } from 'react-bootstrap';
-import { Link } from 'react-router-dom'; // Para navegación interna
+import { Modal } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 
-export const ModalFolio = ({ show, onClose }) => {
+export const ModalFolio = ({ show, onClose, content }) => {
   return (
     <Modal show={show} onHide={onClose} centered>
       <Modal.Header closeButton>
-        <Modal.Title>Asignar Folios</Modal.Title>
+        <Modal.Title>
+          <p className='size-font-subtitle' style={{ color: 'var(--color-verde)' }}>FOLIOS</p>
+        </Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <p>Selecciona una opción para asignar folios:</p>
-        <div className="d-flex flex-column gap-3">
-          {/* Opción 1: Formulario de Remisión */}
-          <Link to="/FolioRemision" className="btn btn-primary">
-            Formulario de Remisión
-          </Link>
-          {/* Opción 2: Formulario de Reembarque */}
-          <Link to="/FolioReembarque" className="btn btn-secondary">
-            Formulario de Reembarque
-          </Link>
+        <div className='row justify-content-center text-center'>
+          {content.map((item, index) => (
+            <div key={index} className='col tarjeta-border ms-2 me-2'>
+              <img src={item.icon} style={{ width: '120px' }} alt={item.title} />
+              <h2 className='size-font-subsubtitle mt-2' style={{ color: 'black' }}>
+                {item.title}
+              </h2>
+              <Link to={item.route}>
+                <button className='style-button fw-b'>{item.buttonLabel}</button>
+              </Link>
+            </div>
+          ))}
         </div>
       </Modal.Body>
-      <Modal.Footer>
-        <Button variant="secondary" onClick={onClose}>
-          Cerrar
-        </Button>
-      </Modal.Footer>
     </Modal>
   );
 };

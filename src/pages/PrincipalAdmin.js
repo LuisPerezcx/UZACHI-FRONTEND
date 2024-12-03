@@ -12,6 +12,8 @@ import iconInforme from '../assets/icon-informe.png';
 import iconFolios from '../assets/icon-folios.png';
 import iconInformeSemarnat from '../assets/icon-informe-semarnat.png'
 import iconInformeInterno from '../assets/icon-informe-interno.png'
+import iconFolioReembarque from '../assets/icon-folio-reembarque.gif'
+import iconFolioRemision from '../assets/icon-folio-remision.gif'
 import { TarjetaAdmin } from '../components/TarjetaAdmin';
 import { ModalC } from '../components/ModalC';
 import { ModalFolio } from '../pages/FoliosAsignados/Components/ModalFolio'; // Nuevo modal
@@ -46,6 +48,23 @@ export const PrincipalAdmin = () => {
       buttonLabel: 'Administrar',
       route: '/ReportesInternos',
       onClick: () => console.log('Administrar informes internos')
+    }
+  ];
+
+  const modalContentFolio = [
+    {
+      icon: iconFolioReembarque,
+      title: 'LLenar formulario folios de reembarque',
+      buttonLabel: 'Reembarque',
+      route: '/FolioReembarque',
+      onClick: () => console.log('Formulario Reembarque')
+    },
+    {
+      icon: iconFolioRemision,
+      title: 'Llenar formulario folios de remisión',
+      buttonLabel: 'Remisión',
+      route: '/FolioRemision',
+      onClick: () => console.log('formulario Remision')
     }
   ];
 
@@ -94,7 +113,7 @@ export const PrincipalAdmin = () => {
         </div>
       </div>
       <ModalC show={show} onClose={handleClose} content={modalContent} />
-      <ModalFolio show={showFoliosModal} onClose={handleCloseFolios} />
+      <ModalFolio show={showFoliosModal} onClose={handleCloseFolios} content={modalContentFolio} />
 
       <Footer></Footer>
     </div>
