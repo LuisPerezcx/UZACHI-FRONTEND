@@ -41,17 +41,6 @@ export const CalculadoraEstandar = () => {
           </div>
           <div className="mb-2">
             <button onClick={agregarVolumenA} className="btn btn-success me-2">Agregar</button>
-            <div className="dropdown d-inline">
-              <button
-                className="btn btn-success dropdown-toggle"
-                type="button"
-                id="dropdownMenuButton"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
-                {selectedClass}
-              </button>
-            </div>
           </div>
           <div className="mt-3 border p-2 rounded">
             {ladoA.map((vol, index) => (
@@ -78,7 +67,7 @@ export const CalculadoraEstandar = () => {
           <div className="mt-3 border p-2 rounded">
             {ladoB.map((vol, index) => (
               <div key={index}>{vol}</div>
-            ))}
+            ))} 
           </div>
         </div>
       </div>

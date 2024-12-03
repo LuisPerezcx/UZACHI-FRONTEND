@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import '../../../styles/Formulario3.css';
-
+import {CalculadoraEspecial}  from '../../../components/Calculadora/CalculadoraEspecial';
+import {CalculadoraEstandar} from '../../../components/Calculadora/CalculadoraEstandar';
 export const Formulario3 = () => {
   // Estados para manejar datos en ambas secciones
   const [numeroCantidad, setNumeroCantidad] = useState('');
@@ -13,21 +14,15 @@ export const Formulario3 = () => {
   const [cantidadAmparada, setCantidadAmpara] = useState('');
   const [saldoSiguiente, setSaldoSiguiente] = useState('');
 
-  // Función para calcular saldo
-  const calcularSaldo = () => {
-    return saldoAnterior + cantidadAmparada;
-  };
-
-  const calcular = () => {
-    alert('Realizando cálculo...');
-  };
+  // Estado para controlar la calculadora activa
+  const [calculadoraActiva, setCalculadoraActiva] = useState(null);
 
   return (
     <>
       <div className='row'>
         {/* Sección Información sobre la materia */}
         <div className='col-lg-7 mt-5'>
-          <div className='card p-5'>
+          <div className='tarjeta-border p-5'>
             <div className="materia-section">
               <h2>Información sobre la materia.</h2>
               <div className='row'>
@@ -77,9 +72,8 @@ export const Formulario3 = () => {
                 />
               </div>
 
-
               <div className="formulario3-actions">
-                <button onClick={calcular}>Calculadora</button>
+                <button onClick={() => setCalculadoraActiva(tipo)}>Abrir Calculadora</button>
                 <select
                   value={tipo}
                   onChange={(e) => setTipo(e.target.value)}
@@ -102,7 +96,7 @@ export const Formulario3 = () => {
 
         {/* Sección Información sobre saldos */}
         <div className='col-lg-5 mt-5'>
-          <div className="card p-5">
+          <div className="tarjeta-border card-formulario3 p-5">
             <h2>Información sobre saldos</h2>
             <div className="formulario3-field">
               <label>Saldo disponible según el documento anterior:</label>
@@ -131,6 +125,10 @@ export const Formulario3 = () => {
           </div>
         </div>
       </div>
+    
+      {/* Render de calculadora basado en el tipo */}
+      {calculadoraActiva === 'Especial' && <CalculadoraEspecial />}
+      {calculadoraActiva === 'Volumen A & B' && <CalculadoraEstandar />}
     </>
-  )
-}
+  );
+};

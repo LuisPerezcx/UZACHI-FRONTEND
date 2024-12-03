@@ -22,7 +22,6 @@
   font-weight: bold;
   background-color: var(--color-verde);
   border-color: var(--color-verde);
-  width: 100%; /* Botón ocupa todo el ancho */
 }
 
 input.form-control {
