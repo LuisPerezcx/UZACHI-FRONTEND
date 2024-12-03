@@ -5,6 +5,7 @@ import { Footer } from '../../components/Footer';
 import { CustomTable } from '../../components/TablaIconos';
 import Swal from "sweetalert2"; 
 import { BreadCrumb } from '../../components/BreadCrumb';
+import { AlertComponent } from '../../components/AlertComponent';
 
 
 export const GestionTransporte = () => {
@@ -23,20 +24,19 @@ export const GestionTransporte = () => {
   };
 
   const handleDelete = (item) => {
-    const updatedData = datosTransporte.filter((data) => data !== item);
-    setDatosTransporte(updatedData);
-
-    Swal.fire({
-      title: 'Eliminado',
-      text: `Transporte eliminado de manera exitosa`,
-      icon: 'success',
-      confirmButtonText: 'Aceptar',
-      timer: 3000,
-      timerProgressBar: true,
-      didOpen: () => {
-        const confirmButton = Swal.getConfirmButton();
-        confirmButton.style.backgroundColor = 'var(--color-verde)'; // Color verde
-      }
+    
+    AlertComponent.confirm({
+      title: '¿Estás seguro?',
+      text: `¿Deseas eliminar el transporte seleccionado?`,
+      onConfirm: () => {
+        const updatedData = datosTransporte.filter((data) => data !== item);
+        setDatosTransporte(updatedData);
+  
+        AlertComponent.success({
+          title: 'Eliminado',
+          text: `Transporte eliminado de manera exitosa`,
+        });
+      },
     });
   };
 

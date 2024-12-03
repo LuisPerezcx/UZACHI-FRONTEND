@@ -5,6 +5,7 @@ import NavAdmin from '../../components/NavAdmin'
 import { CustomTable } from '../../components/TablaIconos'
 import Swal from "sweetalert2"; 
 import { BreadCrumb } from '../../components/BreadCrumb'
+import { AlertComponent } from '../../components/AlertComponent'
 
 
 export const AgregarComunidades = () => {
@@ -20,22 +21,21 @@ export const AgregarComunidades = () => {
   ];
 
   const eliminarComunidades = (item) => {
-    const nuevaComunidad = listaComunidades.filter((data) => data != item);
-    setListaComunidades(nuevaComunidad)
-
-    Swal.fire({
-      title: 'Eliminado',
-      text: `Comunidad eliminada de manera exitosa`,
-      icon: 'success',
-      confirmButtonText: 'Aceptar',
-      timer: 3000,
-      timerProgressBar: true,
-      didOpen: () => {
-        const confirmButton = Swal.getConfirmButton();
-        confirmButton.style.backgroundColor = 'var(--color-verde)'; // Color verde
-      }
+    AlertComponent.confirm({
+      title: '¿Estás seguro?',
+      text: `¿Deseas eliminar la comunidad seleccionada?`,
+      onConfirm: () => {
+        const nuevaComunidad = listaComunidades.filter((data) => data !== item);
+        setListaComunidades(nuevaComunidad);
+  
+        AlertComponent.success({
+          title: 'Eliminado',
+          text: `Comunidad eliminada de manera exitosa`,
+        });
+      },
     });
   };
+  
 
 
   const editarComunidad = (item) => {

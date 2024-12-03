@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { CustomTable } from "../../../components/TablaIconos";
 import FormularioCliente from "./FormularioCliente";
 import Swal from "sweetalert2"; 
+import { AlertComponent } from "../../../components/AlertComponent";
 
 
 const ListadoClientes = () => {
@@ -19,20 +20,18 @@ const ListadoClientes = () => {
 
   // eliminar cliente
   const eliminarCliente = (item) => {
-    const nuevosClientes = clientes.filter((data) => data !== item);
-    setClientes(nuevosClientes);
-
-    Swal.fire({
-      title: 'Eliminado',
-      text: `Cliente eliminado de manera exitosa`,
-      icon: 'success',
-      confirmButtonText: 'Aceptar',
-      timer: 3000,
-      timerProgressBar: true,
-      didOpen: () => {
-        const confirmButton = Swal.getConfirmButton();
-        confirmButton.style.backgroundColor = 'var(--color-verde)'; // Color verde
-      }
+    AlertComponent.confirm({
+      title: '¿Estás seguro?',
+      text: `¿Deseas eliminar el cliente seleccionado?`,
+      onConfirm: () => {
+        const nuevosClientes = clientes.filter((data) => data !== item);
+        setClientes(nuevosClientes);
+  
+        AlertComponent.success({
+          title: 'Eliminado',
+          text: `Cliente eliminado de manera exitosa`,
+        });
+      },
     });
   };
 

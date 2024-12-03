@@ -162,7 +162,7 @@ export const FormularioTransporte = ({ onAdd, editingTransport, formularioForm }
               <Form.Label>Capacidad <span className="text-danger">*</span></Form.Label>
               <Form.Control
                 type="number"
-                max={2}
+                max={99}
                 name="capacidad"
                 value={formData.capacidad}
                 onChange={handleChange}
