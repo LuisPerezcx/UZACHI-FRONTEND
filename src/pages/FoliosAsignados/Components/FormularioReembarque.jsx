@@ -9,24 +9,34 @@ export const FormularioReembarque = () => {
           <div className="tarjeta-border p-4 mb-3">
             <h5 className="card-title text-center"></h5>
             <form>
-              <div className="mb-3">
-                <label htmlFor="numeroTramite" className="form-label">Número de trámite:</label>
-                <input type="text" className="form-control" placeholder="Ingrese cantidad" />
+            <div className="row">
+                {/* Columna 1: Folio inicial */}
+                <div className="col-md-8">
+                  <div className="mb-3">
+                    <label htmlFor="numeroTramite" className="form-label">Número de trámite:</label>
+                  </div>
+                </div>
+                {/* Columna 2: Folio final */}
+                <div className="col-md-4">
+                  <div className="mb-3">
+                    <input type="text" className="form-control" placeholder=" " />
+                  </div>
+                </div>
               </div>
               <div className="mb-3">
                 <label htmlFor="volumenAutorizado" className="form-label">Volumen autorizado</label>
-                <input type="text" className="form-control" placeholder="m²" />
+                <input type="text" className="form-control" placeholder="" />
               </div>
               <div className="mb-3">
                 <label htmlFor="foliosAutorizados" className="form-label">Folios autorizados</label>
-                <input type="text" className="form-control" placeholder="m²" />
+                <input type="text" className="form-control" placeholder=" " />
               </div>
               <div className="row">
                 {/* Columna 1: Folio inicial */}
                 <div className="col-md-6">
                   <div className="mb-3">
                     <label htmlFor="folioInicial" className="form-label">Folio inicial</label>
-                    <input type="text" className="form-control" placeholder="m²" />
+                    <input type="text" className="form-control" placeholder=" " />
                   </div>
                 </div>
 
@@ -34,7 +44,7 @@ export const FormularioReembarque = () => {
                 <div className="col-md-6">
                   <div className="mb-3">
                     <label htmlFor="folioFinal" className="form-label">Folio final</label>
-                    <input type="text" className="form-control" placeholder="m²" />
+                    <input type="text" className="form-control" placeholder=" " />
                   </div>
                 </div>
               </div>
@@ -45,7 +55,7 @@ export const FormularioReembarque = () => {
         {/* Segunda columna: Formulario venta reembarque */}
         <div className="col-md-8">
           <div className="p-4 mb-3">
-            <h5 className="card-title text-center pb-4 fw-2">Venta reembarque</h5>
+            <h4 className="card-title text-center pb-4 mb-4 fw-2">Venta reembarque</h4>
             <form>
               <div className="row">
                 {/* Columna 1 */}
@@ -58,6 +68,9 @@ export const FormularioReembarque = () => {
                       <option>Tablón</option>
                       <option>Rollo</option>
                     </select>
+                  </div>
+                  <div className="mb-3">
+                    <label htmlFor="" className="form-label"></label>
                   </div>
                   <div className="mb-3">
                     <label htmlFor="piesTabla" className="form-label">Pies tabla</label>
@@ -77,7 +90,10 @@ export const FormularioReembarque = () => {
                     </select>
                   </div>
                   <div className="mb-3">
-                    <label htmlFor="volumen" className="form-label">Volumen</label>
+                    <label htmlFor="" className="form-label"></label>
+                  </div>
+                  <div className="mb-3">
+                    <label htmlFor="volumen" className="form-label">Num. Piezas </label>
                     <input type="text" className="form-control" id="volumen" placeholder=" " />
                   </div>
                 </div>
@@ -94,6 +110,9 @@ export const FormularioReembarque = () => {
                     </select>
                   </div>
                   <div className="mb-3">
+                    <label htmlFor="" className="form-label"></label>
+                  </div>
+                  <div className="mb-3">
                     <label htmlFor="precio" className="form-label">Precio</label>
                     <input type="text" className="form-control" id="precio" placeholder=" " />
                   </div>
@@ -104,6 +123,9 @@ export const FormularioReembarque = () => {
                   <div className="mb-2">
                     <label htmlFor="volumenExtra" className="form-label">Volumen</label>
                     <input type="text" className="form-control" id="volumenExtra" placeholder=" " />
+                  </div>
+                  <div className="mb-3">
+                    <label htmlFor="" className="form-label"></label>
                   </div>
                   <div className="mb-3">
                     <label htmlFor="total" className="form-label">Total</label>
