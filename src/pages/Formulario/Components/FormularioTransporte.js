@@ -220,7 +220,7 @@ export const FormularioTransporte = ({ onAdd, editingTransport, formularioForm }
           <div className="text-center">
             <button variant="success" type="submit" size="sm">
               {editingTransport ? 'Actualizar' : 'Agregar'}
-            </button>
+            </button> 
           </div>
         </Form>
     </div>

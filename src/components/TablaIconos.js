@@ -20,6 +20,7 @@ export function CustomTable({ data, columns, onEdit, onDelete, searchPlaceholder
             <div className="d-flex justify-content-start mb-3">
                 <input
                     type="text"
+                    maxLength={16}
                     className="form-control buscar-input"
                     placeholder={searchPlaceholder}
                     value={searchQuery}

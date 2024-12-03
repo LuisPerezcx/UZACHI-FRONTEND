@@ -88,6 +88,7 @@ const FormularioCliente = ({ onAdd, editarClientesFrecuentes }) => {
                 </label>
                 <input
                   type="text"
+                  maxLength={26}
                   className="form-control"
                   name="nombre"
                   value={formData.nombre}
@@ -148,6 +149,7 @@ const FormularioCliente = ({ onAdd, editarClientesFrecuentes }) => {
                 </label>
                 <input
                   type="text"
+                  maxLength={20}
                   className="form-control"
                   name="curp"
                   value={formData.curp}
@@ -187,6 +189,7 @@ const FormularioCliente = ({ onAdd, editarClientesFrecuentes }) => {
                 </label>
                 <input
                   type="text"
+                  maxLength={80}
                   className="form-control"
                   name="domicilio"
                   value={formData.domicilio}

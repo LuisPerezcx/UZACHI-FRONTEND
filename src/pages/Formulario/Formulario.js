@@ -6,6 +6,8 @@ import { InformacionTitular } from './Components/InformacionTitular'
 import {InformacionDestinatario} from './Components/InformacionDestinatario'
 import { Formulario3 } from './Components/Formulario3'
 import { FormularioTransporte } from './Components/FormularioTransporte'
+import ClientesFrecuentes from '../ClientesFrecuentes/ClientesFrecuentes'
+import FormularioCliente from '../ClientesFrecuentes/Components/FormularioCliente'
 
 export const Formulario = () => {
   return (
@@ -22,7 +24,7 @@ export const Formulario = () => {
                 </div>
                 <InformacionDocumento></InformacionDocumento>
                 <InformacionTitular></InformacionTitular>
-                <InformacionDestinatario></InformacionDestinatario>
+                <FormularioCliente/>
                 <Formulario3></Formulario3>
                 <FormularioTransporte titulo="Transporte empleado" formularioForm={true} />
             </div>
