@@ -30,17 +30,18 @@
     -webkit-overflow-scrolling: touch; /* Para un desplazamiento más fluido en dispositivos táctiles */
 }
 
-/* Estilo para las celdas en dispositivos pequeños */
+/* Ajustes para pantallas pequeñas (menos de 768px) */
 @media (max-width: 768px) {
     .table {
         font-size: 0.9rem; /* Reduce el tamaño de fuente para mayor claridad */
     }
-
-    .table th,
+    .table th {
+        font-size: 0.7rem; /* Tamaño reducido en dispositivos más pequeños */
+        padding: 0.3rem; /* Reduce el padding */
+    }
     .table td {
         padding: 0.5rem; /* Reduce el padding en pantallas pequeñas */
     }
-
     /* Oculta columnas desde la tercera en adelante, dejando visibles solo No., Nombre del Documento y Acciones */
     .table th:nth-child(n+3):not(:last-child),
     .table td:nth-child(n+3):not(:last-child) {
@@ -54,34 +55,44 @@
     .boton-icono {
         font-size: 1rem; /* Ajusta el tamaño del botón */
     }
-}
 
+    .excel-icon {
+        width: 30px;
+        height: 30px; /* Reduce el tamaño del ícono */
+    }
 
-.table th {
-    text-align: center;
-    white-space: nowrap; 
-}
-
-
-
-.excel-icon {
-    width: 60px; /* Tamaño inicial */
-    height: auto;
-}
-
-/* Ajustes para pantallas pequeñas */
-@media (max-width: 768px) {
     .reporte-btn {
-        font-size: 0.8rem; /* Reduce el tamaño de la fuente */
-        padding: 0.4rem 0.8rem; /* Ajusta el espacio interno */
+        font-size: 0.7rem; /* Reduce el tamaño de la fuente */
+        padding: 0.2rem 0.6rem; 
+        margin-bottom: 20px;
+    }
+}
+
+
+/* Ajustes para pantallas grandes (más de 1024px) */
+@media (min-width: 1025px) {
+    .table {
+        font-size: 1.1rem; /* Fuente más grande para mejor visibilidad */
+    }
+    .table th, .table td {
+        padding: 0.8rem; /* Incrementa el padding */
+    }
+
+    .dropdown-menu {
+        font-size: 1rem; /* Tamaño estándar del menú */
+    }
+
+    .boton-icono {
+        font-size: 1.5rem; /* Iconos más grandes */
     }
 
     .excel-icon {
-        width: 30px; /* Reduce el tamaño de la imagen */
+        width: 60px;
+        height: 60px; /* Tamaño completo del ícono */
+    }
+
+    .reporte-btn {
+        font-size: 0.9rem;
+        padding: 0.5rem 1rem;
     }
 }
-
-.btn-responsive {
-    font-size: 1rem; /* Tamaño de fuente por defecto */
-    padding: 1px 12px; /* Padding por defecto */
-  }

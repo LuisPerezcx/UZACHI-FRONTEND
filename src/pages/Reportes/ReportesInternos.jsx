@@ -59,8 +59,8 @@ export const ReportesInternos = () => {
       <div className='justify-content-center container'>
         <h2 className='text-center mb-5'>REPORTES INTERNOS</h2>
         <div className='d-flex justify-content-end '>
-          <button className='btn btn-success me-3'  onClick={handleShow}>Generar reporte</button>
-          <img src={excel} alt='excel' />
+          <button className='btn btn-success me-3 reporte-btn'  onClick={handleShow}>Generar reporte</button>
+          <img className='excel-icon' src={excel} alt='excel' />
         </div>
         <div className="d-flex justify-content-center">
           <TableSearch
