@@ -12,7 +12,7 @@ export const ModalC = ({ show, onClose, content }) => {
       </Modal.Header>
       <Modal.Body>
         <div className='row justify-content-center text-center'>
-          {content.map((item, index) => (
+          {content && Array.isArray(content) && content.map((item, index) => (
             <div key={index} className='col tarjeta-border ms-2 me-2'>
               <img src={item.icon} style={{ width: '120px' }} alt={item.title} />
               <h2 className='size-font-subsubtitle mt-2' style={{ color: 'black' }}>
