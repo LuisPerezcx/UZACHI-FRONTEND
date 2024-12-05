@@ -6,7 +6,7 @@ export const FormularioReembarque = () => {
       <div className="tarjeta-border row">
         {/* Primera columna: Formulario de trámites */}
         <div className="col-md-4">
-          <div className="tarjeta-border p-4 mb-3">
+          <div className=" p-4 mb-3">
             <h5 className="card-title text-center"></h5>
             <form>
             <div className="row">

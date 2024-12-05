@@ -12,10 +12,14 @@ const FormularioRemision = () => {
           <div className="mb-3 d-flex">
             <label htmlFor="anualidad" className="form-label me-2" style={{ width: "150px" }}>Anualidad</label>
             <input type="date" className="form-control" />
+            
           </div>
             <div className="mb-3 d-flex">
               <label htmlFor="pinus" className="form-label me-2" style={{ width: "150px" }}>Pinus:</label>
               <input type="text" className="form-control flex-grow-1" />
+              <div id="validationServer03Feedback" class="invalid-feedback">
+                Proporciona una ciudad válida.
+              </div>
             </div>
             <div className="mb-3 d-flex">
               <label htmlFor="quercus" className="form-label me-2" style={{ width: "150px" }}>Quercus:</label>
@@ -32,6 +36,12 @@ const FormularioRemision = () => {
         <div className="col-md-4">
           <h5 className="text-center">Trámite 1</h5>
           <form>
+          <div className="mb-3 d-flex">
+              <label htmlFor="espacio" className="form-label me-2" style={{ width: "150px" }}></label>
+              <label htmlFor="FolioInicial" className="form-label me-2" style={{ width: "150px" }}>Folio inicial</label>
+              <label htmlFor="FolioFinal" className="form-label me-2" style={{ width: "150px" }}>Folio Final</label>
+              
+            </div>
             <div className="mb-3 d-flex">
               <label htmlFor="pinusFolio" className="form-label me-2" style={{ width: "150px" }}>Pinus:</label>
               <input type="text" className="form-control me-2 ms-4" />
@@ -71,29 +81,29 @@ const FormularioRemision = () => {
       </div>
     </div>
       {/* Formulario Remision */}
-    <div className="container mt-4">
+    <div className="tarjeta-border container mt-4">
       <div className="row">
         {/* FORMULARIO DE ROLLO VOLUMEN  */}
-        <div className="col-md-4 ">
-          <div className="tarjeta-border p-4">
-            <h5 className="card-title text-center">Volumen</h5>
+        <div className=" col-md-3 me-2 ms-4">
+          <div className=" p-4">
+            <h5 className="card-title text-center mb-4">Volumen</h5>
             <form>
               <div className="mb-2">
                 <label htmlFor="volumenRolloA" className="form-label">Volumen rollo aserrado</label>
-                <input type="text" className="form-control" placeholder="m²" />
+                <input type="text" className="form-control" placeholder=" " />
               </div>
               <div className="mb-3">
                 <label htmlFor="volumenRolloA" className="form-label">Volumen madera aserrado</label>
-                <input type="text" className="form-control" placeholder="m²" />
+                <input type="text" className="form-control" placeholder=" " />
               </div>
             </form>
           </div>
         </div>
 
         {/* Segunda columna: Formulario PRODUCCION */}
-        <div className="col-md-8">
-          <div className="tarjeta-border p-4 mb-3">
-            <h5 className="card-title text-center">Producción</h5>
+        <div className=" col-md-8 ms-4">
+          <div className=" p-4 mb-3">
+            <h5 className="card-title text-center mb-4">Producción</h5>
             <form>
               <div className="row">
                 {/* Columna 1 */}
@@ -148,6 +158,9 @@ const FormularioRemision = () => {
         </div>
       </div>
     </div>
+    <div class="col-12">
+    <button class="btn btn-primary" type="submit">Enviar formulario</button>
+  </div>
     </div>
   );
 };

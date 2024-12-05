@@ -12,8 +12,8 @@ import iconInforme from '../assets/icon-informe.png';
 import iconFolios from '../assets/icon-folios.png';
 import iconInformeSemarnat from '../assets/icon-informe-semarnat.png'
 import iconInformeInterno from '../assets/icon-informe-interno.png'
-import iconFolioReembarque from '../assets/icon-folio-reembarque.gif'
-import iconFolioRemision from '../assets/icon-folio-remision.gif'
+import iconFolioReembarque from '../assets/icon-folio-reembarque.png'
+import iconFolioRemision from '../assets/icon-folio-remision.png'
 import { TarjetaAdmin } from '../components/TarjetaAdmin';
 import { ModalC } from '../components/ModalC';
 import { ModalFolio } from '../pages/FoliosAsignados/Components/ModalFolio'; // Nuevo modal
