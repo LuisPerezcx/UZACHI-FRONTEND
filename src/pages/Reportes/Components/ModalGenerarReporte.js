@@ -4,24 +4,24 @@ import { Modal } from 'react-bootstrap';
 import { generarReporteSemarnat } from './GenerarReporteSemarnat';
 
 export const GenerarReporteModal = ({ show, handleClose }) => {
-  const [archivo, setArchivo] = useState(null);
+  const [fechaInicio, setFechaInicio] = useState('');
+  const [fechaFinal, setFechaFinal] = useState('');
 
-  // Función para manejar la selección de archivos
-  const manejarArchivo = (evento) => {
-    const archivoSeleccionado = evento.target.files[0];
-    if (archivoSeleccionado) {
-      setArchivo(archivoSeleccionado);
-    }
-  };
-
-  // Función para generar el reporte, pasándole el archivo seleccionado
+  // Función para manejar la generación del reporte
   const manejarGenerarReporte = () => {
-    if (archivo) {
-      // Aquí podrías pasar el archivo al proceso de generación del reporte
-      generarReporteSemarnat(archivo); // Asegúrate de que la función puede manejar archivos
-    } else {
-      alert('Por favor, selecciona un archivo Excel.');
+    if (!fechaInicio || !fechaFinal) {
+      alert('Por favor, selecciona las fechas de inicio y final.');
+      return;
     }
+
+    // Validar que la fecha final no sea antes que la fecha de inicio
+    if (new Date(fechaFinal) < new Date(fechaInicio)) {
+      alert('La fecha final no puede ser antes de la fecha de inicio.');
+      return;
+    }
+
+    // Llamar a la función para generar el reporte si la validación es correcta
+    generarReporteSemarnat();
   };
 
   return (
@@ -42,6 +42,8 @@ export const GenerarReporteModal = ({ show, handleClose }) => {
                 type="date"
                 id="fechaInicio"
                 className="form-control"
+                value={fechaInicio}
+                onChange={(e) => setFechaInicio(e.target.value)}
                 placeholder="Selecciona la fecha de inicio"
               />
             </div>
@@ -57,25 +59,9 @@ export const GenerarReporteModal = ({ show, handleClose }) => {
                 type="date"
                 id="fechaFinal"
                 className="form-control"
+                value={fechaFinal}
+                onChange={(e) => setFechaFinal(e.target.value)}
                 placeholder="Selecciona la fecha final"
-              />
-            </div>
-          </div>
-
-          {/* Nueva sección para cargar el archivo Excel */}
-          <div className="row mb-3">
-            <div className="col-4 text-start">
-              <label htmlFor="archivo" className="form-label">
-                Cargar archivo:
-              </label>
-            </div>
-            <div className="col-8">
-              <input
-                type="file"
-                id="archivo"
-                className="form-control"
-                accept=".xlsx,.xls"
-                onChange={manejarArchivo}
               />
             </div>
           </div>

@@ -17,20 +17,7 @@ export const generarReporteSemarnat = async () => {
         { width: 10 }, // Columna G
     ];
 
-    const logo = await fetch('/assets/logoSemarnat.webp') // Cambia esta ruta según sea necesario
-    .then((res) => res.blob())
-    .then((blob) => blob.arrayBuffer());
-  
-  const logoId = workbook.addImage({
-    buffer: logo,
-    extension: 'webp', // Asegúrate de usar la extensión correcta según el formato de la imagen
-  });
-  
-  worksheet.addImage(logoId, {
-    tl: { col: 0, row: 0 },  // Coordenadas de la imagen
-    ext: { width: 150, height: 70 },  // Tamaño de la imagen
-  });
-  
+   
 
 
     // Títulos principales
