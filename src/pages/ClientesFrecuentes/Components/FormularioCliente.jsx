@@ -1,7 +1,9 @@
 import React, { useState } from "react";
+import { Button } from '../../../components/Boton';
 import Swal from "sweetalert2"; 
 
-const FormularioCliente = ({ onAdd, editarClientesFrecuentes }) => {
+const FormularioCliente = ({ onAdd, editarClientesFrecuentes,formularioForm }) => {
+  const [dentroFormularioForm, setDentroFormularioForm] = useState (formularioForm);
   const [formData, setFormData] = useState({
     nombre: '',
     domicilioDestinatario: '',
@@ -10,7 +12,8 @@ const FormularioCliente = ({ onAdd, editarClientesFrecuentes }) => {
     curp: '',
     rfn: '',
     municipio: '',
-    domicilio: ''
+    domicilio: '',
+    codigoIdentificacion: ''
   });
 
   React.useEffect(() => {
@@ -27,7 +30,7 @@ const FormularioCliente = ({ onAdd, editarClientesFrecuentes }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (!formData.nombre || !formData.domicilioDestinatario || !formData.poblacion || !formData.entidad) {
+    if (!formData.nombre || !formData.domicilioDestinatario || !formData.poblacion || !formData.entidad || !formData.curp  || !formData.rfn  || !formData.municipio  || !formData.domicilio  || !formData.codigoIdentificacion) {
       Swal.fire({
         title: 'Datos incompletos',
         text: 'Por favor, llena todos los campos requeridos.',
@@ -70,16 +73,30 @@ const FormularioCliente = ({ onAdd, editarClientesFrecuentes }) => {
       curp: '',
       rfn: '',
       municipio: '',
-      domicilio: ''
+      domicilio: '',
+      codigoIdentificacion: ''
     });
   };
 
+  const seleccionarCliente = () => {
+    console.log("Se clickeo agregar cliente")
+  }
+
   return (
-    <div className="mx-5 mt-4 mb-4 tarjeta-border">
-      <div className="p-3">
+    <div className=" mx-auto mt-5 mb-4 tarjeta-border p-5">
         <h5 className="text-center mb-3 size-font-title">Agregar nuevo cliente</h5>
         <form onSubmit={handleSubmit}>
-          <div className="row">
+              {/* Agregar datos de carro registrado */}
+          {dentroFormularioForm && (
+            <div className="row mb-4">
+              <div className="col-12 text-end mt-2">
+                <span className="me-2 form-label">Agregar datos de un cliente frecuente</span>
+                <Button label="Seleccionar cliente" onClick={seleccionarCliente} className="btn-success" />
+              </div>
+            </div>
+          )}
+
+          <div className="row"> 
             {/* Columna 1 */}
             <div className="col-md-6">
               <div className="mb-3 d-flex align-items-center">
@@ -88,6 +105,7 @@ const FormularioCliente = ({ onAdd, editarClientesFrecuentes }) => {
                 </label>
                 <input
                   type="text"
+                  maxLength={26}
                   className="form-control"
                   name="nombre"
                   value={formData.nombre}
@@ -105,6 +123,7 @@ const FormularioCliente = ({ onAdd, editarClientesFrecuentes }) => {
                 </label>
                 <input
                   type="text"
+                  maxLength={45}
                   className="form-control"
                   name="domicilioDestinatario"
                   value={formData.domicilioDestinatario}
@@ -118,6 +137,7 @@ const FormularioCliente = ({ onAdd, editarClientesFrecuentes }) => {
                 </label>
                 <input
                   type="text"
+                  maxLength={50}
                   className="form-control"
                   name="poblacion"
                   value={formData.poblacion}
@@ -127,13 +147,28 @@ const FormularioCliente = ({ onAdd, editarClientesFrecuentes }) => {
               </div>
               <div className="mb-3 d-flex align-items-center">
                 <label htmlFor="entidad" className="form-label me-2" style={{ width: "150px" }}>
-                  Entidad: <span className="text-danger">*</span>
+                  Entidad:<span className="text-danger">*</span>
                 </label>
                 <input
                   type="text"
+                  maxLength={50}
                   className="form-control"
                   name="entidad"
                   value={formData.entidad}
+                  placeholder="Ingrese la entidad"
+                  onChange={handleChange}
+                />
+              </div>
+              <div className="mb-3 d-flex align-items-center">
+                <label htmlFor="codigoIdentificacion" className="form-label me-2" style={{ width: "150px" }}>
+                  Codigo de identificacion:<span className="text-danger">*</span>
+                </label>
+                <input
+                  type="number"
+                  maxLength={20}
+                  className="form-control"
+                  name="codigoIdentificacion"
+                  value={formData.codigoIdentificacion}
                   placeholder="Ingrese la entidad"
                   onChange={handleChange}
                 />
@@ -144,10 +179,11 @@ const FormularioCliente = ({ onAdd, editarClientesFrecuentes }) => {
             <div className="col-md-6">
               <div className="mb-3 d-flex align-items-center">
                 <label htmlFor="curp" className="form-label me-2" style={{ width: "150px" }}>
-                  CURP:
+                  CURP: <span className="text-danger">*</span>
                 </label>
                 <input
                   type="text"
+                  maxLength={20}
                   className="form-control"
                   name="curp"
                   value={formData.curp}
@@ -157,10 +193,11 @@ const FormularioCliente = ({ onAdd, editarClientesFrecuentes }) => {
               </div>
               <div className="mb-3 d-flex align-items-center">
                 <label htmlFor="rfn" className="form-label me-2" style={{ width: "150px" }}>
-                  RFN:
+                  RFN: <span className="text-danger">*</span>
                 </label>
                 <input
                   type="text"
+                  maxLength={45}
                   className="form-control"
                   name="rfn"
                   value={formData.rfn}
@@ -170,10 +207,11 @@ const FormularioCliente = ({ onAdd, editarClientesFrecuentes }) => {
               </div>
               <div className="mb-3 d-flex align-items-center">
                 <label htmlFor="municipio" className="form-label me-2" style={{ width: "150px" }}>
-                  Municipio:
+                  Municipio:<span className="text-danger">*</span>
                 </label>
                 <input
                   type="text"
+                  maxLength={50}
                   className="form-control"
                   name="municipio"
                   value={formData.municipio}
@@ -183,10 +221,11 @@ const FormularioCliente = ({ onAdd, editarClientesFrecuentes }) => {
               </div>
               <div className="mb-3 d-flex align-items-center">
                 <label htmlFor="domicilio" className="form-label me-2" style={{ width: "150px" }}>
-                  Domicilio:
+                  Domicilio: <span className="text-danger">*</span>
                 </label>
                 <input
                   type="text"
+                  maxLength={80}
                   className="form-control"
                   name="domicilio"
                   value={formData.domicilio}
@@ -194,16 +233,22 @@ const FormularioCliente = ({ onAdd, editarClientesFrecuentes }) => {
                   onChange={handleChange}
                 />
               </div>
+
+              
             </div>
           </div>
 
           <div className="text-center">
+          {dentroFormularioForm && (
+              <span className="me-3">Agregar como cliente nuevo</span>
+          )}
+
             <button variant="success" type="submit" size="sm">
               {editarClientesFrecuentes ? 'Actualizar' : 'Agregar'}
             </button>
           </div>
+
         </form>
-      </div>
     </div>
   );
 };
