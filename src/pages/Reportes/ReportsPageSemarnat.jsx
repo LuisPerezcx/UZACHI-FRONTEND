@@ -45,6 +45,9 @@ export const ReportesPage = () => {
     }
   ];
 
+
+  
+
   const SimulatedData = [
     { id: 1, name: "MOVIMIENTO DE MADERA ENE-JUN 2024", community: "Santiago Xiacuí", period: "2019 - 2020" },
     { id: 2, name: "MOVIMIENTO DE MADERA JUL-DIC 2024", community: "San Juan Bautista", period: "2020 - 2021" },
