@@ -3,6 +3,10 @@ import { FormularioTransporte } from '../Formulario/Components/FormularioTranspo
 import NavAdmin from '../../components/NavAdmin';
 import { Footer } from '../../components/Footer';
 import { CustomTable } from '../../components/TablaIconos';
+import Swal from "sweetalert2"; 
+import { BreadCrumb } from '../../components/BreadCrumb';
+import { AlertComponent } from '../../components/AlertComponent';
+
 
 export const GestionTransporte = () => {
   const [datosTransporte, setDatosTransporte] = useState([]);
@@ -20,9 +24,20 @@ export const GestionTransporte = () => {
   };
 
   const handleDelete = (item) => {
-    const updatedData = datosTransporte.filter((data) => data !== item);
-    setDatosTransporte(updatedData);
-    console.log('Elemento eliminado:', item);
+    
+    AlertComponent.confirm({
+      title: '¿Estás seguro?',
+      text: `¿Deseas eliminar el transporte seleccionado?`,
+      onConfirm: () => {
+        const updatedData = datosTransporte.filter((data) => data !== item);
+        setDatosTransporte(updatedData);
+  
+        AlertComponent.success({
+          title: 'Eliminado',
+          text: `Transporte eliminado de manera exitosa`,
+        });
+      },
+    });
   };
 
   const handleSave = (newTransport) => {
@@ -39,11 +54,17 @@ export const GestionTransporte = () => {
     }
   };
 
+  const links = [
+    { url: '/PrincipalAdmin', label: 'Inicio' },
+    { url: '/GestionTransporte', label: 'Transportes' }
+  ];
+
   return (
     <div>
       <NavAdmin />
+      <BreadCrumb links={links} />
       <div className="container my-5">
-        <h2 className="text-center mb-4">Gestión de Transporte</h2>
+        <h2 className="size-font-title text-center mb-4">Transportes</h2>
       </div>
       <CustomTable
         data={datosTransporte}
@@ -51,12 +72,12 @@ export const GestionTransporte = () => {
         onEdit={handleEdit}
         onDelete={handleDelete}
         searchPlaceholder="Buscar transporte..."
+        edicion={editingTransport}
       />
       <div className='px-5'>
         <FormularioTransporte
           onAdd={handleSave}
           editingTransport={editingTransport}
-          title={'Hola'}
           formularioForm={false}
         />
       </div>

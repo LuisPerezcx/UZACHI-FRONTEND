@@ -3,7 +3,7 @@ import '../styles/BreadCrumb.css'
 
 export const BreadCrumb = ({links}) => {
   return (
-    <nav className="breadcrumb ms-5">
+    <nav className="breadcrumb ms-5 ">
       <ul>
         {links.map((link, index) => (
           <li key={index} className="breadcrumb-item">

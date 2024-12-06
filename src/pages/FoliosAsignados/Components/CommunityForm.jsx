@@ -36,7 +36,7 @@ function CommunityForm({ onAddCommunity }) {
         className="p-4 border rounded"
         style={{ maxWidth: "800%", width: "800%" }}
       >
-        <div className="row g-3">
+        <div className="row g-2">
           <div className="col-md-6">
             <label htmlFor="name" className="form-label">
               Nombre comunidad:
@@ -129,7 +129,11 @@ function CommunityForm({ onAddCommunity }) {
         </div>
       </form>
       
+
+      
     </div>
+
+    
     
   );
 }

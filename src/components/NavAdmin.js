@@ -4,21 +4,30 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import perfiIcon from '../assets/icon-perfil.png'
+import AccountModal from './MiPerfil/ProfileModal ';
 import { CambioContraseñaModal } from './Usuario/CambiarContraseña';
-import { Link } from 'react-router-dom'; 
 import '../styles/NavAdmin.css'
 
 export const NavAdmin = () => {
+
   const [showModal, setShowModal] = useState(false);
 
-  const handleOpenModal = () => setShowModal(true); 
-  const handleCloseModal = () => setShowModal(false);  
+  const handleShowModal = () => setShowModal(true);
+  const handleCloseModal = () => setShowModal(false);
 
+  // Datos simulados del usuario
+  const user = {
+    name: "Luis Alberto Hernandez",
+    email: "WichoHernandez@gmail.com",
+    profileImage: perfiIcon,
+  };
+
+  
   return (
     <div className='colorNav m-4' style={{borderRadius: 12}}>
       <Navbar expand="lg" style={{ color: 'white' }}>
         <Container>
-          <Navbar.Brand href="/" className='size-font-title-nav' style={{color: 'white',}}>U Z A C H I</Navbar.Brand>
+          <Navbar.Brand href="/PrincipalAdmin" className='size-font-title-nav' style={{color: 'white',}}>U Z A C H I</Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" style={{backgroundColor: 'white'}}/>
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="ms-auto">
@@ -29,17 +38,16 @@ export const NavAdmin = () => {
                 <NavDropdown.Item href="/ClientesFrecuentes" className='dropdown-item'>Clientes frecuentes</NavDropdown.Item>
               </NavDropdown>
 
-              <Nav.Link href="#home" className='size-font-subtitle mx-3' style={{ color: 'white' }}>Historial</Nav.Link>
-              <Nav.Link href="#link"  className='size-font-subtitle' style={{ color: 'white' }}>Contacto</Nav.Link>
-              <NavDropdown className='ms-3' title={<img src={perfiIcon} style={{width: '40px'}}></img>}>
-                <NavDropdown.Item href="#Liga" className='dropdown-item'>Mi cuenta</NavDropdown.Item>
-                <NavDropdown.Item onClick={handleOpenModal} className='dropdown-item'>Cambiar contraseña</NavDropdown.Item>
-                <NavDropdown.Item href="#Liga" className='dropdown-item'>Cerrar sesión</NavDropdown.Item>
+              <NavDropdown className='ms-3 custom-dropdown' title={<img src={perfiIcon} style={{width: '40px'}}></img>}>
+                <NavDropdown.Item className='dropdown-item'>Mi cuenta</NavDropdown.Item>
+                <NavDropdown.Item onClick={handleShowModal} className='dropdown-item'>Cambiar contraseña</NavDropdown.Item>
+                <NavDropdown.Item href="/" className='dropdown-item'>Cerrar sesión</NavDropdown.Item>
               </NavDropdown>
             </Nav>
           </Navbar.Collapse>
         </Container>
-      </Navbar>
+      </Navbar> 
+      <AccountModal show={showModal} handleClose={handleCloseModal} user={user} />
 
       <CambioContraseñaModal showModal={showModal} handleClose={handleCloseModal} />
     </div>

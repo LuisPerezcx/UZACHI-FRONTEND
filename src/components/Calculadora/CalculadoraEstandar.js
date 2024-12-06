@@ -5,24 +5,36 @@ export const CalculadoraEstandar = () => {
     const [ladoB, setLadoB] = useState([]);
     const [volumenA, setVolumenA] = useState('');
     const [volumenB, setVolumenB] = useState('');
-    const [selectedClass, setSelectedClass] = useState('Clase');
   
     const agregarVolumenA = () => {
-      if (volumenA) {
-        setLadoA([...ladoA, volumenA]);
+      if (!isNaN(volumenA) && volumenA.trim() !== '') {
+        setLadoA([...ladoA, parseFloat(volumenA)]);
         setVolumenA('');
+      } else {
+        alert('Por favor, ingresa un número válido en el lado A.');
       }
     };
   
     const agregarVolumenB = () => {
-      if (volumenB) {
-        setLadoB([...ladoB, volumenB]);
+      if (!isNaN(volumenB) && volumenB.trim() !== '') {
+        setLadoB([...ladoB, parseFloat(volumenB)]);
         setVolumenB('');
+      } else {
+        alert('Por favor, ingresa un número válido en el lado B.');
       }
     };
   
     const calcularPromedio = () => {
-      alert("Calculando promedio...");
+      if (ladoA.length !== ladoB.length) {
+        alert('Ambos lados deben tener la misma cantidad de datos.');
+        return;
+      }
+  
+      const sumaA = ladoA.reduce((acc, val) => acc + val, 0);
+      const sumaB = ladoB.reduce((acc, val) => acc + val, 0);
+      const resultado = (sumaA + sumaB) / 2;
+
+      alert(`El promedio calculado es: ${resultado}`);
     };
   return (
     <div className="container p-4 border rounded">
@@ -41,24 +53,6 @@ export const CalculadoraEstandar = () => {
           </div>
           <div className="mb-2">
             <button onClick={agregarVolumenA} className="btn btn-success me-2">Agregar</button>
-            <div className="dropdown d-inline">
-              <button
-                className="btn btn-success dropdown-toggle"
-                type="button"
-                id="dropdownMenuButton"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
-                {selectedClass}
-              </button>
-              <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <div className="dropdown-item" onClick={() => setSelectedClass("Primera")}>Primera</div>
-                <div className="dropdown-item" onClick={() => setSelectedClass("Secundaria")}>Secundaria</div>
-                <div className="dropdown-item" onClick={() => setSelectedClass("Terciaria")}>Terciaria</div>
-                <div className="dropdown-item" onClick={() => setSelectedClass("Bolo")}>Bolo</div>
-                <div className="dropdown-item" onClick={() => setSelectedClass("Seco")}>Seco</div>
-              </div>
-            </div>
           </div>
           <div className="mt-3 border p-2 rounded">
             {ladoA.map((vol, index) => (

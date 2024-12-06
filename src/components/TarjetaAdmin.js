@@ -4,9 +4,9 @@ import '../styles/TarjetaAdmin.css'
 
 export const TarjetaAdmin = ({ imgSrc, title, description, buttons }) => {
     return (
-        <div className='col-12 col-sm-6 col-md-3' style={{ paddingRight: '1em', paddingLeft: '1em' }}>
+        <div className='col-12 col-sm-6 col-md-3 mt-4' style={{ paddingRight: '1em', paddingLeft: '1em' }}>
             <div className='tarjeta-border' style={{ height: '100%' }}>
-                <img src={imgSrc} style={{ width: '90px' }} alt={title} />
+                <img src={imgSrc} style={{ width: '90px', height: '102px' }} alt={title} />
                 <h2 className='size-font-subtitle mt-2' style={{ color: 'black' }}>{title}</h2>
                 <p className='size-font-subsubtitle'>{description}</p>
                 <div>

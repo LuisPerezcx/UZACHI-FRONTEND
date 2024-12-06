@@ -1,6 +1,6 @@
 import React from "react";
 
-export const FormularioUsuarios = ({ usuario }) => {
+const FormularioUsuarios = ({ usuario }) => {
   const addUser = (event) => {
     event.preventDefault();
     usuario({
@@ -66,6 +66,7 @@ export const FormularioUsuarios = ({ usuario }) => {
         </div>
       </form>
     </>
-  )
-}
+  );
+};
 
+export default FormularioUsuarios;

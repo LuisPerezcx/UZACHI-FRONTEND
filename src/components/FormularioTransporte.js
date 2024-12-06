@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from 'react';
-import { SelectCombo } from './SelectCombo';
+import React, {useState } from 'react';
 import { Button } from './Boton';
 import { Col, Form, Row } from 'react-bootstrap';
 
