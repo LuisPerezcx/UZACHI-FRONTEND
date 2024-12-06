@@ -3,15 +3,14 @@ import { useNavigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './LoginForm.css';  
 import logo from '../../assets/Iniciar_sesion.png';
-import { Footer } from '../Footer';
 
 export const LoginForm = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
+  const [errorMessage, setErrorMessage] = useState(''); // Estado para el mensaje de error
 
   const navigate = useNavigate();
-
 
   const handleLogin = () => {
     const adminUser = {
@@ -22,26 +21,28 @@ export const LoginForm = () => {
 
     switch (true) {
       case !email || !password:
-        alert('Por favor, completa todos los campos.');
+        setErrorMessage('Por favor, completa todos los campos.');
         break;
 
-        case !password:
-        alert('Por favor, completa el campo "Contraseña".');
+      case !password:
+        setErrorMessage('Por favor, completa el campo "Contraseña".');
         break;
 
-        case !email :
-        alert('Por favor, completa el campo "Email".');
+      case !email:
+        setErrorMessage('Por favor, completa el campo "Email".');
         break;
   
       case email === adminUser.email && password === adminUser.password:
+        setErrorMessage(''); // Limpiar mensaje de error al iniciar sesión correctamente
         navigate('/PrincipalAdmin');
         break;
   
       default:
-        alert('Por favor, ingresa un usuario válido.');
+        setErrorMessage('Por favor, ingresa un usuario válido.');
         break;
     }
   };
+
   return (
     <div className="container-login d-flex flex-column align-items-center justify-content-between">
       <div className="card-login">
@@ -97,9 +98,13 @@ export const LoginForm = () => {
           >
             Ingresar
           </button>
+          {errorMessage && ( // Mostrar mensaje de error si existe
+            <div className="mt-4 text-danger" style={{ fontSize: '1.1rem' }}>
+              {errorMessage}
+            </div>
+          )}
         </form>
       </div>
     </div>
   );
-}
-
+};
