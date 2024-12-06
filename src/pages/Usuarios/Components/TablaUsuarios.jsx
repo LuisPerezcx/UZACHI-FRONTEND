@@ -5,24 +5,7 @@ import { Link } from "react-router-dom";
 
 export const TablaUsuarios = ({ user }) => {
   const [usuarios, setUsuarios] = useState([
-    {
-      id: 1,
-      nombreUsuario: "LuisDavid",
-      contrasena: "loboSolitario",
-      tipoUsuario: "Usuario",
-    },
-    {
-      id: 2,
-      nombreUsuario: "Luis Hernandez",
-      contrasena: "12345678",
-      tipoUsuario: "Administrador",
-    },
-    {
-      id: 3,
-      nombreUsuario: "Efren David",
-      contrasena: "87654321",
-      tipoUsuario: "Usuario",
-    },
+  
   ]);
 
   useEffect(() => {
@@ -48,11 +31,11 @@ export const TablaUsuarios = ({ user }) => {
               <tr key={m.id}>
                 <td>
                   <Link to={`/usuario/eliminar/${m.id}`}>
-                    <Trash />
+                      <Trash />
                   </Link>
                 </td>
                 <td>
-                  <Link to={`/usuario/modificar/${m.id}`}>
+                  <Link to={`/usuario/modificar/${m.id}`} >
                     <Pencil />
                   </Link>
                 </td>
@@ -67,3 +50,5 @@ export const TablaUsuarios = ({ user }) => {
     </>
   )
 }
+
+

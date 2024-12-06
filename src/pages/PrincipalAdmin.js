@@ -66,7 +66,7 @@ export const PrincipalAdmin = () => {
                 title="Usuario"
                 description="Agrega y administra los usuarios que pueden acceder"
                 buttons={[
-                { label: 'Administrar', onClick: () => console.log('Usuario clicado') }
+                { label: 'Administrar', link: '/Usuarios' }
                 ]}
             />
 
