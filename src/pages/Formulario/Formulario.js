@@ -27,10 +27,10 @@ export const Formulario = () => {
                 <FormularioCliente></FormularioCliente>
                 <Formulario3></Formulario3>
                 <FormularioTransporte titulo="Transporte empleado" formularioForm={true} />
-                <div>
-                  <Button>Guardar e imprimir</Button>
-                  <Button> Guardar</Button>
-                </div>
+            </div>
+            <div className="d-flex justify-content-center align-items-center mt-5 mb-5">
+                <Button style={{ backgroundColor: 'var(--color-verde)', color: 'white' }}>Guardar e imprimir</Button>
+                <Button style={{ backgroundColor: '#0192C7', color: 'white', marginLeft: '50px' }}>Vista previa</Button>
             </div>
         <Footer></Footer>
     </div>

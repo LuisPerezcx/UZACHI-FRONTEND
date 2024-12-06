@@ -13,7 +13,7 @@ export const InformacionTitular = () => {
         unidad: '',
         vencimiento: '',
     });
-
+    const [error, setError] = useState(""); 
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData({ ...formData, [name]: value });
@@ -23,6 +23,15 @@ export const InformacionTitular = () => {
         e.preventDefault();
         console.log('Datos del formulario:', formData);
     };
+
+    const handleKeyPress = (e) => {
+        if (!/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]$/.test(e.key)) {
+          e.preventDefault();
+          setError('Solo se permiten letras.');
+        } else {
+          setError(''); // Limpiar el mensaje de error si la tecla es válida.
+        }
+      };
 
     return (
         <div className="tarjeta-border mt-5 p-5">
@@ -42,6 +51,7 @@ export const InformacionTitular = () => {
                             id="nombre"
                             value={formData.nombre}
                             onChange={handleChange}
+                            onKeyPress={handleKeyPress}
                             placeholder="Nombre"
                             size="sm"
                             className="form-control"
@@ -119,6 +129,11 @@ export const InformacionTitular = () => {
                             name="oficio"
                             id="oficio"
                             value={formData.oficio}
+                            onKeyPress={(e) => {
+                                if (!/^\d$/.test(e.key)) {
+                                  e.preventDefault();
+                                }
+                              }}
                             onChange={handleChange}
                             placeholder="Número de oficio"
                             size="sm"
@@ -134,6 +149,11 @@ export const InformacionTitular = () => {
                             name="cantidad"
                             id="cantidad"
                             value={formData.cantidad}
+                            onKeyPress={(e) => {
+                                if (!/^\d$/.test(e.key)) {
+                                  e.preventDefault();
+                                }
+                              }}
                             onChange={handleChange}
                             placeholder="Cantidad"
                             size="sm"
@@ -149,6 +169,11 @@ export const InformacionTitular = () => {
                             name="folios"
                             id="folios"
                             value={formData.folios}
+                            onKeyPress={(e) => {
+                                if (!/^\d$/.test(e.key)) {
+                                  e.preventDefault();
+                                }
+                              }}
                             onChange={handleChange}
                             placeholder="Folios autorizados"
                             size="sm"
