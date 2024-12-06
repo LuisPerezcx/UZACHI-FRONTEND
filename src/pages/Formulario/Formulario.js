@@ -6,6 +6,8 @@ import { InformacionTitular } from './Components/InformacionTitular'
 import {InformacionDestinatario} from './Components/InformacionDestinatario'
 import { Formulario3 } from './Components/Formulario3'
 import { FormularioTransporte } from './Components/FormularioTransporte'
+import FormularioCliente from '../ClientesFrecuentes/Components/FormularioCliente'
+import { Button } from 'react-bootstrap'
 
 export const Formulario = () => {
   return (
@@ -22,9 +24,13 @@ export const Formulario = () => {
                 </div>
                 <InformacionDocumento></InformacionDocumento>
                 <InformacionTitular></InformacionTitular>
-                <InformacionDestinatario></InformacionDestinatario>
+                <FormularioCliente></FormularioCliente>
                 <Formulario3></Formulario3>
                 <FormularioTransporte titulo="Transporte empleado" formularioForm={true} />
+                <div>
+                  <Button>Guardar e imprimir</Button>
+                  <Button> Guardar</Button>
+                </div>
             </div>
         <Footer></Footer>
     </div>

@@ -76,7 +76,7 @@ export const Formulario3 = () => {
                     <div className="formulario3-field">
                       <label>Número y/o cantidad: <span className="text-danger">*</span></label>
                       <input
-                        type="text"
+                        type="number"
                         value={numeroCantidad}
                         onChange={(e) => setNumeroCantidad(e.target.value)}
                       />
