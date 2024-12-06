@@ -4,9 +4,13 @@ import Swal from "sweetalert2";
 export const GestionComunidades = ({onAdd, editarComunidades}) => {
 
   const [formData,setFormData] = useState ({
-      nombreComunidad: '',
-      municipio: '',
-      entidad: ''
+    nombreComunidad: '',
+    municipio: '',
+    entidad: '',
+    codigoPostal:'',
+    rfc:'',
+    rfn:'',
+    domicilioFiscal:''
   });
 
   React.useEffect(() => {
@@ -23,7 +27,7 @@ export const GestionComunidades = ({onAdd, editarComunidades}) => {
   const agregarComunidades = (e) => {
     e.preventDefault();
 
-    if (!formData.nombreComunidad || !formData.municipio || !formData.entidad) {
+    if (!formData.nombreComunidad || !formData.municipio || !formData.entidad || !formData.codigoPostal || !formData.rfc || !formData.rfn || !formData.domicilioFiscal) {
       Swal.fire({
         title: 'Datos incompletos',
         text: `Por favor, llena todos los campos requeridos.`,
@@ -60,7 +64,11 @@ export const GestionComunidades = ({onAdd, editarComunidades}) => {
     setFormData({
       nombreComunidad: '',
       municipio: '',
-      entidad: ''
+      entidad: '',
+      codigoPostal:'',
+      rfc:'',
+      rfn:'',
+      domicilioFiscal:''
     });
   };
 
@@ -75,15 +83,43 @@ export const GestionComunidades = ({onAdd, editarComunidades}) => {
           <form onSubmit={agregarComunidades}>
             {/* Nombre de la comunidad */}
             <div className="row mb-3 justify-content-center">
-              <div className="col-md-6 d-flex align-items-center">
+              <div className="col-md-5 ">
                 <label htmlFor="nombreComunidad" className="form-label me-2 " >
                   Nombre de la comunidad: <span className="text-danger">*</span>
                 </label>
                 <input
                   type="text"
+                  maxLength={30}
                   className="form-control"
                   name="nombreComunidad"
                   value = {formData.nombreComunidad}
+                  onChange={cambios}
+                />
+              </div>
+
+              <div className="col-sm-6 col-md-4">
+                <label htmlFor="codigoPostal" className="form-label me-2 " >
+                  Codiogo postal: <span className="text-danger">*</span>
+                </label>
+                <input
+                  type="number"
+                  maxLength={5}
+                  className="form-control"
+                  name="codigoPostal"
+                  value = {formData.codigoPostal}
+                  onChange={cambios}
+                />
+              </div>
+              <div className="col-sm-6 col-md-3">
+                <label htmlFor="rfc" className="form-label me-2 " >
+                  RFC: <span className="text-danger">*</span>
+                </label>
+                <input
+                  type="text"
+                  maxLength={13}
+                  className="form-control"
+                  name="rfc"
+                  value = {formData.rfc}
                   onChange={cambios}
                 />
               </div>
@@ -91,33 +127,57 @@ export const GestionComunidades = ({onAdd, editarComunidades}) => {
 
             {/* Municipio y Entidad en la misma línea */}
             <div className="row mb-3 justify-content-center">
-              <div className="col-auto d-flex aling-items-center gap2">
+              <div className="col-sm-8 col-md-5 ">
                 <label htmlFor="municipio" className="form-label mb-0">
                   Municipio: <span className="text-danger">*</span>
                 </label>
-                <div>
-                  <input
-                    type="text"
-                    className="form-control"
-                    name="municipio"
-                    value = {formData.municipio}
-                    onChange={cambios}
-                  />
-                </div>
+                <input
+                  type="text"
+                  maxLength={30}
+                  className="form-control"
+                  name="municipio"
+                  value = {formData.municipio}
+                  onChange={cambios}
+                />
               </div>
-              <div className="col-auto d-flex align-items-center gap-2 ms-2">
+              <div className="col-sm-4 col-md-4 ">
                 <label htmlFor="entidad" className="form-label mb-0">
                   Entidad: <span className="text-danger">*</span>
                 </label>
-                <div>
-                  <input
-                    type="text"
-                    className="form-control"
-                    name="entidad"
-                    value = {formData.entidad}
-                    onChange={cambios}
-                  />
-                </div>
+                <input
+                  type="text"
+                  maxLength={6}
+                  className="form-control"
+                  name="entidad"
+                  value = {formData.entidad}
+                  onChange={cambios}
+                />
+              </div>
+              <div className="col-sm-3 col-md-3">
+                <label htmlFor="rfn" className="form-label mb-0">
+                  RFN: <span className="text-danger">*</span>
+                </label>
+                <input
+                  type="text"
+                  maxLength={30}
+                  className="form-control"
+                  name="rfn"
+                  value = {formData.rfn}
+                  onChange={cambios}
+                />
+              </div>
+              <div className="col-sm-9 col-md-12 col-lg-6 ">
+                <label htmlFor="domicilioFiscal" className="form-label ">
+                  Domicilio fiscal: <span className="text-danger">*</span>
+                </label>
+                <input
+                  type="text"
+                  maxLength={80}
+                  className="form-control"
+                  name="domicilioFiscal"
+                  value = {formData.domicilioFiscal}
+                  onChange={cambios}
+                />
               </div>
             </div>
 
