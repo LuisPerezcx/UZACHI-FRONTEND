@@ -10,7 +10,6 @@ import { Justify } from "react-bootstrap-icons";
 export const FormularioReembarque = () => {
   const [showConfirmModal, setShowConfirmModal] = useState(false);
   const [showWarningModal, setShowWarningModal] = useState(false);
-  const [progress, setProgress] = useState(0);
 
   useEffect(() => {
     let timer;
