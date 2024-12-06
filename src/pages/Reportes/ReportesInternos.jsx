@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import NavAdmin from '../../components/NavAdmin';
 import { BreadCrumb } from '../../components/BreadCrumb';
-import { TableSearch } from '../../components/TableSearch';
+import { TableSearch } from './Components/TableSearch';
 import { Footer } from '../../components/Footer';
 import { GenerarReporteModal } from './Components/ModalGenerarReporte'; 
 
@@ -27,14 +27,13 @@ export const ReportesInternos = () => {
   ];
 
   const filters = [
-    { label: 'No.', value: 'id' },
-    { label: 'Nombre documento', value: 'name' },
+    { label: 'Nombre documento', value: 'filtroDocumento' },
     { label: 'Periodo inicio', value: 'filtropInicio' }
   ];
 
   const actions = [
     {
-      label: 'Editar',
+      label: 'Descargar',
       handler: (item) => console.log('Edit item:', item),
     },
     {
@@ -59,8 +58,8 @@ export const ReportesInternos = () => {
       <div className='justify-content-center container'>
         <h2 className='text-center mb-5'>REPORTES INTERNOS</h2>
         <div className='d-flex justify-content-end '>
-          <button className='btn btn-success me-3'  onClick={handleShow}>Generar reporte</button>
-          <img src={excel} alt='excel' />
+          <button className='btn btn-success me-3 reporte-btn'  onClick={handleShow}>Generar reporte</button>
+          <img className='excel-icon' src={excel} alt='excel' />
         </div>
         <div className="d-flex justify-content-center">
           <TableSearch

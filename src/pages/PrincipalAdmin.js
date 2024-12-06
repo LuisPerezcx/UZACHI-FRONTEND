@@ -12,20 +12,26 @@ import iconInforme from '../assets/icon-informe.png';
 import iconFolios from '../assets/icon-folios.png';
 import iconInformeSemarnat from '../assets/icon-informe-semarnat.png'
 import iconInformeInterno from '../assets/icon-informe-interno.png'
+import iconFolioReembarque from '../assets/icon-folio-reembarque.gif'
+import iconFolioRemision from '../assets/icon-folio-remision.gif'
 import { TarjetaAdmin } from '../components/TarjetaAdmin';
 import { ModalC } from '../components/ModalC';
+import { ModalFolio } from '../pages/FoliosAsignados/Components/ModalFolio'; // Nuevo modal
+
 
 export const PrincipalAdmin = () => {
   // Estado para manejar el modal
   const [show, setShow] = useState(false);
+  const [showFoliosModal, setShowFoliosModal] = useState(false);
 
   // Funciones para abrir y cerrar el modal
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
+  const handleCloseFolios = () => setShowFoliosModal(false);
+  const handleShowFolios = () => setShowFoliosModal(true);
   const links = [
-    { url: '/', label: 'Inicio' },
-    { url: '/', label: 'Administrador' }
+    { url: '/PrincipalAdmin', label: 'Inicio' }
   ];
 
   const modalContent = [
@@ -42,6 +48,23 @@ export const PrincipalAdmin = () => {
       buttonLabel: 'Administrar',
       route: '/ReportesInternos',
       onClick: () => console.log('Administrar informes internos')
+    }
+  ];
+
+  const modalContentFolio = [
+    {
+      icon: iconFolioReembarque,
+      title: 'LLenar formulario folios de reembarque',
+      buttonLabel: 'Reembarque',
+      route: '/FolioReembarque',
+      onClick: () => console.log('Formulario Reembarque')
+    },
+    {
+      icon: iconFolioRemision,
+      title: 'Llenar formulario folios de remisión',
+      buttonLabel: 'Remisión',
+      route: '/FolioRemision',
+      onClick: () => console.log('formulario Remision')
     }
   ];
 
@@ -84,13 +107,14 @@ export const PrincipalAdmin = () => {
                 title="Folios"
                 description="Administra y asigna los folios asignado para cada comunidad"
                 buttons={[
-                { label: 'Asignar folios', link: '/FoliosAsignados'}
+                { label: 'Asignar folios', onClick: handleShowFolios}
                 ]}
             />
         </div>
       </div>
       <ModalC show={show} onClose={handleClose} content={modalContent} />
-      
+      <ModalFolio show={showFoliosModal} onClose={handleCloseFolios} content={modalContentFolio} />
+
       <Footer></Footer>
     </div>
   );

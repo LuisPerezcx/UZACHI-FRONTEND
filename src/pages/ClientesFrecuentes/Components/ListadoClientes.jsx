@@ -1,7 +1,9 @@
 import React, { useState } from "react";
-import { FaEdit, FaTrashAlt } from "react-icons/fa";
 import { CustomTable } from "../../../components/TablaIconos";
 import FormularioCliente from "./FormularioCliente";
+import Swal from "sweetalert2"; 
+import { AlertComponent } from "../../../components/AlertComponent";
+
 
 const ListadoClientes = () => {
   // Estados estaticos por ahora 
@@ -18,8 +20,19 @@ const ListadoClientes = () => {
 
   // eliminar cliente
   const eliminarCliente = (item) => {
-    const nuevosClientes = clientes.filter((data) => data !== item);
-    setClientes(nuevosClientes);
+    AlertComponent.confirm({
+      title: '¿Estás seguro?',
+      text: `¿Deseas eliminar el cliente seleccionado?`,
+      onConfirm: () => {
+        const nuevosClientes = clientes.filter((data) => data !== item);
+        setClientes(nuevosClientes);
+  
+        AlertComponent.success({
+          title: 'Eliminado',
+          text: `Cliente eliminado de manera exitosa`,
+        });
+      },
+    });
   };
 
   // editar cliente (ejemplo básico)
@@ -49,14 +62,20 @@ const ListadoClientes = () => {
       onEdit={editarCliente}
       onDelete={eliminarCliente}
       searchPlaceholder="Buscar nombre..."
+      edicion={editarClientesFrecuentes}
       />
  
+    <div className="px-5">
       <FormularioCliente
         onAdd={guardarDatos}
         editarClientesFrecuentes={editarClientesFrecuentes}
+        formularioForm={false}
       />
+    </div>
+      
     </div>
   );
 };
 
 export default ListadoClientes;
+ 

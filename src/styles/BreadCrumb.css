@@ -56,5 +56,10 @@
   .breadcrumb-item:last-child a {
     color: var(--color-verde);
   }
+
+  .breadcrumb-item + .breadcrumb-item::before {
+    content: none  !important; /* Elimina el divisor */
+  }
+  
   
   /* FIN DE ESTILOS DE BREADCRUMB */

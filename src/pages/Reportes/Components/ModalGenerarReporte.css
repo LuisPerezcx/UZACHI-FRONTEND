@@ -5,12 +5,94 @@
     margin-top: 17px;
     font-weight: bold;
 }
+
 /* Estilo para los inputs */
 .modal-body .container .row .form-label {
     font-size: 1.1rem !important;
 }
+
 /* Estilo para los inputs, con color gris en el borde */
 .modal-body .container .row .col-8 input {
     font-size: 0.8rem !important; 
     border: 1px solid var(--color-gris);
-  }
+}
+
+/* Ajustes generales para la tabla */
+.table {
+    width: 100%;
+    margin-bottom: 1rem;
+    overflow-x: auto;
+    white-space: nowrap; /* Evita que las columnas largas rompan el diseño */
+}
+
+.table-container {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch; /* Para un desplazamiento más fluido en dispositivos táctiles */
+}
+
+/* Ajustes para pantallas pequeñas (menos de 768px) */
+@media (max-width: 768px) {
+    .table {
+        font-size: 0.9rem; /* Reduce el tamaño de fuente para mayor claridad */
+    }
+    .table th {
+        font-size: 0.7rem; /* Tamaño reducido en dispositivos más pequeños */
+        padding: 0.3rem; /* Reduce el padding */
+    }
+    .table td {
+        padding: 0.5rem; /* Reduce el padding en pantallas pequeñas */
+    }
+    /* Oculta columnas desde la tercera en adelante, dejando visibles solo No., Nombre del Documento y Acciones */
+    .table th:nth-child(n+3):not(:last-child),
+    .table td:nth-child(n+3):not(:last-child) {
+        display: none; /* Oculta las columnas adicionales */
+    }
+
+    .dropdown-menu {
+        font-size: 0.8rem; /* Ajusta el tamaño del menú desplegable */
+    }
+
+    .boton-icono {
+        font-size: 1rem; /* Ajusta el tamaño del botón */
+    }
+
+    .excel-icon {
+        width: 30px;
+        height: 30px; /* Reduce el tamaño del ícono */
+    }
+
+    .reporte-btn {
+        font-size: 0.7rem; /* Reduce el tamaño de la fuente */
+        padding: 0.2rem 0.6rem; 
+        margin-bottom: 20px;
+    }
+}
+
+
+/* Ajustes para pantallas grandes (más de 1024px) */
+@media (min-width: 1025px) {
+    .table {
+        font-size: 1.1rem; /* Fuente más grande para mejor visibilidad */
+    }
+    .table th, .table td {
+        padding: 0.8rem; /* Incrementa el padding */
+    }
+
+    .dropdown-menu {
+        font-size: 1rem; /* Tamaño estándar del menú */
+    }
+
+    .boton-icono {
+        font-size: 1.5rem; /* Iconos más grandes */
+    }
+
+    .excel-icon {
+        width: 60px;
+        height: 60px; /* Tamaño completo del ícono */
+    }
+
+    .reporte-btn {
+        font-size: 0.9rem;
+        padding: 0.5rem 1rem;
+    }
+}

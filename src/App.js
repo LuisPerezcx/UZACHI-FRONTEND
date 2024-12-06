@@ -5,7 +5,7 @@ import './App.css';
 import './styles/Common.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
-
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 function App() {
   return (
