@@ -1,7 +1,4 @@
 import React, { useState } from "react";
-import CommunityList from "./Components/CommunityList";
-import CommunityForm from "./Components/CommunityForm";
-import CommunityModal from "./Components/CommunityModal";
 import NavAdmin from '../../components/NavAdmin'
 import { Footer } from '../../components/Footer'
 import { FormularioReembarque } from "./Components/FormularioReembarque";
