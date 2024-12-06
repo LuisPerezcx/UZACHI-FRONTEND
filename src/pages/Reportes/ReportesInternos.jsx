@@ -27,8 +27,7 @@ export const ReportesInternos = () => {
   ];
 
   const filters = [
-    { label: 'No.', value: 'id' },
-    { label: 'Nombre documento', value: 'name' },
+    { label: 'Nombre documento', value: 'filtroDocumento' },
     { label: 'Periodo inicio', value: 'filtropInicio' }
   ];
 

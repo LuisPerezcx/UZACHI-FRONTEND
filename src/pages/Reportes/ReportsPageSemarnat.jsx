@@ -29,10 +29,10 @@ export const ReportesPage = () => {
   ];
 
   const filters = [
-    { label: 'No.', value: 'id' },
-    { label: 'Nombre documento', value: 'name' },
+    { label: 'Comunidad', value: 'filtroComunidad' },
     { label: 'Periodo inicio', value: 'filtropInicio' }
   ];
+
 
   const actions = [
     {

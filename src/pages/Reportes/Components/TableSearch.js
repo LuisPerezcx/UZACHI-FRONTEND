@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
 import InputWithClearButton from '../../../components/InputWithClearButton/InputWithClearButton';
 
 export const TableSearch = ({ endpoint, columns, filters, actions, data }) => {
@@ -7,42 +6,66 @@ export const TableSearch = ({ endpoint, columns, filters, actions, data }) => {
     const [filteredData, setFilteredData] = useState([]);
     const [search, setSearch] = useState('');
     const [filter, setFilter] = useState(filters[0].value);
-    const [loading, setLoading] = useState(true); // Estado de carga
+    const [loading, setLoading] = useState(true);
 
+    // Maneja el cambio en el input de búsqueda
     const handleInputChange = (value) => {
         setSearch(value);
     };
+
+    // Maneja el cambio en el filtro seleccionado
+    const handleFilterChange = (filterValue) => {
+        setFilter(filterValue);
+        setSearch(''); // Restablecer el campo de entrada al cambiar el filtro
+    };
+
+    // Filtra los datos basados en el valor de búsqueda y el filtro seleccionado
+    useEffect(() => {
+        let filtered = [...tableData];
+
+        if (search !== '') {
+            // Filtrar según el filtro seleccionado
+            if (filter === 'filtropInicio') {
+                filtered = filtered.filter(item => item.pInicio.includes(search));
+            } else if (filter === 'filtroComunidad') {
+                filtered = filtered.filter(item => item.nombre.toLowerCase().includes(search.toLowerCase()));
+            }
+        }
+
+        setFilteredData(filtered);
+    }, [search, filter, tableData]);
 
     useEffect(() => {
         // Simulación de carga de datos
         setTimeout(() => {
             setTableData(data);
             setFilteredData(data);
-            setLoading(false); // Finaliza la carga
+            setLoading(false);
         }, 2000);
-
-        // Para una solicitud real:
-        /*
-        axios.get(endpoint)
-            .then((response) => {
-                setTableData(response.data);
-                setFilteredData(response.data);
-                setLoading(false); // Finaliza la carga
-            })
-            .catch((error) => console.error(error));
-        */
-    }, [data, endpoint]);
+    }, [data]);
 
     return (
         <div className="container-fluid mx-auto">
             <div className="rounded mb-3 d-flex justify-content-center w-50 mx-auto">
-                <InputWithClearButton onInputChange={handleInputChange}></InputWithClearButton>
+                <InputWithClearButton onInputChange={handleInputChange} value={search} filter={filter} />
                 {filters && (
                     <div className="dropdown">
+                        <button
+                            className="boton-icono"
+                            type="button"
+                            id={`dropdownMenuButtonFilter`}
+                            data-bs-toggle="dropdown"
+                            aria-expanded="false"
+                        >
+                            <i className="bi icono-filtro bi-filter fs-1"></i>
+                        </button>
                         <ul className="dropdown-menu" aria-labelledby={`dropdownMenuButtonFilter`}>
                             {filters.map((action, actionIndex) => (
                                 <li key={actionIndex}>
-                                    <button onClick={() => action.handler(filter)} className="dropdown-item">
+                                    <button
+                                        onClick={() => handleFilterChange(action.value)}
+                                        className="dropdown-item"
+                                    >
                                         {action.label}
                                     </button>
                                 </li>
