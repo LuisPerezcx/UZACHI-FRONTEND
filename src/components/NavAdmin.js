@@ -11,7 +11,6 @@ import '../styles/NavAdmin.css'
 export const NavAdmin = () => {
 
   const [showModal, setShowModal] = useState(false);
-
   const handleShowModal = () => setShowModal(true);
   const handleCloseModal = () => setShowModal(false);
 
@@ -27,7 +26,7 @@ export const NavAdmin = () => {
     <div className='colorNav m-4' style={{borderRadius: 12}}>
       <Navbar expand="lg" style={{ color: 'white' }}>
         <Container>
-          <Navbar.Brand href="/" className='size-font-title-nav' style={{color: 'white',}}>U Z A C H I</Navbar.Brand>
+          <Navbar.Brand href="/PrincipalAdmin" className='size-font-title-nav' style={{color: 'white',}}>U Z A C H I</Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" style={{backgroundColor: 'white'}}/>
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="ms-auto">
@@ -38,17 +37,19 @@ export const NavAdmin = () => {
                 <NavDropdown.Item href="/ClientesFrecuentes" className='dropdown-item'>Clientes frecuentes</NavDropdown.Item>
               </NavDropdown>
 
-              <NavDropdown className='ms-3 custom-dropdown' title={<img src={perfiIcon} style={{width: '40px'}}></img>}>
-                <NavDropdown.Item className='dropdown-item'>Mi cuenta</NavDropdown.Item>
-                <NavDropdown.Item onClick={handleShowModal} className='dropdown-item'>Cambiar contraseña</NavDropdown.Item>
-                <NavDropdown.Item href="/" className='dropdown-item'>Cerrar sesión</NavDropdown.Item>
+              <Nav.Link href="/HistorialMovimientos" className='size-font-subtitle mx-3' style={{ color: 'white' }}>Historial</Nav.Link>
+              <Nav.Link href="#link"  className='size-font-subtitle' style={{ color: 'white' }}>Contacto</Nav.Link>
+              <NavDropdown className='ms-3' title={<img src={perfiIcon} style={{width: '40px'}}></img>}>
+              <NavDropdown.Item onClick={handleShowModal} className='dropdown-item'>Mi cuenta</NavDropdown.Item>
+              <NavDropdown.Item  className='dropdown-item'>Cambiar contraseña</NavDropdown.Item>
+                <NavDropdown.Item href="#Liga" className='dropdown-item'>Cerrar sesión</NavDropdown.Item>
               </NavDropdown>
+
             </Nav>
           </Navbar.Collapse>
         </Container>
       </Navbar> 
       <AccountModal show={showModal} handleClose={handleCloseModal} user={user} />
-
       <CambioContraseñaModal showModal={showModal} handleClose={handleCloseModal} />
     </div>
   );

@@ -16,7 +16,7 @@ export const FormularioTransporte = ({ onAdd, editingTransport, formularioForm }
   };
 
   const [formData, setFormData] = useState({
-    medio: '',
+    medio: '', 
     marca: '',
     modelo: '',
     propietario: '',
@@ -112,9 +112,10 @@ export const FormularioTransporte = ({ onAdd, editingTransport, formularioForm }
         <Form onSubmit={handleSubmit} >
           <Row className="mb-3">
             <Col md={4}>
-              <Form.Label>Medio de transporte</Form.Label>
+              <Form.Label>Medio de transporte <span className="text-danger">*</span></Form.Label>
               <Form.Control
                 type="text"
+                maxLength={25}
                 name="medio"
                 value={formData.medio}
                 onChange={handleChange}
@@ -122,9 +123,10 @@ export const FormularioTransporte = ({ onAdd, editingTransport, formularioForm }
               />
             </Col>
             <Col md={4}>
-              <Form.Label>Marca</Form.Label>
+              <Form.Label>Marca <span className="text-danger">*</span></Form.Label>
               <Form.Control
                 type="text"
+                maxLength={14}
                 name="marca"
                 value={formData.marca}
                 onChange={handleChange}
@@ -132,9 +134,10 @@ export const FormularioTransporte = ({ onAdd, editingTransport, formularioForm }
               />
             </Col>
             <Col md={4}>
-              <Form.Label>Modelo</Form.Label>
+              <Form.Label>Modelo <span className="text-danger">*</span></Form.Label>
               <Form.Control
                 type="text"
+                maxLength={14}
                 name="modelo"
                 value={formData.modelo}
                 onChange={handleChange}
@@ -145,9 +148,10 @@ export const FormularioTransporte = ({ onAdd, editingTransport, formularioForm }
 
           <Row className="mb-3">
             <Col md={8}>
-              <Form.Label>Propietario <span className="text-danger">*</span></Form.Label>
+              <Form.Label>Conductor <span className="text-danger">*</span></Form.Label>
               <Form.Control
                 type="text"
+                maxLength={80}
                 name="propietario"
                 value={formData.propietario}
                 onChange={handleChange}
@@ -158,6 +162,7 @@ export const FormularioTransporte = ({ onAdd, editingTransport, formularioForm }
               <Form.Label>Capacidad <span className="text-danger">*</span></Form.Label>
               <Form.Control
                 type="number"
+                max={99}
                 name="capacidad"
                 value={formData.capacidad}
                 onChange={handleChange}
@@ -168,25 +173,17 @@ export const FormularioTransporte = ({ onAdd, editingTransport, formularioForm }
 
           <Row className="mb-3">
             <Col md={4}>
-              <Form.Label>Placas o matrícula</Form.Label>
+              <Form.Label>Placas o matrícula <span className="text-danger">*</span></Form.Label>
               <Form.Control
                 type="text"
+                maxLength={9}
                 name="placas"
                 value={formData.placas}
                 onChange={handleChange}
                 size="sm"
               />
             </Col>
-            <Col md={4}>
-              <Form.Label>Otro</Form.Label>
-              <Form.Control
-                type="text"
-                name="otro"
-                value={formData.otro}
-                onChange={handleChange}
-                size="sm"
-              />
-            </Col>
+        
             <Col md={4}>
               <Form.Label>Tipo <span className="text-danger">*</span></Form.Label>
               <Form.Select
@@ -217,11 +214,14 @@ export const FormularioTransporte = ({ onAdd, editingTransport, formularioForm }
           </div>
         )}
 
+        {!formularioFormatoField && (
           <div className="text-center">
             <button variant="success" type="submit" size="sm">
               {editingTransport ? 'Actualizar' : 'Agregar'}
-            </button>
+            </button> 
           </div>
+        )}        
+          
         </Form>
     </div>
   );

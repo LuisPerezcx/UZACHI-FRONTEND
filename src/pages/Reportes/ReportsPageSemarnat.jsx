@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { Footer } from '../../components/Footer';
 import NavAdmin from '../../components/NavAdmin';
-import { TableSearch } from '../../components/TableSearch';
-import { GenerarReporteModal } from './Components/ModalGenerarReporte'; 
+import { TableSearch } from './Components/TableSearch';
+import { GenerarReporteModal } from './Components/ModalGenerarReporte';
 
 
-import excel from '../../assets/excel.png';   
+import excel from '../../assets/excel.png';
 
 import { Modal, Container, Row, Col, Table, Button, InputGroup, FormControl, Dropdown, DropdownButton, Pagination } from 'react-bootstrap';
 import PaginationTable from '../../components/PaginationTable';
@@ -29,14 +29,14 @@ export const ReportesPage = () => {
   ];
 
   const filters = [
-    { label: 'No.', value: 'id' },
-    { label: 'Nombre documento', value: 'name' },
+    { label: 'Comunidad', value: 'filtroComunidad' },
     { label: 'Periodo inicio', value: 'filtropInicio' }
   ];
 
+
   const actions = [
     {
-      label: 'Editar',
+      label: 'Descargar',
       handler: (item) => console.log('Edit item:', item),
     },
     {
@@ -44,6 +44,9 @@ export const ReportesPage = () => {
       handler: (item) => console.log('Delete item:', item),
     }
   ];
+
+
+  
 
   const SimulatedData = [
     { id: 1, name: "MOVIMIENTO DE MADERA ENE-JUN 2024", community: "Santiago Xiacuí", period: "2019 - 2020" },
@@ -58,14 +61,15 @@ export const ReportesPage = () => {
 
   return (
     <div>
-      <NavAdmin/>
+      <NavAdmin />
       <BreadCrumb links={links} />
       <div className='justify-content-center container'>
         <h2 className='text-center mb-5'>REPORTES SEMARNAT</h2>
-        <div className='d-flex justify-content-end '>
-          <button className='btn btn-success me-3'  onClick={handleShow}>Generar reporte</button>
-          <img src={excel} alt='excel' />
+        <div className='d-flex justify-content-end'>
+          <button className='btn btn-success me-3 reporte-btn' onClick={handleShow}>Generar reporte</button>
+          <img className='excel-icon' src={excel} alt='excel' />
         </div>
+
         <div className="d-flex justify-content-center">
           <TableSearch
             endpoint={null}
