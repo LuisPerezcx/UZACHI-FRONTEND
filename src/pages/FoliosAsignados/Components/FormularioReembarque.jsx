@@ -29,7 +29,7 @@ export const FormularioReembarque = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (!formData.folioInicial || !formData.folioFinal || !formData.foliosAutorizados) {
+    if (!formData.folioInicial || !formData.folioFinal || !formData.foliosAutorizados || !formData.volumenAutorizado) {
       Swal.fire({
         title: 'Datos incompletos',
         text: `Por favor, llena todos los campos requeridos.`,
@@ -70,7 +70,7 @@ export const FormularioReembarque = () => {
                 </div>
               </div>
               <div className="mb-3">
-                <Form.Label htmlFor="volumenAutorizado" className="form-label">Volumen autorizado</Form.Label>
+                <Form.Label htmlFor="volumenAutorizado" className="form-label">Volumen autorizado: <span className="text-danger">*</span></Form.Label>
                 <Form.Control 
                   type="text"
                   className="form-control"
@@ -80,7 +80,7 @@ export const FormularioReembarque = () => {
                 />
               </div>
               <div className="mb-3">
-                <Form.Label htmlFor="foliosAutorizados" className="form-label">Folios autorizados</Form.Label>
+                <Form.Label htmlFor="foliosAutorizados" className="form-label">Folios autorizados <span className="text-danger">*</span></Form.Label>
                 <Form.Control 
                   type="text"
                   className="form-control"
@@ -93,7 +93,7 @@ export const FormularioReembarque = () => {
                 {/* Columna 1: Folio inicial */}
                 <div className="col-md-6">
                   <div className="mb-3">
-                    <Form.Label htmlFor="folioInicial" className="form-label">Folio inicial</Form.Label>
+                    <Form.Label htmlFor="folioInicial" className="form-label">Folio inicial: <span className="text-danger">*</span></Form.Label>
                     <Form.Control 
                       type="text"
                       className="form-control"
@@ -107,7 +107,7 @@ export const FormularioReembarque = () => {
                 {/* Columna 2: Folio final */}
                 <div className="col-md-6">
                   <div className="mb-3">
-                    <Form.Label htmlFor="folioFinal" className="form-label">Folio final</Form.Label>
+                    <Form.Label htmlFor="folioFinal" className="form-label">Folio final: <span className="text-danger">*</span></Form.Label>
                     <Form.Control 
                       type="text"
                       className="form-control"
@@ -258,15 +258,17 @@ export const FormularioReembarque = () => {
                 </div>
               </div>
             </form>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div className="text-center">
+            <div className="text-center pt-4">
             <button variant="success" type="submit" size="sm">
               {'Agregar'}
             </button>
           </div>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+    
     </Form>
   );
 };

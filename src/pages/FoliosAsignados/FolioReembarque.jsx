@@ -15,9 +15,7 @@ function FoliosReembarque() {
         </div>
       </div>
       <Footer></Footer>
-    </div>
-
-    
+    </div> 
   );
 }
 
