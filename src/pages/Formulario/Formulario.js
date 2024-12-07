@@ -6,8 +6,8 @@ import { InformacionTitular } from './Components/InformacionTitular'
 import {InformacionDestinatario} from './Components/InformacionDestinatario'
 import { Formulario3 } from './Components/Formulario3'
 import { FormularioTransporte } from './Components/FormularioTransporte'
-import ClientesFrecuentes from '../ClientesFrecuentes/ClientesFrecuentes'
 import FormularioCliente from '../ClientesFrecuentes/Components/FormularioCliente'
+import { Button } from 'react-bootstrap'
 
 export const Formulario = () => {
   return (
@@ -24,9 +24,13 @@ export const Formulario = () => {
                 </div>
                 <InformacionDocumento></InformacionDocumento>
                 <InformacionTitular></InformacionTitular>
-                <FormularioCliente formularioForm={true}/>
+                <FormularioCliente></FormularioCliente>
                 <Formulario3></Formulario3>
                 <FormularioTransporte titulo="Transporte empleado" formularioForm={true} />
+            </div>
+            <div className="d-flex justify-content-center align-items-center mt-5 mb-5">
+                <Button style={{ backgroundColor: 'var(--color-verde)', color: 'white' }}>Guardar e imprimir</Button>
+                <Button style={{ backgroundColor: '#0192C7', color: 'white', marginLeft: '50px' }}>Vista previa</Button>
             </div>
         <Footer></Footer>
     </div>

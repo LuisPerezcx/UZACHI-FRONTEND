@@ -3,6 +3,7 @@ import '../../../styles/Formulario3.css';
 import { CalculadoraEspecial } from '../../../components/Calculadora/CalculadoraEspecial';
 import { CalculadoraEstandar } from '../../../components/Calculadora/CalculadoraEstandar';
 import { ModalPlantilla } from '../../../components/Modal/ModalPlantilla';
+import { SelectCombo } from '../../../components/SelectCombo'
  // Importa el modal
 
 export const Formulario3 = () => {
@@ -11,15 +12,23 @@ export const Formulario3 = () => {
   const [volumenPeso, setVolumenPeso] = useState('');
   const [cantidadLetra, setCantidadLetra] = useState('');
 
-  const [saldoAnterior, setSaldoAnterior] = useState(0);
-  const [cantidadAmparada, setCantidadAmpara] = useState(0);
-  const [saldoSiguiente, setSaldoSiguiente] = useState(0);
+  const [saldoAnterior, setSaldoAnterior] = useState();
+  const [cantidadAmparada, setCantidadAmpara] = useState();
+  const [saldoSiguiente, setSaldoSiguiente] = useState();
 
   const [showModal, setShowModal] = useState(false); // Controla la visibilidad del modal
   const [modalContent, setModalContent] = useState(null); // Controla el contenido del modal
   const [tipoSeleccionado, setTipoSeleccionado] = useState('Calculadora');
   const [calculatorType, setCalculatorType] = useState(null);
   const [error, setError] = useState(""); 
+
+  
+  const opcionesUnidadMedida = [
+    { value: 'seleccion', label: 'Selecciona la unidad de medida' },
+    { value: 'm3', label: 'm³' },
+    { value: 'kg', label: 'Kilogramos' },
+    { value: 'Pies tabla', label: 'Pies tabla' }
+  ];
 
   const handleSeleccionTipo = (tipo) => {
     setTipoSeleccionado(tipo);
@@ -62,6 +71,15 @@ export const Formulario3 = () => {
       }
     };
 
+    const handleKeyPress = (e) => {
+      if (!/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]$/.test(e.key)) {
+        e.preventDefault();
+        setError('Solo se permiten letras.');
+      } else {
+        setError(''); // Limpiar el mensaje de error si la tecla es válida.
+      }
+    };
+
   return (
     <>
       <div className="row">
@@ -76,17 +94,23 @@ export const Formulario3 = () => {
                     <div className="formulario3-field">
                       <label>Número y/o cantidad: <span className="text-danger">*</span></label>
                       <input
-                        type="text"
+                        type="number"
                         value={numeroCantidad}
+                        onKeyPress={(e) => {
+                          if (!/^\d$/.test(e.key)) {
+                            e.preventDefault();
+                          }
+                        }}
                         onChange={(e) => setNumeroCantidad(e.target.value)}
                       />
                     </div>
                     <div className="formulario3-field">
                       <label>Unidad de medida: <span className="text-danger">*</span></label>
-                      <input
-                        type="text"
-                        value={unidadMedida}
-                        onChange={(e) => setUnidadMedida(e.target.value)}
+                      <SelectCombo 
+                          para="unidadMedida" 
+                          name="unidadMedida" 
+                          id="unidadMedida" 
+                          options={opcionesUnidadMedida} 
                       />
                     </div>
                     <div className="formulario3-field">
@@ -94,6 +118,11 @@ export const Formulario3 = () => {
                       <input
                         type="text"
                         value={volumenPeso}
+                        onKeyPress={(e) => {
+                          if (!/^\d$/.test(e.key)) {
+                            e.preventDefault();
+                          }
+                        }}
                         onChange={(e) => setVolumenPeso(e.target.value)}
                       />
                     </div>
@@ -113,6 +142,8 @@ export const Formulario3 = () => {
                 <input
                   type="text"
                   value={cantidadLetra}
+                  onKeyPress={handleKeyPress}
+                  placeholder="Ingresa solo letras"
                   onChange={(e) => setCantidadLetra(e.target.value)}
                 />
               </div>
@@ -146,6 +177,11 @@ export const Formulario3 = () => {
               <input
                 type="number"
                 value={saldoAnterior}
+                onKeyPress={(e) => {
+                  if (!/^\d$/.test(e.key)) {
+                    e.preventDefault();
+                  }
+                }}
                 onChange={handleSaldoAnteriorChange}
               />
             </div>
@@ -154,6 +190,11 @@ export const Formulario3 = () => {
               <input
                 type="number"
                 value={cantidadAmparada}
+                onKeyPress={(e) => {
+                    if (!/^\d$/.test(e.key)) {
+                      e.preventDefault();
+                    }
+                  }}
                 onChange={handleCantidadAmparaChange}
               />
                {error && <p style={{ color: "red", marginTop: "5px" }}>{error}</p>}
@@ -163,6 +204,11 @@ export const Formulario3 = () => {
               <input
                 type="number"
                 value={saldoSiguiente}
+                onKeyPress={(e) => {
+                  if (!/^\d$/.test(e.key)) {
+                    e.preventDefault();
+                  }
+                }}
                 readOnly
               />
             </div>

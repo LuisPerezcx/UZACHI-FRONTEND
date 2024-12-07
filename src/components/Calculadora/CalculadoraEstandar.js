@@ -5,24 +5,36 @@ export const CalculadoraEstandar = () => {
     const [ladoB, setLadoB] = useState([]);
     const [volumenA, setVolumenA] = useState('');
     const [volumenB, setVolumenB] = useState('');
-    const [selectedClass, setSelectedClass] = useState('Clase');
   
     const agregarVolumenA = () => {
-      if (volumenA) {
-        setLadoA([...ladoA, volumenA]);
+      if (!isNaN(volumenA) && volumenA.trim() !== '') {
+        setLadoA([...ladoA, parseFloat(volumenA)]);
         setVolumenA('');
+      } else {
+        alert('Por favor, ingresa un número válido en el lado A.');
       }
     };
   
     const agregarVolumenB = () => {
-      if (volumenB) {
-        setLadoB([...ladoB, volumenB]);
+      if (!isNaN(volumenB) && volumenB.trim() !== '') {
+        setLadoB([...ladoB, parseFloat(volumenB)]);
         setVolumenB('');
+      } else {
+        alert('Por favor, ingresa un número válido en el lado B.');
       }
     };
   
     const calcularPromedio = () => {
-      alert("Calculando promedio...");
+      if (ladoA.length !== ladoB.length) {
+        alert('Ambos lados deben tener la misma cantidad de datos.');
+        return;
+      }
+  
+      const sumaA = ladoA.reduce((acc, val) => acc + val, 0);
+      const sumaB = ladoB.reduce((acc, val) => acc + val, 0);
+      const resultado = (sumaA + sumaB) / 2;
+
+      alert(`El promedio calculado es: ${resultado}`);
     };
   return (
     <div className="container p-4 border rounded">
@@ -67,7 +79,7 @@ export const CalculadoraEstandar = () => {
           <div className="mt-3 border p-2 rounded">
             {ladoB.map((vol, index) => (
               <div key={index}>{vol}</div>
-            ))} 
+            ))}
           </div>
         </div>
       </div>
