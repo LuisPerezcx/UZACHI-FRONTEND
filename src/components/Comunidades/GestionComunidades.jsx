@@ -103,14 +103,10 @@ export const GestionComunidades = ({onAdd, editarComunidades}) => {
                 </label>
                 <input
                   type="number"
+                  maxLength={5}
                   className="form-control"
                   name="codigoPostal"
                   value = {formData.codigoPostal}
-                  onKeyPress={(e) => {
-                    if (!/^\d$/.test(e.key) || e.target.value.length >= 5) {
-                      e.preventDefault();
-                    }
-                  }}
                   onChange={cambios}
                 />
               </div>
