@@ -103,7 +103,6 @@ export const GestionComunidades = ({onAdd, editarComunidades}) => {
                 </label>
                 <input
                   type="number"
-                  max={5}
                   className="form-control"
                   name="codigoPostal"
                   value = {formData.codigoPostal}
