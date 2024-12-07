@@ -170,6 +170,11 @@ const FormularioCliente = ({ onAdd, editarClientesFrecuentes,formularioForm }) =
                   name="codigoIdentificacion"
                   value={formData.codigoIdentificacion}
                   placeholder="Ingrese la entidad"
+                  onKeyPress={(e) => {
+                    if (!/^\d$/.test(e.key) || e.target.value.length >= 20) {
+                      e.preventDefault();
+                    }
+                  }}
                   onChange={handleChange}
                 />
               </div>
