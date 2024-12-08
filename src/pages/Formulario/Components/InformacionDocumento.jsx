@@ -11,7 +11,7 @@ export const InformacionDocumento = () => {
 
     const opcionesTipoDocumento = [
         { value: 'seleccion', label: 'Selecciona un tipo de documento' },
-        { value: 'remision', label: 'Remision' },
+        { value: 'remision', label: 'Remisión' },
         { value: 'reembarque', label: 'Reembarque' }
       ];
 
@@ -22,7 +22,7 @@ export const InformacionDocumento = () => {
     ];
 
     const opcionesTipoGenero = [
-        { value: 'seleccion', label: 'Selecciona el tipo de genero' },
+        { value: 'seleccion', label: 'Selecciona el tipo de género' },
         { value: 'pino', label: 'Pino' },
         { value: 'encino', label: 'Encino' }
     ];
@@ -106,7 +106,7 @@ export const InformacionDocumento = () => {
                 />
             </div>
             <div className='col-md-6 col-lg-3 col-xxl-2 mt-3'>
-                <label className='form-label'>Tipo de genero:</label>
+                <label className='form-label'>Tipo de género:</label>
             </div>
             <div className='col-md-6 col-lg-3 col-xxl-4 mt-3'>
                 <SelectCombo 
@@ -119,13 +119,13 @@ export const InformacionDocumento = () => {
         </div>
         <div className='row'>
             <div className='col-md-6 col-lg-3  col-xxl-2 mt-3'>
-                <label className='form-label'>Fecha de epxedicion:</label>
+                <label className='form-label'>Fecha de expedición:</label>
             </div>
             <div className='col-md-6 col-lg-3  col-xxl-2 mt-3'>
                 <input type="date" class="form-control" id="calendarInput" onChange={handleFechaExpedicion}/>
             </div>
             <div className='col-md-6 col-lg-3  col-xxl-2 mt-3'>
-                <label className='form-label'>Hora expedicion:</label>
+                <label className='form-label'>Hora expedición:</label>
             </div>
             <div className='col-md-6 col-lg-3  col-xxl-1 mt-3'>
                 <input type="time" class="form-control" id="timeInput"  onChange={handleHoraExpedicion}/>
