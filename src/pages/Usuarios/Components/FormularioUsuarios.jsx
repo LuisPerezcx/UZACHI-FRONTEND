@@ -23,15 +23,15 @@ const FormularioUsuarios = ({ usuario }) => {
   const validate = () => {
     const validationErrors = {};
     if (!formData.nombreUsuario.trim()) {
-      validationErrors.nombreUsuario = true;
+      validationErrors.nombreUsuario = "";
     }
     if (!formData.contrasena.trim()) {
-      validationErrors.contrasena = true;
+      validationErrors.contrasena = "";
     } else if (formData.contrasena.length < 6) {
-      validationErrors.contrasena = true;
+      validationErrors.contrasena = "";
     }
-    if (formData.tipoUsuario.trim()) {
-      validationErrors.tipoUsuario = true;
+    if (formData.tipoUsuario === "Selecione una opcion") {
+      validationErrors.tipoUsuario = "";
     }
     return validationErrors;
   };
