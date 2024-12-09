@@ -3,9 +3,12 @@ import React, { useState} from "react";
 import Swal from "sweetalert2"; 
 import { Form } from "react-bootstrap";
 import "../styles/ValidacionFolio.css"
+import { ListaTramites } from "./ListaTramites";
+
 export const FormularioRemision = () => {
   
 const [formData, setFormData] = useState({
+  fechaTramite: '', 
   folioPinus: '',
   folioQuercus: '',
   folioHojosa: '',
@@ -32,6 +35,8 @@ const [formData, setFormData] = useState({
   producto:''
   });
 
+  const [tramites, setTramites] = useState([]);
+
   const [formFolio, setFormFolios] = useState({
     folioInicialPinus: '',
     folioInicialQuercus: '',
@@ -50,7 +55,7 @@ const [formData, setFormData] = useState({
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (!formData.folioQuercus || !formData.folioPinus || !formData.folioHojosa || !formData.clasificacion ||
+    if (!formData.fechaTramite || !formData.folioQuercus || !formData.folioPinus || !formData.folioHojosa || !formData.clasificacion ||
         !formData.folioFinalHojosa || !formData.folioFinalPinus || !formData.folioFinalQuercus ||
         !formData.folioInicialHojosa || !formData.folioInicialPinus || !formData.folioInicialQuercus ||
         !formData.medidaEsp || !formData.medidas || !formData.piesTabla || !formData.precio || !formData.primario ||
@@ -70,6 +75,8 @@ const [formData, setFormData] = useState({
       });
       return;
     }
+
+    {/*Validacion de folio inicial sea menor que el final */}
     if (
       (formFolio.folioInicialPinus) >= (formFolio.folioFinalPinus) ||
       (formFolio.folioInicialHojosa) >= (formFolio.folioFinalHojosa) ||
@@ -113,6 +120,40 @@ const [formData, setFormData] = useState({
       });
       return;
     }
+
+    {/*Guardar tramite */}
+    setTramites([...tramites, {...formData,fecha: formData.fechaTramite} ]);
+    // Limpiar formulario
+    setFormData({
+      fechaTramite: '', // Limpiar la fecha
+
+      folioPinus: '',
+      folioQuercus: '',
+      folioHojosa: '',
+
+      folioInicialPinus: '',
+      folioInicialQuercus: '',
+      folioInicialHojosa: '',
+      folioFinalPinus: '',
+      folioFinalQuercus: '',
+      folioFinalHojosa: '',
+
+      primario: '',
+      secundario: '',
+      medidaEsp: '',
+
+      volumenRollo: '',
+      volumenAserrado:'',
+
+      piesTabla: '',
+      medidas: '',
+      clasificacion: '',
+      precio: '',
+      volumen: '',
+      producto:''
+      
+    });
+
     Swal.fire({
       title: "Formulario enviado",
       text: "Los datos son correctos.",
@@ -136,9 +177,12 @@ const [formData, setFormData] = useState({
         <div className="col-md-4">
           <form>
           <div className="mb-4 d-flex">
-            <label htmlFor="anualidad" style={{ width: "350px" }}>A n u a l i d a d</label>
-            <input 
-              type="date" className="form-control" 
+            <Form.Label htmlFor="fechaTramite" style={{ width: "350px" }}>A n u a l i d a d</Form.Label>
+            <Form.Control
+              type="date"
+              name="fechaTramite"
+              value={formData.fechaTramite}
+              onChange={handleChange}
             />
           </div>
             <div className="mb-3 d-flex">
@@ -179,7 +223,7 @@ const [formData, setFormData] = useState({
 
         {/* Columna 2: Trámite 1 Pinus */}
         <div className="col-md-4">
-          <h5 className="text-center">Trámite</h5>
+          <h5 className="text-center" style={{color:"#595B5A", fontWeight:"bold"}}>Trámites</h5>
           <form>
           <div className="d-flex">
               <Form.Label htmlFor="espacio" className="me-2" style={{ width: "150px" }}></Form.Label>
@@ -188,7 +232,7 @@ const [formData, setFormData] = useState({
 
             </div>
             <div className="mb-3 d-flex">
-              <Form.Label htmlFor="pinusFolio" className="form-label me-2" style={{ width: "150px" }}>Pinus:<span className="text-danger">*</span></Form.Label>
+              <Form.Label htmlFor="pinusFolio" style={{ width: "150px"}}>Pinus:<span className="text-danger">*</span></Form.Label>
               <Form.Control 
                 type="number"
                 className="me-2"
@@ -211,7 +255,7 @@ const [formData, setFormData] = useState({
               />
             </div>
             <div className="mb-3 d-flex">
-              <Form.Label htmlFor="quercusFolio" className="form-label me-2" style={{ width: "150px" }}>Quercus:<span className="text-danger">*</span></Form.Label>
+              <Form.Label htmlFor="quercusFolio" style={{ width: "150px" }}>Quercus:<span className="text-danger">*</span></Form.Label>
               <Form.Control 
                 type="number"
                 className="me-2"
@@ -230,11 +274,11 @@ const [formData, setFormData] = useState({
                 value={formFolio.folioFinalQuercus}
                 onChange={handleChange}
                 max="99999" 
-                min="1"
+                min="0"
               />
             </div>
             <div className="mb-3 d-flex">
-              <Form.Label htmlFor="hojosaFolio" className="form-label me-2" style={{ width: "150px" }}>Hojosa:<span className="text-danger">*</span></Form.Label>
+              <Form.Label htmlFor="hojosaFolio" style={{ width: "150px" }}>Hojosa:<span className="text-danger">*</span></Form.Label>
               <Form.Control
                 type="number"
                 className="me-2"
@@ -243,7 +287,7 @@ const [formData, setFormData] = useState({
                 value={formFolio.folioInicialHojosa}
                 onChange={handleChange} 
                 max="99999" 
-                min="1"
+                min="0"
               />
               <Form.Control
                 type="number"
@@ -253,7 +297,7 @@ const [formData, setFormData] = useState({
                 value={formFolio.folioFinalHojosa}
                 onChange={handleChange}
                 max="99999" 
-                min="1"
+                min="0"
               />
             </div>
           </form>
@@ -261,7 +305,7 @@ const [formData, setFormData] = useState({
 
         {/* Columna 3: Entrada Remisiones */}
         <div className="col-md-4">
-          <h5 className=" text-center">Entrada Remisiones V(m²)</h5>
+          <h5 className=" text-center" style={{color:"#595B5A", fontWeight:"bold"}}>Entrada Remisiones V(m²)</h5>
           <form>
             <div className="mt-4 mb-3 d-flex">
               <Form.Label htmlFor="primario" className="form-label me-2" style={{ width: "150px" }}>Primario:<span className="text-danger">*</span></Form.Label>
@@ -312,7 +356,7 @@ const [formData, setFormData] = useState({
         {/* FORMULARIO DE ROLLO VOLUMEN  */}
         <div className=" col-md-3 me-2 ms-4">
           <div className=" p-4">
-            <h5 className="card-title text-center mb-4">Volumen</h5>
+            <h5 className="card-title text-center mb-4" style={{color:"#595B5A", fontWeight:"bold"}}>Volumen</h5>
             <form>
               <div className="mb-2">
                 <Form.Label htmlFor="volumenRollo">Madera Rollo <span className="text-danger">*</span></Form.Label>
@@ -347,7 +391,7 @@ const [formData, setFormData] = useState({
         {/* Segunda columna: Formulario PRODUCCION */}
         <div className=" col-md-8 ms-4">
           <div className=" p-4 mb-3">
-            <h5 className="card-title text-center mb-4">Producción</h5>
+            <h5 className="card-title text-center mb-4" style={{color:"#595B5A", fontWeight:"bold"}}>Producción</h5>
             <form>
               <div className="row">
                 {/* Columna 1 */}
@@ -456,8 +500,11 @@ const [formData, setFormData] = useState({
           </div>
           </div>
         </div>
+
       </div>
     </div>
+    <ListaTramites tramites={tramites} />
+
     </div>
     </Form>
     

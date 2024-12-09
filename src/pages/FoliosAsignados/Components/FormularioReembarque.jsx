@@ -186,7 +186,7 @@ export const FormularioReembarque = () => {
         {/* Segunda columna: Formulario venta reembarque */}
         <div className="col-md-8">
           <div className="p-4 mb-3">
-            <h4 className="card-title text-center pb-2 mb-4 fw-2">Venta reembarque</h4>
+            <h4 className="card-title text-center pb-2 mb-4 fw-2" style={{color:"#595B5A", fontWeight:"bold"}}>Venta reembarque</h4>
             <form>
               <div className="row">
                 {/* Columna 1 */}
