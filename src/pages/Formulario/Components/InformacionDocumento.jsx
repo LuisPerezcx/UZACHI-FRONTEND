@@ -122,25 +122,25 @@ export const InformacionDocumento = () => {
                 <label className='form-label'>Fecha de expedición:</label>
             </div>
             <div className='col-md-6 col-lg-3  col-xxl-2 mt-3'>
-                <input type="date" class="form-control" id="calendarInput" onChange={handleFechaExpedicion}/>
+                <input type="date" className="form-control" id="calendarInput" onChange={handleFechaExpedicion}/>
             </div>
             <div className='col-md-6 col-lg-3  col-xxl-2 mt-3'>
                 <label className='form-label'>Hora expedición:</label>
             </div>
             <div className='col-md-6 col-lg-3  col-xxl-1 mt-3'>
-                <input type="time" class="form-control" id="timeInput"  onChange={handleHoraExpedicion}/>
+                <input type="time" className="form-control" id="timeInput"  onChange={handleHoraExpedicion}/>
             </div>
             <div className='col-md-6 col-lg-3  col-xxl-2 mt-3'>
                 <label className='form-label'>Fecha vencimiento:</label>
             </div>
             <div className='col-md-6 col-lg-3  col-xxl-3 mt-3'>
-                <input type="date" class="form-control" id="calendarInput" onChange={handleFechaVencimiento}/>
+                <input type="date" className="form-control" id="calendarInput" onChange={handleFechaVencimiento}/>
             </div>
             <div className='col-md-6 col-lg-3  col-xxl-2 mt-3'>
                 <label className='form-label'>Hora vencimiento:</label>
             </div>
             <div className='col-md-6 col-lg-3 col-xxl-1 mt-3'>
-                <input type="time" class="form-control" id="timeInput" onChange={handleHoraVencimiento}/>
+                <input type="time" className="form-control" id="timeInput" onChange={handleHoraVencimiento}/>
             </div>
         </div>
     </div>
