@@ -1,7 +1,8 @@
 import React from 'react';
 import Modal from 'react-bootstrap/Modal';
+import defaultProfileImage from '../../assets/icon-perfil.png';
 
-const AccountModal = ({ show, handleClose, user }) => {
+export const AccountModal = ({ show, handleClose, user }) => {
   return (
     <Modal show={show} onHide={handleClose} centered>
       <div
@@ -18,7 +19,7 @@ const AccountModal = ({ show, handleClose, user }) => {
 
       <Modal.Body style={{ textAlign: 'center', padding: '30px 20px' }}>
         <img
-          src={user.profileImage || "https://via.placeholder.com/80"}
+          src={user.profileImage || defaultProfileImage}
           alt="Perfil"
           style={{
             width: '80px',
