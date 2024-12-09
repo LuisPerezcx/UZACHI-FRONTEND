@@ -1,13 +1,25 @@
-    import React, { useState } from 'react'
+import React, { forwardRef, useState , useImperativeHandle} from 'react'
 import { SelectCombo } from '../../../components/SelectCombo'
 
-export const InformacionDocumento = () => {
+
+
+export const InformacionDocumento = forwardRef((props, ref) => {
 
     const [fechaExpedicion, setFechaExpedicion] = useState('');
     const [fechaVencimiento, setFechaVencimiento] = useState('');
     const [horaExpedicion, setHoraExpedicion] = useState('');
     const [horaVencimiento, sethoraVencimiento] = useState('');
     const [error, setError] = useState(""); 
+
+    const validarDatos = () => {
+        if (!fechaExpedicion || !horaExpedicion || !fechaVencimiento || !horaVencimiento) {
+            setError('Todos los campos deben estar llenos.');
+            return false;
+        }
+    }
+    useImperativeHandle(ref, () => ({
+        validar: validarDatos,
+    }));
 
     const opcionesTipoDocumento = [
         { value: 'seleccion', label: 'Selecciona un tipo de documento' },
@@ -145,4 +157,4 @@ export const InformacionDocumento = () => {
         </div>
     </div>
   )
-}
+});

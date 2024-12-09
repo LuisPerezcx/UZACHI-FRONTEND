@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
 import NavAdmin from '../../components/NavAdmin'
 import { Footer } from '../../components/Footer'
 import { InformacionDocumento } from './Components/InformacionDocumento'
@@ -8,8 +8,32 @@ import { FormularioTransporte } from './Components/FormularioTransporte'
 import FormularioCliente from '../ClientesFrecuentes/Components/FormularioCliente'
 import { Button } from 'react-bootstrap'
 import { BreadCrumb } from '../../components/BreadCrumb'
+import Swal from "sweetalert2"; 
 
 export const Formulario = () => {
+
+  const infoDocumentoRef = useRef();
+
+  const handleGuardar = () => {
+      if (infoDocumentoRef.current.validar()) {
+          console.log('Datos válidos. Proceder con el guardado.');
+          // Realiza la acción de guardar
+      } else {
+        Swal.fire({
+          title: 'Datos incompletos',
+          text: `Por favor, llena todos los campos requeridos.`,
+          icon: 'warning',
+          confirmButtonText: 'Aceptar',
+          timer: 3000,
+          timerProgressBar: true,
+          didOpen: () => {
+            const confirmButton = Swal.getConfirmButton();
+            confirmButton.style.backgroundColor = 'var(--color-verde)';
+          }
+        });
+      }
+  };
+
 const links = [
   { url: '/PrincipalAdmin', label: 'Inicio' },
   {url: '/Formulario', label: 'Formulario'}
@@ -76,7 +100,7 @@ const links = [
                   />
             </div>
             <div className="d-flex justify-content-center align-items-center mt-5 mb-5">
-                <Button style={{ backgroundColor: 'var(--color-verde)', color: 'white' }}>Guardar</Button>
+                <Button style={{ backgroundColor: 'var(--color-verde)', color: 'white' }} onChangeCapture={handleGuardar}>Guardar</Button>
                 <Button style={{ backgroundColor: 'var(--color-verde)', color: 'white', marginLeft: '50px' }}>Guardar e imprimir</Button>
                 <Button style={{ backgroundColor: '#0192C7', color: 'white', marginLeft: '50px' }}>Vista previa</Button>
             </div>
