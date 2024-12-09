@@ -1,4 +1,5 @@
 import React from "react";
+import NavAdmin from '../../components/NavAdmin';
 import { useEffect, useState } from "react";
 import { Footer } from "../../components/Footer";
 import FormularioUsuarios from '../Usuarios/Components/FormularioUsuarios';
@@ -18,6 +19,7 @@ export const Usuario = () => {
 
   return (
     <>
+    <NavAdmin />
       <div className="container my-5">
         <div className="text-center mb-4">
           <h1>AGREGAR USUARIOS</h1>

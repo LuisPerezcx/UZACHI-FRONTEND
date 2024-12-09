@@ -1,60 +1,89 @@
 import React, { useState } from "react";
+import Swal from "sweetalert2";
 
 const FormularioUsuarios = ({ usuario }) => {
+  const [formData, setFormData] = useState({
+    nombreUsuario: "",
+    contrasena: "",
+    tipoUsuario: "Selecione una opcion",
+  });
   const [errors, setErrors] = useState({});
-  const [usuarios, setUsuarios] = useState([]); 
 
-  const validate = (values) => {
-    const errors = {};
-    if (!values.nombreUsuario || values.nombreUsuario.trim() === "") {
-      errors.nombreUsuario = "El nombre de usuario es obligatorio.";
-    }
-    if (!values.contrasena || values.contrasena.trim() === "") {
-      errors.contrasena = "La contraseña es obligatoria.";
-    } else if (values.contrasena.length < 5) {
-      errors.contrasena = "La contraseña debe tener al menos 6 caracteres.";
-    }
-    if (!values.tipoUsuario || values.tipoUsuario === "Selecione una opcion") {
-      errors.tipoUsuario = "Debes seleccionar un tipo de usuario.";
-    }
-    return errors;
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevFormData) => {
+      return {
+        nombreUsuario: name === "nombreUsuario" ? value : prevFormData.nombreUsuario,
+        contrasena: name === "contrasena" ? value : prevFormData.contrasena,
+        tipoUsuario: name === "tipoUsuario" ? value : prevFormData.tipoUsuario,
+      };
+    });
   };
 
-  const addUser = (event) => {
-    event.preventDefault();
-    const values = {
-      nombreUsuario: event.target.form[0].value,
-      contrasena: event.target.form[1].value,
-      tipoUsuario: event.target.form[2].value,
-    };
+  const validate = () => {
+    const validationErrors = {};
+    if (!formData.nombreUsuario.trim()) {
+      validationErrors.nombreUsuario = true;
+    }
+    if (!formData.contrasena.trim()) {
+      validationErrors.contrasena = true;
+    } else if (formData.contrasena.length < 6) {
+      validationErrors.contrasena = true;
+    }
+    if (formData.tipoUsuario.trim()) {
+      validationErrors.tipoUsuario = true;
+    }
+    return validationErrors;
+  };
 
-    const validationErrors = validate(values);
+  
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const validationErrors = validate();
     if (Object.keys(validationErrors).length > 0) {
       setErrors(validationErrors);
+      Swal.fire({
+        title: "Error en el formulario",
+        text: "Por favor, corrige los campos indicados.",
+        icon: "error",
+        confirmButtonText: "Aceptar",
+      });
       return;
     }
 
-    const newUser = { id: Date.now(), ...values };
+    const newUser = { id: Date.now(), ...formData };
+    usuario(newUser);
 
-    setUsuarios([...usuarios, newUser]); 
-    usuario(newUser); 
-    setErrors({}); 
-    alert("Usuario agregado exitosamente.");
+    Swal.fire({
+      title: "Usuario agregado",
+      text: `El usuario "${formData.nombreUsuario}" ha sido agregado exitosamente.`,
+      icon: "success",
+      confirmButtonText: "Aceptar",
+    });
+
+    setFormData({
+      nombreUsuario: "",
+      contrasena: "",
+      tipoUsuario: "Selecione una opcion",
+    });
+    setErrors({});
   };
 
   return (
     <>
-      <form className="gx-2 align-items-center">
+      <form className="gx-2 align-items-center" onSubmit={handleSubmit}>
         <div className="row">
           <div className="col-md-4 d-flex align-items-center p-0">
-            <label htmlFor="nombre" className="form-label2 me-2 mb-0">
-              Nombre usuario:
+            <label htmlFor="nombreUsuario" className="form-label2 me-2 mb-0">
+              Nombre usuario: <span className="text-danger">*</span>
             </label>
             <input
               type="text"
-              id="nombre"
-              name="nombre"
+              id="nombreUsuario"
+              name="nombreUsuario"
               className="form-control"
+              value={formData.nombreUsuario}
+              onChange={handleChange}
             />
             {errors.nombreUsuario && (
               <div className="text-danger ms-2">{errors.nombreUsuario}</div>
@@ -62,27 +91,30 @@ const FormularioUsuarios = ({ usuario }) => {
           </div>
           <div className="col-md-4 d-flex align-items-center p-0">
             <label htmlFor="contrasena" className="form-label2 me-2 mb-0">
-              Contraseña:
+              Contraseña: <span className="text-danger">*</span>
             </label>
             <input
               type="password"
               id="contrasena"
               name="contrasena"
               className="form-control"
+              value={formData.contrasena}
+              onChange={handleChange}
             />
             {errors.contrasena && (
               <div className="text-danger ms-2">{errors.contrasena}</div>
             )}
           </div>
           <div className="col-md-4 d-flex align-items-center p-0">
-            <label htmlFor="tipo" className="form-label2 me-2 mb-0">
-              Tipo de usuario:
+            <label htmlFor="tipoUsuario" className="form-label2 me-2 mb-0">
+              Tipo de usuario: <span className="text-danger">*</span>
             </label>
             <select
-              id="tipo"
-              name="tipo"
-              defaultValue={"Selecione una opcion"}
+              id="tipoUsuario"
+              name="tipoUsuario"
               className="form-control"
+              value={formData.tipoUsuario}
+              onChange={handleChange}
             >
               <option>Selecione una opcion</option>
               <option value="Usuario">Usuario</option>
@@ -95,29 +127,15 @@ const FormularioUsuarios = ({ usuario }) => {
         </div>
         <div className="row my-2">
           <div className="d-flex align-items-center justify-content-center">
-            <button
-              className="btn btn-success w-20"
-              style={{ marginLeft: 0 }}
-              onClick={addUser}
-            >
+            <button className="btn btn-success w-20" type="submit">
               Agregar usuario
             </button>
           </div>
         </div>
       </form>
-
-      <div className="mt-4">
-        <h3>Usuarios Registrados:</h3>
-        <ul>
-          {usuarios.map((u) => (
-            <li key={u.id}>
-              {u.nombreUsuario} - {u.tipoUsuario}
-            </li>
-          ))}
-        </ul>
-      </div>
     </>
   );
 };
 
 export default FormularioUsuarios;
+
