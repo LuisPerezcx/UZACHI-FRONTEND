@@ -86,7 +86,7 @@ const FormularioCliente = ({ onAdd, editarClientesFrecuentes,formularioForm }) =
     <div className=" mx-auto mt-5 mb-4 tarjeta-border p-5">
         <h5 className="text-center mb-3 size-font-title">Agregar nuevo cliente</h5>
         <form onSubmit={handleSubmit}>
-              {/* Agregar datos de carro registrado */}
+              {/* Agregar datos de cliente registrado */}
           {dentroFormularioForm && (
             <div className="row mb-4">
               <div className="col-12 text-end mt-2">
@@ -109,7 +109,7 @@ const FormularioCliente = ({ onAdd, editarClientesFrecuentes,formularioForm }) =
                   className="form-control"
                   name="nombre"
                   value={formData.nombre}
-                  placeholder="Ingrese el nombre"
+                  placeholder="Ingrese el nombre completo"
                   onChange={handleChange}
                 />
               </div>
@@ -127,7 +127,7 @@ const FormularioCliente = ({ onAdd, editarClientesFrecuentes,formularioForm }) =
                   className="form-control"
                   name="domicilioDestinatario"
                   value={formData.domicilioDestinatario}
-                  placeholder="Ingrese el domicilio"
+                  placeholder="Ingrese el domicilio destinatario"
                   onChange={handleChange}
                 />
               </div>
@@ -164,13 +164,20 @@ const FormularioCliente = ({ onAdd, editarClientesFrecuentes,formularioForm }) =
                   Codigo de identificacion:<span className="text-danger">*</span>
                 </label>
                 <input
-                  type="number"
+                  type="text"
                   maxLength={20}
                   className="form-control"
                   name="codigoIdentificacion"
                   value={formData.codigoIdentificacion}
-                  placeholder="Ingrese la entidad"
-                  onChange={handleChange}
+                  placeholder="Ingrese el codgio de identificacion"
+                  onChange={(e) => {
+                    const value = e.target.value;
+                
+                    // Permitir solo números
+                    if (/^\d*$/.test(value)) {
+                      handleChange({ target: { name: "codigoIdentificacion", value } });
+                    }
+                  }}
                 />
               </div>
             </div>

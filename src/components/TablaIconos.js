@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
 import Table from 'react-bootstrap/Table';
+import Pagination from 'react-bootstrap/Pagination';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-// Componente de tabla reutilizable
 export function CustomTable({ data, columns, onEdit, onDelete, searchPlaceholder = 'Buscar...', edicion }) {
-
     // Estado para la búsqueda
     const [searchQuery, setSearchQuery] = useState('');
+
+    // Estado para la paginación
+    const [currentPage, setCurrentPage] = useState(1);
+    const itemsPerPage = 4;
 
     // Filtrado de datos según el criterio de búsqueda
     const filteredData = data.filter(item =>
@@ -14,6 +17,19 @@ export function CustomTable({ data, columns, onEdit, onDelete, searchPlaceholder
             item[column.accessor]?.toString().toLowerCase().includes(searchQuery.toLowerCase())
         )
     );
+
+    // Datos para la página actual
+    const indexOfLastItem = currentPage * itemsPerPage;
+    const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+    const currentData = filteredData.slice(indexOfFirstItem, indexOfLastItem);
+
+    // Calcular total de páginas
+    const totalPages = Math.ceil(filteredData.length / itemsPerPage);
+
+    // Manejador de cambio de página
+    const handlePageChange = (pageNumber) => {
+        setCurrentPage(pageNumber);
+    };
 
     return (
         <div className="container p-3">
@@ -24,7 +40,10 @@ export function CustomTable({ data, columns, onEdit, onDelete, searchPlaceholder
                     className="form-control buscar-input"
                     placeholder={searchPlaceholder}
                     value={searchQuery}
-                    onChange={e => setSearchQuery(e.target.value)}
+                    onChange={e => {
+                        setSearchQuery(e.target.value);
+                        setCurrentPage(1); // Reiniciar a la primera página al buscar
+                    }}
                 />
             </div>
             <div className="d-flex justify-content-center table-responsive">
@@ -39,8 +58,8 @@ export function CustomTable({ data, columns, onEdit, onDelete, searchPlaceholder
                         </tr>
                     </thead>
                     <tbody>
-                        {filteredData.length > 0 ? (
-                            filteredData.map((item, index) => (
+                        {currentData.length > 0 ? (
+                            currentData.map((item, index) => (
                                 <tr key={index}>
                                     {columns.map((column, colIndex) => (
                                         <td key={colIndex}>{item[column.accessor]}</td>
@@ -76,6 +95,19 @@ export function CustomTable({ data, columns, onEdit, onDelete, searchPlaceholder
                         )}
                     </tbody>
                 </Table>
+            </div>
+            <div className="d-flex justify-content-center mt-3">
+                <Pagination>
+                    {[...Array(totalPages).keys()].map(page => (
+                        <Pagination.Item
+                            key={page + 1}
+                            active={page + 1 === currentPage}
+                            onClick={() => handlePageChange(page + 1)}
+                        >
+                            {page + 1}
+                        </Pagination.Item>
+                    ))}
+                </Pagination>
             </div>
         </div>
     );

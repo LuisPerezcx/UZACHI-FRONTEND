@@ -57,7 +57,7 @@ export const AgregarComunidades = () => {
 
   const links = [
     { url: '/PrincipalAdmin', label: 'Inicio' },
-    { url: '/AgregarComunidades', label: 'Comunidades' }
+    { url: '/AgregarComunidades', label: 'Gesition de comunidades' }
   ];
 
   return ( 
@@ -65,14 +65,14 @@ export const AgregarComunidades = () => {
         <NavAdmin></NavAdmin>
         <BreadCrumb links={links} />
         <div className="container my-5">
-            <h2 className="size-font-title text-center mb-4">Comunidades</h2>
+            <h2 className="size-font-title text-center mb-4">Gestion de comunidades</h2>
         </div>
         <CustomTable
             data={listaComunidades}
             columns={columns}
             onEdit={editarComunidad}
             onDelete={eliminarComunidades}
-            searchPlaceholder='Buscar comunidad'
+            searchPlaceholder='Buscar comunidad...'
             edicion={editarComunidades}
         />
         <GestionComunidades

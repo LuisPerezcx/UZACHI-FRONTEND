@@ -4,6 +4,7 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import perfiIcon from '../assets/icon-perfil.png'
+import perfiIconModal from '../assets/icon-add-user.png'
 import AccountModal from './MiPerfil/ProfileModal ';
 import { CambioContraseñaModal } from './Usuario/CambiarContraseña';
 import '../styles/NavAdmin.css'
@@ -14,11 +15,15 @@ export const NavAdmin = () => {
   const handleShowModal = () => setShowModal(true);
   const handleCloseModal = () => setShowModal(false);
 
+  const [showPerfil, setShowPerfil] = useState(false);
+  const mostrarPerfil = () => setShowPerfil(true);
+  const ocultarPerfil = () => setShowPerfil(false);
+
   // Datos simulados del usuario
   const user = {
-    name: "Luis Alberto Hernandez",
-    email: "WichoHernandez@gmail.com",
-    profileImage: perfiIcon,
+    nombre: "Luis Alberto Hernandez",
+    correo: "WichoHernandez@gmail.com",
+    profileImage: perfiIconModal,
   };
 
   
@@ -31,25 +36,23 @@ export const NavAdmin = () => {
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="ms-auto">
 
-              <NavDropdown className='size-font-subtitle ' title={<span style={{ color: 'white' }}>Catalogos</span>}>
+              <NavDropdown className='size-font-subtitle ' title={<span style={{ color: 'white' }}>Catálogos</span>}>
                 <NavDropdown.Item href="/GestionTransporte" className='dropdown-item'>Transporte</NavDropdown.Item>
                 <NavDropdown.Item href="/AgregarComunidades" className='dropdown-item'>Comunidades</NavDropdown.Item>
                 <NavDropdown.Item href="/ClientesFrecuentes" className='dropdown-item'>Clientes frecuentes</NavDropdown.Item>
               </NavDropdown>
 
-              <Nav.Link href="/HistorialMovimientos" className='size-font-subtitle mx-3' style={{ color: 'white' }}>Historial</Nav.Link>
-              <Nav.Link href="#link"  className='size-font-subtitle' style={{ color: 'white' }}>Contacto</Nav.Link>
-              <NavDropdown className='ms-3' title={<img src={perfiIcon} style={{width: '40px'}}></img>}>
-              <NavDropdown.Item onClick={handleShowModal} className='dropdown-item'>Mi cuenta</NavDropdown.Item>
-              <NavDropdown.Item  className='dropdown-item'>Cambiar contraseña</NavDropdown.Item>
-                <NavDropdown.Item href="#Liga" className='dropdown-item'>Cerrar sesión</NavDropdown.Item>
+              <NavDropdown className='ms-3 no-caret' title={<img src={perfiIcon} style={{width: '40px'}}></img>}>
+                <NavDropdown.Item onClick={mostrarPerfil}  className='dropdown-item'>Mi cuenta</NavDropdown.Item>
+                <NavDropdown.Item onClick={handleShowModal} className='dropdown-item'>Cambiar contraseña</NavDropdown.Item>
+                <NavDropdown.Item href="/" className='dropdown-item'>Cerrar sesión</NavDropdown.Item>
               </NavDropdown>
 
             </Nav>
           </Navbar.Collapse>
         </Container>
       </Navbar> 
-      <AccountModal show={showModal} handleClose={handleCloseModal} user={user} />
+      <AccountModal show={showPerfil} handleClose={ocultarPerfil} user={user} />
       <CambioContraseñaModal showModal={showModal} handleClose={handleCloseModal} />
     </div>
   );

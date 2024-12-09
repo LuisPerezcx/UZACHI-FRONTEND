@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import NavAdmin from '../../components/NavAdmin'
 import { Footer } from '../../components/Footer'
 import { InformacionDocumento } from './Components/InformacionDocumento'
@@ -14,6 +14,40 @@ const links = [
   { url: '/PrincipalAdmin', label: 'Inicio' },
   {url: '/Formulario', label: 'Formulario'}
 ];
+  const [datosTransporte, setDatosTransporte] = useState([]);
+  const [editingTransport, setEditingTransport] = useState(null); // Transporte en edición
+  
+  const [clientes, setClientes] = useState([]);
+  const [editarClientesFrecuentes,setEditarClientesFrecuentes] = useState(null);
+
+  const guardarDatos = (nuevoCliente) => {
+    if (editarClientesFrecuentes) {
+      // Actualizar transporte existente
+      const updatedData = clientes.map((data) =>
+        data === editarClientesFrecuentes ? nuevoCliente : data
+      );
+      setClientes(updatedData);
+      setEditarClientesFrecuentes(null); // Salir del modo de edición
+    } else {
+      // Agregar nuevo transporte
+      setClientes([...clientes, { ...nuevoCliente, id: Date.now() }]);
+    }
+  };
+
+  const guardarTransporte = (newTransport) => {
+    if (editingTransport) {
+      // Actualizar transporte existente
+      const updatedData = datosTransporte.map((data) =>
+        data === editingTransport ? newTransport : data
+      );
+      setDatosTransporte(updatedData);
+      setEditingTransport(null); // Salir del modo de edición
+    } else {
+      // Agregar nuevo transporte
+      setDatosTransporte([...datosTransporte, newTransport]);
+    }
+  };
+
   return (
     <div>
         <NavAdmin></NavAdmin>
@@ -30,9 +64,16 @@ const links = [
                 </div>
                 <InformacionDocumento></InformacionDocumento>
                 <InformacionTitular></InformacionTitular>
-                <FormularioCliente></FormularioCliente>
+                <FormularioCliente
+                  formularioForm={true} 
+                  onAdd={guardarDatos} 
+                ></FormularioCliente>
                 <InformacionSubproductosYSaldos></InformacionSubproductosYSaldos>
-                <FormularioTransporte titulo="Transporte empleado" formularioForm={true} />
+                <FormularioTransporte 
+                  titulo="Transporte empleado" 
+                  formularioForm={true}
+                  onAdd={guardarTransporte}
+                  />
             </div>
             <div className="d-flex justify-content-center align-items-center mt-5 mb-5">
                 <Button style={{ backgroundColor: 'var(--color-verde)', color: 'white' }}>Guardar</Button>

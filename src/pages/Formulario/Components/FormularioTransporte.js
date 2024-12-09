@@ -11,10 +11,6 @@ export const FormularioTransporte = ({ onAdd, editingTransport, formularioForm }
     console.log('Seleccionar carro clickeado');
   };
 
-  const handleInputChange = (event) => {
-    console.log("${event.target.name}: ${event.target.value}");
-  };
-
   const [formData, setFormData] = useState({
     medio: '', 
     marca: '',
@@ -51,13 +47,13 @@ export const FormularioTransporte = ({ onAdd, editingTransport, formularioForm }
         timerProgressBar: true,
         didOpen: () => {
           const confirmButton = Swal.getConfirmButton();
-          confirmButton.style.backgroundColor = 'var(--color-verde)'; // Color verde
+          confirmButton.style.backgroundColor = 'var(--color-verde)';
         }
       });
       return;
     }
 
-    onAdd(formData); // Llamar a la función `onAdd` con los datos del formulario
+    onAdd(formData); 
 
     Swal.fire({
       title: editingTransport ? 'Transporte actualizado' : 'Transporte agregado',
@@ -148,7 +144,7 @@ export const FormularioTransporte = ({ onAdd, editingTransport, formularioForm }
 
           <Row className="mb-3">
             <Col md={8}>
-              <Form.Label>Conductor <span className="text-danger">*</span></Form.Label>
+              <Form.Label>Propietario <span className="text-danger">*</span></Form.Label>
               <Form.Control
                 type="text"
                 maxLength={80}
@@ -161,13 +157,21 @@ export const FormularioTransporte = ({ onAdd, editingTransport, formularioForm }
             <Col md={4}>
               <Form.Label>Capacidad <span className="text-danger">*</span></Form.Label>
               <Form.Control
-                type="number"
-                max={99}
+                type="text"
+                maxLength={5} // Ajusta este valor según sea necesario para el rango permitido (por ejemplo, hasta 5 caracteres incluyendo el punto)
                 name="capacidad"
                 value={formData.capacidad}
-                onChange={handleChange}
+                onChange={(e) => {
+                  const value = e.target.value;
+
+                  // Permitir solo números enteros o decimales
+                  if (/^\d*\.?\d*$/.test(value)) {
+                    handleChange({ target: { name: "capacidad", value } });
+                  }
+                }}
                 size="sm"
               />
+
             </Col>
           </Row>
 
@@ -199,28 +203,19 @@ export const FormularioTransporte = ({ onAdd, editingTransport, formularioForm }
             </Col>
           </Row>
 
-          {/* Campo conductor (condicional) */}
-        {formularioFormatoField && (
-          <div className="row g-3 mt-3">
-            <div className="col-md-4">
-              <label className="form-label">Conductor:</label>
-              <input
-                type="text"
-                className="form-control"
-                name="conductor"
-                onChange={handleInputChange}
-              />
-            </div>
-          </div>
-        )}
+       
 
-        {!formularioFormatoField && (
+
           <div className="text-center">
+
+          {formularioForm && (
+              <span className="me-3">Agregar como transporte nuevo</span>
+          )}
             <button variant="success" type="submit" size="sm">
               {editingTransport ? 'Actualizar' : 'Agregar'}
             </button> 
           </div>
-        )}        
+              
           
         </Form>
     </div>
