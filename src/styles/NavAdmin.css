@@ -16,7 +16,8 @@
     font-weight: bold;
 }
 
-.custom-dropdown .dropdown-toggle::after {
-    display: none; /* Oculta la flecha */
+.no-caret .dropdown-toggle::after {
+    display: none ; /* Oculta la flecha */
   }
+  
   

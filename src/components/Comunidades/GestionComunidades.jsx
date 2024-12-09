@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Swal from "sweetalert2"; 
 
-export const GestionComunidades = ({onAdd, editarComunidades}) => {
+export const  GestionComunidades = ({onAdd, editarComunidades}) => {
 
   const [formData,setFormData] = useState ({
     nombreComunidad: '',
@@ -102,16 +102,19 @@ export const GestionComunidades = ({onAdd, editarComunidades}) => {
                   Codiogo postal: <span className="text-danger">*</span>
                 </label>
                 <input
-                  type="number"
+                  type="text"
+                  maxLength={5}
                   className="form-control"
                   name="codigoPostal"
                   value = {formData.codigoPostal}
-                  onKeyPress={(e) => {
-                    if (!/^\d$/.test(e.key) || e.target.value.length >= 5) {
-                      e.preventDefault();
+                  onChange={(e) => {
+                    const value = e.target.value;
+                
+                    // Permitir solo números
+                    if (/^\d*$/.test(value)) {
+                      cambios({ target: { name: "codigoPostal", value } });
                     }
                   }}
-                  onChange={cambios}
                 />
               </div>
               <div className="col-sm-6 col-md-3">

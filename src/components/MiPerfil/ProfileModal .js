@@ -29,9 +29,9 @@ export const AccountModal = ({ show, handleClose, user }) => {
           }}
         />
 
-        <h5 style={{ fontWeight: 'bold', marginBottom: '5px' }}>{user.name}</h5>
+        <h5 style={{ fontWeight: 'bold', marginBottom: '5px' }}>{user.nombre}</h5>
 
-        <p style={{ color: '#777', fontSize: '14px', margin: 0 }}>{user.email}</p>
+        <p style={{ color: '#777', fontSize: '14px', margin: 0 }}>{user.correo}</p>
       </Modal.Body>
     </Modal>
   );

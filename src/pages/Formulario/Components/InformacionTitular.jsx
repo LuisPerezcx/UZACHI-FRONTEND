@@ -13,25 +13,68 @@ export const InformacionTitular = () => {
         unidad: '',
         vencimiento: '',
     });
-    const [error, setError] = useState(""); 
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setFormData({ ...formData, [name]: value });
-    };
 
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log('Datos del formulario:', formData);
     };
 
-    const handleKeyPress = (e) => {
-        if (!/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]$/.test(e.key)) {
-          e.preventDefault();
-          setError('Solo se permiten letras.');
-        } else {
-          setError(''); // Limpiar el mensaje de error si la tecla es válida.
+    const [errors, setErrors] = useState({}); // Manejo de mensajes de error específicos por campo
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+
+        switch (name) {
+            case "nombre":
+            case "domicilio":
+            case "curp":
+            case "siem":
+            case "unidad":
+                // Validar que no contengan números
+                if (/\d/.test(value)) {
+                    setErrors((prev) => ({
+                        ...prev,
+                        [name]: "Este campo solo permite letras.",
+                    }));
+                    return; // No actualizar el valor
+                } else {
+                    setErrors((prev) => {
+                        const newErrors = { ...prev };
+                        delete newErrors[name];
+                        return newErrors;
+                    });
+                }
+                break;
+
+            case "oficio":
+            case "cantidad":
+            case "folios":
+                // Validar solo números positivos
+                if (!/^\d*$/.test(value)) {
+                    setErrors((prev) => ({
+                        ...prev,
+                        [name]: "Este campo solo permite números positivos.",
+                    }));
+                    return;
+                } else {
+                    setErrors((prev) => {
+                        const newErrors = { ...prev };
+                        delete newErrors[name];
+                        return newErrors;
+                    });
+                }
+                break;
+
+            default:
+                setErrors((prev) => {
+                    const newErrors = { ...prev };
+                    delete newErrors[name];
+                    return newErrors;
+                });
         }
-      };
+
+        setFormData({ ...formData, [name]: value });
+    };
 
     return (
         <div className="tarjeta-border mt-5 p-5">
@@ -51,11 +94,15 @@ export const InformacionTitular = () => {
                             id="nombre"
                             value={formData.nombre}
                             onChange={handleChange}
-                            onKeyPress={handleKeyPress}
                             placeholder="Nombre"
                             size="sm"
                             className="form-control"
                         />
+                        {errors.nombre && (
+                            <p className="text-danger" style={{ fontSize: "0.9em" }}>
+                                {errors.nombre}
+                            </p>
+                        )}
                     </div>
                     <div className="col-md-6 mt-3">
                         <label htmlFor="domicilio" className="form-label">
@@ -71,6 +118,11 @@ export const InformacionTitular = () => {
                             size="sm"
                             className="form-control"
                         />
+                        {errors.domicilio && (
+                            <p className="text-danger" style={{ fontSize: "0.9em" }}>
+                                {errors.domicilio}
+                            </p>
+                        )}
                     </div>
                 </div>
                 <div className="row">
@@ -88,6 +140,11 @@ export const InformacionTitular = () => {
                             size="sm"
                             className="form-control"
                         />
+                        {errors.curp && (
+                            <p className="text-danger" style={{ fontSize: "0.9em" }}>
+                                {errors.curp}
+                            </p>
+                        )}
                     </div>
                     <div className="col-md-3 mt-3">
                         <label htmlFor="siem" className="form-label">
@@ -103,6 +160,11 @@ export const InformacionTitular = () => {
                             size="sm"
                             className="form-control"
                         />
+                        {errors.siem && (
+                            <p className="text-danger" style={{ fontSize: "0.9em" }}>
+                                {errors.siem}
+                            </p>
+                        )}
                     </div>
                     <div className="col-md-3 mt-3">
                         <label htmlFor="fecha" className="form-label">
@@ -129,16 +191,16 @@ export const InformacionTitular = () => {
                             name="oficio"
                             id="oficio"
                             value={formData.oficio}
-                            onKeyPress={(e) => {
-                                if (!/^\d$/.test(e.key)) {
-                                  e.preventDefault();
-                                }
-                              }}
                             onChange={handleChange}
                             placeholder="Número de oficio"
                             size="sm"
                             className="form-control"
                         />
+                        {errors.oficio && (
+                            <p className="text-danger" style={{ fontSize: "0.9em" }}>
+                                {errors.oficio}
+                            </p>
+                        )}
                     </div>
                     <div className="col-md-3 mt-3">
                         <label htmlFor="cantidad" className="form-label">
@@ -149,16 +211,16 @@ export const InformacionTitular = () => {
                             name="cantidad"
                             id="cantidad"
                             value={formData.cantidad}
-                            onKeyPress={(e) => {
-                                if (!/^\d$/.test(e.key)) {
-                                  e.preventDefault();
-                                }
-                              }}
                             onChange={handleChange}
                             placeholder="Cantidad"
                             size="sm"
                             className="form-control"
                         />
+                        {errors.cantidad && (
+                            <p className="text-danger" style={{ fontSize: "0.9em" }}>
+                                {errors.cantidad}
+                            </p>
+                        )}
                     </div>
                     <div className="col-md-3 mt-3">
                         <label htmlFor="folios" className="form-label">
@@ -169,16 +231,16 @@ export const InformacionTitular = () => {
                             name="folios"
                             id="folios"
                             value={formData.folios}
-                            onKeyPress={(e) => {
-                                if (!/^\d$/.test(e.key)) {
-                                  e.preventDefault();
-                                }
-                              }}
                             onChange={handleChange}
                             placeholder="Folios autorizados"
                             size="sm"
                             className="form-control"
                         />
+                        {errors.folios && (
+                            <p className="text-danger" style={{ fontSize: "0.9em" }}>
+                                {errors.folios}
+                            </p>
+                        )}
                     </div>
                 </div>
                 <div className="row">
@@ -196,6 +258,11 @@ export const InformacionTitular = () => {
                             size="sm"
                             className="form-control"
                         />
+                        {errors.unidad && (
+                            <p className="text-danger" style={{ fontSize: "0.9em" }}>
+                                {errors.unidad}
+                            </p>
+                        )}
                     </div>
                     <div className="col-md-6 mt-3">
                         <label htmlFor="vencimiento" className="form-label">

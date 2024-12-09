@@ -1,8 +1,8 @@
 import React, {useState } from 'react';
 import { Form,} from 'react-bootstrap';
 import { Button } from '../../../components/Boton';
+import "../styles/ValidacionFolio.css"
 import Swal from "sweetalert2"; 
-
 
 export const FormularioReembarque = () => {
 
@@ -20,16 +20,23 @@ export const FormularioReembarque = () => {
     volumenExtra: '',
     total: '',
   });
+  const [formFolio, setFormFolios] = useState({
+    folioInicial: '',
+    folioFinal: '',
+  });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
-  };
+    setFormFolios({ ...formFolio, [name]: value });
 
+  };
+  {/*Validar que se llenen todos lo campos */}
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    if (!formData.folioInicial || !formData.folioFinal || !formData.foliosAutorizados || !formData.volumenAutorizado) {
+    if (!formData.folioInicial || !formData.folioFinal || !formData.foliosAutorizados || !formData.volumenAutorizado || !formData.medidas || !formData.piesTabla ||
+      !formData.piezas || !formData.precio || !formData.producto || !formData.total || !formData.volumenExtra || !formData.clasificacion
+     ) {
       Swal.fire({
         title: 'Datos incompletos',
         text: `Por favor, llena todos los campos requeridos.`,
@@ -44,7 +51,57 @@ export const FormularioReembarque = () => {
       });
       return;
     }
+
+    {/*Validación del número de Folio inicial sea menor 
+      al número de Folio final*/}
+    if ((formFolio.folioInicial) >= (formFolio.folioFinal)) {
+      Swal.fire({
+        title: 'Error en los folios',
+        text: 'El folio inicial debe ser menor que el folio final.',
+        icon: 'error',
+        confirmButtonText: 'Aceptar',
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: () => {
+          const confirmButton = Swal.getConfirmButton();
+          confirmButton.style.backgroundColor = 'var(--color-verde)'; // Color verde
+        }
+      });
+      return;
+    };
+
+    {/*Validar si no coinciden los folios */}
+    const folioInicial = Number(formData.folioInicial);
+    const folioFinal = Number(formData.folioFinal);
+    const foliosAutorizados = Number(formData.foliosAutorizados);
+
+    if (folioFinal - folioInicial + 1 !== foliosAutorizados) {
+      Swal.fire({
+        title: "Error en la cantidad de folios",
+        text: "El rango de folios no coincide con los folios autorizados.",
+        icon: "error",
+        confirmButtonText: "Aceptar",
+        timer: 3000,
+        timerProgressBar: true,
+      });
+      return;
+    }
+    Swal.fire({
+      title: "Formulario enviado",
+      text: "Los datos son correctos.",
+      icon: "success",
+      confirmButtonText: "Aceptar",
+      timer: 3000,
+      timerProgressBar: true,
+      didOpen: () => {
+        Swal.getConfirmButton().style.backgroundColor = 'var(--color-verde)';
+      },
+    });
+    const seleccionarCliente = () => {
+      console.log("Se clickeo agregar cliente")
+    }
   };
+  
   // Llamar a la función `onAdd` con los datos del formulario
   return (
     <Form onSubmit={handleSubmit}>
@@ -58,48 +115,51 @@ export const FormularioReembarque = () => {
             <div className="row">
                 {/* Columna 1: Folio inicial */}
                 <div className="col-md-8">
-                  <div className="mb-3">
-                    <label htmlFor="numeroTramite" className="form-label">Número de trámite:</label>
+                  <div className="mb-2">
+                    <label htmlFor="numeroTramite">Número de trámite:<span className="text-danger">*</span></label>
                   </div>
                 </div>
                 {/* Columna 2: Folio final */}
                 <div className="col-md-4">
-                  <div className="mb-3">
-                    <input type="text" className="form-control" placeholder=" " />
+                  <div className="mb-2">
+                    <Form.Control type="text" placeholder=" " />
                   </div>
                 </div>
               </div>
               <div className="mb-3">
-                <Form.Label htmlFor="volumenAutorizado" className="form-label">Volumen autorizado: <span className="text-danger">*</span></Form.Label>
+                <Form.Label htmlFor="volumenAutorizado">Volumen autorizado: <span className="text-danger">*</span></Form.Label>
                 <Form.Control 
-                  type="text"
-                  className="form-control"
+                  type="number"
                   name="volumenAutorizado"
                   value={formData.volumenAutorizado}
                   onChange={handleChange}
+                  max="99999999.99" 
+                  min="0"
                 />
               </div>
               <div className="mb-3">
-                <Form.Label htmlFor="foliosAutorizados" className="form-label">Folios autorizados <span className="text-danger">*</span></Form.Label>
+                <Form.Label htmlFor="foliosAutorizados">Folios autorizados <span className="text-danger">*</span></Form.Label>
                 <Form.Control 
-                  type="text"
-                  className="form-control"
+                  type="number"
                   name="foliosAutorizados"
                   value={formData.foliosAutorizados}
                   onChange={handleChange}
+                  max="99999" 
+                  min="0"
                 />
               </div>
               <div className="row">
                 {/* Columna 1: Folio inicial */}
                 <div className="col-md-6">
                   <div className="mb-3">
-                    <Form.Label htmlFor="folioInicial" className="form-label">Folio inicial: <span className="text-danger">*</span></Form.Label>
+                    <Form.Label htmlFor="folioInicial">Folio inicial: <span className="text-danger">*</span></Form.Label>
                     <Form.Control 
-                      type="text"
-                      className="form-control"
+                      type="number"
                       name="folioInicial"
-                      value={formData.folioInicial}
+                      value={formFolio.folioInicial}
                       onChange={handleChange}
+                      max="99999"
+                      min="1"
                     />
                   </div>
                 </div>
@@ -107,13 +167,14 @@ export const FormularioReembarque = () => {
                 {/* Columna 2: Folio final */}
                 <div className="col-md-6">
                   <div className="mb-3">
-                    <Form.Label htmlFor="folioFinal" className="form-label">Folio final: <span className="text-danger">*</span></Form.Label>
+                    <Form.Label htmlFor="folioFinal">Folio final: <span className="text-danger">*</span></Form.Label>
                     <Form.Control 
-                      type="text"
-                      className="form-control"
+                      type="number"
                       name="folioFinal"
-                      value={formData.folioFinal}
+                      value={formFolio.folioFinal}
                       onChange={handleChange} 
+                      max="99999"
+                      min="1"
                     />
                   </div>
                 </div>
@@ -125,15 +186,14 @@ export const FormularioReembarque = () => {
         {/* Segunda columna: Formulario venta reembarque */}
         <div className="col-md-8">
           <div className="p-4 mb-3">
-            <h4 className="card-title text-center pb-4 mb-4 fw-2">Venta reembarque</h4>
+            <h4 className="card-title text-center pb-2 mb-4 fw-2" style={{color:"#595B5A", fontWeight:"bold"}}>Venta reembarque</h4>
             <form>
               <div className="row">
                 {/* Columna 1 */}
                 <div className="col-md-3">
                   <div className="mb-2">
-                    <Form.Label htmlFor="producto" className="form-label">Producto</Form.Label>
+                    <Form.Label htmlFor="producto">Producto<span className="text-danger">*</span></Form.Label>
                     <Form.Select
-                      className="form-select"
                       name="producto"
                       value={formData.producto}
                       onChange={handleChange}
@@ -148,16 +208,18 @@ export const FormularioReembarque = () => {
                     </Form.Select>
                   </div>
                   <div className="mb-3">
-                    <label htmlFor="" className="form-label"></label>
+                    <label htmlFor="" ></label>
                   </div>
                   <div className="mb-3">
-                    <Form.Label htmlFor="piesTabla" className="form-label">Pies tabla</Form.Label>
+                    <Form.Label htmlFor="piesTabla">Pies tabla<span className="text-danger">*</span></Form.Label>
                     <Form.Control 
-                      type="text"
-                      className="form-control"
+                      type="number"
                       name="piesTabla"
                       value={formData.piesTabla}
                       onChange={handleChange}
+                      max="99999999.99" 
+                      min="1"
+                      step="0.01" 
                     />
                   </div>
                 </div>
@@ -165,7 +227,7 @@ export const FormularioReembarque = () => {
                 {/* Columna 2 */}
                 <div className="col-md-3">
                   <div className="mb-2">
-                    <Form.Label htmlFor="medidas" className="form-label">Medidas</Form.Label>
+                    <Form.Label htmlFor="medidas">Medidas<span className="text-danger">*</span></Form.Label>
                     <Form.Select
                       className="form-select"
                       name="medidas"
@@ -185,13 +247,14 @@ export const FormularioReembarque = () => {
                     <label htmlFor="" className="form-label"></label>
                   </div>
                   <div className="mb-3">
-                    <Form.Label htmlFor="piezas" className="form-label">Num. Piezas </Form.Label>
-                    <Form.Control 
-                      type="text"
-                      className="form-control"
+                    <Form.Label htmlFor="piezas">Número Piezas<span className="text-danger">*</span> </Form.Label>
+                    <Form.Control
+                      type="number"
                       name="piezas"
                       value={formData.piezas}
                       onChange={handleChange}
+                      max="9999" // Máximo valor permitido
+                      min="1" 
                     />
                   </div>
                 </div>
@@ -199,7 +262,7 @@ export const FormularioReembarque = () => {
                 {/* Columna 3 */}
                 <div className="col-md-3">
                   <div className="mb-2">
-                    <Form.Label htmlFor="clasificacion" className="form-label">Clasificación</Form.Label>
+                    <Form.Label htmlFor="clasificacion">Clasificación<span className="text-danger">*</span></Form.Label>
                     <Form.Select
                       className="form-select"
                       name="clasificacion"
@@ -216,43 +279,50 @@ export const FormularioReembarque = () => {
                     </Form.Select>
                   </div>
                   <div className="mb-3">
-                    <label htmlFor="" className="form-label"></label>
+                    <label htmlFor=""></label>
                   </div>
                   <div className="mb-3">
-                    <Form.Label htmlFor="precio" className="form-label">Precio</Form.Label>
+                    <Form.Label htmlFor="precio">Precio<span className="text-danger">*</span></Form.Label>
                     <Form.Control 
-                      type="text"
-                      className="form-control"
+                      type="number"
                       name="precio"
                       value={formData.precio}
                       onChange={handleChange}
-                    />
+                      max="99999999.99" 
+                      min="0"
+                      step="0.01" 
+                     />
                   </div>
                 </div>
 
                 {/* Columna 4 */}
                 <div className="col-md-3">
                   <div className="mb-2">
-                    <Form.Label htmlFor="volumenExtra" className="form-label">Volumen</Form.Label>
+                    <Form.Label htmlFor="volumenExtra">Volumen<span className="text-danger">*</span></Form.Label>
                     <Form.Control 
-                    type="text"
-                    className="form-control"
+                    type="number"
                     name="volumenExtra"
+                    placeholder="m³"
                     value={formData.volumenExtra}
                     onChange={handleChange}
+                    max="99999999.99" 
+                    min="0"
+                    step="0.01" 
                     />
                   </div>
                   <div className="mb-3">
-                    <Form.Label htmlFor="" className="form-label"></Form.Label>
+                    <Form.Label htmlFor=""></Form.Label>
                   </div>
                   <div className="mb-3">
-                    <Form.Label htmlFor="total" className="form-label">Total</Form.Label>
+                    <Form.Label htmlFor="total">Total<span className="text-danger">*</span></Form.Label>
                     <Form.Control 
-                      type="text"
-                      className="form-control"
+                      type="number"
                       name="total"
                       value={formData.total}
                       onChange={handleChange}
+                      step="0.01" 
+                      min="0"
+                      max="99999999.99" 
                     />
                   </div>
                 </div>

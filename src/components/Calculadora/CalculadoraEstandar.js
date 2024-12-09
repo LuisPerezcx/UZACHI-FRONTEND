@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-export const CalculadoraEstandar = () => {
+export const CalculadoraEstandar = ({onCalculate}) => {
     const [ladoA, setLadoA] = useState([]);
     const [ladoB, setLadoB] = useState([]);
     const [volumenA, setVolumenA] = useState('');
@@ -33,6 +33,7 @@ export const CalculadoraEstandar = () => {
       const sumaA = ladoA.reduce((acc, val) => acc + val, 0);
       const sumaB = ladoB.reduce((acc, val) => acc + val, 0);
       const resultado = (sumaA + sumaB) / 2;
+      onCalculate(resultado)
 
       alert(`El promedio calculado es: ${resultado}`);
     };
