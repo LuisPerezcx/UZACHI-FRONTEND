@@ -166,6 +166,11 @@ export const FormularioTransporte = ({ onAdd, editingTransport, formularioForm }
                 name="capacidad"
                 value={formData.capacidad}
                 onChange={handleChange}
+                onKeyPress={(e) => {
+                  if (!/^\d$/.test(e.key) || e.target.value.length >= 2) {
+                    e.preventDefault();
+                  }
+                }}
                 size="sm"
               />
             </Col>

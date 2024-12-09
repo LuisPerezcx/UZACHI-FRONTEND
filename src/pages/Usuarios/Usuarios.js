@@ -4,6 +4,7 @@ import { Footer } from "../../components/Footer";
 import FormularioUsuarios from '../Usuarios/Components/FormularioUsuarios';
 import { TablaUsuarios } from "../Usuarios/Components/TablaUsuarios";
 
+
 export const Usuario = () => {
   const [usuario, setUsuario] = useState({});
   const [nombreUsuario, setNombreUsuario] = useState("");

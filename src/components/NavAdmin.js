@@ -47,6 +47,7 @@ export const NavAdmin = () => {
                 <NavDropdown.Item onClick={handleShowChangePasswordModal} className='dropdown-item'>Cambiar contraseña</NavDropdown.Item>
                 <NavDropdown.Item href="/" className='dropdown-item'>Cerrar sesión</NavDropdown.Item>
               </NavDropdown>
+
             </Nav>
           </Navbar.Collapse>
         </Container>
