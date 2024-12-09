@@ -1,4 +1,3 @@
-// src/pages/ReportesInternos.js
 import React, { useState } from 'react';
 import NavAdmin from '../../components/NavAdmin';
 import { BreadCrumb } from '../../components/BreadCrumb';
@@ -13,61 +12,60 @@ export const ReportesInternos = () => {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-
-  const links = [
-    { url: '/', label: 'Inicio' },
-    { url: '/ReportesInternos', label: 'Informes' }
+  const enlaces = [
+    { url: '/', etiqueta: 'Inicio' },
+    { url: '/ReportesInternos', etiqueta: 'Informes' }
   ];
 
-  const columns = [
-    { label: 'No.', key: 'id' },
-    { label: 'Nombre documento', key: 'nombre' },
-    { label: 'Periodo inicio', key: 'pInicio' },
-    { label: 'Periodo fin', key: 'pFin' }
+  const columnas = [
+    { etiqueta: 'No.', clave: 'id' },
+    { etiqueta: 'Nombre documento', clave: 'nombre' },
+    { etiqueta: 'Periodo inicio', clave: 'pInicio' },
+    { etiqueta: 'Periodo fin', clave: 'pFin' }
   ];
 
-  const filters = [
-    { label: 'Nombre documento', value: 'filtroDocumento' },
-    { label: 'Periodo inicio', value: 'filtropInicio' }
+  const filtros = [
+    { etiqueta: 'Nombre documento', valor: 'filtroDocumento' },
+    { etiqueta: 'Periodo inicio', valor: 'filtropInicio' }
   ];
 
-  const actions = [
+  const acciones = [
     {
-      label: 'Descargar',
-      handler: (item) => console.log('Edit item:', item),
+      etiqueta: 'Descargar',
+      manejador: (elemento) => console.log('Editar elemento:', elemento),
     },
     {
-      label: 'Eliminar',
-      handler: (item) => console.log('Delete item:', item),
+      etiqueta: 'Eliminar',
+      manejador: (elemento) => console.log('Eliminar elemento:', elemento),
     }
   ];
 
-  const SimulatedData = [
+  const datosSimulados = [
     { id: 1, nombre: 'TransporteMadera 21-22', pInicio: '2023-10-23', pFin: '2024-10-23' },
     { id: 2, nombre: 'TransporteMadera 22-23', pInicio: '2022-10-23', pFin: '2023-10-23' },
-    { id: 3, nombre: 'TransporteMadera 21-22', pInicio: '2021-10-23', pFin: '2022-10-23'},
+    { id: 3, nombre: 'TransporteMadera 21-22', pInicio: '2021-10-23', pFin: '2022-10-23' },
     { id: 4, nombre: 'TransporteMadera 21-22', pInicio: '2023-10-23', pFin: '2024-10-23' },
     { id: 5, nombre: 'TransporteMadera 22-23', pInicio: '2022-10-23', pFin: '2023-10-23' },
-    { id: 6, nombre: 'TransporteMadera 21-22', pInicio: '2021-10-23', pFin: '2022-10-23'}
-];
+    { id: 6, nombre: 'TransporteMadera 21-22', pInicio: '2021-10-23', pFin: '2022-10-23' }
+  ];
 
   return (
     <div>
       <NavAdmin />
-      <BreadCrumb links={links} />
+      <BreadCrumb links={enlaces} />
       <div className='justify-content-center container'>
         <h2 className='text-center mb-5'>REPORTES INTERNOS</h2>
         <div className='d-flex justify-content-end '>
-          <button className='btn btn-success me-3 reporte-btn'  onClick={handleShow}>Generar reporte</button>
+          <button className='btn btn-success me-3 reporte-btn' onClick={handleShow}>Generar reporte</button>
           <img className='excel-icon' src={excel} alt='excel' />
         </div>
         <div className="d-flex justify-content-center">
           <TableSearch
             endpoint={null}
-            columns={columns}
-            filters={filters}
-            actions={actions}
-            data={SimulatedData}
+            columns={columnas}
+            filters={filtros}
+            actions={acciones}
+            data={datosSimulados}
           />
         </div>
       </div>
