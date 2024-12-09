@@ -1,9 +1,24 @@
 import React, { useState } from "react";
 import { Button } from '../../../components/Boton';
 import Swal from "sweetalert2"; 
+import { ModalPlantilla } from "../../../components/Modal/ModalPlantilla";
+import { CustomTable } from "../../../components/TablaIconos";
 
 const FormularioCliente = ({ onAdd, editarClientesFrecuentes,formularioForm }) => {
   const [dentroFormularioForm, setDentroFormularioForm] = useState (formularioForm);
+
+  const [showModal, setShowModal] = useState(false);
+  const [modalContent, setModalContent] = useState(null);
+  const [tituloModal, setTitutloModal] = useState(null);
+
+  const [clientes, setClientes] = useState([]);
+  const columns = [
+    { header: 'Nombre', accessor: 'nombre' },
+    { header: 'Domicilio destinatario', accessor: 'domicilioDestinatario' },
+    { header: 'Poblacion', accessor: 'poblacion' },
+    { header: 'Entidad', accessor: 'entidad' },
+  ];
+
   const [formData, setFormData] = useState({
     nombre: '',
     domicilioDestinatario: '',
@@ -79,23 +94,28 @@ const FormularioCliente = ({ onAdd, editarClientesFrecuentes,formularioForm }) =
   };
 
   const seleccionarCliente = () => {
-    console.log("Se clickeo agregar cliente")
+    setTitutloModal('Selecciona un cliente');
+    setModalContent(<CustomTable
+      data={clientes}
+      columns={columns}
+      />);
+    setShowModal(true);
   }
 
   return (
     <div className=" mx-auto mt-5 mb-4 tarjeta-border p-5">
         <h5 className="text-center mb-3 size-font-title">Agregar nuevo cliente</h5>
-        <form onSubmit={handleSubmit}>
-              {/* Agregar datos de cliente registrado */}
-          {dentroFormularioForm && (
-            <div className="row mb-4">
-              <div className="col-12 text-end mt-2">
-                <span className="me-2 form-label">Agregar datos de un cliente frecuente</span>
-                <Button label="Seleccionar cliente" onClick={seleccionarCliente} className="btn-success" />
-              </div>
-            </div>
-          )}
 
+        {/* Agregar datos de cliente registrado */}
+        {dentroFormularioForm && (
+          <div className="row mb-4">
+            <div className="col-12 text-end mt-2">
+              <span className="me-2 form-label">Agregar datos de un cliente frecuente</span>
+              <Button label="Seleccionar cliente" onClick={seleccionarCliente} className="btn-success" />
+            </div>
+          </div>
+        )}
+        <form onSubmit={handleSubmit}>
           <div className="row"> 
             {/* Columna 1 */}
             <div className="col-md-6">
@@ -256,6 +276,12 @@ const FormularioCliente = ({ onAdd, editarClientesFrecuentes,formularioForm }) =
           </div>
 
         </form>
+        <ModalPlantilla
+          show={showModal}
+          onClose={() =>  setShowModal(false)}
+          content={modalContent}
+          title={tituloModal}
+        />
     </div>
   );
 };
