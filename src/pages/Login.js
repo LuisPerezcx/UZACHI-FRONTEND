@@ -8,7 +8,7 @@ export const Login = () => {
   return (
     <>
       <LoginForm></LoginForm>  
-      <Footer></Footer>  
+      <Footer></Footer>
     </>
   );
 };

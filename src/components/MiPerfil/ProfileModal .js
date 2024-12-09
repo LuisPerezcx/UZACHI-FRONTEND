@@ -1,7 +1,7 @@
 import React from 'react';
 import Modal from 'react-bootstrap/Modal';
 
-const AccountModal = ({ show, handleClose, user }) => {
+export const AccountModal = ({ show, handleClose, user }) => {
   return (
     <Modal show={show} onHide={handleClose} centered>
       <div
