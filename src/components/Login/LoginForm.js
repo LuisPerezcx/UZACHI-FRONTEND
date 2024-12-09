@@ -72,7 +72,6 @@ export const LoginForm = () => {
             alt="Logo"
             className="img-login"
           />
-          <h5 style={{ fontWeight: 'bold', color: '#4B4B4B' }}>Iniciar Sesión</h5>
         </div>
         <form>
           <div className="mb-3">
