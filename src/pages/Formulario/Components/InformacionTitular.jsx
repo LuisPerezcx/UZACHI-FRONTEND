@@ -27,7 +27,6 @@ export const InformacionTitular = () => {
         switch (name) {
             case "nombre":
             case "domicilio":
-            case "curp":
             case "siem":
             case "unidad":
                 // Validar que no contengan números
@@ -64,6 +63,28 @@ export const InformacionTitular = () => {
                     });
                 }
                 break;
+                case "curp": {
+                    const curpRegex = /^[A-Z]{0,4}\d{0,6}[HM]{0,1}[A-Z]{0,5}[A-Z\d]{0,1}\d?$/;
+        
+                    if (curpRegex.test(value.toUpperCase())) {
+                        setFormData((prev) => ({
+                            ...prev,
+                            curp: value.toUpperCase(),
+                        }));
+                        setErrors((prev) => {
+                            const newErrors = { ...prev };
+                            delete newErrors.curp;
+                            return newErrors;
+                        });
+                    } else {
+                        setErrors((prev) => ({
+                            ...prev,
+                            curp: "Formato de CURP incorrecto. Revisa los caracteres ingresados.",
+                        }));
+                    }
+                    break;
+                }
+                        
 
             default:
                 setErrors((prev) => {
@@ -97,6 +118,7 @@ export const InformacionTitular = () => {
                             placeholder="Nombre"
                             size="sm"
                             className="form-control"
+                            maxLength={100}
                         />
                         {errors.nombre && (
                             <p className="text-danger" style={{ fontSize: "0.9em" }}>
@@ -117,6 +139,7 @@ export const InformacionTitular = () => {
                             placeholder="Domicilio"
                             size="sm"
                             className="form-control"
+                            maxLength={200}
                         />
                         {errors.domicilio && (
                             <p className="text-danger" style={{ fontSize: "0.9em" }}>
@@ -139,6 +162,7 @@ export const InformacionTitular = () => {
                             placeholder="CURP"
                             size="sm"
                             className="form-control"
+                            maxLength={18}
                         />
                         {errors.curp && (
                             <p className="text-danger" style={{ fontSize: "0.9em" }}>
@@ -159,6 +183,7 @@ export const InformacionTitular = () => {
                             placeholder="Registro SIEM"
                             size="sm"
                             className="form-control"
+                            maxLength={15}
                         />
                         {errors.siem && (
                             <p className="text-danger" style={{ fontSize: "0.9em" }}>

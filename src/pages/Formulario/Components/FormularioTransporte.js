@@ -2,15 +2,23 @@ import React, {useState } from 'react';
 import { Col, Form, Row } from 'react-bootstrap';
 import { Button } from '../../../components/Boton';
 import Swal from "sweetalert2"; 
+import { ModalPlantilla } from '../../../components/Modal/ModalPlantilla';
+import { CustomTable } from "../../../components/TablaIconos";
 
 
 export const FormularioTransporte = ({ onAdd, editingTransport, formularioForm, onCancel }) => {
   const [formularioFormatoField, setFormularioFormatoField] = useState(formularioForm);
 
-  const seleccionarCarro = () => {
-    console.log('Seleccionar carro clickeado');
-  };
+  const [showModal, setShowModal] = useState(false);
+  const [modalContent, setModalContent] = useState(null);
+  const [tituloModal, setTitutloModal] = useState(null);
 
+  const [carros, setCarros] = useState([]);
+  const columns = [
+    { header: 'Propietario', accessor: 'propietario' },
+    { header: 'Tipo ', accessor: 'tipo' },
+    { header: 'Capacidad', accessor: 'capacidad' },
+  ];
   const initialFormState = {
     medio: '',
     marca: '',
@@ -84,7 +92,14 @@ export const FormularioTransporte = ({ onAdd, editingTransport, formularioForm, 
       tipo: '',
     });
   };
-
+  const seleccionarCarro = () => {
+    setTitutloModal('Selecciona un carro');
+    setModalContent(<CustomTable
+      data={carros}
+      columns={columns}
+      />);
+    setShowModal(true);
+  }
   const handleCancel = () => {
     setFormData(initialFormState); // Limpia el formulario
     if (onCancel) {
@@ -235,9 +250,15 @@ export const FormularioTransporte = ({ onAdd, editingTransport, formularioForm, 
             </button>
           )}
           </div>
-          
+          <ModalPlantilla
+          show={showModal}
+          onClose={() =>  setShowModal(false)}
+          content={modalContent}
+          title={tituloModal}
+        />
           
         </Form>
+
     </div>
   );
 };
