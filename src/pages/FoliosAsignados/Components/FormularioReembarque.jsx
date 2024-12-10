@@ -219,7 +219,7 @@ export const FormularioReembarque = () => {
           </div>      
           </div>
         </div>
-        <div className="col-md-6 ms-5 " >
+        <div className="col-md-6 mt-4" >
           <h5 className="text-center" style={{color:"#595B5A", fontWeight:"bold"}}>Lista de trámites</h5>
           <div className="scrollable-container tarjeta-border">
             {tramites.length === 0 ? ( // Validar si no hay trámites
