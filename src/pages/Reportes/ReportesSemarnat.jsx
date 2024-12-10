@@ -1,4 +1,3 @@
-// src/pages/ReportesSemarnat.jsx
 import React, { useState } from 'react';
 import NavAdmin from '../../components/NavAdmin';
 import { TableSearch } from './Components/TableSearch';
@@ -12,6 +11,16 @@ export const ReportesSemarnat = () => {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
+  const [reportes, setReportes] = useState([  // Agregar estado para los reportes
+    { id: 1, nombre: "MOVIMIENTO DE MADERA ENE-JUN 2024", comunidad: "Santiago Xiacuí", periodo: "2019 - 2020" },
+    { id: 2, nombre: "MOVIMIENTO DE MADERA JUL-DIC 2024", comunidad: "San Juan Bautista", periodo: "2020 - 2021" },
+    { id: 3, nombre: "REPORTE DE ACTIVIDADES 2023", comunidad: "Santa María Yolotepec", periodo: "2022 - 2023" },
+    { id: 4, nombre: "INFORME AMBIENTAL", comunidad: "San Pedro Juchatengo", periodo: "2021 - 2022" },
+    { id: 5, nombre: "INVENTARIO DE BOSQUE 2022", comunidad: "San José del Progreso", periodo: "2018 - 2019" },
+    { id: 6, nombre: "MOVIMIENTO DE MADERA ENE-JUN 2023", comunidad: "Santo Domingo Albarradas", periodo: "2020 - 2021" },
+    { id: 7, nombre: "ANÁLISIS DE SUELO", comunidad: "San Agustín Etla", periodo: "2023 - 2024" },
+  ]);
 
   const linksLabel = [
     { url: '/', label: 'Inicio' },
@@ -41,17 +50,25 @@ export const ReportesSemarnat = () => {
     }
   ];
 
-  const simulatedDataLabel = [
-    { id: 1, nombre: "MOVIMIENTO DE MADERA ENE-JUN 2024", comunidad: "Santiago Xiacuí", periodo: "2019 - 2020" },
-    { id: 2, nombre: "MOVIMIENTO DE MADERA JUL-DIC 2024", comunidad: "San Juan Bautista", periodo: "2020 - 2021" },
-    { id: 3, nombre: "REPORTE DE ACTIVIDADES 2023", comunidad: "Santa María Yolotepec", periodo: "2022 - 2023" },
-    { id: 4, nombre: "INFORME AMBIENTAL", comunidad: "San Pedro Juchatengo", periodo: "2021 - 2022" },
-    { id: 5, nombre: "INVENTARIO DE BOSQUE 2022", comunidad: "San José del Progreso", periodo: "2018 - 2019" },
-    { id: 6, nombre: "MOVIMIENTO DE MADERA ENE-JUN 2023", comunidad: "Santo Domingo Albarradas", periodo: "2020 - 2021" },
-    { id: 7, nombre: "ANÁLISIS DE SUELO", comunidad: "San Agustín Etla", periodo: "2023 - 2024" },
-  ];
+  const simulatedDataLabel = reportes;  
+  // Usar el estado de los reportes en lugar de los datos simulados
 
-  return (
+  const agregarReporte = (nombreReporte) => {
+    const nuevoReporte = {
+      id: reportes.length + 1,  // Nuevo ID para el reporte
+      nombre: nombreReporte,
+      comunidad: "Comunidad Ejemplo",  
+      periodo: "2023 - 2024",
+    };
+
+    setReportes([...reportes, nuevoReporte]);  // Agregar el nuevo reporte a la lista
+  };
+
+  const eliminarReporte = (item) => {
+    setReportes(reportes.filter(reporte => reporte.id !== item.id));
+};
+
+return (
     <div>
       <NavAdmin />
       <BreadCrumb links={linksLabel} />
@@ -68,11 +85,12 @@ export const ReportesSemarnat = () => {
             filters={filtersLabel}
             actions={actionsLabel}
             data={simulatedDataLabel}
+            onDelete={eliminarReporte}  // Pasamos la función onDelete
           />
         </div>
       </div>
-      <GenerarReporteModal show={show} handleClose={handleClose} />
+      <GenerarReporteModal show={show} handleClose={handleClose} agregarReporte={agregarReporte} />
       <Footer />
     </div>
-  );
-};
+);
+}
