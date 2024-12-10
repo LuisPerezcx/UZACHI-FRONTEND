@@ -19,7 +19,7 @@ export const ReportesSemarnat = () => {
     ]);
 
   const linksLabel = [
-    { url: '/', label: 'Inicio' },
+    { url: '/PrincipalAdmin', label: 'Inicio' },
     { url: '/ReportesSemarnat', label: 'Reportes SEMARNAT' }
   ];
 
@@ -72,7 +72,7 @@ return (
         <h2 className='text-center mb-5'>REPORTES SEMARNAT</h2>
         <div className='d-flex justify-content-end'>
           <button className='btn btn-success me-3 reporte-btn' onClick={handleShow}>Generar reporte</button>
-          <img className='excel-icon' src={excel} alt='excel' />
+          <img className='excel-icon-informes' src={excel} alt='excel' />
         </div>
         <div className="d-flex justify-content-center">
           <TableSearch

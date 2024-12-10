@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './InputWithClearButton.css'; 
 import 'bootstrap-icons/font/bootstrap-icons.css';
 
-const InputWithClearButton = ({ onInputChange, value, filter }) => {
+export const InputWithClearButton = ({ onInputChange, value, filter }) => {
     const [inputValue, setInputValue] = useState(value);
 
     const handleChange = (e) => {
@@ -47,11 +47,9 @@ const InputWithClearButton = ({ onInputChange, value, filter }) => {
             />
             {inputValue && (
                 <span className="input-group-text" onClick={clearInput} style={{ cursor: 'pointer' }}>
-                    <i className="bi bi-x-circle-fill" style={{backgroundColor:'green'}}></i> {/* Ícono de "x" para borrar */}
+                    <i className="bi bi-x-circle-fill" style={{backgroundColor:'green'}}></i> 
                 </span>
             )}
         </div>
     );
 };
-
-export default InputWithClearButton;

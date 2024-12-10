@@ -1,92 +1,83 @@
 import React, { useEffect, useState } from 'react';
-import InputWithClearButton from '../../../components/InputWithClearButton/InputWithClearButton';
+import {InputWithClearButton} from '../../../components/InputWithClearButton/InputWithClearButton';
+import { ContenedorDeCarga } from '../../../components/ContenedorDeCarga';
 
 export const TableSearch = ({ endpoint, columns, filters, actions, data, onDelete }) => {
-    const [tableData, setTableData] = useState([]);
-    const [filteredData, setFilteredData] = useState([]);
-    const [search, setSearch] = useState('');
-    const [filter, setFilter] = useState(filters[0].value);
-    const [loading, setLoading] = useState(true);
+    const [tableData, setTableData] = useState([]);  // Todos los datos de la tabla
+    const [filteredData, setFilteredData] = useState([]);  // Datos filtrados
+    const [search, setSearch] = useState('');  // Valor de búsqueda
+    const [filter, setFilter] = useState(filters[0].value);  // Filtro seleccionado
+    const [loading, setLoading] = useState(true);  // Estado de carga
 
-    // Maneja el cambio en el input de búsqueda
+    // Maneja el cambio en el campo de búsqueda
     const handleInputChange = (value) => {
         setSearch(value);
     };
 
-    // Maneja el cambio en el filtro seleccionado
+    // Maneja el cambio de filtro
     const handleFilterChange = (filterValue) => {
-        setFilter(filterValue);
-        setSearch(''); // Restablecer el campo de entrada al cambiar el filtro
+        setFilter(filterValue); 
+        setSearch('');  
     };
 
-    // Filtra los datos basados en el valor de búsqueda y el filtro seleccionado
+    // Filtra los datos cuando cambia la búsqueda o el filtro
     useEffect(() => {
         let filtered = [...tableData];
 
         if (search !== '') {
-            // Filtrar según el filtro seleccionado
+            // Filtra los datos según el valor de búsqueda
             filtered = filtered.filter(item => {
-                // Usar el filtro para elegir qué campo comparar
                 const field = item[filter];
                 if (typeof field === 'string') {
-                    return field.toLowerCase().includes(search.toLowerCase());
+                    return field.toLowerCase().includes(search.toLowerCase());  // Ignora mayúsculas/minúsculas
                 }
                 return false;
             });
         }
 
-        setFilteredData(filtered);
+        setFilteredData(filtered);  
     }, [search, filter, tableData]);
 
+    // Carga los datos iniciales
     useEffect(() => {
-        // Simulación de carga de datos
         setTimeout(() => {
-            setTableData(data);
-            setFilteredData(data);
-            setLoading(false);
+            setTableData(data);  
+            setFilteredData(data);  
+            setLoading(false);  
         }, 2000);
     }, [data]);
 
+    // Maneja la eliminación de un ítem
     const handleDelete = (item) => {
         if (onDelete) {
-            onDelete(item);  // Llamamos la función onDelete para eliminar el elemento
+            onDelete(item);  // Llama al callback onDelete
         }
     };
 
     return (
         <div className="container-fluid mx-auto">
             <div className="rounded mb-3 d-flex justify-content-center w-50 mx-auto">
-                <InputWithClearButton 
-                    onInputChange={handleInputChange} 
-                    value={search} 
-                    filter={filter} 
+                <InputWithClearButton
+                    onInputChange={handleInputChange}
+                    value={search}
+                    filter={filter}
                 />
-                {filters && (
-                    <div className="dropdown">
-                        <button
-                            className="boton-icono"
-                            type="button"
-                            id={`dropdownMenuButtonFilter`}
-                            data-bs-toggle="dropdown"
-                            aria-expanded="false"
-                        >
-                            <i className="bi icono-filtro bi-filter fs-1"></i>
-                        </button>
-                        <ul className="dropdown-menu" aria-labelledby={`dropdownMenuButtonFilter`}>
-                            {filters.map((action, actionIndex) => (
-                                <li key={actionIndex}>
-                                    <button
-                                        onClick={() => handleFilterChange(action.value)}
-                                        className="dropdown-item"
-                                    >
-                                        {action.label}
-                                    </button>
-                                </li>
-                            ))}
-                        </ul>
-                    </div>
-                )}
+                <div className="dropdown">
+                    <button className="boton-icono" type="button" id={`dropdownMenuButtonFilter`} data-bs-toggle="dropdown" aria-expanded="false">
+                        <i className="bi icono-filtro bi-filter fs-1"></i>
+                    </button>
+                    <ul className="dropdown-menu" aria-labelledby={`dropdownMenuButtonFilter`}>
+                        {filters.map((action, actionIndex) => (
+                            <li key={actionIndex}>
+                                <button onClick={() => handleFilterChange(action.value)} className="dropdown-item">
+                                    {action.label}
+                                </button>
+                            </li>
+                        ))}
+                    </ul>
+                </div> 
             </div>
+
             <div className="d-flex justify-content-center">
                 <table className="table table-striped table-hover shadow-lg text-center rounded-4 overflow-hidden" style={{ marginBottom: '100px' }}>
                     <thead>
@@ -98,65 +89,47 @@ export const TableSearch = ({ endpoint, columns, filters, actions, data, onDelet
                         </tr>
                     </thead>
                     <tbody>
-                        {loading ? (
-                            <tr>
-                                <td colSpan={columns.length + (actions ? 1 : 0)} className="text-center">
-                                    <div className="text-center">
-                                        <div className="spinner-border text-success" role="status">
-                                            <span className="visually-hidden">Cargando...</span>
-                                        </div>
-                                        <p>Cargando datos, por favor espere...</p>
-                                    </div>
-                                </td>
-                            </tr>
-                        ) : filteredData.length > 0 ? (
-                            filteredData.map((item, index) => (
-                                <tr key={index}>
-                                    {columns.map((col, colIndex) => (
-                                        <td key={colIndex}>{item[col.key]}</td>
-                                    ))}
-                                    {actions && (
-                                        <td>
-                                            <div className="dropdown">
-                                                <button
-                                                    className="boton-icono"
-                                                    type="button"
-                                                    id={`dropdownMenuButton-${index}`}
-                                                    data-bs-toggle="dropdown"
-                                                    aria-expanded="false"
-                                                >
-                                                    <i className="bi icono-puntos-vertical bi-three-dots-vertical"></i>
-                                                </button>
-                                                <ul className="dropdown-menu" aria-labelledby={`dropdownMenuButton-${index}`}>
-                                                    {actions.map((action, actionIndex) => (
-                                                        <li key={actionIndex}>
-                                                            <button
-                                                                onClick={() => {
+                        <ContenedorDeCarga cargando={loading} colSpan={columns.length + (actions ? 1 : 0)}>
+                            {filteredData.length > 0 ? (
+                                filteredData.map((item, index) => (
+                                    <tr key={index}>
+                                        {columns.map((col, colIndex) => (
+                                            <td key={colIndex}>{item[col.key]}</td>
+                                        ))}
+                                        {actions && (
+                                            <td>
+                                                <div className="dropdown">
+                                                    <button className="boton-icono" type="button" id={`dropdownMenuButton-${index}`} data-bs-toggle="dropdown" aria-expanded="false">
+                                                        <i className="bi icono-puntos-vertical bi-three-dots-vertical"></i>
+                                                    </button>
+                                                    <ul className="dropdown-menu" aria-labelledby={`dropdownMenuButton-${index}`}>
+                                                        {actions.map((action, actionIndex) => (
+                                                            <li key={actionIndex}>
+                                                                <button onClick={() => {
                                                                     if (action.label === 'Eliminar') {
-                                                                        handleDelete(item);  // Si la acción es "Eliminar", ejecutamos la función
+                                                                        handleDelete(item);
                                                                     } else {
                                                                         action.handler(item);
                                                                     }
-                                                                }}
-                                                                className="dropdown-item"
-                                                            >
-                                                                {action.label}
-                                                            </button>
-                                                        </li>
-                                                    ))}
-                                                </ul>
-                                            </div>
-                                        </td>
-                                    )}
+                                                                }} className="dropdown-item">
+                                                                    {action.label}
+                                                                </button>
+                                                            </li>
+                                                        ))}
+                                                    </ul>
+                                                </div>
+                                            </td>
+                                        )}
+                                    </tr>
+                                ))
+                            ) : (
+                                <tr>
+                                    <td colSpan={columns.length + (actions ? 1 : 0)} className="text-center">
+                                        No hay datos disponibles
+                                    </td>
                                 </tr>
-                            ))
-                        ) : (
-                            <tr>
-                                <td colSpan={columns.length + (actions ? 1 : 0)} className="text-center">
-                                    No hay datos disponibles
-                                </td>
-                            </tr>
-                        )}
+                            )}
+                        </ContenedorDeCarga>
                     </tbody>
                 </table>
             </div>

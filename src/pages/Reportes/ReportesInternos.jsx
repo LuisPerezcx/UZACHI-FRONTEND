@@ -13,7 +13,7 @@ export const ReportesInternos = () => {
   const handleShow = () => setShow(true);
 
   const enlaces = [
-    { url: '/', label: 'Inicio' },
+    { url: '/PrincipalAdmin', label: 'Inicio' },
     { url: '/ReportesInternos', label: 'Informes' }
   ];
 
