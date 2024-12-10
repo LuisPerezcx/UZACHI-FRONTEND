@@ -10,11 +10,15 @@ import '../styles/NavAdmin.css'
 
 export const NavAdmin = () => {
 
-  const [showModal, setShowModal] = useState(false);
-
-  const handleShowModal = () => setShowModal(true);
-  const handleCloseModal = () => setShowModal(false);
-
+  const [showAccountModal, setShowAccountModal] = useState(false);
+  const [showChangePasswordModal, setShowChangePasswordModal] = useState(false);
+  
+  const handleShowAccountModal = () => setShowAccountModal(true);
+  const handleCloseAccountModal = () => setShowAccountModal(false);
+  
+  const handleShowChangePasswordModal = () => setShowChangePasswordModal(true);
+  const handleCloseChangePasswordModal = () => setShowChangePasswordModal(false);
+  
   // Datos simulados del usuario
   const user = {
     name: "Luis Alberto Hernandez",
@@ -39,17 +43,19 @@ export const NavAdmin = () => {
               </NavDropdown>
 
               <NavDropdown className='ms-3 custom-dropdown' title={<img src={perfiIcon} style={{width: '40px'}}></img>}>
-                <NavDropdown.Item className='dropdown-item'>Mi cuenta</NavDropdown.Item>
-                <NavDropdown.Item onClick={handleShowModal} className='dropdown-item'>Cambiar contraseña</NavDropdown.Item>
+                <NavDropdown.Item onClick={handleShowAccountModal} className='dropdown-item'>Mi cuenta</NavDropdown.Item>
+                <NavDropdown.Item onClick={handleShowChangePasswordModal} className='dropdown-item'>Cambiar contraseña</NavDropdown.Item>
                 <NavDropdown.Item href="/" className='dropdown-item'>Cerrar sesión</NavDropdown.Item>
               </NavDropdown>
+
             </Nav>
           </Navbar.Collapse>
         </Container>
       </Navbar> 
-      <AccountModal show={showModal} handleClose={handleCloseModal} user={user} />
+      <AccountModal show={showAccountModal} handleClose={handleCloseAccountModal} user={user}/>
 
-      <CambioContraseñaModal showModal={showModal} handleClose={handleCloseModal} />
+      <CambioContraseñaModal showModal={showChangePasswordModal} handleClose={handleCloseChangePasswordModal}/>
+
     </div>
   );
 };

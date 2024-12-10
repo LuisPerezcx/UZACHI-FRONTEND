@@ -1,40 +1,120 @@
-import React from 'react';
+import React, {useState } from 'react';
+import { Form,} from 'react-bootstrap';
+import { Button } from '../../../components/Boton';
+import Swal from "sweetalert2"; 
+
 
 export const FormularioReembarque = () => {
+
+  const [formData, setFormData] = useState({
+    volumenAutorizado: '',
+    foliosAutorizados: '',
+    folioInicial: '',
+    folioFinal: '',
+    producto: '',
+    piesTabla: '',
+    medidas: '',
+    clasificacion: '',
+    piezas: '',
+    precio: '',
+    volumenExtra: '',
+    total: '',
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (!formData.folioInicial || !formData.folioFinal || !formData.foliosAutorizados || !formData.volumenAutorizado) {
+      Swal.fire({
+        title: 'Datos incompletos',
+        text: `Por favor, llena todos los campos requeridos.`,
+        icon: 'warning',
+        confirmButtonText: 'Aceptar',
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: () => {
+          const confirmButton = Swal.getConfirmButton();
+          confirmButton.style.backgroundColor = 'var(--color-verde)'; // Color verde
+        }
+      });
+      return;
+    }
+  };
+  // Llamar a la función `onAdd` con los datos del formulario
   return (
+    <Form onSubmit={handleSubmit}>
     <div className="container mt-4">
       <div className="tarjeta-border row">
         {/* Primera columna: Formulario de trámites */}
         <div className="col-md-4">
-          <div className="tarjeta-border p-4 mb-3">
+          <div className="p-4 mb-3">
             <h5 className="card-title text-center"></h5>
             <form>
-              <div className="mb-3">
-                <label htmlFor="numeroTramite" className="form-label">Número de trámite:</label>
-                <input type="text" className="form-control" placeholder="Ingrese cantidad" />
+            <div className="row">
+                {/* Columna 1: Folio inicial */}
+                <div className="col-md-8">
+                  <div className="mb-3">
+                    <label htmlFor="numeroTramite" className="form-label">Número de trámite:</label>
+                  </div>
+                </div>
+                {/* Columna 2: Folio final */}
+                <div className="col-md-4">
+                  <div className="mb-3">
+                    <input type="text" className="form-control" placeholder=" " />
+                  </div>
+                </div>
               </div>
               <div className="mb-3">
-                <label htmlFor="volumenAutorizado" className="form-label">Volumen autorizado</label>
-                <input type="text" className="form-control" placeholder="m²" />
+                <Form.Label htmlFor="volumenAutorizado" className="form-label">Volumen autorizado: <span className="text-danger">*</span></Form.Label>
+                <Form.Control 
+                  type="text"
+                  className="form-control"
+                  name="volumenAutorizado"
+                  value={formData.volumenAutorizado}
+                  onChange={handleChange}
+                />
               </div>
               <div className="mb-3">
-                <label htmlFor="foliosAutorizados" className="form-label">Folios autorizados</label>
-                <input type="text" className="form-control" placeholder="m²" />
+                <Form.Label htmlFor="foliosAutorizados" className="form-label">Folios autorizados <span className="text-danger">*</span></Form.Label>
+                <Form.Control 
+                  type="text"
+                  className="form-control"
+                  name="foliosAutorizados"
+                  value={formData.foliosAutorizados}
+                  onChange={handleChange}
+                />
               </div>
               <div className="row">
                 {/* Columna 1: Folio inicial */}
                 <div className="col-md-6">
                   <div className="mb-3">
-                    <label htmlFor="folioInicial" className="form-label">Folio inicial</label>
-                    <input type="text" className="form-control" placeholder="m²" />
+                    <Form.Label htmlFor="folioInicial" className="form-label">Folio inicial: <span className="text-danger">*</span></Form.Label>
+                    <Form.Control 
+                      type="text"
+                      className="form-control"
+                      name="folioInicial"
+                      value={formData.folioInicial}
+                      onChange={handleChange}
+                    />
                   </div>
                 </div>
 
                 {/* Columna 2: Folio final */}
                 <div className="col-md-6">
                   <div className="mb-3">
-                    <label htmlFor="folioFinal" className="form-label">Folio final</label>
-                    <input type="text" className="form-control" placeholder="m²" />
+                    <Form.Label htmlFor="folioFinal" className="form-label">Folio final: <span className="text-danger">*</span></Form.Label>
+                    <Form.Control 
+                      type="text"
+                      className="form-control"
+                      name="folioFinal"
+                      value={formData.folioFinal}
+                      onChange={handleChange} 
+                    />
                   </div>
                 </div>
               </div>
@@ -45,76 +125,150 @@ export const FormularioReembarque = () => {
         {/* Segunda columna: Formulario venta reembarque */}
         <div className="col-md-8">
           <div className="p-4 mb-3">
-            <h5 className="card-title text-center pb-4 fw-2">Venta reembarque</h5>
+            <h4 className="card-title text-center pb-4 mb-4 fw-2">Venta reembarque</h4>
             <form>
               <div className="row">
                 {/* Columna 1 */}
                 <div className="col-md-3">
                   <div className="mb-2">
-                    <label htmlFor="producto" className="form-label">Producto</label>
-                    <select className="form-select" id="producto" required>
-                      <option selected disabled value="">Seleccione opción</option>
-                      <option>Tabla</option>
-                      <option>Tablón</option>
-                      <option>Rollo</option>
-                    </select>
+                    <Form.Label htmlFor="producto" className="form-label">Producto</Form.Label>
+                    <Form.Select
+                      className="form-select"
+                      name="producto"
+                      value={formData.producto}
+                      onChange={handleChange}
+                      required
+                    >
+                    <option disabled value="">
+                      Seleccione opción
+                    </option>
+                      <option value="tabla">Tabla</option>
+                      <option value="tablon">Tablón</option>
+                      <option value="rollo">Rollo</option>
+                    </Form.Select>
                   </div>
                   <div className="mb-3">
-                    <label htmlFor="piesTabla" className="form-label">Pies tabla</label>
-                    <input type="text" className="form-control" id="piesTabla" placeholder=" " />
+                    <label htmlFor="" className="form-label"></label>
+                  </div>
+                  <div className="mb-3">
+                    <Form.Label htmlFor="piesTabla" className="form-label">Pies tabla</Form.Label>
+                    <Form.Control 
+                      type="text"
+                      className="form-control"
+                      name="piesTabla"
+                      value={formData.piesTabla}
+                      onChange={handleChange}
+                    />
                   </div>
                 </div>
 
                 {/* Columna 2 */}
                 <div className="col-md-3">
                   <div className="mb-2">
-                    <label htmlFor="medidas" className="form-label">Medidas</label>
-                    <select className="form-select" id="medidas" required>
-                      <option selected disabled value="">Seleccione opción</option>
+                    <Form.Label htmlFor="medidas" className="form-label">Medidas</Form.Label>
+                    <Form.Select
+                      className="form-select"
+                      name="medidas"
+                      value={formData.medidas}
+                      onChange={handleChange}
+                      required
+                    >
+                    <option disabled value="">
+                      Seleccione opción
+                    </option>
                       <option>16 x 25</option>
                       <option>18 x 50</option>
                       <option>20 x 75</option>
-                    </select>
+                    </Form.Select>
                   </div>
                   <div className="mb-3">
-                    <label htmlFor="volumen" className="form-label">Volumen</label>
-                    <input type="text" className="form-control" id="volumen" placeholder=" " />
+                    <label htmlFor="" className="form-label"></label>
+                  </div>
+                  <div className="mb-3">
+                    <Form.Label htmlFor="piezas" className="form-label">Num. Piezas </Form.Label>
+                    <Form.Control 
+                      type="text"
+                      className="form-control"
+                      name="piezas"
+                      value={formData.piezas}
+                      onChange={handleChange}
+                    />
                   </div>
                 </div>
 
                 {/* Columna 3 */}
                 <div className="col-md-3">
                   <div className="mb-2">
-                    <label htmlFor="clasificacion" className="form-label">Clasificación</label>
-                    <select className="form-select" id="clasificacion" required>
-                      <option selected disabled value="">Seleccione opción</option>
+                    <Form.Label htmlFor="clasificacion" className="form-label">Clasificación</Form.Label>
+                    <Form.Select
+                      className="form-select"
+                      name="clasificacion"
+                      value={formData.clasificacion}
+                      onChange={handleChange}
+                      required
+                    >
+                    <option disabled value="">
+                      Seleccione opción
+                    </option>
                       <option>Primera</option>
                       <option>Secundaria</option>
                       <option>Tercera</option>
-                    </select>
+                    </Form.Select>
                   </div>
                   <div className="mb-3">
-                    <label htmlFor="precio" className="form-label">Precio</label>
-                    <input type="text" className="form-control" id="precio" placeholder=" " />
+                    <label htmlFor="" className="form-label"></label>
+                  </div>
+                  <div className="mb-3">
+                    <Form.Label htmlFor="precio" className="form-label">Precio</Form.Label>
+                    <Form.Control 
+                      type="text"
+                      className="form-control"
+                      name="precio"
+                      value={formData.precio}
+                      onChange={handleChange}
+                    />
                   </div>
                 </div>
 
                 {/* Columna 4 */}
                 <div className="col-md-3">
                   <div className="mb-2">
-                    <label htmlFor="volumenExtra" className="form-label">Volumen</label>
-                    <input type="text" className="form-control" id="volumenExtra" placeholder=" " />
+                    <Form.Label htmlFor="volumenExtra" className="form-label">Volumen</Form.Label>
+                    <Form.Control 
+                    type="text"
+                    className="form-control"
+                    name="volumenExtra"
+                    value={formData.volumenExtra}
+                    onChange={handleChange}
+                    />
                   </div>
                   <div className="mb-3">
-                    <label htmlFor="total" className="form-label">Total</label>
-                    <input type="text" className="form-control" id="total" placeholder=" " />
+                    <Form.Label htmlFor="" className="form-label"></Form.Label>
+                  </div>
+                  <div className="mb-3">
+                    <Form.Label htmlFor="total" className="form-label">Total</Form.Label>
+                    <Form.Control 
+                      type="text"
+                      className="form-control"
+                      name="total"
+                      value={formData.total}
+                      onChange={handleChange}
+                    />
                   </div>
                 </div>
               </div>
             </form>
+            <div className="text-center pt-4">
+            <button variant="success" type="submit" size="sm">
+              {'Agregar'}
+            </button>
+          </div>
           </div>
         </div>
       </div>
+      
     </div>
+    
+    </Form>
   );
 };
