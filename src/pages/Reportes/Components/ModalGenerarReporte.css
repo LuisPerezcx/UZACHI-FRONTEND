@@ -30,7 +30,23 @@
     -webkit-overflow-scrolling: touch; /* Para un desplazamiento más fluido en dispositivos táctiles */
 }
 
+.dropdown-menu {
+    position: absolute !important;
+    z-index: 1050; 
+}
 
+.dropdown-menu.show {
+    display: block;
+}
+
+.dropdown-menu {
+    position: absolute !important;
+    z-index: 1050; /* Esto asegura que el menú esté encima de otros elementos */
+}
+
+.dropdown-menu.show {
+    display: block;
+}
 
 
 .excel-icon-informes {

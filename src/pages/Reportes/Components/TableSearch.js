@@ -1,56 +1,59 @@
 import React, { useEffect, useState } from 'react';
-import {InputWithClearButton} from '../../../components/InputWithClearButton/InputWithClearButton';
+import { InputWithClearButton } from '../../../components/InputWithClearButton/InputWithClearButton';
 import { ContenedorDeCarga } from '../../../components/ContenedorDeCarga';
 
-export const TableSearch = ({ endpoint, columns, filters, actions, data, onDelete }) => {
-    const [tableData, setTableData] = useState([]);  // Todos los datos de la tabla
-    const [filteredData, setFilteredData] = useState([]);  // Datos filtrados
-    const [search, setSearch] = useState('');  // Valor de búsqueda
-    const [filter, setFilter] = useState(filters[0].value);  // Filtro seleccionado
-    const [loading, setLoading] = useState(true);  // Estado de carga
+export const TableSearch = ({ endpoint, columnas, filtros, acciones, datos, onDelete }) => {
+    const [datosTabla, setDatosTabla] = useState([]);
+    const [datosFiltrados, setDatosFiltrados] = useState([]);
+    const [busqueda, setBusqueda] = useState('');
+    const [filtro, setFiltro] = useState(filtros[0].value);
+    const [cargando, setCargando] = useState(true);
 
     // Maneja el cambio en el campo de búsqueda
-    const handleInputChange = (value) => {
-        setSearch(value);
+    const handleInputChange = (valor) => {
+        setBusqueda(valor);
     };
 
     // Maneja el cambio de filtro
-    const handleFilterChange = (filterValue) => {
-        setFilter(filterValue); 
-        setSearch('');  
+    const handleFilterChange = (valorFiltro) => {
+        setFiltro(valorFiltro);
+        setBusqueda('');
     };
 
     // Filtra los datos cuando cambia la búsqueda o el filtro
     useEffect(() => {
-        let filtered = [...tableData];
-
-        if (search !== '') {
-            // Filtra los datos según el valor de búsqueda
-            filtered = filtered.filter(item => {
-                const field = item[filter];
-                if (typeof field === 'string') {
-                    return field.toLowerCase().includes(search.toLowerCase());  // Ignora mayúsculas/minúsculas
+        let filtrados = [...datosTabla];
+    
+        if (busqueda !== '') {
+            filtrados = filtrados.filter(item => {
+                if (item.hasOwnProperty(filtro)) {
+                    const campo = item[filtro];
+                    if (typeof campo === 'string') {
+                        return campo.toLowerCase().includes(busqueda.toLowerCase());
+                    }
                 }
                 return false;
             });
         }
-
-        setFilteredData(filtered);  
-    }, [search, filter, tableData]);
+    
+        setDatosFiltrados(filtrados); // Asignar el resultado filtrado, aunque esté vacío
+    }, [busqueda, filtro, datosTabla]);
+    
 
     // Carga los datos iniciales
     useEffect(() => {
         setTimeout(() => {
-            setTableData(data);  
-            setFilteredData(data);  
-            setLoading(false);  
+            setDatosTabla(datos);
+            setDatosFiltrados(datos || []);  
+            setCargando(false);
         }, 2000);
-    }, [data]);
+    }, [datos]);
+    
 
     // Maneja la eliminación de un ítem
     const handleDelete = (item) => {
         if (onDelete) {
-            onDelete(item);  // Llama al callback onDelete
+            onDelete(item);
         }
     };
 
@@ -59,60 +62,69 @@ export const TableSearch = ({ endpoint, columns, filters, actions, data, onDelet
             <div className="rounded mb-3 d-flex justify-content-center w-50 mx-auto">
                 <InputWithClearButton
                     onInputChange={handleInputChange}
-                    value={search}
-                    filter={filter}
+                    value={busqueda}
+                    filter={filtro}
                 />
                 <div className="dropdown">
                     <button className="boton-icono" type="button" id={`dropdownMenuButtonFilter`} data-bs-toggle="dropdown" aria-expanded="false">
                         <i className="bi icono-filtro bi-filter fs-1"></i>
                     </button>
                     <ul className="dropdown-menu" aria-labelledby={`dropdownMenuButtonFilter`}>
-                        {filters.map((action, actionIndex) => (
-                            <li key={actionIndex}>
-                                <button onClick={() => handleFilterChange(action.value)} className="dropdown-item">
-                                    {action.label}
+                        {filtros.map((accion, indexAccion) => (
+                            <li key={indexAccion}>
+                                <button onClick={() => handleFilterChange(accion.value)} className="dropdown-item">
+                                    {accion.label}
                                 </button>
                             </li>
                         ))}
                     </ul>
-                </div> 
+                </div>
             </div>
 
             <div className="d-flex justify-content-center">
                 <table className="table table-striped table-hover shadow-lg text-center rounded-4 overflow-hidden" style={{ marginBottom: '100px' }}>
                     <thead>
                         <tr>
-                            {columns.map((col, index) => (
+                            {columnas.map((col, index) => (
                                 <th key={index}>{col.label}</th>
                             ))}
-                            {actions && <th></th>}
+                            {acciones && <th></th>}
                         </tr>
                     </thead>
                     <tbody>
-                        <ContenedorDeCarga cargando={loading} colSpan={columns.length + (actions ? 1 : 0)}>
-                            {filteredData.length > 0 ? (
-                                filteredData.map((item, index) => (
+                        <ContenedorDeCarga cargando={cargando} colSpan={columnas.length + (acciones ? 1 : 0)}>
+                            {datosFiltrados.length > 0 ? (
+                                datosFiltrados.map((item, index) => (
                                     <tr key={index}>
-                                        {columns.map((col, colIndex) => (
+                                        {columnas.map((col, colIndex) => (
                                             <td key={colIndex}>{item[col.key]}</td>
                                         ))}
-                                        {actions && (
+                                        {acciones && (
                                             <td>
                                                 <div className="dropdown">
-                                                    <button className="boton-icono" type="button" id={`dropdownMenuButton-${index}`} data-bs-toggle="dropdown" aria-expanded="false">
+                                                    <button
+                                                        className="boton-icono"
+                                                        type="button"
+                                                        id={`dropdownMenuButton-${index}`}
+                                                        data-bs-toggle="dropdown"
+                                                        aria-expanded="false"
+                                                    >
                                                         <i className="bi icono-puntos-vertical bi-three-dots-vertical"></i>
                                                     </button>
-                                                    <ul className="dropdown-menu" aria-labelledby={`dropdownMenuButton-${index}`}>
-                                                        {actions.map((action, actionIndex) => (
-                                                            <li key={actionIndex}>
-                                                                <button onClick={() => {
-                                                                    if (action.label === 'Eliminar') {
-                                                                        handleDelete(item);
-                                                                    } else {
-                                                                        action.handler(item);
-                                                                    }
-                                                                }} className="dropdown-item">
-                                                                    {action.label}
+                                                    <ul className="dropdown-menu dropdown-menu-end" aria-labelledby={`dropdownMenuButton-${index}`}>
+                                                        {acciones.map((accion, indexAccion) => (
+                                                            <li key={indexAccion}>
+                                                                <button
+                                                                    onClick={() => {
+                                                                        if (accion.label === 'Eliminar') {
+                                                                            handleDelete(item);  // Llama la función handleDelete
+                                                                        } else {
+                                                                            accion.handler(item);
+                                                                        }
+                                                                    }}
+                                                                    className="dropdown-item"
+                                                                >
+                                                                    {accion.label}
                                                                 </button>
                                                             </li>
                                                         ))}
@@ -124,7 +136,7 @@ export const TableSearch = ({ endpoint, columns, filters, actions, data, onDelet
                                 ))
                             ) : (
                                 <tr>
-                                    <td colSpan={columns.length + (actions ? 1 : 0)} className="text-center">
+                                    <td colSpan={columnas.length + (acciones ? 1 : 0)} className="text-center">
                                         No hay datos disponibles
                                     </td>
                                 </tr>
@@ -133,6 +145,7 @@ export const TableSearch = ({ endpoint, columns, filters, actions, data, onDelet
                     </tbody>
                 </table>
             </div>
+
         </div>
     );
 };
