@@ -46,9 +46,6 @@ export const ListaTramites = ({ tramites }) => {
                     <strong>Folio Hojosa:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong> 
                     {tramite.folioHojosa}
                     <br />
-                    <strong>Clasificación:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong> 
-                    {tramite.clasificacion}
-                    <br />
                     <strong>Folio Inicial Pinus:&nbsp; </strong> {tramite.folioInicialPinus}
                     <strong>&nbsp;&nbsp;&nbsp;Folio Final Pinus:&nbsp;</strong> 
                     {tramite.folioFinalPinus}

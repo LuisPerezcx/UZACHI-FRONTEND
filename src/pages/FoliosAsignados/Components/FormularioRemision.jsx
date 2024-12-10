@@ -159,6 +159,7 @@ const [formData, setFormData] = useState({
               <Form.Control 
                 type="text"
                 name="folioPinus"
+                maxLength={5}
                 value={formData.folioPinus}
                 onChange={(e) => {
                   const value = e.target.value;
@@ -174,13 +175,14 @@ const [formData, setFormData] = useState({
               <Form.Control
                 type="text"
                 name="folioQuercus"
+                maxLength={5}
                 value={formData.folioQuercus}
                 onChange={(e) => {
-                  const value = e.target.value;
+                const value = e.target.value;
                   // Permitir solo números enteros o decimales
                   if (/^\d*\.?\d*$/.test(value)) {
                     handleChange({ target: { name: "folioQuercus", value } });
-                  }
+                }
                 }}
               />
             </div>
@@ -189,6 +191,7 @@ const [formData, setFormData] = useState({
               <Form.Control 
                 type="text"
                 name="folioHojosa"
+                maxLength={5}
                 value={formData.folioHojosa}
                 onChange={(e) => {
                   const value = e.target.value;
@@ -215,70 +218,100 @@ const [formData, setFormData] = useState({
             <div className="mb-3 d-flex">
               <Form.Label htmlFor="folioInicialPinus" style={{ width: "150px"}}>Pinus:<span className="text-danger">*</span></Form.Label>
               <Form.Control 
-                type="number"
+                type="text"
                 className="me-2"
                 style={{width:"50%"}}
                 name="folioInicialPinus"
+                maxLength={5}
                 value={formFolio.folioInicialPinus}
-                onChange={handleChange}
-                max="99999" 
-                min="0"
+                onChange={(e) => {
+                  const value = e.target.value;
+                  // Permitir solo números enteros o decimales
+                  if (/^\d*\.?\d*$/.test(value)) {
+                    handleChange({ target: { name: "folioInicialPinus", value } });
+                  }
+                }}
               />
               <Form.Control
-                type="number"
+                type="text"
                 className="me-2"
                 style={{width:"50%"}}
                 name="folioFinalPinus"
+                maxLength={5}
                 value={formFolio.folioFinalPinus}
-                onChange={handleChange}
-                max="99999" 
-                min="0"
+                onChange={(e) => {
+                  const value = e.target.value;
+                  // Permitir solo números enteros o decimales
+                  if (/^\d*\.?\d*$/.test(value)) {
+                    handleChange({ target: { name: "folioFinalPinus", value } });
+                  }
+                }}
               />
             </div>
             <div className="mb-3 d-flex">
               <Form.Label htmlFor="quercusFolio" style={{ width: "150px" }}>Quercus:<span className="text-danger">*</span></Form.Label>
               <Form.Control 
-                type="number"
+                type="text"
                 className="me-2"
                 style={{width:"50%"}}
                 name="folioInicialQuercus"
+                maxLength={5}
                 value={formFolio.folioInicialQuercus}
-                onChange={handleChange}
-                max="99999" 
-                min="0"
+                onChange={(e) => {
+                  const value = e.target.value;
+                  // Permitir solo números enteros o decimales
+                  if (/^\d*\.?\d*$/.test(value)) {
+                    handleChange({ target: { name: "folioInicialQuercus", value } });
+                  }
+                }}
               />
               <Form.Control 
-                type="number"
+                type="text"
                 className="me-2"
                 style={{width:"50%"}}
                 name="folioFinalQuercus"
+                maxLength={5}
                 value={formFolio.folioFinalQuercus}
-                onChange={handleChange}
-                max="99999" 
-                min="0"
+                onChange={(e) => {
+                  const value = e.target.value;
+                  // Permitir solo números enteros o decimales
+                  if (/^\d*\.?\d*$/.test(value)) {
+                    handleChange({ target: { name: "folioFinalQuercus", value } });
+                  }
+                }}
               />
             </div>
             <div className="mb-3 d-flex">
               <Form.Label htmlFor="hojosaFolio" style={{ width: "150px" }}>Hojosa:<span className="text-danger">*</span></Form.Label>
               <Form.Control
-                type="number"
+                type="text"
                 className="me-2"
                 style={{width:"50%"}}
                 name="folioInicialHojosa"
+                maxLength={5}
                 value={formFolio.folioInicialHojosa}
-                onChange={handleChange} 
-                max="99999" 
-                min="0"
+                onChange={(e) => {
+                  const value = e.target.value;
+                  // Permitir solo números enteros o decimales
+                  if (/^\d*\.?\d*$/.test(value)) {
+                    handleChange({ target: { name: "folioInicialHojosa", value } });
+                  }
+                }}
               />
               <Form.Control
-                type="number"
+                type="texdt"
                 className="me-2"
                 style={{width:"50%"}}
                 name="folioFinalHojosa"
+                maxLength={5}
                 value={formFolio.folioFinalHojosa}
-                onChange={handleChange}
-                max="99999" 
-                min="0"
+                onChange={(e) => {
+                  const value = e.target.value;
+                  // Permitir solo números enteros o decimales
+                  if (/^\d*\.?\d*$/.test(value)) {
+                    handleChange({ target: { name: "folioFinalHojosa", value } });
+                  }
+                }}
               />
             </div>
           </form>
