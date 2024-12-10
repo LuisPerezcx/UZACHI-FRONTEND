@@ -21,7 +21,7 @@ const TablaUsuarios = () => {
       title: "¿Estás seguro?",
       text: `¿Deseas eliminar al usuario `,
       onConfirm: () => {
-        const nuevosUsuarios = usuarios.filter((data) => data !== it);
+        const nuevosUsuarios = usuarios.filter((data) => data !== item);
         setUsuarios(nuevosUsuarios);
 
         AlertComponent.success({
