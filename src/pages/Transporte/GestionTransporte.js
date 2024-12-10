@@ -100,7 +100,7 @@ export const GestionTransporte = () => {
         searchPlaceholder="Buscar transporte..."
         edicion={editingTransport}
       />
-      <div className='px-5'>
+      <div className="px-5 container">
         <FormularioTransporte
           onAdd={guardarTransporte}
           editingTransport={editingTransport}

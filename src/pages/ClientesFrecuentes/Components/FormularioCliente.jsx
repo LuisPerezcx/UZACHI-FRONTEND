@@ -112,7 +112,7 @@ const FormularioCliente = ({ onAdd, editarClientesFrecuentes,formularioForm, onC
   };
 
   return (
-    <div className="container mx-auto mt-5 mb-4 tarjeta-border p-5">
+    <div className="mx-auto mt-5 mb-4 tarjeta-border p-5">
         <h5 className="text-center mb-3 size-font-title">Agregar nuevo cliente</h5>
 
         {/* Agregar datos de cliente registrado */}
