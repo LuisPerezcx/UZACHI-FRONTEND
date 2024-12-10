@@ -1,17 +1,25 @@
 import React, { useState } from 'react';
 
-export const CalculadoraEstandar = () => {
+export const CalculadoraEstandar = ({onCalculate}) => {
     const [ladoA, setLadoA] = useState([]);
     const [ladoB, setLadoB] = useState([]);
     const [volumenA, setVolumenA] = useState('');
     const [volumenB, setVolumenB] = useState('');
+
+    const [error, setError] = useState('');
+
+    const handleNumericInput = (value) => {
+      // Permite solo números, puntos decimales, y evita múltiples puntos
+      return value.replace(/[^0-9.]/g, '').replace(/(\..*?)\./g, '$1');
+    };
+
   
     const agregarVolumenA = () => {
       if (!isNaN(volumenA) && volumenA.trim() !== '') {
         setLadoA([...ladoA, parseFloat(volumenA)]);
         setVolumenA('');
       } else {
-        alert('Por favor, ingresa un número válido en el lado A.');
+        setError('Por favor, ingresa un número válido en el lado A.');
       }
     };
   
@@ -20,21 +28,23 @@ export const CalculadoraEstandar = () => {
         setLadoB([...ladoB, parseFloat(volumenB)]);
         setVolumenB('');
       } else {
-        alert('Por favor, ingresa un número válido en el lado B.');
+        setError('Por favor, ingresa un número válido en el lado B.');
       }
     };
   
     const calcularPromedio = () => {
       if (ladoA.length !== ladoB.length) {
-        alert('Ambos lados deben tener la misma cantidad de datos.');
+        setError('Ambos lados deben tener la misma cantidad de datos.');
         return;
       }
   
       const sumaA = ladoA.reduce((acc, val) => acc + val, 0);
       const sumaB = ladoB.reduce((acc, val) => acc + val, 0);
       const resultado = (sumaA + sumaB) / 2;
+      onCalculate(resultado)
+      setError(`El promedio calculado es: ${resultado}`);
+      setError('');
 
-      alert(`El promedio calculado es: ${resultado}`);
     };
   return (
     <div className="container p-4 border rounded">
@@ -47,7 +57,7 @@ export const CalculadoraEstandar = () => {
               type="text"
               placeholder="Agrega el volumen A"
               value={volumenA}
-              onChange={(e) => setVolumenA(e.target.value)}
+              onChange={(e) => setVolumenA(handleNumericInput(e.target.value))}
               className="form-control"
             />
           </div>
@@ -69,7 +79,7 @@ export const CalculadoraEstandar = () => {
               type="text"
               placeholder="Agrega el volumen B"
               value={volumenB}
-              onChange={(e) => setVolumenB(e.target.value)}
+              onChange={(e) => setVolumenB(handleNumericInput(e.target.value))}
               className="form-control"
             />
           </div>
@@ -85,7 +95,10 @@ export const CalculadoraEstandar = () => {
       </div>
 
       <div className="text-center mt-3">
-        <button onClick={calcularPromedio} className="btn btn-success">Calcular promedio</button>
+        <button onClick={calcularPromedio} className="btn btn-success">
+          Calcular promedio
+        </button>
+        {error && <div className="text-danger mt-2">{error}</div>}
       </div>
     </div>
   )

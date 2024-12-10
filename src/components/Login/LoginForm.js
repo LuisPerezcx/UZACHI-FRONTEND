@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './LoginForm.css';  
 import logo from '../../assets/Iniciar_sesion.png';
+import { Footer } from '../Footer';
 
 export const LoginForm = () => {
   const [email, setEmail] = useState('');
@@ -11,7 +12,7 @@ export const LoginForm = () => {
   const [errorMessage, setErrorMessage] = useState(''); // Estado para el mensaje de error
 
   const navigate = useNavigate();
-
+  
   const handleLogin = () => {
     const adminUser = {
       email: 'admin',
@@ -19,8 +20,11 @@ export const LoginForm = () => {
       role: 'admin',
     };
 
+    const MAX_EMAIL_LENGTH = 25; // Límite máximo para el email
+    const MAX_PASSWORD_LENGTH = 20; // Límite máximo para la contraseña
+
     switch (true) {
-      case !email || !password:
+      case !email && !password:
         setErrorMessage('Por favor, completa todos los campos.');
         break;
 
@@ -31,12 +35,28 @@ export const LoginForm = () => {
       case !email:
         setErrorMessage('Por favor, completa el campo "Email".');
         break;
+
+      case email.length > MAX_EMAIL_LENGTH:
+        setErrorMessage(`El email no puede tener más de ${MAX_EMAIL_LENGTH} caracteres.`);
+        break;
+
+      case password.length > MAX_PASSWORD_LENGTH:
+        setErrorMessage(`La contraseña no puede tener más de ${MAX_PASSWORD_LENGTH} caracteres.`);
+        break;
+
+      case email !== adminUser.email:
+        setErrorMessage('El email del usuario no existe');
+        break;
+
+      case password !== adminUser.password && email === adminUser.email:
+        setErrorMessage('La contraseña del usuario es incorrecta');
+        break;
   
       case email === adminUser.email && password === adminUser.password:
         setErrorMessage(''); // Limpiar mensaje de error al iniciar sesión correctamente
         navigate('/PrincipalAdmin');
         break;
-  
+
       default:
         setErrorMessage('Por favor, ingresa un usuario válido.');
         break;
@@ -52,7 +72,6 @@ export const LoginForm = () => {
             alt="Logo"
             className="img-login"
           />
-          <h5 style={{ fontWeight: 'bold', color: '#4B4B4B' }}>Iniciar Sesión</h5>
         </div>
         <form>
           <div className="mb-3">
@@ -105,6 +124,6 @@ export const LoginForm = () => {
           )}
         </form>
       </div>
-    </div>
+    </div>    
   );
 };

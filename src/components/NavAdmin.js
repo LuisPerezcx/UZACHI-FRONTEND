@@ -11,14 +11,15 @@ import '../styles/NavAdmin.css'
 
 export const NavAdmin = () => {
 
-  const [showModal, setShowModal] = useState(false);
-  const handleShowModal = () => setShowModal(true);
-  const handleCloseModal = () => setShowModal(false);
-
-  const [showPerfil, setShowPerfil] = useState(false);
-  const mostrarPerfil = () => setShowPerfil(true);
-  const ocultarPerfil = () => setShowPerfil(false);
-
+  const [showAccountModal, setShowAccountModal] = useState(false);
+  const [showChangePasswordModal, setShowChangePasswordModal] = useState(false);
+  
+  const handleShowAccountModal = () => setShowAccountModal(true);
+  const handleCloseAccountModal = () => setShowAccountModal(false);
+  
+  const handleShowChangePasswordModal = () => setShowChangePasswordModal(true);
+  const handleCloseChangePasswordModal = () => setShowChangePasswordModal(false);
+  
   // Datos simulados del usuario
   const user = {
     nombre: "Luis Alberto Hernandez",
@@ -42,9 +43,9 @@ export const NavAdmin = () => {
                 <NavDropdown.Item href="/ClientesFrecuentes" className='dropdown-item'>Clientes frecuentes</NavDropdown.Item>
               </NavDropdown>
 
-              <NavDropdown className='ms-3 no-caret' title={<img src={perfiIcon} style={{width: '40px'}}></img>}>
-                <NavDropdown.Item onClick={mostrarPerfil}  className='dropdown-item'>Mi cuenta</NavDropdown.Item>
-                <NavDropdown.Item onClick={handleShowModal} className='dropdown-item'>Cambiar contraseña</NavDropdown.Item>
+              <NavDropdown className='ms-3 custom-dropdown' title={<img src={perfiIcon} style={{width: '40px'}}></img>}>
+                <NavDropdown.Item onClick={handleShowAccountModal} className='dropdown-item'>Mi cuenta</NavDropdown.Item>
+                <NavDropdown.Item onClick={handleShowChangePasswordModal} className='dropdown-item'>Cambiar contraseña</NavDropdown.Item>
                 <NavDropdown.Item href="/" className='dropdown-item'>Cerrar sesión</NavDropdown.Item>
               </NavDropdown>
 
@@ -52,8 +53,10 @@ export const NavAdmin = () => {
           </Navbar.Collapse>
         </Container>
       </Navbar> 
-      <AccountModal show={showPerfil} handleClose={ocultarPerfil} user={user} />
-      <CambioContraseñaModal showModal={showModal} handleClose={handleCloseModal} />
+      <AccountModal show={showAccountModal} handleClose={handleCloseAccountModal} user={user}/>
+
+      <CambioContraseñaModal showModal={showChangePasswordModal} handleClose={handleCloseChangePasswordModal}/>
+
     </div>
   );
 };
