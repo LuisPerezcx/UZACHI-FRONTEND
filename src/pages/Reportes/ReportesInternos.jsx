@@ -44,7 +44,6 @@ export const ReportesInternos = () => {
     setReportes(nuevosReportes);
   };
 
- 
   // Función para agregar un nuevo reporte
   const agregarReporte = (nombreReporte) => {
     const nuevoReporte = {
