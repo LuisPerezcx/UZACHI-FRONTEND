@@ -110,32 +110,40 @@ export const FormularioReembarque = () => {
                 {/* Columna 2: Folio final */}
                 <div className="col-md-4">
                   <div className="mb-2">
-                    <Form.Control type="text" placeholder=" " />
+                    <Form.Control type="number" placeholder=" " />
                   </div>
                 </div>
               </div>
               <div className="mb-3">
                 <Form.Label htmlFor="volumenAutorizado">Volumen autorizado: <span className="text-danger">*</span></Form.Label>
                 <Form.Control 
-                  type="number"
+                  type="text"
                   name="volumenAutorizado"
                   value={formData.volumenAutorizado}
-                  onChange={handleChange}
-                  max="99999999.99" 
-                  min="0"
-                  required
+                  maxLength={5}
+                  onChange={(e) => {
+                  const value = e.target.value;
+                  // Permitir solo números enteros o decimales
+                  if (/^\d*\.?\d*$/.test(value)) {
+                    handleChange({ target: { name: "volumenAutorizado", value } });
+                  }
+                }}
                 />
               </div>
               <div className="mb-3">
                 <Form.Label htmlFor="foliosAutorizados">Folios autorizados <span className="text-danger">*</span></Form.Label>
                 <Form.Control 
-                  type="number"
+                  type="text"
                   name="foliosAutorizados"
                   value={formData.foliosAutorizados}
-                  onChange={handleChange}
-                  max="99999" 
-                  min="0"
-                  required
+                  maxLength={5}
+                  onChange={(e) => {
+                    const value = e.target.value;
+                    // Permitir solo números enteros o decimales
+                    if (/^\d*\.?\d*$/.test(value)) {
+                      handleChange({ target: { name: "foliosAutorizados", value } });
+                  }
+                }}
                 />
               </div>
               <div className="row">
@@ -144,13 +152,17 @@ export const FormularioReembarque = () => {
                   <div className="mb-3">
                     <Form.Label htmlFor="folioInicial">Folio inicial: <span className="text-danger">*</span></Form.Label>
                     <Form.Control 
-                      type="number"
+                      type="text"
                       name="folioInicial"
                       value={formFolio.folioInicial}
-                      onChange={handleChange}
-                      max="99999"
-                      min="1"
-                      required
+                      maxLength={5}
+                      onChange={(e) => {
+                        const value = e.target.value;
+                        // Permitir solo números enteros o decimales
+                        if (/^\d*\.?\d*$/.test(value)) {
+                          handleChange({ target: { name: "folioInicial", value } });
+                        }
+                      }}
                     />
                   </div>
                 </div>
@@ -160,13 +172,17 @@ export const FormularioReembarque = () => {
                   <div className="mb-3">
                     <Form.Label htmlFor="folioFinal">Folio final: <span className="text-danger">*</span></Form.Label>
                     <Form.Control 
-                      type="number"
+                      type="text"
                       name="folioFinal"
                       value={formFolio.folioFinal}
-                      onChange={handleChange} 
-                      max="99999"
-                      min="1"
-                      required
+                      maxLength={5}
+                      onChange={(e) => {
+                        const value = e.target.value;
+                        // Permitir solo números enteros o decimales
+                        if (/^\d*\.?\d*$/.test(value)) {
+                          handleChange({ target: { name: "folioFinal", value } });
+                        }
+                      }}
                     />
                   </div>
                 </div>
@@ -181,7 +197,6 @@ export const FormularioReembarque = () => {
         </div>
       </div>
     </div>
-    
     </Form>
   );
 };

@@ -159,8 +159,8 @@ const [formData, setFormData] = useState({
               <Form.Control 
                 type="text"
                 name="folioPinus"
-                maxLength={5}
                 value={formData.folioPinus}
+                maxLength={5}
                 onChange={(e) => {
                   const value = e.target.value;
                   // Permitir solo números enteros o decimales
