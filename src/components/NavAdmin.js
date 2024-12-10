@@ -43,7 +43,7 @@ export const NavAdmin = () => {
                 <NavDropdown.Item href="/ClientesFrecuentes" className='dropdown-item'>Clientes frecuentes</NavDropdown.Item>
               </NavDropdown>
 
-              <NavDropdown className='ms-3 custom-dropdown' title={<img src={perfiIcon} style={{width: '40px'}}></img>}>
+              <NavDropdown className='ms-3 no-caret custom-dropdown' title={<img src={perfiIcon} style={{width: '40px'}}></img>}>
                 <NavDropdown.Item onClick={handleShowAccountModal} className='dropdown-item'>Mi cuenta</NavDropdown.Item>
                 <NavDropdown.Item onClick={handleShowChangePasswordModal} className='dropdown-item'>Cambiar contraseña</NavDropdown.Item>
                 <NavDropdown.Item href="/" className='dropdown-item'>Cerrar sesión</NavDropdown.Item>

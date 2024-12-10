@@ -89,7 +89,7 @@ export const PrincipalAdmin = () => {
                 title="Usuario"
                 description="Agrega y administra los usuarios que pueden acceder"
                 buttons={[
-                { label: 'Administrar', link: '/Usuarios' }
+                { label: 'Acceder', link: '/Usuarios' }
                 ]}
             />
 
@@ -98,7 +98,7 @@ export const PrincipalAdmin = () => {
                 title="Informes"
                 description="Administra los informes internos e informes SEMARNAT"
                 buttons={[
-                    { label: 'Administrar', onClick: () => { handleShow(); console.log('Informes clicado'); }}
+                    { label: 'Acceder', onClick: () => { handleShow(); console.log('Informes clicado'); }}
                 ]}
             />
 
@@ -107,15 +107,17 @@ export const PrincipalAdmin = () => {
                 title="Folios"
                 description="Administra y asigna los folios asignado para cada comunidad"
                 buttons={[
-                { label: 'Asignar folios', onClick: handleShowFolios}
+                { label: 'Acceder', onClick: handleShowFolios}
                 ]}
             />
         </div>
       </div>
       <ModalC show={show} onClose={handleClose} content={modalContent} />
       <ModalFolio show={showFoliosModal} onClose={handleCloseFolios} content={modalContentFolio} />
-
+      <div className='mt-5'>
       <Footer></Footer>
+
+      </div>
     </div>
   );
 };

@@ -4,7 +4,7 @@ import Swal from "sweetalert2";
 import { ModalPlantilla } from "../../../components/Modal/ModalPlantilla";
 import { CustomTable } from "../../../components/TablaIconos";
 
-const FormularioCliente = ({ onAdd, editarClientesFrecuentes,formularioForm }) => {
+const FormularioCliente = ({ onAdd, editarClientesFrecuentes,formularioForm, onCancel }) => {
   const [dentroFormularioForm, setDentroFormularioForm] = useState (formularioForm);
 
   const [showModal, setShowModal] = useState(false);
@@ -19,7 +19,7 @@ const FormularioCliente = ({ onAdd, editarClientesFrecuentes,formularioForm }) =
     { header: 'Entidad', accessor: 'entidad' },
   ];
 
-  const [formData, setFormData] = useState({
+  const initialForm = {
     nombre: '',
     domicilioDestinatario: '',
     poblacion: '',
@@ -29,7 +29,9 @@ const FormularioCliente = ({ onAdd, editarClientesFrecuentes,formularioForm }) =
     municipio: '',
     domicilio: '',
     codigoIdentificacion: ''
-  });
+  }
+
+  const [formData, setFormData] = useState(initialForm);
 
   React.useEffect(() => {
     if (editarClientesFrecuentes) {
@@ -101,6 +103,13 @@ const FormularioCliente = ({ onAdd, editarClientesFrecuentes,formularioForm }) =
       />);
     setShowModal(true);
   }
+
+  const handleCancel = () => {
+    setFormData(initialForm); // Limpia el formulario
+    if (onCancel) {
+      onCancel(); // Notifica al componente padre
+    }
+  };
 
   return (
     <div className=" mx-auto mt-5 mb-4 tarjeta-border p-5">
@@ -273,6 +282,17 @@ const FormularioCliente = ({ onAdd, editarClientesFrecuentes,formularioForm }) =
             <button variant="success" type="submit" size="sm">
               {editarClientesFrecuentes ? 'Actualizar' : 'Agregar'}
             </button>
+
+            {editarClientesFrecuentes && (
+            <button
+              style={{backgroundColor: 'red'}}
+              size="sm"
+              onClick={handleCancel}
+              className='ms-5'
+            >
+              Cancelar edicion
+            </button>
+          )}
           </div>
 
         </form>
