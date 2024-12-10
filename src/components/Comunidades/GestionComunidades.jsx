@@ -85,7 +85,7 @@ export const  GestionComunidades = ({onAdd, editarComunidades, onCancel }) => {
   return (
     <div className="container mt-5">
       <div className="mx-auto" style={{ maxWidth: "95%", borderRadius: "12px" }}>
-        <div className="tarjeta-border">
+        <div className="tarjeta-border p-4">
           <h4 className="size-font-title text-center mb-4">Agregar comunidad</h4>
           <form onSubmit={agregarComunidades}>
             {/* Nombre de la comunidad */}
