@@ -16,11 +16,7 @@ export const ReportesSemarnat = () => {
     { id: 1, nombre: "MOVIMIENTO DE MADERA ENE-JUN 2024", comunidad: "Santiago Xiacuí", periodo: "2019 - 2020" },
     { id: 2, nombre: "MOVIMIENTO DE MADERA JUL-DIC 2024", comunidad: "San Juan Bautista", periodo: "2020 - 2021" },
     { id: 3, nombre: "REPORTE DE ACTIVIDADES 2023", comunidad: "Santa María Yolotepec", periodo: "2022 - 2023" },
-    { id: 4, nombre: "INFORME AMBIENTAL", comunidad: "San Pedro Juchatengo", periodo: "2021 - 2022" },
-    { id: 5, nombre: "INVENTARIO DE BOSQUE 2022", comunidad: "San José del Progreso", periodo: "2018 - 2019" },
-    { id: 6, nombre: "MOVIMIENTO DE MADERA ENE-JUN 2023", comunidad: "Santo Domingo Albarradas", periodo: "2020 - 2021" },
-    { id: 7, nombre: "ANÁLISIS DE SUELO", comunidad: "San Agustín Etla", periodo: "2023 - 2024" },
-  ]);
+    ]);
 
   const linksLabel = [
     { url: '/', label: 'Inicio' },

@@ -13,40 +13,61 @@ export const ReportesInternos = () => {
   const handleShow = () => setShow(true);
 
   const enlaces = [
-    { url: '/', etiqueta: 'Inicio' },
-    { url: '/ReportesInternos', etiqueta: 'Informes' }
+    { url: '/', label: 'Inicio' },
+    { url: '/ReportesInternos', label: 'Informes' }
   ];
 
   const columnas = [
-    { etiqueta: 'No.', clave: 'id' },
-    { etiqueta: 'Nombre documento', clave: 'nombre' },
-    { etiqueta: 'Periodo inicio', clave: 'pInicio' },
-    { etiqueta: 'Periodo fin', clave: 'pFin' }
+    { label: 'No.', key: 'id' },
+    { label: 'Nombre documento', key: 'nombre' },
+    { label: 'Periodo inicio', key: 'pInicio' },
+    { label: 'Periodo fin', key: 'pFin' }
   ];
 
   const filtros = [
-    { etiqueta: 'Nombre documento', valor: 'filtroDocumento' },
-    { etiqueta: 'Periodo inicio', valor: 'filtropInicio' }
+    { label: 'Nombre documento', value: 'filtroDocumento' },
+    { label: 'Periodo inicio', value: 'filtropInicio' }
   ];
 
-  const acciones = [
-    {
-      etiqueta: 'Descargar',
-      manejador: (elemento) => console.log('Editar elemento:', elemento),
-    },
-    {
-      etiqueta: 'Eliminar',
-      manejador: (elemento) => console.log('Eliminar elemento:', elemento),
-    }
-  ];
-
-  const datosSimulados = [
+  const [reportes, setReportes] = useState([
     { id: 1, nombre: 'TransporteMadera 21-22', pInicio: '2023-10-23', pFin: '2024-10-23' },
     { id: 2, nombre: 'TransporteMadera 22-23', pInicio: '2022-10-23', pFin: '2023-10-23' },
     { id: 3, nombre: 'TransporteMadera 21-22', pInicio: '2021-10-23', pFin: '2022-10-23' },
     { id: 4, nombre: 'TransporteMadera 21-22', pInicio: '2023-10-23', pFin: '2024-10-23' },
     { id: 5, nombre: 'TransporteMadera 22-23', pInicio: '2022-10-23', pFin: '2023-10-23' },
     { id: 6, nombre: 'TransporteMadera 21-22', pInicio: '2021-10-23', pFin: '2022-10-23' }
+  ]);
+
+  // Función para eliminar un reporte
+  const eliminarReporte = (item) => {
+    const nuevosReportes = reportes.filter((reporte) => reporte.id !== item.id);
+    setReportes(nuevosReportes);
+  };
+
+ 
+  // Función para agregar un nuevo reporte
+  const agregarReporte = (nombreReporte) => {
+    const nuevoReporte = {
+      id: reportes.length + 1,  
+      nombre: nombreReporte,
+      pInicio: "2023-10-23",  // Ejemplo de periodo inicio
+      pFin: "2024-10-23",     // Ejemplo de periodo fin
+    };
+
+    setReportes([...reportes, nuevoReporte]);  // Agregar el nuevo reporte a la lista
+    handleClose(); // Cerrar el modal después de agregar el reporte
+  };
+
+
+  const acciones = [
+    {
+      label: 'Descargar',
+      handler: (item) => console.log('Descargar elemento:', item),
+    },
+    {
+      label: 'Eliminar',
+      handler: eliminarReporte, // Vincula la función eliminarReporte
+    }
   ];
 
   return (
@@ -65,11 +86,15 @@ export const ReportesInternos = () => {
             columns={columnas}
             filters={filtros}
             actions={acciones}
-            data={datosSimulados}
+            data={reportes} 
           />
         </div>
       </div>
-      <GenerarReporteModal show={show} handleClose={handleClose} />
+      <GenerarReporteModal 
+        show={show} 
+        handleClose={handleClose} 
+        agregarReporte={agregarReporte} 
+      />
       <Footer />
     </div>
   );
