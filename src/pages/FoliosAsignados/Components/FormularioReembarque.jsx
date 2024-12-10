@@ -1,7 +1,8 @@
 import React, {useState } from 'react';
 import { Form,} from 'react-bootstrap';
-import { Button } from '../../../components/Boton';
 import Swal from "sweetalert2"; 
+import '../../FoliosAsignados/styles/ValidacionFolio.css'
+
 
 export const FormularioReembarque = () => {
 
@@ -16,6 +17,9 @@ export const FormularioReembarque = () => {
     folioInicial: '',
     folioFinal: '',
   });
+
+  const [tramites, setTramites] = useState([]); // Lista de trámites
+  const [contador, setContador] = useState(1); // Contador de trámites
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -76,45 +80,65 @@ export const FormularioReembarque = () => {
       });
       return;
     }
+    const nuevoTramite = {
+      id: contador,
+      ...formData,
+    };
+    setTramites([...tramites, nuevoTramite]);
+    setContador(contador + 1);
+
+    setFormData({
+      volumenAutorizado: "",
+      foliosAutorizados: "",
+      folioInicial: "",
+      folioFinal: "",
+    });
+    setFormFolios({
+      folioInicial: "",
+      folioFinal: "",
+    });
     Swal.fire({
-      title: "Formulario enviado",
+      title: "Tramite Registrado",
       text: "Los datos son correctos.",
       icon: "success",
       confirmButtonText: "Aceptar",
-      timer: 3000,
+      timer: 5000,
       timerProgressBar: true,
       didOpen: () => {
         Swal.getConfirmButton().style.backgroundColor = 'var(--color-verde)';
       },
     });
-    const seleccionarCliente = () => {
-      console.log("Se clickeo agregar cliente")
-    }
   };
   
   return (
     <Form onSubmit={handleSubmit}>
-    <div className="container mt-4">
+    <div className="container mt-4 d-flex justify-content-center">
       <div className="row">
         {/* Primera columna: Formulario de trámites */}
-        <div className="col-md-4 tarjeta-border">
-          <div className="p-4 mb-3">
+        <div className="col-md-5 tarjeta-border">
+          <div className="p-4">
             <form>
             <div className="row">
                 {/* Columna 1: Folio inicial */}
                 <div className="col-md-8">
                   <div className="mb-2">
-                    <label htmlFor="numeroTramite">Número de trámite:<span className="text-danger">*</span></label>
+                    <label htmlFor="numeroTramite">
+                      Número de trámite:<span className="text-danger">*</span>
+                    </label>
                   </div>
                 </div>
                 {/* Columna 2: Folio final */}
                 <div className="col-md-4">
-                  <div className="mb-2">
-                    <Form.Control type="number" placeholder=" " />
+                  <div className="mb-1">
+                  <Form.Control
+                      type="text"
+                      value={contador}
+                      readOnly
+                    />
                   </div>
                 </div>
               </div>
-              <div className="mb-3">
+              <div className="mb-2">
                 <Form.Label htmlFor="volumenAutorizado">Volumen autorizado: <span className="text-danger">*</span></Form.Label>
                 <Form.Control 
                   type="text"
@@ -130,7 +154,7 @@ export const FormularioReembarque = () => {
                 }}
                 />
               </div>
-              <div className="mb-3">
+              <div className="mb-2">
                 <Form.Label htmlFor="foliosAutorizados">Folios autorizados <span className="text-danger">*</span></Form.Label>
                 <Form.Control 
                   type="text"
@@ -169,7 +193,7 @@ export const FormularioReembarque = () => {
 
                 {/* Columna 2: Folio final */}
                 <div className="col-md-6">
-                  <div className="mb-3">
+                  <div className="mb-2">
                     <Form.Label htmlFor="folioFinal">Folio final: <span className="text-danger">*</span></Form.Label>
                     <Form.Control 
                       type="text"
@@ -188,11 +212,30 @@ export const FormularioReembarque = () => {
                 </div>
               </div>
             </form>
-            <div className="text-center pt-4">
-            <button variant="success" type="submit" size="sm">
+            <div className="text-center pt-2">
+            <button variant="success" type="submit" size="sm" fontWeight="bold">
               {'Agregar'}
             </button>
+          </div>      
           </div>
+        </div>
+        <div className="col-md-6 mt-4" >
+          <h5 className="text-center" style={{color:"#595B5A", fontWeight:"bold"}}>Lista de trámites</h5>
+          <div className="scrollable-container tarjeta-border">
+            {tramites.length === 0 ? ( // Validar si no hay trámites
+              <div className="alert alert-info" role="alert" style={{ textAlign: "center" }}>
+              No hay trámites existentes.
+            </div>
+            ) : (
+              <ul className="list-group">
+                {tramites.map((tramite) => (
+                  <li key={tramite.id} className="list-group-item ">
+                    <strong  style={{color:"#14C3A2"}}> Trámite # {tramite.id}<br /></strong>
+                    Folio autorizado {tramite.foliosAutorizados}, Folio inicial {tramite.folioInicial}, Folio final {tramite.folioFinal}.
+                  </li>
+                ))}
+              </ul>
+            )}
           </div>
         </div>
       </div>
