@@ -2,7 +2,6 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import React, { useState} from "react"; 
 import Swal from "sweetalert2"; 
 import { Form } from "react-bootstrap";
-import "../styles/ValidacionFolio.css"
 import { ListaTramites } from "./ListaTramites";
 
 export const FormularioRemision = () => {
@@ -20,19 +19,6 @@ const [formData, setFormData] = useState({
   folioFinalQuercus: '',
   folioFinalHojosa: '',
 
-  primario: '',
-  secundario: '',
-  medidaEsp: '',
-
-  volumenRollo: '',
-  volumenAserrado:'',
-
-  piesTabla: '',
-  medidas: '',
-  clasificacion: '',
-  precio: '',
-  volumen: '',
-  producto:''
   });
 
   const [tramites, setTramites] = useState([]);
@@ -55,11 +41,9 @@ const [formData, setFormData] = useState({
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (!formData.fechaTramite || !formData.folioQuercus || !formData.folioPinus || !formData.folioHojosa || !formData.clasificacion ||
+    if (!formData.fechaTramite || !formData.folioQuercus || !formData.folioPinus || !formData.folioHojosa ||
         !formData.folioFinalHojosa || !formData.folioFinalPinus || !formData.folioFinalQuercus ||
-        !formData.folioInicialHojosa || !formData.folioInicialPinus || !formData.folioInicialQuercus ||
-        !formData.medidaEsp || !formData.medidas || !formData.piesTabla || !formData.precio || !formData.primario ||
-        !formData.producto || !formData.secundario || !formData.volumen || !formData.volumenAserrado || !formData.volumenRollo
+        !formData.folioInicialHojosa || !formData.folioInicialPinus || !formData.folioInicialQuercus
     ) {
       Swal.fire({
         title: 'Datos incompletos',
@@ -136,22 +120,7 @@ const [formData, setFormData] = useState({
       folioInicialHojosa: '',
       folioFinalPinus: '',
       folioFinalQuercus: '',
-      folioFinalHojosa: '',
-
-      primario: '',
-      secundario: '',
-      medidaEsp: '',
-
-      volumenRollo: '',
-      volumenAserrado:'',
-
-      piesTabla: '',
-      medidas: '',
-      clasificacion: '',
-      precio: '',
-      volumen: '',
-      producto:''
-      
+      folioFinalHojosa: '',  
     });
 
     Swal.fire({
@@ -174,7 +143,7 @@ const [formData, setFormData] = useState({
     <div className="container tarjeta-border mt-4">
       <div className="row p-4">
         {/* Columna 1: Anualidad */}
-        <div className="col-md-4">
+        <div className="col-md-6">
           <form>
           <div className="mb-4 d-flex">
             <Form.Label htmlFor="fechaTramite" style={{ width: "350px" }}>A n u a l i d a d</Form.Label>
@@ -186,43 +155,55 @@ const [formData, setFormData] = useState({
             />
           </div>
             <div className="mb-3 d-flex">
-              <Form.Label htmlFor="pinus" style={{ width: "150px" }}>Pinus: <span className="text-danger"> *</span></Form.Label>
+              <Form.Label htmlFor="folioPinus" style={{ width: "150px" }}>Pinus: <span className="text-danger"> *</span></Form.Label>
               <Form.Control 
-                type="number"
+                type="text"
                 name="folioPinus"
                 value={formData.folioPinus}
-                onChange={handleChange} 
-                max="99999" 
-                min="1"
+                onChange={(e) => {
+                  const value = e.target.value;
+                  // Permitir solo números enteros o decimales
+                  if (/^\d*\.?\d*$/.test(value)) {
+                    handleChange({ target: { name: "folioPinus", value } });
+                  }
+                }}
               />
             </div>
             <div className="mb-3 d-flex">
-              <Form.Label htmlFor="quercus" style={{ width: "150px" }}>Quercus: <span className="text-danger">*</span></Form.Label>
+              <Form.Label htmlFor="FolioQuercus" style={{ width: "150px" }}>Quercus: <span className="text-danger">*</span></Form.Label>
               <Form.Control
-                type="number"
+                type="text"
                 name="folioQuercus"
                 value={formData.folioQuercus}
-                onChange={handleChange} 
-                max="99999" 
-                min="1"
+                onChange={(e) => {
+                  const value = e.target.value;
+                  // Permitir solo números enteros o decimales
+                  if (/^\d*\.?\d*$/.test(value)) {
+                    handleChange({ target: { name: "folioQuercus", value } });
+                  }
+                }}
               />
             </div>
             <div className="mb-3 d-flex">
-              <Form.Label htmlFor="hojosa" style={{ width: "150px" }}>Hojosa: <span className="text-danger">*</span></Form.Label>
+              <Form.Label htmlFor="folioHojosa" style={{ width: "150px" }}>Hojosa: <span className="text-danger">*</span></Form.Label>
               <Form.Control 
-                type="number"
+                type="text"
                 name="folioHojosa"
                 value={formData.folioHojosa}
-                onChange={handleChange}
-                max="99999" 
-                min="1"
+                onChange={(e) => {
+                  const value = e.target.value;
+                  // Permitir solo números enteros o decimales
+                  if (/^\d*\.?\d*$/.test(value)) {
+                    handleChange({ target: { name: "folioHojosa", value } });
+                  }
+                }}
               />
             </div>
           </form>
         </div>
 
         {/* Columna 2: Trámite 1 Pinus */}
-        <div className="col-md-4">
+        <div className="col-md-6">
           <h5 className="text-center" style={{color:"#595B5A", fontWeight:"bold"}}>Trámites</h5>
           <form>
           <div className="d-flex">
@@ -232,7 +213,7 @@ const [formData, setFormData] = useState({
 
             </div>
             <div className="mb-3 d-flex">
-              <Form.Label htmlFor="pinusFolio" style={{ width: "150px"}}>Pinus:<span className="text-danger">*</span></Form.Label>
+              <Form.Label htmlFor="folioInicialPinus" style={{ width: "150px"}}>Pinus:<span className="text-danger">*</span></Form.Label>
               <Form.Control 
                 type="number"
                 className="me-2"
@@ -301,210 +282,16 @@ const [formData, setFormData] = useState({
               />
             </div>
           </form>
+          
         </div>
-
-        {/* Columna 3: Entrada Remisiones */}
-        <div className="col-md-4">
-          <h5 className=" text-center" style={{color:"#595B5A", fontWeight:"bold"}}>Entrada Remisiones V(m²)</h5>
-          <form>
-            <div className="mt-4 mb-3 d-flex">
-              <Form.Label htmlFor="primario" className="form-label me-2" style={{ width: "150px" }}>Primario:<span className="text-danger">*</span></Form.Label>
-              <Form.Control 
-                type="number"
-                name="primario"
-                placeholder="m²"
-                value={formData.primario}
-                onChange={handleChange}
-                max="99999999.99" 
-                min="0"
-                step="0.01" 
-              />
-            </div>
-            <div className="mb-3 d-flex">
-              <Form.Label htmlFor="secundario" className="form-label me-2" style={{ width: "150px" }}>Secundario:<span className="text-danger">*</span></Form.Label>
-              <Form.Control 
-                type="number"
-                name="secundario"
-                placeholder="m²"
-                value={formData.secundario}
-                onChange={handleChange}
-                max="99999999.99" 
-                min="0"
-                step="0.01" 
-                />            
-              </div>
-            <div className="mb-3 d-flex">
-              <Form.Label htmlFor="medidaEsp" className="form-label me-2" style={{ width: "250px" }}>Medida especial:<span className="text-danger">*</span></Form.Label>
-              <Form.Control 
-                type="number"
-                name="medidaEsp"
-                placeholder="m²"
-                value={formData.medidaEsp}
-                onChange={handleChange}
-                max="99999999.99" 
-                min="0"
-                step="0.01" 
-              />            
-              </div>
-          </form>
-        </div>
-      </div>
-    </div>
-      {/* Formulario Remision */}
-    <div className="tarjeta-border container mt-4">
-      <div className="row">
-        {/* FORMULARIO DE ROLLO VOLUMEN  */}
-        <div className=" col-md-3 me-2 ms-4">
-          <div className=" p-4">
-            <h5 className="card-title text-center mb-4" style={{color:"#595B5A", fontWeight:"bold"}}>Volumen</h5>
-            <form>
-              <div className="mb-2">
-                <Form.Label htmlFor="volumenRollo">Madera Rollo <span className="text-danger">*</span></Form.Label>
-                <Form.Control
-                  type="number"
-                  name="volumenRollo"
-                  placeholder="m³"
-                  value={formData.volumenRollo}
-                  onChange={handleChange}
-                  max="99999999.99" 
-                  min="0"
-                  step="0.01"
-                />
-              </div>
-              <div className="mb-3">
-                <Form.Label htmlFor="volumenAserrado">Madera aserrado<span className="text-danger">*</span></Form.Label>
-                <Form.Control 
-                type="number"
-                name="volumenAserrado"
-                placeholder="m³"
-                value={formData.volumenAserrado}
-                onChange={handleChange}
-                max="99999999.99" 
-                min="0"
-                step="0.01"
-              />              
-              </div>
-            </form>
-          </div>
-        </div>
-
-        {/* Segunda columna: Formulario PRODUCCION */}
-        <div className=" col-md-8 ms-4">
-          <div className=" p-4 mb-3">
-            <h5 className="card-title text-center mb-4" style={{color:"#595B5A", fontWeight:"bold"}}>Producción</h5>
-            <form>
-              <div className="row">
-                {/* Columna 1 */}
-                <div className="col-md-4">
-                  <div className="mb-2">
-                    <Form.Label htmlFor="producto" className="form-label">Producto<span className="text-danger">*</span></Form.Label>
-                    <Form.Select
-                      name="producto"
-                      value={formData.producto}
-                      onChange={handleChange}
-                      required
-                    >
-                    <option disabled value="">
-                      Seleccione opción
-                    </option>
-                      <option value="tabla">Tabla</option>
-                      <option value="tablon">Tablón</option>
-                      <option value="rollo">Rollo</option>
-                    </Form.Select>
-                  </div>
-                  <div className="mb-3">
-                    <Form.Label htmlFor="piesTabla" className="form-label">Pies tabla<span className="text-danger">*</span></Form.Label>
-                    <Form.Control 
-                      type="number"
-                      name="piesTabla"
-                      value={formData.piesTabla}
-                      onChange={handleChange} 
-                      max="99999999.99" 
-                      min="0"
-                      step="0.01"
-                    />
-                  </div>
-                </div>
-
-                {/* Columna 2 */}
-                <div className="col-md-4">
-                  <div className="mb-2">
-                    <Form.Label htmlFor="medidas" className="form-label">Medidas<span className="text-danger">*</span></Form.Label>
-                    <Form.Select
-                      name="medidas"
-                      value={formData.medidas}
-                      onChange={handleChange}
-                      required
-                    >
-                    <option disabled value="">
-                      Seleccione opción
-                    </option>
-                      <option>16 x 25</option>
-                      <option>18 x 50</option>
-                      <option>20 x 75</option>
-                    </Form.Select>
-                  </div>
-                  <div className="mb-3">
-                    <Form.Label htmlFor="volumen" className="form-label">Volumen<span className="text-danger">*</span></Form.Label>
-                    <Form.Control 
-                      type="number"
-                      placeholder="m³"
-                      name="volumen"
-                      value={formData.volumen}
-                      onChange={handleChange}
-                      max="99999999.99" 
-                      min="1"
-                      step="0.01"
-                    />
-                  </div>
-                </div>
-
-                {/* Columna 3 */}
-                <div className="col-md-4">
-                  <div className="mb-2">
-                    <Form.Label htmlFor="clasificacion" className="form-label">Clasificación<span className="text-danger">*</span></Form.Label>
-                    <Form.Select
-                      className="form-select"
-                      name="clasificacion"
-                      value={formData.clasificacion}
-                      onChange={handleChange}
-                      required
-                    >
-                    <option disabled value="">
-                      Seleccione opción
-                    </option>
-                      <option>Primera</option>
-                      <option>Secundaria</option>
-                      <option>Tercera</option>
-                    </Form.Select>
-                  </div>
-                  <div className="mb-3">
-                    <Form.Label htmlFor="precio" className="form-label">Precio<span className="text-danger">*</span></Form.Label>
-                    <Form.Control 
-                      type="number"
-                      name="precio"
-                      value={formData.precio}
-                      onChange={handleChange}
-                      max="99999999.99" 
-                      min="0"
-                      step="0.01"
-                    />
-                  </div>
-                </div>
-              </div>
-            </form>
-            <div className="text-center pt-4">
+        <div className="text-center pt-4">
             <button variant="success" type="submit" size="sm">
               {'Agregar'}
             </button>
           </div>
-          </div>
-        </div>
-
       </div>
     </div>
-    <ListaTramites tramites={tramites} />
-
+      <ListaTramites tramites={tramites} />
     </div>
     </Form>
     
