@@ -88,7 +88,7 @@ const ListadoClientes = () => {
       columns={columns}
       onEdit={editarCliente}
       onDelete={eliminarCliente}
-      searchPlaceholder="Buscar nombre..."
+      searchPlaceholder="Buscar cliente..."
       edicion={editarClientesFrecuentes}
       />
  
