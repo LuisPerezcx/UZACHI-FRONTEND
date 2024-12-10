@@ -2,42 +2,57 @@ import React, { forwardRef, useState , useImperativeHandle} from 'react'
 import { SelectCombo } from '../../../components/SelectCombo'
 
 
-
-export const InformacionDocumento = ({datos, actualizarDatos}) => {
-
+//todo:
+export const InformacionDocumento = forwardRef((props, ref) => {
     const [fechaExpedicion, setFechaExpedicion] = useState('');
     const [fechaVencimiento, setFechaVencimiento] = useState('');
     const [horaExpedicion, setHoraExpedicion] = useState('');
     const [horaVencimiento, setHoraVencimiento] = useState('');
-    const [error, setError] = useState(""); 
-
-
+    const [errors, setErrors] = useState({}); // Para manejar los errores por campo
+  
     const opcionesTipoDocumento = [
-        { value: 'seleccion', label: 'Selecciona un tipo de documento' },
-        { value: 'remision', label: 'Remisión' },
-        { value: 'reembarque', label: 'Reembarque' }
-      ];
-
+      { value: 'seleccion', label: 'Selecciona un tipo de documento' },
+      { value: 'remision', label: 'Remisión' },
+      { value: 'reembarque', label: 'Reembarque' },
+    ];
+  
     const opcionesTipoProducto = [
-        { value: 'seleccion', label: 'Selecciona el tipo de producto' },
-        { value: 'aserrada', label: 'Aserrada' },
-        { value: 'rollo', label: 'Rollo' }
+      { value: 'seleccion', label: 'Selecciona el tipo de producto' },
+      { value: 'aserrada', label: 'Aserrada' },
+      { value: 'rollo', label: 'Rollo' },
     ];
-
+  
     const opcionesTipoGenero = [
-        { value: 'seleccion', label: 'Selecciona el tipo de género' },
-        { value: 'pino', label: 'Pino' },
-        { value: 'encino', label: 'Encino' }
+      { value: 'seleccion', label: 'Selecciona el tipo de género' },
+      { value: 'pino', label: 'Pino' },
+      { value: 'encino', label: 'Encino' },
     ];
+  
+    // Función de validación
+    const validate = () => {
+        const newErrors = {};
 
-    const handleChange = () => {
-        actualizarDatos({
-          fechaExpedicion,
-          horaExpedicion,
-          fechaVencimiento,
-          horaVencimiento,
-        });
-      };
+        if (!fechaExpedicion) newErrors.fechaExpedicion = 'La fecha de expedición es obligatoria.';
+        if (!fechaVencimiento) newErrors.fechaVencimiento = 'La fecha de vencimiento es obligatoria.';
+        if (!horaExpedicion) newErrors.horaExpedicion = 'La hora de expedición es obligatoria.';
+        if (!horaVencimiento) newErrors.horaVencimiento = 'La hora de vencimiento es obligatoria.';
+    
+        setErrors(newErrors);
+    
+        // Devuelve true si no hay errores
+        return Object.keys(newErrors).length === 0;
+    };
+  
+    // Exponiendo la función de validación al padre
+    useImperativeHandle(ref, () => ({
+      validate,
+      getValues: () => ({
+        fechaExpedicion,
+        fechaVencimiento,
+        horaExpedicion,
+        horaVencimiento,
+      }),
+    }));
 
   return (
     <div className='tarjeta-border px-5'> 
@@ -86,11 +101,9 @@ export const InformacionDocumento = ({datos, actualizarDatos}) => {
                 class="form-control" 
                 id="calendarInput"
                 value={fechaExpedicion}
-                onChange={(e) => {
-                setFechaExpedicion(e.target.value);
-                handleChange();
-                }}
+                onChange={(e) => setFechaExpedicion(e.target.value)}
                 />
+                {errors.fechaExpedicion && <span className='text-danger'>{errors.fechaExpedicion}</span>}
             </div>
             <div className='col-md-6 col-lg-3  col-xxl-2 mt-3'>
                 <label className='form-label'>Hora expedición:</label>
@@ -99,11 +112,7 @@ export const InformacionDocumento = ({datos, actualizarDatos}) => {
                 <input type="time" 
                 class="form-control" 
                 id="timeInput"  
-                value={horaExpedicion}
-                onChange={(e) => {
-                setHoraExpedicion(e.target.value);
-                handleChange();
-                }}/>
+                value={horaExpedicion}/>
             </div>
             <div className='col-md-6 col-lg-3  col-xxl-2 mt-3'>
                 <label className='form-label'>Fecha vencimiento:</label>
@@ -112,11 +121,7 @@ export const InformacionDocumento = ({datos, actualizarDatos}) => {
                 <input type="date" 
                 class="form-control" 
                 id="calendarInput"
-                value={fechaVencimiento}
-                onChange={(e) => {
-                  setFechaVencimiento(e.target.value);
-                  handleChange();
-                }}/>
+                value={fechaVencimiento}/>
             </div>
             <div className='col-md-6 col-lg-3  col-xxl-2 mt-3'>
                 <label className='form-label'>Hora vencimiento:</label>
@@ -125,13 +130,9 @@ export const InformacionDocumento = ({datos, actualizarDatos}) => {
                 <input type="time" 
                 class="form-control" 
                 id="timeInput" 
-                value={horaVencimiento}
-                onChange={(e) => {
-                  setHoraVencimiento(e.target.value);
-                  handleChange();
-                }}/>
+                value={horaVencimiento}/>
             </div>
         </div>
     </div>
-  )
-}
+  );
+});
