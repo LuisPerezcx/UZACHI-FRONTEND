@@ -93,7 +93,7 @@ export const FormularioTransporte = ({ onAdd, editingTransport, formularioForm, 
   };
 
   return (
-    <div className="mx-auto tarjeta-border mt-5 mx-5 mb-5 p-5">
+    <div className="container mx-auto tarjeta-border mt-5 mx-5 mb-5 p-5">
       {/* Título del formulario */}
       <div className="row">
         <div className="col-12 text-center mb-4">
