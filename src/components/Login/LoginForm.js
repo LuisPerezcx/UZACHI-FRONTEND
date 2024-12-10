@@ -20,7 +20,7 @@ export const LoginForm = () => {
       role: 'admin',
     };
 
-    const MAX_EMAIL_LENGTH = 50; // Límite máximo para el email
+    const MAX_EMAIL_LENGTH = 25; // Límite máximo para el email
     const MAX_PASSWORD_LENGTH = 20; // Límite máximo para la contraseña
 
     switch (true) {

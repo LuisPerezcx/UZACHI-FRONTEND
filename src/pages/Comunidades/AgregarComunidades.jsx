@@ -10,7 +10,38 @@ import { AlertComponent } from '../../components/AlertComponent'
 
 export const AgregarComunidades = () => {
       // Datos simulados
-  const [listaComunidades, setListaComunidades] = useState([]);
+  const [listaComunidades, setListaComunidades] = useState([
+    {
+      nombreComunidad: 'San Juan del Bosque',
+      municipio: 'Villa Alta',
+      entidad: 'Oaxaca',
+      codigoPostal: '68250',
+      rfc: 'SJB123456T12',
+      rfn: '1234567890',
+      domicilioFiscal: 'Calle Principal S/N, San Juan del Bosque, Oaxaca'
+  },
+  
+  {
+      nombreComunidad: 'San Pedro Yosotato',
+      municipio: 'Villa Alta',
+      entidad: 'Oaxaca',
+      codigoPostal: '68255',
+      rfc: 'SPY987654T34',
+      rfn: '0987654321',
+      domicilioFiscal: 'Avenida 5 de Mayo No. 10, San Pedro Yosotato, Oaxaca'
+  },
+  
+  {
+      nombreComunidad: 'San Miguel de Quetzaltepec',
+      municipio: 'Villa Alta',
+      entidad: 'Oaxaca',
+      codigoPostal: '68260',
+      rfc: 'SMQ876543T56',
+      rfn: '1122334455',
+      domicilioFiscal: 'Calle Reforma No. 20, San Miguel de Quetzaltepec, Oaxaca'
+  }
+  
+  ]);
   const [editarComunidades, setEditarComunidades] = useState(null)
 
   // Configuración de columnas
@@ -60,6 +91,10 @@ export const AgregarComunidades = () => {
     { url: '/AgregarComunidades', label: 'Gesition de comunidades' }
   ];
 
+  const cancelarEdicion = () => {
+    setEditarComunidades(null); // Salir del modo de edición
+  };
+
   return ( 
     <>
         <NavAdmin></NavAdmin>
@@ -78,6 +113,7 @@ export const AgregarComunidades = () => {
         <GestionComunidades
           onAdd={guardarDatosComunidades}
           editarComunidades={editarComunidades}
+          onCancel={cancelarEdicion}
         />
         <Footer/>
     </>

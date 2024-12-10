@@ -5,6 +5,8 @@
   justify-content: space-between; /* Espaciado entre elementos */
   align-items: center;
   background-color: #ffffff;
+  min-height: 70vh; /* Asegura que ocupe toda la altura del viewport */
+
 }
 /* Tarjeta del formulario */
 .card-login {

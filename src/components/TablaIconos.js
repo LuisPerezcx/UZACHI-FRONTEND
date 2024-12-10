@@ -33,7 +33,10 @@ export function CustomTable({ data, columns, onEdit, onDelete, searchPlaceholder
 
     return (
         <div className="container p-3">
-            <div className="d-flex justify-content-start mb-3">
+            <div className="d-flex justify-content-center mb-3">
+                <span className="input-group-text">
+                    <i className="bi bi-search"></i>
+                </span>
                 <input
                     type="text"
                     maxLength={16}

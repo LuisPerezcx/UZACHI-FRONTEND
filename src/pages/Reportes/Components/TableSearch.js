@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import InputWithClearButton from '../../../components/InputWithClearButton/InputWithClearButton';
 
-export const TableSearch = ({ endpoint, columns, filters, actions, data }) => {
+export const TableSearch = ({ endpoint, columns, filters, actions, data, onDelete }) => {
     const [tableData, setTableData] = useState([]);
     const [filteredData, setFilteredData] = useState([]);
     const [search, setSearch] = useState('');
@@ -25,11 +25,14 @@ export const TableSearch = ({ endpoint, columns, filters, actions, data }) => {
 
         if (search !== '') {
             // Filtrar según el filtro seleccionado
-            if (filter === 'filtropInicio') {
-                filtered = filtered.filter(item => item.pInicio.includes(search));
-            } else if (filter === 'filtroComunidad') {
-                filtered = filtered.filter(item => item.nombre.toLowerCase().includes(search.toLowerCase()));
-            }
+            filtered = filtered.filter(item => {
+                // Usar el filtro para elegir qué campo comparar
+                const field = item[filter];
+                if (typeof field === 'string') {
+                    return field.toLowerCase().includes(search.toLowerCase());
+                }
+                return false;
+            });
         }
 
         setFilteredData(filtered);
@@ -44,10 +47,20 @@ export const TableSearch = ({ endpoint, columns, filters, actions, data }) => {
         }, 2000);
     }, [data]);
 
+    const handleDelete = (item) => {
+        if (onDelete) {
+            onDelete(item);  // Llamamos la función onDelete para eliminar el elemento
+        }
+    };
+
     return (
         <div className="container-fluid mx-auto">
             <div className="rounded mb-3 d-flex justify-content-center w-50 mx-auto">
-                <InputWithClearButton onInputChange={handleInputChange} value={search} filter={filter} />
+                <InputWithClearButton 
+                    onInputChange={handleInputChange} 
+                    value={search} 
+                    filter={filter} 
+                />
                 {filters && (
                     <div className="dropdown">
                         <button
@@ -118,7 +131,13 @@ export const TableSearch = ({ endpoint, columns, filters, actions, data }) => {
                                                     {actions.map((action, actionIndex) => (
                                                         <li key={actionIndex}>
                                                             <button
-                                                                onClick={() => action.handler(item)}
+                                                                onClick={() => {
+                                                                    if (action.label === 'Eliminar') {
+                                                                        handleDelete(item);  // Si la acción es "Eliminar", ejecutamos la función
+                                                                    } else {
+                                                                        action.handler(item);
+                                                                    }
+                                                                }}
                                                                 className="dropdown-item"
                                                             >
                                                                 {action.label}
