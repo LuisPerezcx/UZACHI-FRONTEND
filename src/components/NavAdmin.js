@@ -4,6 +4,7 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import perfiIcon from '../assets/icon-perfil.png'
+import perfiIconModal from '../assets/icon-add-user.png'
 import AccountModal from './MiPerfil/ProfileModal ';
 import { CambioContraseñaModal } from './Usuario/CambiarContraseña';
 import '../styles/NavAdmin.css'
@@ -21,9 +22,9 @@ export const NavAdmin = () => {
   
   // Datos simulados del usuario
   const user = {
-    name: "Luis Alberto Hernandez",
-    email: "WichoHernandez@gmail.com",
-    profileImage: perfiIcon,
+    nombre: "Luis Alberto Hernandez",
+    correo: "WichoHernandez@gmail.com",
+    profileImage: perfiIconModal,
   };
 
   
@@ -36,13 +37,13 @@ export const NavAdmin = () => {
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="ms-auto">
 
-              <NavDropdown className='size-font-subtitle ' title={<span style={{ color: 'white' }}>Catalogos</span>}>
+              <NavDropdown className='size-font-subtitle ' title={<span style={{ color: 'white' }}>Catálogos</span>}>
                 <NavDropdown.Item href="/GestionTransporte" className='dropdown-item'>Transporte</NavDropdown.Item>
                 <NavDropdown.Item href="/AgregarComunidades" className='dropdown-item'>Comunidades</NavDropdown.Item>
                 <NavDropdown.Item href="/ClientesFrecuentes" className='dropdown-item'>Clientes frecuentes</NavDropdown.Item>
               </NavDropdown>
 
-              <NavDropdown className='ms-3 custom-dropdown' title={<img src={perfiIcon} style={{width: '40px'}}></img>}>
+              <NavDropdown className='ms-3 no-caret custom-dropdown' title={<img src={perfiIcon} style={{width: '40px'}}></img>}>
                 <NavDropdown.Item onClick={handleShowAccountModal} className='dropdown-item'>Mi cuenta</NavDropdown.Item>
                 <NavDropdown.Item onClick={handleShowChangePasswordModal} className='dropdown-item'>Cambiar contraseña</NavDropdown.Item>
                 <NavDropdown.Item href="/" className='dropdown-item'>Cerrar sesión</NavDropdown.Item>

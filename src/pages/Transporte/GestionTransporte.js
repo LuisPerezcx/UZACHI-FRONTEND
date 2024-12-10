@@ -3,13 +3,32 @@ import { FormularioTransporte } from '../Formulario/Components/FormularioTranspo
 import NavAdmin from '../../components/NavAdmin';
 import { Footer } from '../../components/Footer';
 import { CustomTable } from '../../components/TablaIconos';
-import Swal from "sweetalert2"; 
 import { BreadCrumb } from '../../components/BreadCrumb';
 import { AlertComponent } from '../../components/AlertComponent';
 
 
 export const GestionTransporte = () => {
-  const [datosTransporte, setDatosTransporte] = useState([]);
+  const [datosTransporte, setDatosTransporte] = useState([
+    {
+      medio: 'Transporte terrestre',
+      marca: 'Toyota',
+      modelo: 'Hilux 2022',
+      propietario: 'Luis David Pérez Cruz',
+      capacidad: '1',
+      placas: 'ABC-1234',
+      tipo: 'Torton'
+    },
+    {
+      medio: 'Transporte terrestre',
+      marca: 'Kenworth',
+      modelo: 'T800',
+      propietario: 'Transporte Forestal López',
+      capacidad: '20',
+      placas: 'XF-3456-TL',
+      tipo: 'Trocero'
+    }
+    
+  ]);
   const [editingTransport, setEditingTransport] = useState(null); // Transporte en edición
 
   const columns = [
@@ -17,6 +36,8 @@ export const GestionTransporte = () => {
     { header: 'Tipo', accessor: 'tipo' },
     { header: 'Capacidad', accessor: 'capacidad' },
     { header: 'Placas', accessor: 'placas' },
+    { header: 'Marca', accessor: 'marca' },
+    { header: 'Modelo', accessor: 'modelo' },
   ];
 
   const handleEdit = (item) => {
@@ -40,7 +61,7 @@ export const GestionTransporte = () => {
     });
   };
 
-  const handleSave = (newTransport) => {
+  const guardarTransporte = (newTransport) => {
     if (editingTransport) {
       // Actualizar transporte existente
       const updatedData = datosTransporte.map((data) =>
@@ -56,15 +77,20 @@ export const GestionTransporte = () => {
 
   const links = [
     { url: '/PrincipalAdmin', label: 'Inicio' },
-    { url: '/GestionTransporte', label: 'Transportes' }
+    { url: '/GestionTransporte', label: 'Gestion de transportes' }
   ];
+
+  const cancelarEdicion = () => {
+    setEditingTransport(null); // Salir del modo de edición
+  };
+  
 
   return (
     <div>
       <NavAdmin />
       <BreadCrumb links={links} />
       <div className="container my-5">
-        <h2 className="size-font-title text-center mb-4">Transportes</h2>
+        <h2 className="size-font-title text-center mb-4">Gestion de transportes</h2>
       </div>
       <CustomTable
         data={datosTransporte}
@@ -76,9 +102,10 @@ export const GestionTransporte = () => {
       />
       <div className='px-5'>
         <FormularioTransporte
-          onAdd={handleSave}
+          onAdd={guardarTransporte}
           editingTransport={editingTransport}
           formularioForm={false}
+          onCancel={cancelarEdicion}
         />
       </div>
       <Footer />

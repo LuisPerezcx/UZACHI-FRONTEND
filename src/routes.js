@@ -4,7 +4,7 @@ import { PrincipalAdmin } from './pages/PrincipalAdmin';
 import { ReportesInternos } from './pages/Reportes/ReportesInternos';
 import { ReportesSemarnat } from './pages/Reportes/ReportesSemarnat';
 import { Usuario } from './pages/Usuarios/Usuarios';
-import { Formulario3 } from './pages/Formulario/Components/Formulario3';
+import { Formulario3, InformacionSubproductosYSaldos } from './pages/Formulario/Components/InformacionSubproductosYSaldos';
 import { Formulario } from './pages/Formulario/Formulario';
 import { AgregarComunidades } from './pages/Comunidades/AgregarComunidades';
 import {GestionTransporte} from '../src/pages/Transporte/GestionTransporte'
@@ -26,7 +26,7 @@ const AppRoutes = () => {
       <Route path='/ClientesFrecuentes' element={<ClientesFrecuentes/>} />
       <Route path='/Usuarios' element={<Usuario/>} />
       <Route path='/Formulario' element={<Formulario/>} />
-      <Route path='/Formulario3' element={<Formulario3/>} />
+      <Route path='/Formulario3' element={<InformacionSubproductosYSaldos/>} />
       <Route path='/AgregarComunidades' element={<AgregarComunidades/>} />
       <Route path='/FolioReembarque' element={<FolioReembarque/>} />
       <Route path='/FolioRemision' element={<FolioRemision/>} />

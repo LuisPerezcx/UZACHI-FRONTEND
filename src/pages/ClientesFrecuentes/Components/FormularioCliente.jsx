@@ -1,10 +1,25 @@
 import React, { useState } from "react";
 import { Button } from '../../../components/Boton';
 import Swal from "sweetalert2"; 
+import { ModalPlantilla } from "../../../components/Modal/ModalPlantilla";
+import { CustomTable } from "../../../components/TablaIconos";
 
-const FormularioCliente = ({ onAdd, editarClientesFrecuentes,formularioForm }) => {
+const FormularioCliente = ({ onAdd, editarClientesFrecuentes,formularioForm, onCancel }) => {
   const [dentroFormularioForm, setDentroFormularioForm] = useState (formularioForm);
-  const [formData, setFormData] = useState({
+
+  const [showModal, setShowModal] = useState(false);
+  const [modalContent, setModalContent] = useState(null);
+  const [tituloModal, setTitutloModal] = useState(null);
+
+  const [clientes, setClientes] = useState([]);
+  const columns = [
+    { header: 'Nombre', accessor: 'nombre' },
+    { header: 'Domicilio destinatario', accessor: 'domicilioDestinatario' },
+    { header: 'Poblacion', accessor: 'poblacion' },
+    { header: 'Entidad', accessor: 'entidad' },
+  ];
+
+  const initialForm = {
     nombre: '',
     domicilioDestinatario: '',
     poblacion: '',
@@ -14,7 +29,9 @@ const FormularioCliente = ({ onAdd, editarClientesFrecuentes,formularioForm }) =
     municipio: '',
     domicilio: '',
     codigoIdentificacion: ''
-  });
+  }
+
+  const [formData, setFormData] = useState(initialForm);
 
   React.useEffect(() => {
     if (editarClientesFrecuentes) {
@@ -79,23 +96,35 @@ const FormularioCliente = ({ onAdd, editarClientesFrecuentes,formularioForm }) =
   };
 
   const seleccionarCliente = () => {
-    console.log("Se clickeo agregar cliente")
+    setTitutloModal('Selecciona un cliente');
+    setModalContent(<CustomTable
+      data={clientes}
+      columns={columns}
+      />);
+    setShowModal(true);
   }
+
+  const handleCancel = () => {
+    setFormData(initialForm); // Limpia el formulario
+    if (onCancel) {
+      onCancel(); // Notifica al componente padre
+    }
+  };
 
   return (
     <div className=" mx-auto mt-5 mb-4 tarjeta-border p-5">
         <h5 className="text-center mb-3 size-font-title">Agregar nuevo cliente</h5>
-        <form onSubmit={handleSubmit}>
-              {/* Agregar datos de carro registrado */}
-          {dentroFormularioForm && (
-            <div className="row mb-4">
-              <div className="col-12 text-end mt-2">
-                <span className="me-2 form-label">Agregar datos de un cliente frecuente</span>
-                <Button label="Seleccionar cliente" onClick={seleccionarCliente} className="btn-success" />
-              </div>
-            </div>
-          )}
 
+        {/* Agregar datos de cliente registrado */}
+        {dentroFormularioForm && (
+          <div className="row mb-4">
+            <div className="col-12 text-end mt-2">
+              <span className="me-2 form-label">Agregar datos de un cliente frecuente</span>
+              <Button label="Seleccionar cliente" onClick={seleccionarCliente} className="btn-success" />
+            </div>
+          </div>
+        )}
+        <form onSubmit={handleSubmit}>
           <div className="row"> 
             {/* Columna 1 */}
             <div className="col-md-6">
@@ -109,7 +138,7 @@ const FormularioCliente = ({ onAdd, editarClientesFrecuentes,formularioForm }) =
                   className="form-control"
                   name="nombre"
                   value={formData.nombre}
-                  placeholder="Ingrese el nombre"
+                  placeholder="Ingrese el nombre completo"
                   onChange={handleChange}
                 />
               </div>
@@ -127,7 +156,7 @@ const FormularioCliente = ({ onAdd, editarClientesFrecuentes,formularioForm }) =
                   className="form-control"
                   name="domicilioDestinatario"
                   value={formData.domicilioDestinatario}
-                  placeholder="Ingrese el domicilio"
+                  placeholder="Ingrese el domicilio destinatario"
                   onChange={handleChange}
                 />
               </div>
@@ -164,18 +193,20 @@ const FormularioCliente = ({ onAdd, editarClientesFrecuentes,formularioForm }) =
                   Codigo de identificacion:<span className="text-danger">*</span>
                 </label>
                 <input
-                  type="number"
+                  type="text"
                   maxLength={20}
                   className="form-control"
                   name="codigoIdentificacion"
                   value={formData.codigoIdentificacion}
-                  placeholder="Ingrese la entidad"
-                  onKeyPress={(e) => {
-                    if (!/^\d$/.test(e.key) || e.target.value.length >= 20) {
-                      e.preventDefault();
+                  placeholder="Ingrese el codgio de identificacion"
+                  onChange={(e) => {
+                    const value = e.target.value;
+                
+                    // Permitir solo números
+                    if (/^\d*$/.test(value)) {
+                      handleChange({ target: { name: "codigoIdentificacion", value } });
                     }
                   }}
-                  onChange={handleChange}
                 />
               </div>
             </div>
@@ -251,9 +282,26 @@ const FormularioCliente = ({ onAdd, editarClientesFrecuentes,formularioForm }) =
             <button variant="success" type="submit" size="sm">
               {editarClientesFrecuentes ? 'Actualizar' : 'Agregar'}
             </button>
+
+            {editarClientesFrecuentes && (
+            <button
+              style={{backgroundColor: 'red'}}
+              size="sm"
+              onClick={handleCancel}
+              className='ms-5'
+            >
+              Cancelar edicion
+            </button>
+          )}
           </div>
 
         </form>
+        <ModalPlantilla
+          show={showModal}
+          onClose={() =>  setShowModal(false)}
+          content={modalContent}
+          title={tituloModal}
+        />
     </div>
   );
 };

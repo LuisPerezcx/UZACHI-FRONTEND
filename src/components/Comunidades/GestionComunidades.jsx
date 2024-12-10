@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import Swal from "sweetalert2"; 
 
-export const GestionComunidades = ({onAdd, editarComunidades}) => {
+export const  GestionComunidades = ({onAdd, editarComunidades, onCancel }) => {
 
-  const [formData,setFormData] = useState ({
+  const initialFormState = {
     nombreComunidad: '',
     municipio: '',
     entidad: '',
@@ -11,7 +11,9 @@ export const GestionComunidades = ({onAdd, editarComunidades}) => {
     rfc:'',
     rfn:'',
     domicilioFiscal:''
-  });
+  };
+
+  const [formData,setFormData] = useState (initialFormState);
 
   React.useEffect(() => {
     if (editarComunidades) {
@@ -72,7 +74,12 @@ export const GestionComunidades = ({onAdd, editarComunidades}) => {
     });
   };
 
-
+  const handleCancel = () => {
+    setFormData(initialFormState); // Limpia el formulario
+    if (onCancel) {
+      onCancel(); // Notifica al componente padre
+    }
+  };
 
 
   return (
@@ -102,16 +109,19 @@ export const GestionComunidades = ({onAdd, editarComunidades}) => {
                   Codiogo postal: <span className="text-danger">*</span>
                 </label>
                 <input
-                  type="number"
+                  type="text"
+                  maxLength={5}
                   className="form-control"
                   name="codigoPostal"
                   value = {formData.codigoPostal}
-                  onKeyPress={(e) => {
-                    if (!/^\d$/.test(e.key) || e.target.value.length >= 5) {
-                      e.preventDefault();
+                  onChange={(e) => {
+                    const value = e.target.value;
+                
+                    // Permitir solo números
+                    if (/^\d*$/.test(value)) {
+                      cambios({ target: { name: "codigoPostal", value } });
                     }
                   }}
-                  onChange={cambios}
                 />
               </div>
               <div className="col-sm-6 col-md-3">
@@ -190,6 +200,17 @@ export const GestionComunidades = ({onAdd, editarComunidades}) => {
               <button variant="success" type="submit" size="sm">
                 {editarComunidades ? 'Actualizar' : 'Agregar'}
               </button>
+
+              {editarComunidades && (
+            <button
+              style={{backgroundColor: 'red'}}
+              size="sm"
+              onClick={handleCancel}
+              className='ms-5'
+            >
+              Cancelar edicion
+            </button>
+          )}
             </div>
           </form>
         </div>

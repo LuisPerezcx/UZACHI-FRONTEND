@@ -20,7 +20,7 @@ export const LoginForm = () => {
       role: 'admin',
     };
 
-    const MAX_EMAIL_LENGTH = 50; // Límite máximo para el email
+    const MAX_EMAIL_LENGTH = 25; // Límite máximo para el email
     const MAX_PASSWORD_LENGTH = 20; // Límite máximo para la contraseña
 
     switch (true) {
@@ -72,7 +72,6 @@ export const LoginForm = () => {
             alt="Logo"
             className="img-login"
           />
-          <h5 style={{ fontWeight: 'bold', color: '#4B4B4B' }}>Iniciar Sesión</h5>
         </div>
         <form>
           <div className="mb-3">

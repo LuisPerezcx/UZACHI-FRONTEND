@@ -9,13 +9,13 @@ import { BreadCrumb } from "../../components/BreadCrumb";
 const ClientesFrecuentes = () => {
   const links = [
     { url: '/PrincipalAdmin', label: 'Inicio' },
-    {url: '/ClientesFrecuentes', label: 'Clientes frecuentes'}
+    {url: '/ClientesFrecuentes', label: 'Gestion de clientes frecuentes'}
   ];
   return (
     <div>
       <NavAdmin></NavAdmin>
       <BreadCrumb links={links} />
-      <h2 className="text-center mb-4 size-font-title">Clientes frecuentes</h2>
+      <h2 className="text-center mb-4 size-font-title">Gestion de clientes frecuentes</h2>
       <ListadoClientes />
 
       <Footer></Footer>

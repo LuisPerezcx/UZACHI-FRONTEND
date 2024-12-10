@@ -7,7 +7,30 @@ import { AlertComponent } from "../../../components/AlertComponent";
 
 const ListadoClientes = () => {
   // Estados estaticos por ahora 
-  const [clientes, setClientes] = useState([]);
+  const [clientes, setClientes] = useState([
+    {
+      nombre: 'Luis David Perez Cruz',
+      domicilioDestinatario: 'Ixtlan de Juarez',
+      poblacion: 'Yahuiche',
+      entidad: 'Oaxaca',
+      curp: 'HJKL020304LKJA2',
+      rfn: '125dfsdgf',
+      municipio: 'Ixtlan de Juarez',
+      domicilio: 'Independencia SN',
+      codigoIdentificacion: '12',
+    },
+    {
+      nombre: 'Maria Lopez Garcia',
+      domicilioDestinatario: 'San Pedro Mixtepec',
+      poblacion: 'Mixtepec',
+      entidad: 'Oaxaca',
+      curp: 'MLG010203HZSGN1',
+      rfn: '786asdhqw',
+      municipio: 'San Pedro Mixtepec',
+      domicilio: 'Centro SN',
+      codigoIdentificacion: '34',
+    },
+  ]);
   const [editarClientesFrecuentes,setEditarClientesFrecuentes] = useState(null);
 
 
@@ -39,7 +62,7 @@ const ListadoClientes = () => {
   const editarCliente = (item) => {
     setEditarClientesFrecuentes(item);
   };
-
+  
   const guardarDatos = (nuevoCliente) => {
     if (editarClientesFrecuentes) {
       // Actualizar transporte existente
@@ -52,6 +75,10 @@ const ListadoClientes = () => {
       // Agregar nuevo transporte
       setClientes([...clientes, { ...nuevoCliente, id: Date.now() }]);
     }
+  };
+
+  const cancelarEdicion = () => {
+    setEditarClientesFrecuentes(null); // Salir del modo de edición
   };
 
   return (
@@ -70,6 +97,7 @@ const ListadoClientes = () => {
         onAdd={guardarDatos}
         editarClientesFrecuentes={editarClientesFrecuentes}
         formularioForm={false}
+        onCancel={cancelarEdicion}
       />
     </div>
       
