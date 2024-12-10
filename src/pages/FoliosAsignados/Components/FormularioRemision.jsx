@@ -68,9 +68,9 @@ const [formData, setFormData] = useState({
 
     {/*Validacion de folio inicial sea menor que el final */}
     if (
-      (formFolio.folioInicialPinus) >= (formFolio.folioFinalPinus) ||
-      (formFolio.folioInicialHojosa) >= (formFolio.folioFinalHojosa) ||
-      (formFolio.folioInicialQuercus) >= (formFolio.folioFinalQuercus)
+      (formFolio.folioInicialPinus) > (formFolio.folioFinalPinus) ||
+      (formFolio.folioInicialHojosa) > (formFolio.folioFinalHojosa) ||
+      (formFolio.folioInicialQuercus) > (formFolio.folioFinalQuercus)
     ) {
       Swal.fire({
         title: 'Error en los folios',
@@ -161,9 +161,20 @@ const [formData, setFormData] = useState({
         <div className="col-md-6">
           <form>
           <div className="mb-4 d-flex">
-            <Form.Label htmlFor="fechaTramite" style={{ width: "350px" }}>A n u a l i d a d</Form.Label>
+          <Form.Label htmlFor="fechaTramite" style={{ width: "530px", alignItems:"flex-start"}}>Total de folios</Form.Label>
+            <Form.Control
+              type="number"
+              className="me-4"
+              style={{height:"40px"}}
+              name="fechaTramite"
+              value={formData.fechaTramite}
+              onChange={handleChange}
+            />
+
+            <Form.Label className="ms-2" htmlFor="fechaTramite" style={{ width: "350px"}}>Anualidad</Form.Label>
             <Form.Control
               type="date"
+              style={{height:"40px"}}
               name="fechaTramite"
               value={formData.fechaTramite}
               onChange={handleChange}
@@ -179,7 +190,7 @@ const [formData, setFormData] = useState({
                 onChange={(e) => {
                   const value = e.target.value;
                   // Permitir solo números enteros o decimales
-                  if (/^\d*\.?\d*$/.test(value)) {
+                  if (/^\d*$/.test(value)) {
                     handleChange({ target: { name: "folioPinus", value } });
                   }
                 }}
@@ -195,7 +206,7 @@ const [formData, setFormData] = useState({
                 onChange={(e) => {
                 const value = e.target.value;
                   // Permitir solo números enteros o decimales
-                  if (/^\d*\.?\d*$/.test(value)) {
+                  if (/^\d*$/.test(value)) {
                     handleChange({ target: { name: "folioQuercus", value } });
                 }
                 }}
@@ -211,7 +222,7 @@ const [formData, setFormData] = useState({
                 onChange={(e) => {
                   const value = e.target.value;
                   // Permitir solo números enteros o decimales
-                  if (/^\d*\.?\d*$/.test(value)) {
+                  if (/^\d*$/.test(value)) {
                     handleChange({ target: { name: "folioHojosa", value } });
                   }
                 }}
@@ -242,7 +253,7 @@ const [formData, setFormData] = useState({
                 onChange={(e) => {
                   const value = e.target.value;
                   // Permitir solo números enteros o decimales
-                  if (/^\d*\.?\d*$/.test(value)) {
+                  if (/^\d*$/.test(value)) {
                     handleChange({ target: { name: "folioInicialPinus", value } });
                   }
                 }}
@@ -257,7 +268,7 @@ const [formData, setFormData] = useState({
                 onChange={(e) => {
                   const value = e.target.value;
                   // Permitir solo números enteros o decimales
-                  if (/^\d*\.?\d*$/.test(value)) {
+                  if (/^\d*$/.test(value)) {
                     handleChange({ target: { name: "folioFinalPinus", value } });
                   }
                 }}
@@ -275,7 +286,7 @@ const [formData, setFormData] = useState({
                 onChange={(e) => {
                   const value = e.target.value;
                   // Permitir solo números enteros o decimales
-                  if (/^\d*\.?\d*$/.test(value)) {
+                  if (/^\d*$/.test(value)) {
                     handleChange({ target: { name: "folioInicialQuercus", value } });
                   }
                 }}
@@ -290,7 +301,7 @@ const [formData, setFormData] = useState({
                 onChange={(e) => {
                   const value = e.target.value;
                   // Permitir solo números enteros o decimales
-                  if (/^\d*\.?\d*$/.test(value)) {
+                  if (/^\d*$/.test(value)) {
                     handleChange({ target: { name: "folioFinalQuercus", value } });
                   }
                 }}
@@ -308,7 +319,7 @@ const [formData, setFormData] = useState({
                 onChange={(e) => {
                   const value = e.target.value;
                   // Permitir solo números enteros o decimales
-                  if (/^\d*\.?\d*$/.test(value)) {
+                  if (/^\d*$/.test(value)) {
                     handleChange({ target: { name: "folioInicialHojosa", value } });
                   }
                 }}
@@ -323,7 +334,7 @@ const [formData, setFormData] = useState({
                 onChange={(e) => {
                   const value = e.target.value;
                   // Permitir solo números enteros o decimales
-                  if (/^\d*\.?\d*$/.test(value)) {
+                  if (/^\d*$/.test(value)) {
                     handleChange({ target: { name: "folioFinalHojosa", value } });
                   }
                 }}

@@ -48,7 +48,7 @@ export const FormularioReembarque = () => {
 
     {/*Validación del número de Folio inicial sea menor 
       al número de Folio final*/}
-    if ((formFolio.folioInicial) >= (formFolio.folioFinal)) {
+    if ((formFolio.folioInicial) > (formFolio.folioFinal)) {
       Swal.fire({
         title: 'Error en los folios',
         text: 'El folio inicial debe ser menor que el folio final.',
@@ -145,6 +145,7 @@ export const FormularioReembarque = () => {
                   name="volumenAutorizado"
                   value={formData.volumenAutorizado}
                   maxLength={5}
+                  max={1}
                   onChange={(e) => {
                   const value = e.target.value;
                   // Permitir solo números enteros o decimales
@@ -161,10 +162,11 @@ export const FormularioReembarque = () => {
                   name="foliosAutorizados"
                   value={formData.foliosAutorizados}
                   maxLength={5}
+                  max={1}
                   onChange={(e) => {
                     const value = e.target.value;
                     // Permitir solo números enteros o decimales
-                    if (/^\d*\.?\d*$/.test(value)) {
+                    if (/^\d*$/.test(value)) {
                       handleChange({ target: { name: "foliosAutorizados", value } });
                   }
                 }}
@@ -183,7 +185,7 @@ export const FormularioReembarque = () => {
                       onChange={(e) => {
                         const value = e.target.value;
                         // Permitir solo números enteros o decimales
-                        if (/^\d*\.?\d*$/.test(value)) {
+                        if (/^\d*$/.test(value)) {
                           handleChange({ target: { name: "folioInicial", value } });
                         }
                       }}
@@ -203,7 +205,7 @@ export const FormularioReembarque = () => {
                       onChange={(e) => {
                         const value = e.target.value;
                         // Permitir solo números enteros o decimales
-                        if (/^\d*\.?\d*$/.test(value)) {
+                        if (/^\d*$/.test(value)) {
                           handleChange({ target: { name: "folioFinal", value } });
                         }
                       }}
@@ -231,7 +233,7 @@ export const FormularioReembarque = () => {
                 {tramites.map((tramite) => (
                   <li key={tramite.id} className="list-group-item ">
                     <strong  style={{color:"#14C3A2"}}> Trámite # {tramite.id}<br /></strong>
-                    Folio autorizado {tramite.foliosAutorizados}, Folio inicial {tramite.folioInicial}, Folio final {tramite.folioFinal}.
+                    Volumen autoriazado {tramite.volumenAutorizado} Folio autorizado {tramite.foliosAutorizados}, <br></br>Folio inicial {tramite.folioInicial}, Folio final {tramite.folioFinal}.
                   </li>
                 ))}
               </ul>
