@@ -39,6 +39,7 @@ export const InformacionSubproductosYSaldos = () => {
     }
     setShowModal(true);
   };
+  
   const handleCalculation = (resultado) => {
     setCantidadAmpara(resultado.toString());
   };

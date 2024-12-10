@@ -9,7 +9,6 @@ export const InformacionDocumento = ({datos, actualizarDatos}) => {
     const [fechaVencimiento, setFechaVencimiento] = useState('');
     const [horaExpedicion, setHoraExpedicion] = useState('');
     const [horaVencimiento, setHoraVencimiento] = useState('');
-    const [error, setError] = useState(""); 
 
 
     const opcionesTipoDocumento = [
@@ -30,12 +29,14 @@ export const InformacionDocumento = ({datos, actualizarDatos}) => {
         { value: 'encino', label: 'Encino' }
     ];
 
-    const handleChange = () => {
+    const handleChange = (e) => {
+        const selectedValue = e.target.value;
         actualizarDatos({
           fechaExpedicion,
           horaExpedicion,
           fechaVencimiento,
           horaVencimiento,
+          tipoDocumento: selectedValue
         });
       };
 
