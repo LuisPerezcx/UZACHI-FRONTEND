@@ -3,8 +3,6 @@ import { Footer } from '../../components/Footer';
 import NavAdmin from '../../components/NavAdmin';
 import { TableSearch } from './Components/TableSearch';
 import { GenerarReporteModal } from './Components/ModalGenerarReporte';
-
-
 import excel from '../../assets/excel.png';
 
 import { Modal, Container, Row, Col, Table, Button, InputGroup, FormControl, Dropdown, DropdownButton, Pagination } from 'react-bootstrap';
