@@ -6,7 +6,13 @@ import { ListaTramites } from "./ListaTramites";
 
 export const FormularioRemision = () => {
   
+  const getTodayDate = () => {
+    const today = new Date();
+    return today.toISOString().split('T')[0]; // Formato YYYY-MM-DD
+  };
+
 const [formData, setFormData] = useState({
+  fechaTramite: getTodayDate(), // Fecha actual al cargar el componente
   fechaTramite: '', 
   folioPinus: '',
   folioQuercus: '',
@@ -109,8 +115,7 @@ const [formData, setFormData] = useState({
     setTramites([...tramites, {...formData,fecha: formData.fechaTramite} ]);
     // Limpiar formulario
     setFormData({
-      fechaTramite: '', // Limpiar la fecha
-
+      fechaTramite: getTodayDate(), // Reestablece la fecha actual después de enviar el formulario
       folioPinus: '',
       folioQuercus: '',
       folioHojosa: '',
@@ -122,9 +127,19 @@ const [formData, setFormData] = useState({
       folioFinalQuercus: '',
       folioFinalHojosa: '',  
     });
+    setFormFolios(
+      {
+        folioInicialPinus: '',
+        folioInicialQuercus: '',
+        folioInicialHojosa: '',
+        folioFinalPinus: '',
+        folioFinalQuercus: '',
+        folioFinalHojosa: '', 
+      }
+    )
 
     Swal.fire({
-      title: "Formulario enviado",
+      title: "Tramite Agregado",
       text: "Los datos son correctos.",
       icon: "success",
       confirmButtonText: "Aceptar",
