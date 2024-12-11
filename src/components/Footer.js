@@ -3,8 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './Footer.css'; 
 import { Container, Row, Col } from 'react-bootstrap';
 import facebookIcon from '../assets/facebook (1).png';
-import instagramIcon from '../assets/instagram.png';
-import whatsappIcon from '../assets/whatsapp.jpeg';
+import logoUzachi from '../assets/logoUzachi.png';
 import logo from '../assets/logo.jpeg';
 
 export const Footer = () => {
@@ -34,14 +33,11 @@ export const Footer = () => {
           <Col md="3" className="text-center">
             <h6 className="footer-title">REDES SOCIALES</h6>
             <div className="social-icons">
-              <a href="https://www.facebook.com" className="mx-2">
+              <a href="https://www.facebook.com/people/Uzachi/100057245297951/" target='_blank' rel="noopener noreferrer" className="mx-2">
                 <img src={facebookIcon} alt="Facebook" style={{ width: '30px' }} />
               </a>
-              <a href="https://www.instagram.com" className="mx-2">
-                <img src={instagramIcon} alt="Instagram" style={{ width: '30px' }} />
-              </a>
-              <a href="https://wa.me/9515392008" className="mx-2">
-                <img src={whatsappIcon} alt="WhatsApp" style={{ width: '30px' }} />
+              <a href="http://uzachi.org/" target='_blank' rel="noopener noreferrer" className="mx-2">
+                <img src={logoUzachi} alt="Instagram" style={{ width: '35px' }} />
               </a>
             </div>
           </Col>

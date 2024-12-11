@@ -117,6 +117,7 @@ export const FormularioTransporte = ({ onAdd, editingTransport, formularioForm, 
       data={carros}
       columns={columns}
       onRowClick={onSelectTransporte}
+      showActions={false}
       />);
     setShowModal(true);
   }

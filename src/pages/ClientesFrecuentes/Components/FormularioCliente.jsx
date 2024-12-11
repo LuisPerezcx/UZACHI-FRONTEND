@@ -123,6 +123,7 @@ const FormularioCliente = ({ onAdd, editarClientesFrecuentes,formularioForm, onC
       data={clientes}
       columns={columns}
       onRowClick={onSelectCliente}
+      showActions={false}
       />);
     setShowModal(true);
   }
