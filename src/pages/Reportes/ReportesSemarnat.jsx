@@ -45,7 +45,7 @@ export const ReportesSemarnat = () => {
     },
     {
       label: 'Eliminar',
-      handler: (item) => handleDelete(item),  // Llama a la función de eliminación
+      handler: (item) => handleDelete(item), 
     }
   ];
 

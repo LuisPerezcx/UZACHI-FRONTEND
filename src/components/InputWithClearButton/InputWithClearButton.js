@@ -13,7 +13,7 @@ export const InputWithClearButton = ({ onInputChange, value, filter }) => {
         const value = e.target.value;
         
         // Validación según el filtro
-        if (filter === 'periodo') {
+        if (filter === 'periodo' || filter ===  'pInicio'  ) {
             // Permitir solo 4 dígitos numéricos
             if (/^\d{0,4}$/.test(value)) {
                 setInputValue(value);
@@ -43,7 +43,11 @@ export const InputWithClearButton = ({ onInputChange, value, filter }) => {
     };
 
     // Determinamos el texto del placeholder según el filtro
-    const placeholderText = filter === 'periodo' ? 'periodo' : filter === 'comunidad' ? 'comunidad' : 'tipo de informe';
+    const placeholderText = filter === 'periodo' ? 'periodo' 
+                            : filter === 'comunidad' ? 'comunidad' 
+                            : filter === 'documento' ? 'nombre' 
+                            : filter === 'pInicio' ? 'año inicio' 
+                            : 'tipo de informe';
 
     return (
         <div className="input-group mb-3">
