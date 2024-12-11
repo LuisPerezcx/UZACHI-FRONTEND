@@ -18,8 +18,13 @@ export const FormularioReembarque = () => {
     folioFinal: '',
   });
 
-  const [tramites, setTramites] = useState([]); // Lista de trámites
-  const [contador, setContador] = useState(1); // Contador de trámites
+  const [tramites, setTramites] = useState([
+    { id: 1, volumenAutorizado: "10", foliosAutorizados: "100", folioInicial: "1", folioFinal: "100" },
+    { id: 2, volumenAutorizado: "15", foliosAutorizados: "150", folioInicial: "101", folioFinal: "250" },
+    { id: 3, volumenAutorizado: "20", foliosAutorizados: "200", folioInicial: "251", folioFinal: "450" },
+  ]); // Lista de trámites con valores predeterminados
+
+  const [contador, setContador] = useState(4); // Contador de trámites
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -48,7 +53,7 @@ export const FormularioReembarque = () => {
 
     {/*Validación del número de Folio inicial sea menor 
       al número de Folio final*/}
-    if ((formFolio.folioInicial) >= (formFolio.folioFinal)) {
+    if ((formFolio.folioInicial) > (formFolio.folioFinal)) {
       Swal.fire({
         title: 'Error en los folios',
         text: 'El folio inicial debe ser menor que el folio final.',
@@ -145,6 +150,7 @@ export const FormularioReembarque = () => {
                   name="volumenAutorizado"
                   value={formData.volumenAutorizado}
                   maxLength={5}
+                  max={1}
                   onChange={(e) => {
                   const value = e.target.value;
                   // Permitir solo números enteros o decimales
@@ -161,10 +167,11 @@ export const FormularioReembarque = () => {
                   name="foliosAutorizados"
                   value={formData.foliosAutorizados}
                   maxLength={5}
+                  max={1}
                   onChange={(e) => {
                     const value = e.target.value;
                     // Permitir solo números enteros o decimales
-                    if (/^\d*\.?\d*$/.test(value)) {
+                    if (/^\d*$/.test(value)) {
                       handleChange({ target: { name: "foliosAutorizados", value } });
                   }
                 }}
@@ -183,7 +190,7 @@ export const FormularioReembarque = () => {
                       onChange={(e) => {
                         const value = e.target.value;
                         // Permitir solo números enteros o decimales
-                        if (/^\d*\.?\d*$/.test(value)) {
+                        if (/^\d*$/.test(value)) {
                           handleChange({ target: { name: "folioInicial", value } });
                         }
                       }}
@@ -203,7 +210,7 @@ export const FormularioReembarque = () => {
                       onChange={(e) => {
                         const value = e.target.value;
                         // Permitir solo números enteros o decimales
-                        if (/^\d*\.?\d*$/.test(value)) {
+                        if (/^\d*$/.test(value)) {
                           handleChange({ target: { name: "folioFinal", value } });
                         }
                       }}
@@ -231,7 +238,8 @@ export const FormularioReembarque = () => {
                 {tramites.map((tramite) => (
                   <li key={tramite.id} className="list-group-item ">
                     <strong  style={{color:"#14C3A2"}}> Trámite # {tramite.id}<br /></strong>
-                    Folio autorizado {tramite.foliosAutorizados}, Folio inicial {tramite.folioInicial}, Folio final {tramite.folioFinal}.
+                    Volumen autorizado = <b>{tramite.volumenAutorizado}</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    Folio autorizado = <b>{tramite.foliosAutorizados}</b> <br></br>
+                    Folio inicial = <b>{tramite.folioInicial}</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Folio final = <b>{tramite.folioFinal}</b>
                   </li>
                 ))}
               </ul>
