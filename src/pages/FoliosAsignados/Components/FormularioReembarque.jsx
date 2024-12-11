@@ -103,7 +103,7 @@ export const FormularioReembarque = () => {
       folioFinal: "",
     });
     Swal.fire({
-      title: "Tramite Registrado",
+      title: "Tramite registrado",
       text: "Los datos son correctos.",
       icon: "success",
       confirmButtonText: "Aceptar",

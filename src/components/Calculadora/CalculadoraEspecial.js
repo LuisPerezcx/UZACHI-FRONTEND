@@ -98,6 +98,8 @@ export const CalculadoraEspecial = ({onCalculate}) => {
         onCalculate(volumen.toFixed(2))
 
     };
+
+
     
     return (
         <div className="container border rounded p-4" style={{ maxWidth: '400px' }}>

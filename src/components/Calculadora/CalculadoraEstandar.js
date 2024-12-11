@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { showModal,useState } from 'react';
 import Swal from 'sweetalert2';
 
 export const CalculadoraEstandar = ({onCalculate}) => {
@@ -6,7 +6,6 @@ export const CalculadoraEstandar = ({onCalculate}) => {
     const [ladoB, setLadoB] = useState([]);
     const [volumenA, setVolumenA] = useState('');
     const [volumenB, setVolumenB] = useState('');
-
 
     const handleNumericInput = (value) => {
       // Permite solo números, puntos decimales, y evita múltiples puntos
@@ -25,9 +24,6 @@ export const CalculadoraEstandar = ({onCalculate}) => {
       return sanitizedValue;
   };
 
-    
-
-  
     const agregarVolumenA = () => {
       const parsedVolumenA = parseFloat(volumenA);
       if (!isNaN(volumenA) && volumenA.trim() !== '' && parsedVolumenA !== 0) {
@@ -43,10 +39,9 @@ export const CalculadoraEstandar = ({onCalculate}) => {
           timerProgressBar: true,
           didOpen: () => {
             const confirmButton = Swal.getConfirmButton();
-            confirmButton.style.backgroundColor = 'var(--color-verde)'; // Color verde
+            confirmButton.style.backgroundColor = 'var(--color-verde)';
           }
         }); 
-        //setError('El valor del lado "A" no puede ser 0 o nulo');
       }
     };
   
@@ -65,10 +60,9 @@ export const CalculadoraEstandar = ({onCalculate}) => {
           timerProgressBar: true,
           didOpen: () => {
             const confirmButton = Swal.getConfirmButton();
-            confirmButton.style.backgroundColor = 'var(--color-verde)'; // Color verde
+            confirmButton.style.backgroundColor = 'var(--color-verde)';
           }
         }); 
-        //setError('El valor del lado "B" no puede ser 0 o nulo');      
       }
     };
   
@@ -86,7 +80,6 @@ export const CalculadoraEstandar = ({onCalculate}) => {
             confirmButton.style.backgroundColor = 'var(--color-verde)'; // Color verde
           }
         });   
-        //setError('Ambos lados deben tener al menos 5 elementos para realizar el cálculo.');
           return;
       }
   
@@ -103,16 +96,32 @@ export const CalculadoraEstandar = ({onCalculate}) => {
             confirmButton.style.backgroundColor = 'var(--color-verde)'; // Color verde
           }
         });   
-        //setError('Ambos lados deben tener la misma cantidad de datos.');
-          return;
+        return;
       }
   
       const sumaA = ladoA.reduce((acc, val) => acc + val, 0);
       const sumaB = ladoB.reduce((acc, val) => acc + val, 0);
       const resultado = (sumaA + sumaB) / 2;
-      
-      onCalculate(resultado);
-  };
+
+      Swal.fire({
+        title: 'CALCULO REALIZADO',
+        text: 'El calculo se realizo de forma correcta',
+        icon: 'success',
+        confirmButtonText: 'Aceptar',
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: () => {
+          const confirmButton = Swal.getConfirmButton();
+          confirmButton.style.backgroundColor = 'var(--color-verde)';
+        }
+      }).then(() => {
+        // Reinicia los datos de Lado A
+        setLadoA([]); 
+        // Reinicia los datos de Lado B
+        setLadoB([]);
+      });
+    onCalculate(resultado);
+};
 
   const eliminarElemento = (lado, index) => {
     if (lado === 'A') {
@@ -127,11 +136,11 @@ export const CalculadoraEstandar = ({onCalculate}) => {
       <div className="row">
         {/* Lado A */}
         <div className="col-md-6 text-center">
-          <h6>Lado A del vehículo</h6>
+        <h6>Lado A del vehículo <hr/>({ladoA.length} elementos)</h6>
           <div className="mb-2">
             <input
               type="text"
-              placeholder="Agrega el volumen A"
+              placeholder="Ingresa Volumen A"
               value={volumenA}
               onChange={(e) => setVolumenA(handleNumericInput(e.target.value))}
               className="form-control"
@@ -149,9 +158,7 @@ export const CalculadoraEstandar = ({onCalculate}) => {
                       className="btn btn-danger btn-sm"
                       onClick={() => eliminarElemento('A', index)}
                       style={{ fontSize: '0.75rem' }}
-                    >
-                      Eliminar
-                    </button>
+                    > Eliminar </button>
                   </div>
                 ))}
               </div>
@@ -173,8 +180,8 @@ export const CalculadoraEstandar = ({onCalculate}) => {
 
         {/* Lado B */}
         <div className="col-md-6 text-center">
-          <h6>Lado B del vehículo</h6>
-          <div className="mb-2">
+        <h6>Lado B del vehículo <hr/>({ladoB.length} elementos)</h6>          
+        <div className="mb-2">
             <input
               type="text"
               placeholder="Agrega el volumen B"

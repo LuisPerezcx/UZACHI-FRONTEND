@@ -21,120 +21,41 @@ export const LoginForm = () => {
       rol: 'admin',
     };
 
-    // Límite máximo para el usuario
     const MAX_TAM_USUARIO = 25;
-    // Límite máximo para la contraseña
     const MAX_TAM_CONTRASENA = 20;
+
     switch (true) {
       case !usuario && !contrasena:
-        Swal.fire({
-          title: 'Error en los campos ingresados',
-          text: 'Los campos de contraseña y usuario no pueden estar bacios',
-          icon: 'error',
-          confirmButtonText: 'Aceptar',
-          timer: 3000,
-          timerProgressBar: true,
-          didOpen: () => {
-            const confirmButton = Swal.getConfirmButton();
-            confirmButton.style.backgroundColor = 'var(--color-verde)'; // Color verde
-          }
-        });        
+        setErrorMessage('Los campos de contraseña y usuario no pueden estar vacios');      
         break;
 
       case !contrasena:
-        Swal.fire({
-          title: 'Error al ingresar la contraseña',
-          text: 'El campo de contraseña no puede estar bacio',
-          icon: 'error',
-          confirmButtonText: 'Aceptar',
-          timer: 3000,
-          timerProgressBar: true,
-          didOpen: () => {
-            const confirmButton = Swal.getConfirmButton();
-            confirmButton.style.backgroundColor = 'var(--color-verde)'; // Color verde
-          }
-        });
+        setErrorMessage('El campo de contraseña no puede estar vacio');
         break;
 
       case !usuario:
-        Swal.fire({
-          title: 'Error al ingresar el Usuario',
-          text: 'El campo de usuario no puede estar bacio',
-          icon: 'error',
-          confirmButtonText: 'Aceptar',
-          timer: 3000,
-          timerProgressBar: true,
-          didOpen: () => {
-            const confirmButton = Swal.getConfirmButton();
-            confirmButton.style.backgroundColor = 'var(--color-verde)'; // Color verde
-          }
-        });
+        setErrorMessage('El campo de usuario no puede estar vacio');
         break;
 
       case usuario.length > MAX_TAM_USUARIO:
-        Swal.fire({
-          title: 'Error de validacion',
-          text: 'El usuario supero el limite de 25 caracteres',
-          icon: 'error',
-          confirmButtonText: 'Aceptar',
-          timer: 3000,
-          timerProgressBar: true,
-          didOpen: () => {
-            const confirmButton = Swal.getConfirmButton();
-            confirmButton.style.backgroundColor = 'var(--color-verde)'; // Color verde
-          }
-        });
-        //setErrorMessage(`El Usuario no puede tener más de ${MAX_EMAIL_LENGTH} caracteres.`);
+        setErrorMessage('El usuario supero el limite de 25 caracteres');
         break;
 
       case contrasena.length > MAX_TAM_CONTRASENA:
-        Swal.fire({
-          title: 'Error de validacion',
-          text: 'La contraseña supero el limite de 25 caracteres',
-          icon: 'error',
-          confirmButtonText: 'Aceptar',
-          timer: 3000,
-          timerProgressBar: true,
-          didOpen: () => {
-            const confirmButton = Swal.getConfirmButton();
-            confirmButton.style.backgroundColor = 'var(--color-verde)'; // Color verde
-          }
-        });  
-      //setErrorMessage(`La contraseña no puede tener más de ${MAX_PASSWORD_LENGTH} caracteres.`);
+        setErrorMessage('La contraseña supero el limite de 25 caracteres'); 
         break;
 
       case usuario !== adminUser.usuario:
-        Swal.fire({
-          title: 'Error de validacion',
-          text: 'El usuario que ingresaste no es correcto',
-          icon: 'error',
-          confirmButtonText: 'Aceptar',
-          timer: 3000,
-          timerProgressBar: true,
-          didOpen: () => {
-            const confirmButton = Swal.getConfirmButton();
-            confirmButton.style.backgroundColor = 'var(--color-verde)'; // Color verde
-          }
-        });        break;
+        setErrorMessage('El usuario que ingresaste no es correcto');     
+        break;
 
       case contrasena !== adminUser.contrasena && usuario === adminUser.usuario:
-        Swal.fire({
-          title: 'Error de validacion',
-          text: 'La contraseña que se ingreso es incorrecta',
-          icon: 'error',
-          confirmButtonText: 'Aceptar',
-          timer: 3000,
-          timerProgressBar: true,
-          didOpen: () => {
-            const confirmButton = Swal.getConfirmButton();
-            confirmButton.style.backgroundColor = 'var(--color-verde)'; // Color verde
-          }
-        });
+        setErrorMessage('La contraseña que se ingreso es incorrecta');  
         break;
   
       case usuario === adminUser.usuario && contrasena === adminUser.contrasena:
-        //setErrorMessage(''); // Limpiar mensaje de error al iniciar sesión correctamente
         navigate('/PrincipalAdmin');
+        setErrorMessage('');
         break;
 
       default:
@@ -145,7 +66,9 @@ export const LoginForm = () => {
 
   return (
     <div className="container-login d-flex flex-column align-items-center justify-content-between">
+      
       <div className="card-login">
+      <form>
         <div className="position-relative mb-4">
           <img
             src={logo}
@@ -153,7 +76,7 @@ export const LoginForm = () => {
             className="img-login"
           />
         </div>
-        <form>
+        
           <div className="mb-3">
             <label htmlFor="email" className="form-label-login">
               Usuario
@@ -197,8 +120,9 @@ export const LoginForm = () => {
           >
             Ingresar
           </button>
+          
           {errorMessage && ( // Mostrar mensaje de error si existe
-            <div className="mt-4 text-danger" style={{ fontSize: '1.1rem' }}>
+            <div className="mt-4 text-danger" style={{ fontSize: '1rem' }}>
               {errorMessage}
             </div>
           )}
