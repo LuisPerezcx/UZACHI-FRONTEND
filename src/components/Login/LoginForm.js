@@ -3,57 +3,137 @@ import { useNavigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './LoginForm.css';  
 import logo from '../../assets/Iniciar_sesion.png';
-import { Footer } from '../Footer';
+import Swal from 'sweetalert2';
 
 export const LoginForm = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [usuario, setUsuario] = useState('');
+  const [contrasena, setContrasena] = useState('');
   const [showPassword, setShowPassword] = useState(false);
-  const [errorMessage, setErrorMessage] = useState(''); // Estado para el mensaje de error
+  // Estado para el mensaje de error
+  const [errorMessage, setErrorMessage] = useState(''); 
 
   const navigate = useNavigate();
   
   const handleLogin = () => {
     const adminUser = {
-      email: 'admin',
-      password: 'admin123',
-      role: 'admin',
+      usuario: 'admin',
+      contrasena: 'admin123',
+      rol: 'admin',
     };
 
-    const MAX_EMAIL_LENGTH = 25; // Límite máximo para el email
-    const MAX_PASSWORD_LENGTH = 20; // Límite máximo para la contraseña
-
+    // Límite máximo para el usuario
+    const MAX_TAM_USUARIO = 25;
+    // Límite máximo para la contraseña
+    const MAX_TAM_CONTRASENA = 20;
     switch (true) {
-      case !email && !password:
-        setErrorMessage('Por favor, completa todos los campos.');
+      case !usuario && !contrasena:
+        Swal.fire({
+          title: 'Error en los campos ingresados',
+          text: 'Los campos de contraseña y usuario no pueden estar bacios',
+          icon: 'error',
+          confirmButtonText: 'Aceptar',
+          timer: 3000,
+          timerProgressBar: true,
+          didOpen: () => {
+            const confirmButton = Swal.getConfirmButton();
+            confirmButton.style.backgroundColor = 'var(--color-verde)'; // Color verde
+          }
+        });        
         break;
 
-      case !password:
-        setErrorMessage('Por favor, completa el campo "Contraseña".');
+      case !contrasena:
+        Swal.fire({
+          title: 'Error al ingresar la contraseña',
+          text: 'El campo de contraseña no puede estar bacio',
+          icon: 'error',
+          confirmButtonText: 'Aceptar',
+          timer: 3000,
+          timerProgressBar: true,
+          didOpen: () => {
+            const confirmButton = Swal.getConfirmButton();
+            confirmButton.style.backgroundColor = 'var(--color-verde)'; // Color verde
+          }
+        });
         break;
 
-      case !email:
-        setErrorMessage('Por favor, completa el campo "Email".');
+      case !usuario:
+        Swal.fire({
+          title: 'Error al ingresar el Usuario',
+          text: 'El campo de usuario no puede estar bacio',
+          icon: 'error',
+          confirmButtonText: 'Aceptar',
+          timer: 3000,
+          timerProgressBar: true,
+          didOpen: () => {
+            const confirmButton = Swal.getConfirmButton();
+            confirmButton.style.backgroundColor = 'var(--color-verde)'; // Color verde
+          }
+        });
         break;
 
-      case email.length > MAX_EMAIL_LENGTH:
-        setErrorMessage(`El email no puede tener más de ${MAX_EMAIL_LENGTH} caracteres.`);
+      case usuario.length > MAX_TAM_USUARIO:
+        Swal.fire({
+          title: 'Error de validacion',
+          text: 'El usuario supero el limite de 25 caracteres',
+          icon: 'error',
+          confirmButtonText: 'Aceptar',
+          timer: 3000,
+          timerProgressBar: true,
+          didOpen: () => {
+            const confirmButton = Swal.getConfirmButton();
+            confirmButton.style.backgroundColor = 'var(--color-verde)'; // Color verde
+          }
+        });
+        //setErrorMessage(`El Usuario no puede tener más de ${MAX_EMAIL_LENGTH} caracteres.`);
         break;
 
-      case password.length > MAX_PASSWORD_LENGTH:
-        setErrorMessage(`La contraseña no puede tener más de ${MAX_PASSWORD_LENGTH} caracteres.`);
+      case contrasena.length > MAX_TAM_CONTRASENA:
+        Swal.fire({
+          title: 'Error de validacion',
+          text: 'La contraseña supero el limite de 25 caracteres',
+          icon: 'error',
+          confirmButtonText: 'Aceptar',
+          timer: 3000,
+          timerProgressBar: true,
+          didOpen: () => {
+            const confirmButton = Swal.getConfirmButton();
+            confirmButton.style.backgroundColor = 'var(--color-verde)'; // Color verde
+          }
+        });  
+      //setErrorMessage(`La contraseña no puede tener más de ${MAX_PASSWORD_LENGTH} caracteres.`);
         break;
 
-      case email !== adminUser.email:
-        setErrorMessage('El email del usuario no existe');
-        break;
+      case usuario !== adminUser.usuario:
+        Swal.fire({
+          title: 'Error de validacion',
+          text: 'El usuario que ingresaste no es correcto',
+          icon: 'error',
+          confirmButtonText: 'Aceptar',
+          timer: 3000,
+          timerProgressBar: true,
+          didOpen: () => {
+            const confirmButton = Swal.getConfirmButton();
+            confirmButton.style.backgroundColor = 'var(--color-verde)'; // Color verde
+          }
+        });        break;
 
-      case password !== adminUser.password && email === adminUser.email:
-        setErrorMessage('La contraseña del usuario es incorrecta');
+      case contrasena !== adminUser.contrasena && usuario === adminUser.usuario:
+        Swal.fire({
+          title: 'Error de validacion',
+          text: 'La contraseña que se ingreso es incorrecta',
+          icon: 'error',
+          confirmButtonText: 'Aceptar',
+          timer: 3000,
+          timerProgressBar: true,
+          didOpen: () => {
+            const confirmButton = Swal.getConfirmButton();
+            confirmButton.style.backgroundColor = 'var(--color-verde)'; // Color verde
+          }
+        });
         break;
   
-      case email === adminUser.email && password === adminUser.password:
-        setErrorMessage(''); // Limpiar mensaje de error al iniciar sesión correctamente
+      case usuario === adminUser.usuario && contrasena === adminUser.contrasena:
+        //setErrorMessage(''); // Limpiar mensaje de error al iniciar sesión correctamente
         navigate('/PrincipalAdmin');
         break;
 
@@ -82,8 +162,8 @@ export const LoginForm = () => {
               type="email"
               id="email"
               className="form-control form-control-login"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              value={usuario}
+              onChange={(e) => setUsuario(e.target.value)}
             />
           </div>
           <div className="mb-3">
@@ -94,8 +174,8 @@ export const LoginForm = () => {
               type={showPassword ? 'text' : 'password'}
               id="password"
               className="form-control form-control-login"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              value={contrasena}
+              onChange={(e) => setContrasena(e.target.value)}
             />
           </div>
           <div className="form-check mb-3 text-start">

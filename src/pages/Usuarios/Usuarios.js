@@ -1,32 +1,25 @@
 import React from "react";
-import NavAdmin from '../../components/NavAdmin';
-import { useEffect, useState } from "react";
+import NavAdmin from "../../components/NavAdmin";
 import { Footer } from "../../components/Footer";
-import FormularioUsuarios from '../Usuarios/Components/FormularioUsuarios';
-import { TablaUsuarios } from "../Usuarios/Components/TablaUsuarios";
-
+import { BreadCrumb } from "../../components/BreadCrumb";
+import TablaUsuarios from "../Usuarios/Components/TablaUsuarios";
 
 export const Usuario = () => {
-  const [usuario, setUsuario] = useState({});
-  const [nombreUsuario, setNombreUsuario] = useState("");
-  const [contrasena, setContrasena] = useState("");
-  const [tipoUsuario, setTipoUsuario] = useState("administrador");
-
-  const addUser = (data) => {
-    setUsuario(data);
-    console.log(data);
-  };
+  const links = [
+    { url: "/PrincipalAdmin", label: "Inicio" },
+    { url: "/Usuario", label: "Gestión de usuarios" },
+  ];
 
   return (
     <>
-    <NavAdmin />
+      <NavAdmin />
       <div className="container my-5">
+        <BreadCrumb links={links} />
         <div className="text-center mb-4">
           <h1>AGREGAR USUARIOS</h1>
         </div>
-        <div className=" p-0 mb-4">
-          <FormularioUsuarios usuario={addUser} />
-          <TablaUsuarios user={usuario} />
+        <div className="p-0 mb-4">
+          <TablaUsuarios />
         </div>
       </div>
       <Footer />
