@@ -124,7 +124,7 @@ const links = [
         <NavAdmin></NavAdmin>
         <BreadCrumb links={links} />
             <div style={{marginInline: '10%'}}>
-              <h1 className='size-font-title'style={{color: 'var(--color-gris)', fontWeight:'bold' }}>Formulario</h1>
+              <h1 className='size-font-title text-center'style={{color: 'var(--color-gris)', fontWeight:'bold' }}>FORMULARIO</h1>
                 <div className='row'>
                   <div className='col-sm-6'>
                     <h2 className='size-font-title' > <span style={{color: 'var(--color-gris)', fontWeight:'bold' }}>FOLIO NÚMERO:</span> <span className='size-font-subsubtitle' style={{color: 'var(--color-gris)'}}>27</span> <span className='size-font-subsubtitle' style={{color: 'var(--color-gris)'}}>/</span> <span className='size-font-subsubtitle' style={{color: 'var(--color-gris)'}}>38</span></h2>

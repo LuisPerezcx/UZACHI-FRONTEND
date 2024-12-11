@@ -1,0 +1,14 @@
+.mi-bordered-cell {
+    border: 1px solid #000; /* Borde de 1px en todos los lados */
+    padding: 10px; /* Espaciado dentro de las celdas */
+  }
+  
+  .mi-table {
+    width: 100%;
+    border-collapse: collapse; /* Para que los bordes de las celdas se fusionen correctamente */
+  }
+  
+  .mi-table-bordered td, .mi-table-bordered th {
+    border: 1px solid #000; /* Bordes para todas las celdas de la tabla */
+  }
+  

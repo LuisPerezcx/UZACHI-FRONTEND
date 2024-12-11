@@ -3,7 +3,7 @@ import Table from 'react-bootstrap/Table';
 import Pagination from 'react-bootstrap/Pagination';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-export function CustomTable({ data, columns, onEdit, onDelete, searchPlaceholder = 'Buscar...', edicion }) {
+export function CustomTable({ data, columns, onEdit, onDelete, searchPlaceholder = 'Buscar...', edicion, onRowClick }) {
     // Estado para la búsqueda
     const [searchQuery, setSearchQuery] = useState('');
 
@@ -29,6 +29,13 @@ export function CustomTable({ data, columns, onEdit, onDelete, searchPlaceholder
     // Manejador de cambio de página
     const handlePageChange = (pageNumber) => {
         setCurrentPage(pageNumber);
+    };
+
+    // Manejador de clic en la fila (si se pasa onRowClick)
+    const handleRowClick = (item) => {
+        if (onRowClick) {
+            onRowClick(item); // Solo se llama si onRowClick está definido
+        }
     };
 
     return (
@@ -63,7 +70,7 @@ export function CustomTable({ data, columns, onEdit, onDelete, searchPlaceholder
                     <tbody>
                         {currentData.length > 0 ? (
                             currentData.map((item, index) => (
-                                <tr key={index}>
+                                <tr key={index} onClick={() => handleRowClick(item)}>
                                     {columns.map((column, colIndex) => (
                                         <td key={colIndex}>{item[column.accessor]}</td>
                                     ))}
