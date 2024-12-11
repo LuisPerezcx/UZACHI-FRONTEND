@@ -3,32 +3,30 @@ import Table from 'react-bootstrap/Table';
 import Pagination from 'react-bootstrap/Pagination';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-export function CustomTable({ data, columns, onEdit, onDelete, searchPlaceholder = 'Buscar...', edicion }) {
-    // Estado para la búsqueda
+export function CustomTable({ data, columns, onEdit, onDelete, searchPlaceholder = 'Buscar...', edicion, onRowClick, showActions=true }) {
     const [searchQuery, setSearchQuery] = useState('');
-
-    // Estado para la paginación
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 4;
 
-    // Filtrado de datos según el criterio de búsqueda
     const filteredData = data.filter(item =>
         columns.some(column =>
             item[column.accessor]?.toString().toLowerCase().includes(searchQuery.toLowerCase())
         )
     );
 
-    // Datos para la página actual
     const indexOfLastItem = currentPage * itemsPerPage;
     const indexOfFirstItem = indexOfLastItem - itemsPerPage;
     const currentData = filteredData.slice(indexOfFirstItem, indexOfLastItem);
-
-    // Calcular total de páginas
     const totalPages = Math.ceil(filteredData.length / itemsPerPage);
 
-    // Manejador de cambio de página
     const handlePageChange = (pageNumber) => {
         setCurrentPage(pageNumber);
+    };
+
+    const handleRowClick = (item) => {
+        if (onRowClick) {
+            onRowClick(item);
+        }
     };
 
     return (
@@ -45,11 +43,11 @@ export function CustomTable({ data, columns, onEdit, onDelete, searchPlaceholder
                     value={searchQuery}
                     onChange={e => {
                         setSearchQuery(e.target.value);
-                        setCurrentPage(1); // Reiniciar a la primera página al buscar
+                        setCurrentPage(1);
                     }}
                 />
             </div>
-            <div className="d-flex justify-content-center table-responsive">
+            <div className="table-responsive mx-auto">
                 <Table className="table" striped bordered hover>
                     <thead>
                         <tr>
@@ -63,30 +61,36 @@ export function CustomTable({ data, columns, onEdit, onDelete, searchPlaceholder
                     <tbody>
                         {currentData.length > 0 ? (
                             currentData.map((item, index) => (
-                                <tr key={index}>
+                                <tr key={index} onClick={() => handleRowClick(item)}>
                                     {columns.map((column, colIndex) => (
                                         <td key={colIndex}>{item[column.accessor]}</td>
                                     ))}
-                                    <td className="celda-icono">
-                                        <button
-                                            className="boton-icono"
-                                            onClick={() => onEdit(item)}
-                                            title="Editar"
-                                        >
-                                            <i className="bi bi-pencil-square icono-editar"></i>
-                                        </button>
-                                    </td>
-                                    <td className="celda-icono">
-                                        {edicion === null && (
-                                            <button
-                                                className="boton-icono"
-                                                onClick={() => onDelete(item)}
-                                                title="Eliminar"
-                                            >
-                                                <i className="bi bi-trash3 icono-basura"></i>
-                                            </button>
-                                        )}
-                                    </td>
+                                    {showActions && (
+                                        <>
+                                            <td className="celda-icono">
+                                                {onEdit && (
+                                                    <button
+                                                        className="boton-icono"
+                                                        onClick={() => onEdit(item)}
+                                                        title="Editar"
+                                                    >
+                                                        <i className="bi bi-pencil-square icono-editar"></i>
+                                                    </button>
+                                                )}
+                                            </td>
+                                            <td className="celda-icono">
+                                                {edicion === null && onDelete && (
+                                                    <button
+                                                        className="boton-icono"
+                                                        onClick={() => onDelete(item)}
+                                                        title="Eliminar"
+                                                    >
+                                                        <i className="bi bi-trash3 icono-basura"></i>
+                                                    </button>
+                                                )}
+                                            </td>
+                                        </>
+                                    )}
                                 </tr>
                             ))
                         ) : (

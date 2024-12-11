@@ -4,13 +4,14 @@ import { CalculadoraEspecial } from '../../../components/Calculadora/Calculadora
 import { CalculadoraEstandar } from '../../../components/Calculadora/CalculadoraEstandar';
 import { ModalPlantilla } from '../../../components/Modal/ModalPlantilla';
 import { SelectCombo } from '../../../components/SelectCombo';
+import {ToWords} from 'to-words'
 
 export const InformacionSubproductosYSaldos = () => {
   const [numeroCantidad, setNumeroCantidad] = useState('');
   const [volumenPeso, setVolumenPeso] = useState('');
   const [cantidadLetra, setCantidadLetra] = useState('');
 
-  const [saldoAnterior, setSaldoAnterior] = useState('');
+  const [saldoAnterior, setSaldoAnterior] = useState(30000);
   const [cantidadAmparada, setCantidadAmpara] = useState('');
   const [saldoSiguiente, setSaldoSiguiente] = useState('');
 
@@ -20,6 +21,8 @@ export const InformacionSubproductosYSaldos = () => {
   const [calculatorType, setCalculatorType] = useState(null);
 
   const [errors, setErrors] = useState({});
+  
+
 
   const opcionesUnidadMedida = [
     { value: 'seleccion', label: 'Selecciona la unidad de medida' },
@@ -32,7 +35,7 @@ export const InformacionSubproductosYSaldos = () => {
     setTipoSeleccionado(tipo);
     if (tipo === 'Especial') {
       setCalculatorType('Calculadora especial');
-      setModalContent(<CalculadoraEspecial />);
+      setModalContent(<CalculadoraEspecial onCalculate={handleCalculation}/>);
     } else {
       setCalculatorType('Calculadora estándar');
       setModalContent(<CalculadoraEstandar onCalculate={handleCalculation} />);
@@ -93,6 +96,39 @@ export const InformacionSubproductosYSaldos = () => {
     }
   };
 
+  const toWords = new ToWords({
+    localeCode: 'es-ES',
+    converterOptions: {
+      currency: false,
+      ignoreDecimal: false,
+    },
+  });
+
+  const handleCantidadAmpara = (e) => {
+    const value = e.target.value;
+    if (validateNumberField('cantidadAmparada', value)) {
+      setCantidadAmpara(value);
+    }
+  };
+
+  // Efecto para convertir número a texto
+  useEffect(() => {
+    if (cantidadAmparada) {
+      try {
+        const cantidadEnLetras = toWords.convert(Number(cantidadAmparada));
+        setCantidadLetra(cantidadEnLetras);
+      } catch (error) {
+        setErrors((prev) => ({
+          ...prev,
+          cantidadAmparada: 'No se pudo convertir la cantidad a texto.',
+        }));
+      }
+    } else {
+      setCantidadLetra('');
+    }
+  }, [cantidadAmparada]);
+
+
   return (
     <>
       <div className="row">
@@ -146,10 +182,12 @@ export const InformacionSubproductosYSaldos = () => {
               <label>Cantidad que ampara este documento con letra: <span className="text-danger">*</span></label>
               <input
                 type="text"
-                value={cantidadLetra}
+                value={cantidadLetra}K
                 onKeyPress={handleKeyPress}
                 onChange={(e) => setCantidadLetra(e.target.value)}
                 maxLength={200}
+                onInput={handleCantidadAmpara}
+                readOnly
               />
               {errors.cantidadLetra && <p style={{ color: 'red' }}>{errors.cantidadLetra}</p>}
             </div>

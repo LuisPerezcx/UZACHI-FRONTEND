@@ -8,18 +8,16 @@ export const generarReporteSemarnat = async () => {
     // Configurar estilos globales
     worksheet.properties.defaultRowHeight = 20;
     worksheet.columns = [
-        { width: 25 }, // Columna A
-        { width: 10 }, // Columna B
-        { width: 15 }, // Columna C
-        { width: 15 }, // Columna D
-        { width: 30 }, // Columna E
-        { width: 10 }, // Columna F
-        { width: 10 }, // Columna G
+        { width: 25 }, 
+        { width: 10 }, 
+        { width: 15 }, 
+        { width: 15 }, 
+        { width: 30 }, 
+        { width: 10 }, 
+        { width: 10 }, 
     ];
 
    
-
-
     // Títulos principales
     const titulos = [
         ['COMISARIADO DE BIENES COMUNALES'],

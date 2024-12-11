@@ -13,7 +13,26 @@ export const FormularioTransporte = ({ onAdd, editingTransport, formularioForm, 
   const [modalContent, setModalContent] = useState(null);
   const [tituloModal, setTitutloModal] = useState(null);
 
-  const [carros, setCarros] = useState([]);
+  const [carros, setCarros] = useState([
+    {
+      medio: 'Transporte terrestre',
+      marca: 'Toyota',
+      modelo: 'Hilux 2022',
+      propietario: 'Luis David Pérez Cruz',
+      capacidad: '1',
+      placas: 'ABC-1234',
+      tipo: 'Torton'
+    },
+    {
+      medio: 'Transporte terrestre',
+      marca: 'Kenworth',
+      modelo: 'T800',
+      propietario: 'Transporte Forestal López',
+      capacidad: '20',
+      placas: 'XF-3456-TL',
+      tipo: 'Trocero'
+    }
+  ]);
   const columns = [
     { header: 'Propietario', accessor: 'propietario' },
     { header: 'Tipo ', accessor: 'tipo' },
@@ -97,9 +116,24 @@ export const FormularioTransporte = ({ onAdd, editingTransport, formularioForm, 
     setModalContent(<CustomTable
       data={carros}
       columns={columns}
+      onRowClick={onSelectTransporte}
+      showActions={false}
       />);
     setShowModal(true);
   }
+  const onSelectTransporte = (transporte) => {
+    setFormData({
+      ...formData,
+      medio: transporte.medio,
+      marca: transporte.marca,
+      modelo: transporte.modelo,
+      propietario: transporte.propietario,
+      capacidad: transporte.capacidad,
+      placas: transporte.placas,
+      tipo: transporte.tipo,
+    });
+    setShowModal(false); // Cierra el modal
+  };
   const handleCancel = () => {
     setFormData(initialFormState); // Limpia el formulario
     if (onCancel) {
@@ -265,7 +299,7 @@ export const FormularioTransporte = ({ onAdd, editingTransport, formularioForm, 
           {formularioForm && (
               <span className="me-3">Agregar como transporte nuevo</span>
           )}
-            <button variant="success" type="submit" size="sm">
+            <button variant="success" type="submit" size="sm" className='ms-2 me-2'>
               {editingTransport ? 'Actualizar' : 'Agregar'}
             </button> 
             
@@ -274,9 +308,9 @@ export const FormularioTransporte = ({ onAdd, editingTransport, formularioForm, 
               style={{backgroundColor: 'red'}}
               size="sm"
               onClick={handleCancel}
-              className='ms-5'
+              className='me-2 ms-2'
             >
-              Cancelar edicion
+              Cancelar
             </button>
           )}
           </div>

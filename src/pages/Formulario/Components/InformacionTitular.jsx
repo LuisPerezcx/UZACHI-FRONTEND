@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, forwardRef, useImperativeHandle } from 'react';
 
-export const InformacionTitular = () => {
-    const [formData, setFormData] = useState({
+export const InformacionTitular = forwardRef((props, ref) => {
+    const [formValues, setFormValues] = useState({
         nombre: '',
         domicilio: '',
         curp: '',
@@ -13,16 +13,25 @@ export const InformacionTitular = () => {
         unidad: '',
         vencimiento: '',
     });
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        console.log('Datos del formulario:', formData);
-    };
-
     const [errors, setErrors] = useState({}); // Manejo de mensajes de error específicos por campo
 
+
     const handleChange = (e) => {
-        const { name, value } = e.target;
+        const {name, value} = e.target;
+        //actualizar valores del formulario
+        if(name==='curp') value?.toString().trim().toUpperCase();
+        setFormValues({
+            ...formValues,
+            [name]: value,
+        });
+        //validar el campo dinámicamente
+        validateField(name, value);
+    }
+
+
+    const validateField = (name, value) => {
+        let error = '';
+        if(!value || value === '') error = 'Este campo es obligatorio.';
 
         switch (name) {
             case "nombre":
@@ -30,72 +39,54 @@ export const InformacionTitular = () => {
             case "siem":
             case "unidad":
                 // Validar que no contengan números
-                if (/\d/.test(value)) {
-                    setErrors((prev) => ({
-                        ...prev,
-                        [name]: "Este campo solo permite letras.",
-                    }));
-                    return; // No actualizar el valor
-                } else {
-                    setErrors((prev) => {
-                        const newErrors = { ...prev };
-                        delete newErrors[name];
-                        return newErrors;
-                    });
-                }
+                if (/\d/.test(value)) error = 'Este campo solo permite letras.'
                 break;
-
             case "oficio":
             case "cantidad":
             case "folios":
                 // Validar solo números positivos
-                if (!/^\d*$/.test(value)) {
-                    setErrors((prev) => ({
-                        ...prev,
-                        [name]: "Este campo solo permite números positivos.",
-                    }));
-                    return;
-                } else {
-                    setErrors((prev) => {
-                        const newErrors = { ...prev };
-                        delete newErrors[name];
-                        return newErrors;
-                    });
+                if (!/^\d*$/.test(value)) error = 'Este campo solo permite números positivos.';
+                break;
+            case "curp": 
+                const curpRegex = /^[A-Z]{4}\d{6}[HM][A-Z]{2}[A-Z]{3}[A-Z\d]{2}$/;
+    
+                if (!curpRegex.test(value.toUpperCase())) {
+                    error = 'Formato de CURP incorrecto. Revisa los caracteres ingresados.';
                 }
                 break;
-                case "curp": {
-                    const curpRegex = /^[A-Z]{0,4}\d{0,6}[HM]{0,1}[A-Z]{0,5}[A-Z\d]{0,1}\d?$/;
-        
-                    if (curpRegex.test(value.toUpperCase())) {
-                        setFormData((prev) => ({
-                            ...prev,
-                            curp: value.toUpperCase(),
-                        }));
-                        setErrors((prev) => {
-                            const newErrors = { ...prev };
-                            delete newErrors.curp;
-                            return newErrors;
-                        });
-                    } else {
-                        setErrors((prev) => ({
-                            ...prev,
-                            curp: "Formato de CURP incorrecto. Revisa los caracteres ingresados.",
-                        }));
-                    }
-                    break;
-                }
-                        
-
+            
             default:
-                setErrors((prev) => {
-                    const newErrors = { ...prev };
-                    delete newErrors[name];
-                    return newErrors;
-                });
+                break;
         }
+        setErrors((prevErrors) => ({
+            ...prevErrors,
+            [name]: error || undefined,
+        }));
 
-        setFormData({ ...formData, [name]: value });
-    };
+        return error;
+    }
+
+    const validateAllFields = () => {
+        const newErrors = {};
+        Object.entries(formValues).forEach(([name, value]) => {
+          const error = validateField(name, value);
+          if (error) {
+            newErrors[name] = error;
+          }
+        });
+        setErrors(newErrors);
+        return Object.keys(newErrors).length === 0; // Retorna si no hay errores
+      };
+
+    useImperativeHandle(ref, () => ({
+        getValues: () => {
+        const isValid = validateAllFields();
+        if (!isValid) {
+            throw new Error("Hay errores en la sección información del titular.");
+        }
+        return formValues;
+        },
+    }));
 
     return (
         <div className="tarjeta-border mt-5 p-5">
@@ -103,7 +94,7 @@ export const InformacionTitular = () => {
                 Información del titular
             </h5>
             <br />
-            <form onSubmit={handleSubmit}>
+            <form>
                 <div className="row">
                     <div className="col-md-6 mt-3">
                         <label htmlFor="nombre" className="form-label">
@@ -113,18 +104,14 @@ export const InformacionTitular = () => {
                             type="text"
                             name="nombre"
                             id="nombre"
-                            value={formData.nombre}
+                            value={formValues.nombre}
                             onChange={handleChange}
                             placeholder="Nombre"
                             size="sm"
                             className="form-control"
                             maxLength={100}
                         />
-                        {errors.nombre && (
-                            <p className="text-danger" style={{ fontSize: "0.9em" }}>
-                                {errors.nombre}
-                            </p>
-                        )}
+                        {errors.nombre && <span className='text-danger'>{errors.nombre}</span>}
                     </div>
                     <div className="col-md-6 mt-3">
                         <label htmlFor="domicilio" className="form-label">
@@ -134,18 +121,14 @@ export const InformacionTitular = () => {
                             type="text"
                             name="domicilio"
                             id="domicilio"
-                            value={formData.domicilio}
+                            value={formValues.domicilio}
                             onChange={handleChange}
                             placeholder="Domicilio"
                             size="sm"
                             className="form-control"
                             maxLength={200}
                         />
-                        {errors.domicilio && (
-                            <p className="text-danger" style={{ fontSize: "0.9em" }}>
-                                {errors.domicilio}
-                            </p>
-                        )}
+                        {errors.domicilio && <span className='text-danger'>{errors.domicilio}</span>}
                     </div>
                 </div>
                 <div className="row">
@@ -157,18 +140,14 @@ export const InformacionTitular = () => {
                             type="text"
                             name="curp"
                             id="curp"
-                            value={formData.curp}
+                            value={formValues.curp}
                             onChange={handleChange}
                             placeholder="CURP"
                             size="sm"
                             className="form-control"
                             maxLength={18}
                         />
-                        {errors.curp && (
-                            <p className="text-danger" style={{ fontSize: "0.9em" }}>
-                                {errors.curp}
-                            </p>
-                        )}
+                        {errors.curp && <span className='text-danger'>{errors.curp}</span>}
                     </div>
                     <div className="col-md-3 mt-3">
                         <label htmlFor="siem" className="form-label">
@@ -178,18 +157,14 @@ export const InformacionTitular = () => {
                             type="text"
                             name="siem"
                             id="siem"
-                            value={formData.siem}
+                            value={formValues.siem}
                             onChange={handleChange}
                             placeholder="Registro SIEM"
                             size="sm"
                             className="form-control"
                             maxLength={15}
                         />
-                        {errors.siem && (
-                            <p className="text-danger" style={{ fontSize: "0.9em" }}>
-                                {errors.siem}
-                            </p>
-                        )}
+                        {errors.siem && <span className='text-danger'>{errors.siem}</span>}
                     </div>
                     <div className="col-md-3 mt-3">
                         <label htmlFor="fecha" className="form-label">
@@ -199,11 +174,12 @@ export const InformacionTitular = () => {
                             type="date"
                             name="fecha"
                             id="fecha"
-                            value={formData.fecha}
+                            value={formValues.fecha}
                             onChange={handleChange}
                             size="sm"
                             className="form-control"
                         />
+                        {errors.fecha && <span className='text-danger'>{errors.fecha}</span>}
                     </div>
                 </div>
                 <div className="row">
@@ -215,17 +191,13 @@ export const InformacionTitular = () => {
                             type="text"
                             name="oficio"
                             id="oficio"
-                            value={formData.oficio}
+                            value={formValues.oficio}
                             onChange={handleChange}
                             placeholder="Número de oficio"
                             size="sm"
                             className="form-control"
                         />
-                        {errors.oficio && (
-                            <p className="text-danger" style={{ fontSize: "0.9em" }}>
-                                {errors.oficio}
-                            </p>
-                        )}
+                        {errors.oficio && <span className='text-danger'>{errors.oficio}</span>}
                     </div>
                     <div className="col-md-3 mt-3">
                         <label htmlFor="cantidad" className="form-label">
@@ -235,17 +207,13 @@ export const InformacionTitular = () => {
                             type="text"
                             name="cantidad"
                             id="cantidad"
-                            value={formData.cantidad}
+                            value={formValues.cantidad}
                             onChange={handleChange}
                             placeholder="Cantidad"
                             size="sm"
                             className="form-control"
                         />
-                        {errors.cantidad && (
-                            <p className="text-danger" style={{ fontSize: "0.9em" }}>
-                                {errors.cantidad}
-                            </p>
-                        )}
+                        {errors.cantidad && <span className='text-danger'>{errors.cantidad}</span>}
                     </div>
                     <div className="col-md-3 mt-3">
                         <label htmlFor="folios" className="form-label">
@@ -255,17 +223,13 @@ export const InformacionTitular = () => {
                             type="text"
                             name="folios"
                             id="folios"
-                            value={formData.folios}
+                            value={formValues.folios}
                             onChange={handleChange}
                             placeholder="Folios autorizados"
                             size="sm"
                             className="form-control"
                         />
-                        {errors.folios && (
-                            <p className="text-danger" style={{ fontSize: "0.9em" }}>
-                                {errors.folios}
-                            </p>
-                        )}
+                        {errors.folios && <span className='text-danger'>{errors.folios}</span>}
                     </div>
                 </div>
                 <div className="row">
@@ -277,17 +241,13 @@ export const InformacionTitular = () => {
                             type="text"
                             name="unidad"
                             id="unidad"
-                            value={formData.unidad}
+                            value={formValues.unidad}
                             onChange={handleChange}
                             placeholder="Unidad de medida"
                             size="sm"
                             className="form-control"
                         />
-                        {errors.unidad && (
-                            <p className="text-danger" style={{ fontSize: "0.9em" }}>
-                                {errors.unidad}
-                            </p>
-                        )}
+                        {errors.unidad && <span className='text-danger'>{errors.unidad}</span>}
                     </div>
                     <div className="col-md-6 mt-3">
                         <label htmlFor="vencimiento" className="form-label">
@@ -297,14 +257,15 @@ export const InformacionTitular = () => {
                             type="date"
                             name="vencimiento"
                             id="vencimiento"
-                            value={formData.vencimiento}
+                            value={formValues.vencimiento}
                             onChange={handleChange}
                             size="sm"
                             className="form-control"
                         />
+                        {errors.vencimiento && <span className='text-danger'>{errors.vencimiento}</span>}
                     </div>
                 </div>
             </form>
         </div>
     );
-};
+});

@@ -8,6 +8,8 @@ export const TableSearch = ({ endpoint, columnas, filtros, acciones, datos, onDe
     const [busqueda, setBusqueda] = useState('');
     const [filtro, setFiltro] = useState(filtros[0].value);
     const [cargando, setCargando] = useState(true);
+    const [paginaActual, setPaginaActual] = useState(1); // Página actual
+    const [elementosPorPagina, setElementosPorPagina] = useState(5); // Elementos por página
 
     // Maneja el cambio en el campo de búsqueda
     const handleInputChange = (valor) => {
@@ -23,7 +25,7 @@ export const TableSearch = ({ endpoint, columnas, filtros, acciones, datos, onDe
     // Filtra los datos cuando cambia la búsqueda o el filtro
     useEffect(() => {
         let filtrados = [...datosTabla];
-    
+
         if (busqueda !== '') {
             filtrados = filtrados.filter(item => {
                 if (item.hasOwnProperty(filtro)) {
@@ -35,20 +37,18 @@ export const TableSearch = ({ endpoint, columnas, filtros, acciones, datos, onDe
                 return false;
             });
         }
-    
-        setDatosFiltrados(filtrados); // Asignar el resultado filtrado, aunque esté vacío
+
+        setDatosFiltrados(filtrados);
     }, [busqueda, filtro, datosTabla]);
-    
 
     // Carga los datos iniciales
     useEffect(() => {
         setTimeout(() => {
             setDatosTabla(datos);
-            setDatosFiltrados(datos || []);  
+            setDatosFiltrados(datos || []);
             setCargando(false);
         }, 2000);
     }, [datos]);
-    
 
     // Maneja la eliminación de un ítem
     const handleDelete = (item) => {
@@ -56,6 +56,26 @@ export const TableSearch = ({ endpoint, columnas, filtros, acciones, datos, onDe
             onDelete(item);
         }
     };
+
+    // Función para cambiar a la página anterior
+    const handlePaginaAnterior = () => {
+        if (paginaActual > 1) {
+            setPaginaActual(paginaActual - 1);
+        }
+    };
+
+    // Función para cambiar a la siguiente página
+    const handlePaginaSiguiente = () => {
+        if (paginaActual < Math.ceil(datosFiltrados.length / elementosPorPagina)) {
+            setPaginaActual(paginaActual + 1);
+        }
+    };
+
+    // Calcular los elementos a mostrar en la página actual
+    const datosPaginados = datosFiltrados.slice(
+        (paginaActual - 1) * elementosPorPagina,
+        paginaActual * elementosPorPagina
+    );
 
     return (
         <div className="container-fluid mx-auto">
@@ -81,8 +101,8 @@ export const TableSearch = ({ endpoint, columnas, filtros, acciones, datos, onDe
                 </div>
             </div>
 
-            <div className="d-flex justify-content-center">
-                <table className="table table-striped table-hover shadow-lg text-center rounded-4 overflow-hidden" style={{ marginBottom: '100px' }}>
+            <div className="d-flex justify-content-center table-container">
+                <table className="table table-striped table-hover shadow-lg text-center rounded-4" >
                     <thead>
                         <tr>
                             {columnas.map((col, index) => (
@@ -93,8 +113,8 @@ export const TableSearch = ({ endpoint, columnas, filtros, acciones, datos, onDe
                     </thead>
                     <tbody>
                         <ContenedorDeCarga cargando={cargando} colSpan={columnas.length + (acciones ? 1 : 0)}>
-                            {datosFiltrados.length > 0 ? (
-                                datosFiltrados.map((item, index) => (
+                            {datosPaginados.length > 0 ? (
+                                datosPaginados.map((item, index) => (
                                     <tr key={index}>
                                         {columnas.map((col, colIndex) => (
                                             <td key={colIndex}>{item[col.key]}</td>
@@ -146,6 +166,35 @@ export const TableSearch = ({ endpoint, columnas, filtros, acciones, datos, onDe
                 </table>
             </div>
 
+            {/* Paginación */}
+            <div className="pagination-container">
+                <button
+                    className="pagination-nav-button"
+                    onClick={handlePaginaAnterior}
+                    disabled={paginaActual === 1}
+                >
+                    &#60;
+                </button>
+
+                {/* Páginas numeradas */}
+                {Array.from({ length: Math.ceil(datosFiltrados.length / elementosPorPagina) }, (_, index) => (
+                    <button
+                        key={index}
+                        className={`pagination-button ${paginaActual === index + 1 ? 'active' : ''}`}
+                        onClick={() => setPaginaActual(index + 1)}
+                    >
+                        {index + 1}
+                    </button>
+                ))}
+
+                <button
+                    className="pagination-nav-button"
+                    onClick={handlePaginaSiguiente}
+                    disabled={paginaActual === Math.ceil(datosFiltrados.length / elementosPorPagina)}
+                >
+                    &#62;
+                </button>
+            </div>
         </div>
     );
 };

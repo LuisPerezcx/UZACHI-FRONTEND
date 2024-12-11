@@ -1,0 +1,42 @@
+.mi-container {
+  font-family: Arial, sans-serif;
+  margin: 20px;
+}
+
+.mi-bordered-cell {
+  border: 1px solid #000;
+  padding: 5px;
+  text-align: left;
+}
+
+.mi-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.mi-table-bordered td,
+.mi-table-bordered th {
+  border: 1px solid #000;
+}
+
+.dark-cell {
+  background-color: #d9d9d9; /* Color sombreado */
+  font-weight: bold;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.mt-4 {
+  margin-top: 20px;
+}
+
+.d-flex {
+  display: flex;
+  justify-content: space-between;
+}
+.large-row {
+  height: 150px; /* Ajusta esta altura según tus necesidades */
+  background-color: #f8f8f8; /* Fondo opcional */
+}

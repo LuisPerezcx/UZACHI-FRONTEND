@@ -4,15 +4,15 @@ import { PrincipalAdmin } from './pages/PrincipalAdmin';
 import { ReportesInternos } from './pages/Reportes/ReportesInternos';
 import { ReportesSemarnat } from './pages/Reportes/ReportesSemarnat';
 import { Usuario } from './pages/Usuarios/Usuarios';
-import { Formulario3, InformacionSubproductosYSaldos } from './pages/Formulario/Components/InformacionSubproductosYSaldos';
+import { InformacionSubproductosYSaldos } from './pages/Formulario/Components/InformacionSubproductosYSaldos';
 import { Formulario } from './pages/Formulario/Formulario';
 import { AgregarComunidades } from './pages/Comunidades/AgregarComunidades';
 import {GestionTransporte} from '../src/pages/Transporte/GestionTransporte'
 import ClientesFrecuentes from './pages/ClientesFrecuentes/ClientesFrecuentes';
 import { Login } from './pages/Login';
-import { Calculadoras } from './pages/Calculadoras';
 import FolioReembarque from './pages/FoliosAsignados/FolioReembarque';
 import FolioRemision from './pages/FoliosAsignados/FolioRemision';
+import { PlantillaDocumento } from './components/PlantillaDocumento/PlantillaDocumento';
 
 
 const AppRoutes = () => {
@@ -30,6 +30,7 @@ const AppRoutes = () => {
       <Route path='/AgregarComunidades' element={<AgregarComunidades/>} />
       <Route path='/FolioReembarque' element={<FolioReembarque/>} />
       <Route path='/FolioRemision' element={<FolioRemision/>} />
+      <Route path='/prueba' element={<PlantillaDocumento/>} />
 
     </Routes>
   );
