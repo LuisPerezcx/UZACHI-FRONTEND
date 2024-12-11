@@ -8,6 +8,8 @@ export const TableSearch = ({ endpoint, columnas, filtros, acciones, datos, onDe
     const [busqueda, setBusqueda] = useState('');
     const [filtro, setFiltro] = useState(filtros[0].value);
     const [cargando, setCargando] = useState(true);
+    const [paginaActual, setPaginaActual] = useState(1); // Página actual
+    const [elementosPorPagina, setElementosPorPagina] = useState(5); // Elementos por página
 
     // Maneja el cambio en el campo de búsqueda
     const handleInputChange = (valor) => {
@@ -55,6 +57,26 @@ export const TableSearch = ({ endpoint, columnas, filtros, acciones, datos, onDe
         }
     };
 
+    // Función para cambiar a la página anterior
+    const handlePaginaAnterior = () => {
+        if (paginaActual > 1) {
+            setPaginaActual(paginaActual - 1);
+        }
+    };
+
+    // Función para cambiar a la siguiente página
+    const handlePaginaSiguiente = () => {
+        if (paginaActual < Math.ceil(datosFiltrados.length / elementosPorPagina)) {
+            setPaginaActual(paginaActual + 1);
+        }
+    };
+
+    // Calcular los elementos a mostrar en la página actual
+    const datosPaginados = datosFiltrados.slice(
+        (paginaActual - 1) * elementosPorPagina,
+        paginaActual * elementosPorPagina
+    );
+
     return (
         <div className="container-fluid mx-auto">
             <div className="rounded mb-3 d-flex justify-content-center w-50 mx-auto">
@@ -80,7 +102,7 @@ export const TableSearch = ({ endpoint, columnas, filtros, acciones, datos, onDe
             </div>
 
             <div className="d-flex justify-content-center table-container">
-                <table className="table table-striped table-hover shadow-lg text-center rounded-4" style={{ marginBottom: '100px' }}>
+                <table className="table table-striped table-hover shadow-lg text-center rounded-4" >
                     <thead>
                         <tr>
                             {columnas.map((col, index) => (
@@ -91,8 +113,8 @@ export const TableSearch = ({ endpoint, columnas, filtros, acciones, datos, onDe
                     </thead>
                     <tbody>
                         <ContenedorDeCarga cargando={cargando} colSpan={columnas.length + (acciones ? 1 : 0)}>
-                            {datosFiltrados.length > 0 ? (
-                                datosFiltrados.map((item, index) => (
+                            {datosPaginados.length > 0 ? (
+                                datosPaginados.map((item, index) => (
                                     <tr key={index}>
                                         {columnas.map((col, colIndex) => (
                                             <td key={colIndex}>{item[col.key]}</td>
@@ -142,6 +164,36 @@ export const TableSearch = ({ endpoint, columnas, filtros, acciones, datos, onDe
                         </ContenedorDeCarga>
                     </tbody>
                 </table>
+            </div>
+
+            {/* Paginación */}
+            <div className="pagination-container">
+                <button
+                    className="pagination-nav-button"
+                    onClick={handlePaginaAnterior}
+                    disabled={paginaActual === 1}
+                >
+                    &#60;
+                </button>
+
+                {/* Páginas numeradas */}
+                {Array.from({ length: Math.ceil(datosFiltrados.length / elementosPorPagina) }, (_, index) => (
+                    <button
+                        key={index}
+                        className={`pagination-button ${paginaActual === index + 1 ? 'active' : ''}`}
+                        onClick={() => setPaginaActual(index + 1)}
+                    >
+                        {index + 1}
+                    </button>
+                ))}
+
+                <button
+                    className="pagination-nav-button"
+                    onClick={handlePaginaSiguiente}
+                    disabled={paginaActual === Math.ceil(datosFiltrados.length / elementosPorPagina)}
+                >
+                    &#62;
+                </button>
             </div>
         </div>
     );

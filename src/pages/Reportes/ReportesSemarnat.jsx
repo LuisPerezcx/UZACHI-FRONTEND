@@ -7,6 +7,7 @@ import { Footer } from '../../components/Footer';
 import { AlertComponent } from '../../components/AlertComponent'; 
 
 import excel from '../../assets/excel.png';
+import { generarReporteSemarnat } from './Components/GenerarReporteSemarnat';
 
 export const ReportesSemarnat = () => {
   const [show, setShow] = useState(false);
@@ -20,6 +21,18 @@ export const ReportesSemarnat = () => {
   ];
 
   const [reportes, setReportes] = useState([  
+    { id: 1, nombre: "REPORTE 2019 - 2020", comunidad: "Santiago Xiacuí", tipo: "Remisión", periodo: "2019-01-01 - 2020-01-01" },
+    { id: 2, nombre: "REPORTE 2020 - 2021", comunidad: "San Juan Bautista", tipo: "Remisión", periodo: "2020-01-01 - 2021-01-01" },
+    { id: 3, nombre: "REPORTE 2022 - 2023", comunidad: "Santa María Yolotepec", tipo: "Rembarque", periodo: "2022-01-01 - 2023-01-01" },
+  
+    { id: 1, nombre: "REPORTE 2019 - 2020", comunidad: "Santiago Xiacuí", tipo: "Remisión", periodo: "2019-01-01 - 2020-01-01" },
+    { id: 2, nombre: "REPORTE 2020 - 2021", comunidad: "San Juan Bautista", tipo: "Remisión", periodo: "2020-01-01 - 2021-01-01" },
+    { id: 3, nombre: "REPORTE 2022 - 2023", comunidad: "Santa María Yolotepec", tipo: "Rembarque", periodo: "2022-01-01 - 2023-01-01" },
+  
+    { id: 1, nombre: "REPORTE 2019 - 2020", comunidad: "Santiago Xiacuí", tipo: "Remisión", periodo: "2019-01-01 - 2020-01-01" },
+    { id: 2, nombre: "REPORTE 2020 - 2021", comunidad: "San Juan Bautista", tipo: "Remisión", periodo: "2020-01-01 - 2021-01-01" },
+    { id: 3, nombre: "REPORTE 2022 - 2023", comunidad: "Santa María Yolotepec", tipo: "Rembarque", periodo: "2022-01-01 - 2023-01-01" },
+  
     { id: 1, nombre: "REPORTE 2019 - 2020", comunidad: "Santiago Xiacuí", tipo: "Remisión", periodo: "2019-01-01 - 2020-01-01" },
     { id: 2, nombre: "REPORTE 2020 - 2021", comunidad: "San Juan Bautista", tipo: "Remisión", periodo: "2020-01-01 - 2021-01-01" },
     { id: 3, nombre: "REPORTE 2022 - 2023", comunidad: "Santa María Yolotepec", tipo: "Rembarque", periodo: "2022-01-01 - 2023-01-01" },
@@ -41,7 +54,7 @@ export const ReportesSemarnat = () => {
   const accionesLabel = [
     {
       label: 'Descargar',
-      handler: (item) => console.log('Editar elemento:', item),
+      handler: (item) => generarReporteSemarnat(),
     },
     {
       label: 'Eliminar',

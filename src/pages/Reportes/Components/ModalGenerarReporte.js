@@ -4,11 +4,13 @@ import { Modal, Alert } from 'react-bootstrap';
 import { generarReporteSemarnat } from './GenerarReporteSemarnat';
 import { generarReporteInterno } from './GenerarReporteInterno';
 
+
 export const GenerarReporteModal = ({ show, handleClose, agregarReporte, tipoReporte }) => {
   const [fechaInicio, setFechaInicio] = useState('');
   const [fechaFinal, setFechaFinal] = useState('');
   const [comunidad, setComunidad] = useState('');
   const [tipoFormato, setTipoFormato] = useState('');
+  const [nombreInforma, setNombreInforma] = useState('');
   const [mensajeError, setMensajeError] = useState('');
 
   // Limpia los campos cada vez que se abra el modal
@@ -18,6 +20,7 @@ export const GenerarReporteModal = ({ show, handleClose, agregarReporte, tipoRep
       setFechaFinal('');
       setComunidad('');
       setTipoFormato('');
+      setNombreInforma('');
       setMensajeError('');
     }
   }, [show]);
@@ -53,28 +56,28 @@ export const GenerarReporteModal = ({ show, handleClose, agregarReporte, tipoRep
     const nuevoReporte =
       tipoReporte === 'interno'
         ? {
-            id: Date.now(), // Genera un ID único usando la marca de tiempo
-            nombre: `TransporteMadera ${anioInicio}-${anioFinal}`,
-            tipo: tipoFormato,
-            pInicio: fechaInicio,
-            pFin: fechaFinal,
-          }
+          id: Date.now(), // Genera un ID único usando la marca de tiempo
+          nombre: `TransporteMadera ${anioInicio}-${anioFinal}`,
+          tipo: tipoFormato,
+          pInicio: fechaInicio,
+          pFin: fechaFinal,
+        }
         : {
-            id: Date.now(),
-            nombre: `REPORTE ${anioInicio} - ${anioFinal}`,
-            comunidad: comunidad,
-            tipo: tipoFormato,
-            periodo: `${fechaInicio} - ${fechaFinal}`,
-          };
+          id: Date.now(),
+          nombre: `REPORTE ${anioInicio} - ${anioFinal}`,
+          comunidad: comunidad,
+          tipo: tipoFormato,
+          periodo: `${fechaInicio} - ${fechaFinal}`,
+        };
 
     agregarReporte(nuevoReporte);
 
 
     // Decidir qué tipo de reporte generar
     if (tipoReporte === 'semarnat') {
-        await generarReporteSemarnat(); 
+      await generarReporteSemarnat();
     } else if (tipoReporte === 'interno') {
-        await generarReporteInterno(); 
+      await generarReporteInterno();
     }
     handleClose();
   };
@@ -121,6 +124,24 @@ export const GenerarReporteModal = ({ show, handleClose, agregarReporte, tipoRep
                   value={comunidad}
                   onChange={(e) => setComunidad(e.target.value)}
                   placeholder="Ingresa la comunidad"
+                />
+              </div>
+            </div>
+          )}
+
+          {tipoReporte !== 'interno' && (
+            <div className="row mb-3">
+              <div className="col-4 text-start">
+                <label htmlFor="nombreInforma" className="form-label">Informe por:</label>
+              </div>
+              <div className="col-8">
+                <input
+                  type="text"
+                  id="nombreInforma"
+                  className="form-control"
+                  value={nombreInforma}
+                  onChange={(e) => setNombreInforma(e.target.value)}
+                  placeholder="Ingresa el nombre de quien informa"
                 />
               </div>
             </div>
