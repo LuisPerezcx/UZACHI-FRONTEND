@@ -27,26 +27,8 @@
 .table-container {
     overflow-x: auto;
     -webkit-overflow-scrolling: touch; 
+    margin-bottom: 3rem;
 }
-
-.dropdown-menu {
-    position: absolute !important;
-    z-index: 1050; 
-}
-
-.dropdown-menu.show {
-    display: block;
-}
-
-.dropdown-menu {
-    position: absolute !important;
-    z-index: 1050; 
-}
-
-.dropdown-menu.show {
-    display: block;
-}
-
 
 .excel-icon-informes {
     width: 40px;
@@ -71,7 +53,9 @@
     }
     
     .dropdown-menu {
-        font-size: 0.8rem; /* Ajusta el tamaño del menú desplegable */
+        font-size: 0.8rem; 
+        max-height: none;
+        overflow: visible;
     }
 
     .boton-icono {
