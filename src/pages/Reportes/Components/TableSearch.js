@@ -132,23 +132,23 @@ export const TableSearch = ({ endpoint, columnas, filtros, acciones, datos, onDe
                                                         <i className="bi icono-puntos-vertical bi-three-dots-vertical"></i>
                                                     </button>
                                                     <ul className="dropdown-menu dropdown-menu-end no-scroll" aria-labelledby={`dropdownMenuButton-${index}`}>
-    {acciones.map((accion, indexAccion) => (
-        <li key={indexAccion}>
-            <button
-                onClick={() => {
-                    if (accion.label === 'Eliminar') {
-                        handleDelete(item);  
-                    } else {
-                        accion.handler(item);
-                    }
-                }}
-                className="dropdown-item"
-            >
-                {accion.label}
-            </button>
-        </li>
-    ))}
-</ul>
+                                                        {acciones.map((accion, indexAccion) => (
+                                                            <li key={indexAccion}>
+                                                                <button
+                                                                    onClick={() => {
+                                                                        if (accion.label === 'Eliminar') {
+                                                                            handleDelete(item);
+                                                                        } else {
+                                                                            accion.handler(item);
+                                                                        }
+                                                                    }}
+                                                                    className="dropdown-item"
+                                                                >
+                                                                    {accion.label}
+                                                                </button>
+                                                            </li>
+                                                        ))}
+                                                    </ul>
 
                                                 </div>
                                             </td>
