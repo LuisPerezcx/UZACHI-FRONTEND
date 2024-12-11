@@ -1,12 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, forwardRef, useImperativeHandle } from "react";
 import { Button } from '../../../components/Boton';
 import Swal from "sweetalert2";
 import { ModalPlantilla } from "../../../components/Modal/ModalPlantilla";
 import { CustomTable } from "../../../components/TablaIconos";
 
-const FormularioCliente = ({ onAdd, editarClientesFrecuentes, formularioForm, onCancel }) => {
+const FormularioCliente = forwardRef(({ onAdd, editarClientesFrecuentes, formularioForm, onCancel }, ref) => {
   const [dentroFormularioForm, setDentroFormularioForm] = useState(formularioForm);
-
+  const [errors, setErrors] = useState({});
   const [showModal, setShowModal] = useState(false);
   const [modalContent, setModalContent] = useState(null);
   const [tituloModal, setTitutloModal] = useState(null);
@@ -64,7 +64,64 @@ const FormularioCliente = ({ onAdd, editarClientesFrecuentes, formularioForm, on
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
+    validateField(name, value);
   };
+
+  const validateField = (name, value) =>{
+    let error = '';
+    if(!value) error = 'Este campo es obligatorio.';
+    switch(name){
+      case 'nombre':
+        break
+      case 'domicilioDestinatario':
+        break;
+      case 'poblacion':
+        break;
+      case 'poblacion':
+        break;
+      case 'entidad':
+        break;
+      case 'curp':
+        break;
+      case 'rfn':
+        break
+      case 'municipio':
+        break;
+      case 'domicilio':
+        break;
+      case 'codigoIdentificacion':
+          break
+      default:
+        break;
+    }
+    setErrors((prevErrors) => ({
+      ...prevErrors,
+      [name]:error || undefined,
+    }));
+    return error;
+  }
+
+  const validateAllFields = () => {
+    const newErrors = {};
+    Object.entries(formData).forEach(([name, value]) => {
+      const error = validateField(name, value);
+      if (error) {
+        newErrors[name] = error;
+      }
+    });
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0; // Retorna si no hay errores
+  };
+
+  useImperativeHandle(ref, () => ({
+    getValues: () => {
+    const isValid = validateAllFields();
+    if (!isValid) {
+        throw new Error("Hay errores en la sección información del cliente.");
+    }
+    return formData;
+    },
+  }));
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -179,6 +236,7 @@ const FormularioCliente = ({ onAdd, editarClientesFrecuentes, formularioForm, on
               placeholder="Ingrese el nombre completo"
               onChange={handleChange}
             />
+            {errors.nombre && <span className="text-danger">{errors.nombre}</span>}
           </div>
           <div className="col-md-6 mt-2">
             <label
@@ -197,6 +255,7 @@ const FormularioCliente = ({ onAdd, editarClientesFrecuentes, formularioForm, on
               placeholder="Ingrese el domicilio destinatario"
               onChange={handleChange}
             />
+            {errors.domicilioDestinatario && <span className="text-danger">{errors.domicilioDestinatario}</span>}
           </div>
           <div className="col-md-4 mt-2">
             <label htmlFor="poblacion" className="form-label me-2" style={{ width: "150px" }}>
@@ -211,6 +270,7 @@ const FormularioCliente = ({ onAdd, editarClientesFrecuentes, formularioForm, on
               placeholder="Ingrese la población"
               onChange={handleChange}
             />
+            {errors.poblacion && <span className="text-danger">{errors.poblacion}</span>}
           </div>
           <div className="col-md-4 mt-2">
             <label htmlFor="entidad" className="form-label me-2" style={{ width: "150px" }}>
@@ -225,6 +285,7 @@ const FormularioCliente = ({ onAdd, editarClientesFrecuentes, formularioForm, on
               placeholder="Ingrese la entidad"
               onChange={handleChange}
             />
+            {errors.entidad && <span className="text-danger">{errors.entidad}</span>}
           </div>
           <div className="col-md-4 mt-2">
           <label htmlFor="domicilio" className="form-label me-2" style={{ width: "150px" }}>
@@ -239,8 +300,7 @@ const FormularioCliente = ({ onAdd, editarClientesFrecuentes, formularioForm, on
               placeholder="Ingrese el domicilio"
               onChange={handleChange}
             />
-
-            
+            {errors.domicilio && <span className="text-danger">{errors.domicilio}</span>}
           </div>
 
           {/* Columna 2 */}
@@ -257,6 +317,7 @@ const FormularioCliente = ({ onAdd, editarClientesFrecuentes, formularioForm, on
               placeholder="Ingrese la CURP"
               onChange={handleChange}
             />
+            {errors.curp && <span className="text-danger">{errors.curp}</span>}
           </div>
           <div className="col-md-3 mt-2">
             <label htmlFor="rfn" className="form-label me-2" style={{ width: "150px" }}>
@@ -271,6 +332,7 @@ const FormularioCliente = ({ onAdd, editarClientesFrecuentes, formularioForm, on
               placeholder="Ingrese el RFN"
               onChange={handleChange}
             />
+            {errors.rfn && <span className="text-danger">{errors.rfn}</span>}
           </div>
           <div className="col-md-4 mt-2">
             <label htmlFor="municipio" className="form-label me-2" style={{ width: "150px" }}>
@@ -285,6 +347,7 @@ const FormularioCliente = ({ onAdd, editarClientesFrecuentes, formularioForm, on
               placeholder="Ingrese el municipio"
               onChange={handleChange}
             />
+            {errors.municipio && <span className="text-danger">{errors.municipio}</span>}
           </div>
           <div className="col-md-6 mt-2">
           <label htmlFor="codigoIdentificacion" className="form-label me-2" >
@@ -299,13 +362,13 @@ const FormularioCliente = ({ onAdd, editarClientesFrecuentes, formularioForm, on
               placeholder="Ingrese el codgio de identificacion"
               onChange={(e) => {
                 const value = e.target.value;
-
                 // Permitir solo números
                 if (/^\d*$/.test(value)) {
                   handleChange({ target: { name: "codigoIdentificacion", value } });
                 }
               }}
             />
+            {errors.codigoIdentificacion && <span className="text-danger">{errors.codigoIdentificacion}</span>}
           </div>
         </div>
 
@@ -340,6 +403,6 @@ const FormularioCliente = ({ onAdd, editarClientesFrecuentes, formularioForm, on
       />
     </div>
   );
-};
+});
 
 export default FormularioCliente;

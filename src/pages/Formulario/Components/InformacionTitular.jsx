@@ -31,7 +31,7 @@ export const InformacionTitular = forwardRef((props, ref) => {
 
     const validateField = (name, value) => {
         let error = '';
-        if(!value || value === '') error = 'Este campo es obligatorio.';
+        if(!value) error = 'Este campo es obligatorio.';
 
         switch (name) {
             case "nombre":

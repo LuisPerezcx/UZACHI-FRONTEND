@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, forwardRef } from 'react';
 import '../../../styles/Formulario3.css';
 import { CalculadoraEspecial } from '../../../components/Calculadora/CalculadoraEspecial';
 import { CalculadoraEstandar } from '../../../components/Calculadora/CalculadoraEstandar';
@@ -6,7 +6,10 @@ import { ModalPlantilla } from '../../../components/Modal/ModalPlantilla';
 import { SelectCombo } from '../../../components/SelectCombo';
 import {ToWords} from 'to-words'
 
-export const InformacionSubproductosYSaldos = () => {
+export const InformacionSubproductosYSaldos = forwardRef((props, ref) => {
+  const [formMateriaValues, setFormMateriaValues] = useState({
+    
+  })
   const [numeroCantidad, setNumeroCantidad] = useState('');
   const [volumenPeso, setVolumenPeso] = useState('');
   const [cantidadLetra, setCantidadLetra] = useState('');
@@ -182,7 +185,7 @@ export const InformacionSubproductosYSaldos = () => {
               <label>Cantidad que ampara este documento con letra: <span className="text-danger">*</span></label>
               <input
                 type="text"
-                value={cantidadLetra}K
+                value={cantidadLetra}
                 onKeyPress={handleKeyPress}
                 onChange={(e) => setCantidadLetra(e.target.value)}
                 maxLength={200}
@@ -254,4 +257,4 @@ export const InformacionSubproductosYSaldos = () => {
       />
     </>
   );
-};
+});

@@ -83,8 +83,8 @@ export const Formulario = () => {
 
   const refInformacionDocumento = useRef();
   const refInformacionTitular = useRef();
-  /*
   const refFormularioCliente = useRef();
+  /*
   const refInformacionSubproductosYSaldos = useRef();
   const refFormularioTransporte = useRef();
   */
@@ -125,7 +125,7 @@ export const Formulario = () => {
   };
   
   const handleSubmit = () =>{
-    const allRefs = [refInformacionDocumento, refInformacionTitular]; // Todas las referencias
+    const allRefs = [refInformacionDocumento, refInformacionTitular, refFormularioCliente]; // Todas las referencias
     const collectedValues = {}; // Aquí almacenaremos los valores de todos los componentes
     const errors = []; 
 
@@ -186,6 +186,7 @@ export const Formulario = () => {
                 <FormularioCliente
                   formularioForm={true} 
                   onAdd={guardarDatos} 
+                  ref={refFormularioCliente}
                 ></FormularioCliente>
                 <InformacionSubproductosYSaldos></InformacionSubproductosYSaldos>
                 <FormularioTransporte 

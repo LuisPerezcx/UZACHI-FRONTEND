@@ -45,7 +45,7 @@ export const InformacionDocumento = forwardRef((props, ref) => {
       
     const validateField = (name, value) => {
         let error = '';        
-        if(!value || value==='') error = 'Este campo es obligatorio.';
+        if(!value) error = 'Este campo es obligatorio.';
         
         // Agregar reglas de validación según el campo
         switch(name){
