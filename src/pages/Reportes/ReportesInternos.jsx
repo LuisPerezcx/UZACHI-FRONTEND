@@ -13,6 +13,7 @@ export const ReportesInternos = () => {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+  const tipoReporte = "interno";
 
   const enlaces = [
     { url: '/PrincipalAdmin', label: 'Inicio' },
@@ -20,24 +21,24 @@ export const ReportesInternos = () => {
   ];
 
   const columnasLabel = [
-    { label: 'No.', key: 'id' },
     { label: 'Nombre documento', key: 'nombre' },
+    { label: 'Tipo', key: 'tipo' },
     { label: 'Periodo inicio', key: 'pInicio' },
     { label: 'Periodo fin', key: 'pFin' }
   ];
-
   const filtrosLabel = [
-    { label: 'Nombre documento', value: 'documento' },
-    { label: 'Periodo', value: 'periodo' }
-  ];
+    { label: 'Periodo Inicio', value: 'pInicio' },       
+    { label: 'Tipo informe', value: 'tipo' }
+];
+
 
   const [reportes, setReportes] = useState([
-    { id: 1, nombre: 'TransporteMadera 21-22', pInicio: '2023-10-23', pFin: '2024-10-23' },
-    { id: 2, nombre: 'TransporteMadera 22-23', pInicio: '2022-10-23', pFin: '2023-10-23' },
-    { id: 3, nombre: 'TransporteMadera 21-22', pInicio: '2021-10-23', pFin: '2022-10-23' },
-    { id: 4, nombre: 'TransporteMadera 21-22', pInicio: '2023-10-23', pFin: '2024-10-23' },
-    { id: 5, nombre: 'TransporteMadera 22-23', pInicio: '2022-10-23', pFin: '2023-10-23' },
-    { id: 6, nombre: 'TransporteMadera 21-22', pInicio: '2021-10-23', pFin: '2022-10-23' }
+    { id: 1, nombre: 'TransporteMadera 21-22', tipo: "Remisión", pInicio: '2023-10-23', pFin: '2024-10-23' },
+    { id: 2, nombre: 'TransporteMadera 22-23', tipo: "Remisión", pInicio: '2022-10-23', pFin: '2023-10-23' },
+    { id: 3, nombre: 'TransporteMadera 21-22', tipo: "Rembarque", pInicio: '2021-10-23', pFin: '2022-10-23' },
+    { id: 4, nombre: 'TransporteMadera 21-22', tipo: "Remisión", pInicio: '2023-10-23', pFin: '2024-10-23' },
+    { id: 5, nombre: 'TransporteMadera 22-23', tipo: "Rembarque", pInicio: '2022-10-23', pFin: '2023-10-23' },
+    { id: 6, nombre: 'TransporteMadera 21-22', tipo: "Rembarque", pInicio: '2021-10-23', pFin: '2022-10-23' }
   ]);
 
   // Función para eliminar un reporte
@@ -62,19 +63,9 @@ export const ReportesInternos = () => {
     });
   };
 
-  // Función para agregar un nuevo reporte
-  const agregarReporte = (nombreReporte) => {
-    const nuevoReporte = {
-      id: reportes.length + 1,  
-      nombre: nombreReporte,
-      pInicio: "2023-10-23",  // Ejemplo de periodo inicio
-      pFin: "2024-10-23",     // Ejemplo de periodo fin
-    };
-
-    setReportes([...reportes, nuevoReporte]);  // Agregar el nuevo reporte a la lista
-    handleClose(); // Cerrar el modal después de agregar el reporte
+  const agregarReporte = (nuevoReporte) => {
+    setReportes([...reportes, nuevoReporte]);  
   };
-
 
   const acciones = [
     {
@@ -95,7 +86,7 @@ export const ReportesInternos = () => {
         <h2 className='text-center mb-5'>REPORTES INTERNOS</h2>
         <div className='d-flex justify-content-end '>
           <button className='btn btn-success me-3 reporte-btn' onClick={handleShow}>Generar reporte</button>
-          <img className='excel-icon' src={excel} alt='excel' />
+          <img className='excel-icon-informes' src={excel} alt='excel' />
         </div>
         <div className="d-flex justify-content-center">
           <TableSearch
@@ -112,6 +103,7 @@ export const ReportesInternos = () => {
         show={show} 
         handleClose={handleClose} 
         agregarReporte={agregarReporte} 
+        tipoReporte={tipoReporte} 
       />
       <Footer />
     </div>

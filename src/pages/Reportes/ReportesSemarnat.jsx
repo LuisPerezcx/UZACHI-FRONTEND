@@ -12,6 +12,7 @@ export const ReportesSemarnat = () => {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+  const tipoReporte = "semarnat";
 
   const enlacesLabel = [
     { url: '/PrincipalAdmin', label: 'Inicio' },
@@ -19,22 +20,22 @@ export const ReportesSemarnat = () => {
   ];
 
   const [reportes, setReportes] = useState([  
-    { id: 1, nombre: "MOVIMIENTO DE MADERA ENE-JUN 2024", comunidad: "Santiago Xiacuí", periodo: "2019 - 2020" },
-    { id: 2, nombre: "MOVIMIENTO DE MADERA JUL-DIC 2024", comunidad: "San Juan Bautista", periodo: "2020 - 2021" },
-    { id: 3, nombre: "REPORTE DE ACTIVIDADES 2023", comunidad: "Santa María Yolotepec", periodo: "2022 - 2023" },
+    { id: 1, nombre: "REPORTE 2019 - 2020", comunidad: "Santiago Xiacuí", tipo: "Remisión", periodo: "2019-01-01 - 2020-01-01" },
+    { id: 2, nombre: "REPORTE 2020 - 2021", comunidad: "San Juan Bautista", tipo: "Remisión", periodo: "2020-01-01 - 2021-01-01" },
+    { id: 3, nombre: "REPORTE 2022 - 2023", comunidad: "Santa María Yolotepec", tipo: "Rembarque", periodo: "2022-01-01 - 2023-01-01" },
   ]);
 
   const columnasLabel = [
-    { label: 'No.', key: 'id' },
     { label: 'Nombre documento', key: 'nombre' },
     { label: 'Comunidad', key: 'comunidad' },
+    { label: 'Tipo', key: 'tipo' },
     { label: 'Periodo', key: 'periodo' },
   ];
 
-  
   const filtrosLabel = [
     { label: 'Comunidad', value: 'comunidad' },
-    { label: 'Periodo inicio', value: 'periodo' }
+    { label: 'Periodo', value: 'periodo' },
+    { label: 'Tipo informe', value: 'tipo' }
   ];
 
   const accionesLabel = [
@@ -44,28 +45,20 @@ export const ReportesSemarnat = () => {
     },
     {
       label: 'Eliminar',
-      handler: (item) => handleDelete(item),  // Llama a la función de eliminación
+      handler: (item) => handleDelete(item), 
     }
   ];
 
-  const agregarReporte = (nombreReporte) => {
-    const nuevoReporte = {
-      id: reportes.length + 1,  // Nuevo ID para el reporte
-      nombre: nombreReporte,
-      comunidad: "Comunidad Ejemplo",  
-      periodo: "2023 - 2024",
-    };
-
-    setReportes([...reportes, nuevoReporte]);  // Agregar el nuevo reporte a la lista
+  const agregarReporte = (nuevoReporte) => {
+    setReportes([...reportes, nuevoReporte]);  
   };
 
   const handleDelete = (item) => {
-    // Llama al componente de alerta antes de eliminar el reporte
     AlertComponent.confirm({
       title: '¿Estás seguro de eliminar este reporte?',
       text: `Se eliminará el reporte: ${item.nombre}`,
       onConfirm: () => {
-        eliminarReporte(item);  // Elimina el reporte
+        eliminarReporte(item); 
         AlertComponent.success({
           title: 'Eliminado',
           text: `El reporte ${item.nombre} ha sido eliminado de manera exitosa.`,  // Mensaje actualizado
@@ -74,8 +67,6 @@ export const ReportesSemarnat = () => {
     });
   };
   
-
-   // Función para eliminar un reporte
    const eliminarReporte = (item) => {
     const nuevosReportes = reportes.filter((reporte) => reporte.id !== item.id);
     setReportes(nuevosReportes);
@@ -98,11 +89,11 @@ export const ReportesSemarnat = () => {
             filtros={filtrosLabel}
             acciones={accionesLabel}
             datos={reportes}
-            onDelete={handleDelete}  
+            onDelete={handleDelete} 
           />
         </div>
       </div>
-      <GenerarReporteModal show={show} handleClose={handleClose} agregarReporte={agregarReporte} />
+      <GenerarReporteModal show={show} handleClose={handleClose} agregarReporte={agregarReporte}  tipo={tipoReporte}  />
       <Footer />
     </div>
   );

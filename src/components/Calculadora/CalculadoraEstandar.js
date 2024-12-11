@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Swal from 'sweetalert2';
 
 export const CalculadoraEstandar = ({onCalculate}) => {
     const [ladoA, setLadoA] = useState([]);
@@ -6,46 +7,121 @@ export const CalculadoraEstandar = ({onCalculate}) => {
     const [volumenA, setVolumenA] = useState('');
     const [volumenB, setVolumenB] = useState('');
 
-    const [error, setError] = useState('');
 
     const handleNumericInput = (value) => {
       // Permite solo números, puntos decimales, y evita múltiples puntos
-      return value.replace(/[^0-9.]/g, '').replace(/(\..*?)\./g, '$1');
-    };
+      let sanitizedValue = value.replace(/[^0-9.]/g, '').replace(/(\..*?)\./g, '$1');
+  
+      // Limitar a un formato de hasta 5 enteros y 2 decimales
+      const decimalMatch = sanitizedValue.match(/^(\d{1,5})(\.\d{0,2})?$/);
+  
+      if (decimalMatch) {
+          sanitizedValue = decimalMatch[0]; // Retener solo la parte válida
+      } else {
+          // Si no coincide, descartar caracteres adicionales
+          sanitizedValue = sanitizedValue.slice(0, 5);
+      }
+  
+      return sanitizedValue;
+  };
+
+    
 
   
     const agregarVolumenA = () => {
-      if (!isNaN(volumenA) && volumenA.trim() !== '') {
+      const parsedVolumenA = parseFloat(volumenA);
+      if (!isNaN(volumenA) && volumenA.trim() !== '' && parsedVolumenA !== 0) {
         setLadoA([...ladoA, parseFloat(volumenA)]);
         setVolumenA('');
       } else {
-        setError('Por favor, ingresa un número válido en el lado A.');
+        Swal.fire({
+          title: 'Error, campos invalidos',
+          text: 'El valor del lado "A" no puede ser 0 o nulo',
+          icon: 'error',
+          confirmButtonText: 'Aceptar',
+          timer: 3000,
+          timerProgressBar: true,
+          didOpen: () => {
+            const confirmButton = Swal.getConfirmButton();
+            confirmButton.style.backgroundColor = 'var(--color-verde)'; // Color verde
+          }
+        }); 
+        //setError('El valor del lado "A" no puede ser 0 o nulo');
       }
     };
   
     const agregarVolumenB = () => {
-      if (!isNaN(volumenB) && volumenB.trim() !== '') {
+      const parsedVolumenB = parseFloat(volumenB);
+      if (!isNaN(volumenB) && volumenB.trim() !== '' && parsedVolumenB !== 0) {
         setLadoB([...ladoB, parseFloat(volumenB)]);
         setVolumenB('');
       } else {
-        setError('Por favor, ingresa un número válido en el lado B.');
+        Swal.fire({
+          title: 'Error, campos invalidos',
+          text: 'El valor del lado "B" no puede ser 0 o nulo',
+          icon: 'error',
+          confirmButtonText: 'Aceptar',
+          timer: 3000,
+          timerProgressBar: true,
+          didOpen: () => {
+            const confirmButton = Swal.getConfirmButton();
+            confirmButton.style.backgroundColor = 'var(--color-verde)'; // Color verde
+          }
+        }); 
+        //setError('El valor del lado "B" no puede ser 0 o nulo');      
       }
     };
   
     const calcularPromedio = () => {
+      if (ladoA.length < 5 || ladoB.length < 5) {
+        Swal.fire({
+          title: 'Error, campos insuficientes',
+          text: 'Ambos lados deben tener al menos 5 elementos para realizar el cálculo.',
+          icon: 'error',
+          confirmButtonText: 'Aceptar',
+          timer: 3000,
+          timerProgressBar: true,
+          didOpen: () => {
+            const confirmButton = Swal.getConfirmButton();
+            confirmButton.style.backgroundColor = 'var(--color-verde)'; // Color verde
+          }
+        });   
+        //setError('Ambos lados deben tener al menos 5 elementos para realizar el cálculo.');
+          return;
+      }
+  
       if (ladoA.length !== ladoB.length) {
-        setError('Ambos lados deben tener la misma cantidad de datos.');
-        return;
+        Swal.fire({
+          title: 'Error, campos insuficientes',
+          text: 'Ambos lados deben tener la misma cantidad de datos.',
+          icon: 'error',
+          confirmButtonText: 'Aceptar',
+          timer: 3000,
+          timerProgressBar: true,
+          didOpen: () => {
+            const confirmButton = Swal.getConfirmButton();
+            confirmButton.style.backgroundColor = 'var(--color-verde)'; // Color verde
+          }
+        });   
+        //setError('Ambos lados deben tener la misma cantidad de datos.');
+          return;
       }
   
       const sumaA = ladoA.reduce((acc, val) => acc + val, 0);
       const sumaB = ladoB.reduce((acc, val) => acc + val, 0);
       const resultado = (sumaA + sumaB) / 2;
-      onCalculate(resultado)
-      setError(`El promedio calculado es: ${resultado}`);
-      setError('');
+      
+      onCalculate(resultado);
+  };
 
-    };
+  const eliminarElemento = (lado, index) => {
+    if (lado === 'A') {
+        setLadoA(ladoA.filter((_, i) => i !== index));
+    } else {
+        setLadoB(ladoB.filter((_, i) => i !== index));
+    }
+};
+  
   return (
     <div className="container p-4 border rounded">
       <div className="row">
@@ -65,9 +141,33 @@ export const CalculadoraEstandar = ({onCalculate}) => {
             <button onClick={agregarVolumenA} className="btn btn-success me-2">Agregar</button>
           </div>
           <div className="mt-3 border p-2 rounded">
-            {ladoA.map((vol, index) => (
-              <div key={index}>{vol}</div>
-            ))}
+            {ladoA.length > 3 ? (
+              <div className="overflow-auto" style={{ maxHeight: '120px' }}>
+                {ladoA.map((vol, index) => (
+                  <div key={index} className="d-flex justify-content-between mb-2">{vol}
+                    <button
+                      className="btn btn-danger btn-sm"
+                      onClick={() => eliminarElemento('A', index)}
+                      style={{ fontSize: '0.75rem' }}
+                    >
+                      Eliminar
+                    </button>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              ladoA.map((vol, index) => (
+                <div key={index} className="d-flex justify-content-between mb-2">{vol}
+                  <button
+                    className="btn btn-danger btn-sm"
+                    onClick={() => eliminarElemento('A', index)}
+                    style={{ fontSize: '0.75rem' }}
+                  >
+                    Eliminar
+                  </button>
+                </div>
+              ))
+            )}
           </div>
         </div>
 
@@ -87,9 +187,33 @@ export const CalculadoraEstandar = ({onCalculate}) => {
             <button onClick={agregarVolumenB} className="btn btn-success">Agregar</button>
           </div>
           <div className="mt-3 border p-2 rounded">
-            {ladoB.map((vol, index) => (
-              <div key={index}>{vol}</div>
-            ))}
+            {ladoB.length > 3 ? (
+              <div className="overflow-auto" style={{ maxHeight: '120px' }}>
+                {ladoB.map((vol, index) => (
+                  <div key={index} className="d-flex justify-content-between mb-2">{vol}
+                    <button
+                      className="btn btn-danger btn-sm"
+                      onClick={() => eliminarElemento('B', index)}
+                      style={{ fontSize: '0.75rem' }}
+                    >
+                      Eliminar
+                    </button>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              ladoB.map((vol, index) => (
+                <div key={index} className="d-flex justify-content-between mb-2">{vol}
+                  <button
+                    className="btn btn-danger btn-sm"
+                    onClick={() => eliminarElemento('B', index)}
+                    style={{ fontSize: '0.75rem' }}
+                  >
+                    Eliminar
+                  </button>
+                </div>
+              ))
+            )}
           </div>
         </div>
       </div>
@@ -98,7 +222,7 @@ export const CalculadoraEstandar = ({onCalculate}) => {
         <button onClick={calcularPromedio} className="btn btn-success">
           Calcular promedio
         </button>
-        {error && <div className="text-danger mt-2">{error}</div>}
+        {<div className="text-danger mt-2"></div>}
       </div>
     </div>
   )

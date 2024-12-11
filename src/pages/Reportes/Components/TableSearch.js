@@ -23,7 +23,7 @@ export const TableSearch = ({ endpoint, columnas, filtros, acciones, datos, onDe
     // Filtra los datos cuando cambia la búsqueda o el filtro
     useEffect(() => {
         let filtrados = [...datosTabla];
-    
+
         if (busqueda !== '') {
             filtrados = filtrados.filter(item => {
                 if (item.hasOwnProperty(filtro)) {
@@ -35,20 +35,18 @@ export const TableSearch = ({ endpoint, columnas, filtros, acciones, datos, onDe
                 return false;
             });
         }
-    
-        setDatosFiltrados(filtrados); // Asignar el resultado filtrado, aunque esté vacío
+
+        setDatosFiltrados(filtrados);
     }, [busqueda, filtro, datosTabla]);
-    
 
     // Carga los datos iniciales
     useEffect(() => {
         setTimeout(() => {
             setDatosTabla(datos);
-            setDatosFiltrados(datos || []);  
+            setDatosFiltrados(datos || []);
             setCargando(false);
         }, 2000);
     }, [datos]);
-    
 
     // Maneja la eliminación de un ítem
     const handleDelete = (item) => {
@@ -81,8 +79,8 @@ export const TableSearch = ({ endpoint, columnas, filtros, acciones, datos, onDe
                 </div>
             </div>
 
-            <div className="d-flex justify-content-center">
-                <table className="table table-striped table-hover shadow-lg text-center rounded-4 overflow-hidden" style={{ marginBottom: '100px' }}>
+            <div className="d-flex justify-content-center table-container">
+                <table className="table table-striped table-hover shadow-lg text-center rounded-4" style={{ marginBottom: '100px' }}>
                     <thead>
                         <tr>
                             {columnas.map((col, index) => (
@@ -145,7 +143,6 @@ export const TableSearch = ({ endpoint, columnas, filtros, acciones, datos, onDe
                     </tbody>
                 </table>
             </div>
-
         </div>
     );
 };
