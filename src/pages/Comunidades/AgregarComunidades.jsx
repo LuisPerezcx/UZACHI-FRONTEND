@@ -110,12 +110,16 @@ export const AgregarComunidades = () => {
             searchPlaceholder='Buscar comunidad...'
             edicion={editarComunidades}
         />
-        <GestionComunidades
-          onAdd={guardarDatosComunidades}
-          editarComunidades={editarComunidades}
-          onCancel={cancelarEdicion}
-        />
-        <Footer/>
+        
+          <GestionComunidades
+            onAdd={guardarDatosComunidades}
+            editarComunidades={editarComunidades}
+            onCancel={cancelarEdicion}
+          />
+        
+        <div className='mt-5'>
+          <Footer/>
+        </div>
     </>
   )
 }

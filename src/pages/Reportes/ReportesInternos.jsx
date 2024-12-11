@@ -4,6 +4,8 @@ import { BreadCrumb } from '../../components/BreadCrumb';
 import { TableSearch } from './Components/TableSearch';
 import { Footer } from '../../components/Footer';
 import { GenerarReporteModal } from './Components/ModalGenerarReporte'; 
+import { AlertComponent } from '../../components/AlertComponent'; 
+
 
 import excel from '../../assets/excel.png';
 
@@ -13,20 +15,20 @@ export const ReportesInternos = () => {
   const handleShow = () => setShow(true);
 
   const enlaces = [
-    { url: '/', label: 'Inicio' },
+    { url: '/PrincipalAdmin', label: 'Inicio' },
     { url: '/ReportesInternos', label: 'Informes' }
   ];
 
-  const columnas = [
+  const columnasLabel = [
     { label: 'No.', key: 'id' },
     { label: 'Nombre documento', key: 'nombre' },
     { label: 'Periodo inicio', key: 'pInicio' },
     { label: 'Periodo fin', key: 'pFin' }
   ];
 
-  const filtros = [
-    { label: 'Nombre documento', value: 'filtroDocumento' },
-    { label: 'Periodo inicio', value: 'filtropInicio' }
+  const filtrosLabel = [
+    { label: 'Nombre documento', value: 'documento' },
+    { label: 'Periodo', value: 'periodo' }
   ];
 
   const [reportes, setReportes] = useState([
@@ -45,6 +47,21 @@ export const ReportesInternos = () => {
   };
 
  
+  const handleDelete = (item) => {
+    // Llama al componente de alerta antes de eliminar el reporte
+    AlertComponent.confirm({
+      title: '¿Estás seguro de eliminar este reporte?',
+      text: `Se eliminará el reporte: ${item.nombre}`,
+      onConfirm: () => {
+        eliminarReporte(item);  // Elimina el reporte
+        AlertComponent.success({
+          title: 'Eliminado',
+          text: `El reporte ${item.nombre} ha sido eliminado de manera exitosa.`,  // Mensaje actualizado
+        });
+      },
+    });
+  };
+
   // Función para agregar un nuevo reporte
   const agregarReporte = (nombreReporte) => {
     const nuevoReporte = {
@@ -83,10 +100,11 @@ export const ReportesInternos = () => {
         <div className="d-flex justify-content-center">
           <TableSearch
             endpoint={null}
-            columns={columnas}
-            filters={filtros}
-            actions={acciones}
-            data={reportes} 
+            columnas={columnasLabel}
+            filtros={filtrosLabel}
+            acciones={acciones}
+            datos={reportes} 
+            onDelete={handleDelete}
           />
         </div>
       </div>

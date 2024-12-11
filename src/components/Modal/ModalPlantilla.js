@@ -1,9 +1,9 @@
 import React from 'react';
 import { Modal } from 'react-bootstrap'; // Importa Modal desde react-bootstrap
 
-export const ModalPlantilla = ({ show, onClose, content, title }) => {
+export const ModalPlantilla = ({ show, onClose, content, title, size = "md"}) => {
   return (
-    <Modal show={show} onHide={onClose} centered>
+    <Modal show={show} onHide={onClose} centered size={size}>
       <Modal.Header closeButton>
         {/* Renderiza el título dinámicamente */}
         <Modal.Title>
