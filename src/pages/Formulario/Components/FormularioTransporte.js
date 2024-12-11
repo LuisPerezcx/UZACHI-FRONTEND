@@ -2,17 +2,25 @@ import React, {useState } from 'react';
 import { Col, Form, Row } from 'react-bootstrap';
 import { Button } from '../../../components/Boton';
 import Swal from "sweetalert2"; 
+import { ModalPlantilla } from '../../../components/Modal/ModalPlantilla';
+import { CustomTable } from "../../../components/TablaIconos";
 
 
-export const FormularioTransporte = ({ onAdd, editingTransport, formularioForm }) => {
+export const FormularioTransporte = ({ onAdd, editingTransport, formularioForm, onCancel }) => {
   const [formularioFormatoField, setFormularioFormatoField] = useState(formularioForm);
 
-  const seleccionarCarro = () => {
-    console.log('Seleccionar carro clickeado');
-  };
+  const [showModal, setShowModal] = useState(false);
+  const [modalContent, setModalContent] = useState(null);
+  const [tituloModal, setTitutloModal] = useState(null);
 
-  const [formData, setFormData] = useState({
-    medio: '', 
+  const [carros, setCarros] = useState([]);
+  const columns = [
+    { header: 'Propietario', accessor: 'propietario' },
+    { header: 'Tipo ', accessor: 'tipo' },
+    { header: 'Capacidad', accessor: 'capacidad' },
+  ];
+  const initialFormState = {
+    medio: '',
     marca: '',
     modelo: '',
     propietario: '',
@@ -20,7 +28,9 @@ export const FormularioTransporte = ({ onAdd, editingTransport, formularioForm }
     placas: '',
     otro: '',
     tipo: '',
-  });
+  };
+
+  const [formData, setFormData] = useState(initialFormState);
 
   // Efecto para cargar los datos del transporte en edición
   React.useEffect(() => {
@@ -82,9 +92,23 @@ export const FormularioTransporte = ({ onAdd, editingTransport, formularioForm }
       tipo: '',
     });
   };
+  const seleccionarCarro = () => {
+    setTitutloModal('Selecciona un carro');
+    setModalContent(<CustomTable
+      data={carros}
+      columns={columns}
+      />);
+    setShowModal(true);
+  }
+  const handleCancel = () => {
+    setFormData(initialFormState); // Limpia el formulario
+    if (onCancel) {
+      onCancel(); // Notifica al componente padre
+    }
+  };
 
   return (
-    <div className="mx-auto tarjeta-border mt-5 mx-5 mb-5 p-5">
+    <div className="container mx-auto tarjeta-border mt-5 mx-5 mb-5 p-5">
       {/* Título del formulario */}
       <div className="row">
         <div className="col-12 text-center mb-4">
@@ -155,7 +179,7 @@ export const FormularioTransporte = ({ onAdd, editingTransport, formularioForm }
               />
             </Col>
             <Col md={4}>
-              <Form.Label>Capacidad <span className="text-danger">*</span></Form.Label>
+              <Form.Label>Capacidad/Toneladas <span className="text-danger">*</span></Form.Label>
               <Form.Control
                 type="text"
                 maxLength={5} // Ajusta este valor según sea necesario para el rango permitido (por ejemplo, hasta 5 caracteres incluyendo el punto)
@@ -198,7 +222,7 @@ export const FormularioTransporte = ({ onAdd, editingTransport, formularioForm }
               >
                 <option value="">Selecciona un tipo</option>
                 <option value="Torton">Torton</option>
-                <option value="Trocer">Trocero</option>
+                <option value="Trocero">Trocero</option>
               </Form.Select>
             </Col>
           </Row>
@@ -214,10 +238,27 @@ export const FormularioTransporte = ({ onAdd, editingTransport, formularioForm }
             <button variant="success" type="submit" size="sm">
               {editingTransport ? 'Actualizar' : 'Agregar'}
             </button> 
+            
+            {editingTransport && (
+            <button
+              style={{backgroundColor: 'red'}}
+              size="sm"
+              onClick={handleCancel}
+              className='ms-5'
+            >
+              Cancelar edicion
+            </button>
+          )}
           </div>
-              
+          <ModalPlantilla
+          show={showModal}
+          onClose={() =>  setShowModal(false)}
+          content={modalContent}
+          title={tituloModal}
+        />
           
         </Form>
+
     </div>
   );
 };

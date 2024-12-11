@@ -30,6 +30,30 @@
     -webkit-overflow-scrolling: touch; /* Para un desplazamiento más fluido en dispositivos táctiles */
 }
 
+.dropdown-menu {
+    position: absolute !important;
+    z-index: 1050; 
+}
+
+.dropdown-menu.show {
+    display: block;
+}
+
+.dropdown-menu {
+    position: absolute !important;
+    z-index: 1050; /* Esto asegura que el menú esté encima de otros elementos */
+}
+
+.dropdown-menu.show {
+    display: block;
+}
+
+
+.excel-icon-informes {
+    width: 40px;
+    height: 40px; 
+}
+
 /* Ajustes para pantallas pequeñas (menos de 768px) */
 @media (max-width: 768px) {
     .table {
@@ -56,13 +80,13 @@
         font-size: 1rem; /* Ajusta el tamaño del botón */
     }
 
-    .excel-icon {
+    .excel-icon-informes {
         width: 30px;
-        height: 30px; /* Reduce el tamaño del ícono */
+        height: 30px; 
     }
 
     .reporte-btn {
-        font-size: 0.7rem; /* Reduce el tamaño de la fuente */
+        font-size: 0.7rem;
         padding: 0.2rem 0.6rem; 
         margin-bottom: 20px;
     }

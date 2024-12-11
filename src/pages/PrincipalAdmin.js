@@ -38,14 +38,14 @@ export const PrincipalAdmin = () => {
     {
       icon: iconInformeSemarnat,
       title: 'Administración de los informes para SEMARNAT',
-      buttonLabel: 'Administrar',
+      buttonLabel: 'Acceder',
       route: '/ReportesSemarnat',
       onClick: () => console.log('Administrar informes SEMARNAT')
     },
     {
       icon: iconInformeInterno,
       title: 'Administración de los informes internos de UZACHI',
-      buttonLabel: 'Administrar',
+      buttonLabel: 'Acceder',
       route: '/ReportesInternos',
       onClick: () => console.log('Administrar informes internos')
     }
@@ -89,16 +89,16 @@ export const PrincipalAdmin = () => {
                 title="Usuario"
                 description="Agrega y administra los usuarios que pueden acceder"
                 buttons={[
-                { label: 'Administrar', link: '/Usuarios' }
+                { label: 'Acceder', link: '/Usuarios' }
                 ]}
             />
 
             <TarjetaAdmin
                 imgSrc={iconInforme}
                 title="Informes"
-                description="Administra los informes internos e informes SEMARNAT"
+                description="Informes internos e informes para SEMARNAT"
                 buttons={[
-                    { label: 'Administrar', onClick: () => { handleShow(); console.log('Informes clicado'); }}
+                    { label: 'Acceder', onClick: () => { handleShow(); }}
                 ]}
             />
 
@@ -107,15 +107,17 @@ export const PrincipalAdmin = () => {
                 title="Folios"
                 description="Administra y asigna los folios asignado para cada comunidad"
                 buttons={[
-                { label: 'Asignar folios', onClick: handleShowFolios}
+                { label: 'Acceder', onClick: handleShowFolios}
                 ]}
             />
         </div>
       </div>
       <ModalC show={show} onClose={handleClose} content={modalContent} />
       <ModalFolio show={showFoliosModal} onClose={handleCloseFolios} content={modalContentFolio} />
-
+      <div className='mt-5'>
       <Footer></Footer>
+
+      </div>
     </div>
   );
 };
