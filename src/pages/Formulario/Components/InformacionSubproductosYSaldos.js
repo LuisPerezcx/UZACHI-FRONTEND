@@ -35,7 +35,7 @@ export const InformacionSubproductosYSaldos = () => {
     setTipoSeleccionado(tipo);
     if (tipo === 'Especial') {
       setCalculatorType('Calculadora especial');
-      setModalContent(<CalculadoraEspecial />);
+      setModalContent(<CalculadoraEspecial onCalculate={handleCalculation}/>);
     } else {
       setCalculatorType('Calculadora estándar');
       setModalContent(<CalculadoraEstandar onCalculate={handleCalculation} />);
@@ -187,6 +187,7 @@ export const InformacionSubproductosYSaldos = () => {
                 onChange={(e) => setCantidadLetra(e.target.value)}
                 maxLength={200}
                 onInput={handleCantidadAmpara}
+                readOnly
               />
               {errors.cantidadLetra && <p style={{ color: 'red' }}>{errors.cantidadLetra}</p>}
             </div>
