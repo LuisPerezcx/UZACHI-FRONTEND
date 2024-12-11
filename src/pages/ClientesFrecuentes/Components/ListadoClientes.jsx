@@ -92,7 +92,7 @@ const ListadoClientes = () => {
       edicion={editarClientesFrecuentes}
       />
  
-    <div className="px-5">
+    <div className="px-5 container">
       <FormularioCliente
         onAdd={guardarDatos}
         editarClientesFrecuentes={editarClientesFrecuentes}

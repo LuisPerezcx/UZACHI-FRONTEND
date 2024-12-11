@@ -45,8 +45,8 @@ export const FormularioTransporte = ({ onAdd, editingTransport, formularioForm, 
     propietario: '',
     capacidad: '',
     placas: '',
-    otro: '',
     tipo: '',
+    descOtro: '',
   };
 
   const [formData, setFormData] = useState(initialFormState);
@@ -107,8 +107,8 @@ export const FormularioTransporte = ({ onAdd, editingTransport, formularioForm, 
       propietario: '',
       capacidad: '',
       placas: '',
-      otro: '',
       tipo: '',
+      descOtro: '',
     });
   };
   const seleccionarCarro = () => {
@@ -140,8 +140,25 @@ export const FormularioTransporte = ({ onAdd, editingTransport, formularioForm, 
     }
   };
 
+  const handleTipoChange = (e) => {
+    const { value } = e.target;
+    if (value !== "Otro") {
+      setFormData((prevData) => ({
+        ...prevData,
+        tipo: value,
+        descOtro: '', // Reiniciar el campo "descOtro" si el tipo no es "Otro"
+      }));
+    } else {
+      setFormData((prevData) => ({
+        ...prevData,
+        tipo: value,
+      }));
+    }
+  };
+  
+
   return (
-    <div className="container mx-auto tarjeta-border mt-5 mx-5 mb-5 p-5">
+    <div className="mx-auto tarjeta-border mt-5 mx-5 mb-5 p-5">
       {/* Título del formulario */}
       <div className="row">
         <div className="col-12 text-center mb-4">
@@ -250,18 +267,31 @@ export const FormularioTransporte = ({ onAdd, editingTransport, formularioForm, 
               <Form.Select
                 name="tipo"
                 value={formData.tipo}
-                onChange={handleChange}
+                onChange={handleTipoChange}
                 size="sm"
               >
                 <option value="">Selecciona un tipo</option>
                 <option value="Torton">Torton</option>
                 <option value="Trocero">Trocero</option>
+                <option value="Otro">Otro</option>
               </Form.Select>
+
             </Col>
+            {formData.tipo === "Otro" && (
+              <Col md={4}>
+              <Form.Label>Otro <span className="text-danger">*</span></Form.Label>
+              <Form.Control
+                type="text"
+                maxLength={26}
+                name="descOtro"
+                value={formData.descOtro}
+                onChange={handleChange}
+                size="sm"
+              />
+              </Col>
+            )}
+           
           </Row>
-
-       
-
 
           <div className="text-center">
 
