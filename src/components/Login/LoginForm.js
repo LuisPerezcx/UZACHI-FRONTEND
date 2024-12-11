@@ -26,15 +26,15 @@ export const LoginForm = () => {
 
     switch (true) {
       case !usuario && !contrasena:
-        setErrorMessage('Los campos de contraseña y usuario no pueden estar bacios');      
+        setErrorMessage('Los campos de contraseña y usuario no pueden estar vacios');      
         break;
 
       case !contrasena:
-        setErrorMessage('El campo de contraseña no puede estar bacio');
+        setErrorMessage('El campo de contraseña no puede estar vacio');
         break;
 
       case !usuario:
-        setErrorMessage('El campo de usuario no puede estar bacio');
+        setErrorMessage('El campo de usuario no puede estar vacio');
         break;
 
       case usuario.length > MAX_TAM_USUARIO:
@@ -66,7 +66,9 @@ export const LoginForm = () => {
 
   return (
     <div className="container-login d-flex flex-column align-items-center justify-content-between">
+      
       <div className="card-login">
+      <form>
         <div className="position-relative mb-4">
           <img
             src={logo}
@@ -74,7 +76,7 @@ export const LoginForm = () => {
             className="img-login"
           />
         </div>
-        <form>
+        
           <div className="mb-3">
             <label htmlFor="email" className="form-label-login">
               Usuario
@@ -118,13 +120,13 @@ export const LoginForm = () => {
           >
             Ingresar
           </button>
-          </form>
+          
           {errorMessage && ( // Mostrar mensaje de error si existe
             <div className="mt-4 text-danger" style={{ fontSize: '1rem' }}>
               {errorMessage}
             </div>
           )}
-        
+        </form>
       </div>
     </div>    
   );

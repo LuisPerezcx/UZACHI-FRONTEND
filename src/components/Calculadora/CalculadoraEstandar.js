@@ -96,12 +96,13 @@ export const CalculadoraEstandar = ({onCalculate}) => {
             confirmButton.style.backgroundColor = 'var(--color-verde)'; // Color verde
           }
         });   
-                  return;
+        return;
       }
   
       const sumaA = ladoA.reduce((acc, val) => acc + val, 0);
       const sumaB = ladoB.reduce((acc, val) => acc + val, 0);
       const resultado = (sumaA + sumaB) / 2;
+
       Swal.fire({
         title: 'CALCULO REALIZADO',
         text: 'El calculo se realizo de forma correcta',
@@ -118,8 +119,7 @@ export const CalculadoraEstandar = ({onCalculate}) => {
         setLadoA([]); 
         // Reinicia los datos de Lado B
         setLadoB([]);
-    });
-
+      });
     onCalculate(resultado);
 };
 
@@ -158,9 +158,7 @@ export const CalculadoraEstandar = ({onCalculate}) => {
                       className="btn btn-danger btn-sm"
                       onClick={() => eliminarElemento('A', index)}
                       style={{ fontSize: '0.75rem' }}
-                    >
-                      Eliminar
-                    </button>
+                    > Eliminar </button>
                   </div>
                 ))}
               </div>
