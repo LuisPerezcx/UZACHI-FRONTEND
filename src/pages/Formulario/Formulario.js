@@ -68,10 +68,28 @@ export const Formulario = () => {
     }
   };
 
-const links = [
-  { url: '/PrincipalAdmin', label: 'Inicio' },
-  {url: '/Formulario', label: 'Formulario'}
-];
+  const links = [
+    { url: '/PrincipalAdmin', label: 'Inicio' },
+    {url: '/Formulario', label: 'Formulario'}
+  ];
+
+  const [formData, setFormData] = useState({
+    InformacionDocumento: {},
+    InformacionTitular: {},
+    InformacionSubproductosYSaldos: {},
+    FormularioTransporte: {},
+    FormularioCliente: {},
+  });
+
+  const refInformacionDocumento = useRef();
+  const refInformacionTitular = useRef();
+  /*
+  const refFormularioCliente = useRef();
+  const refInformacionSubproductosYSaldos = useRef();
+  const refFormularioTransporte = useRef();
+  */
+
+
   const [datosTransporte, setDatosTransporte] = useState([]);
   const [editingTransport, setEditingTransport] = useState(null); // Transporte en edición
   
@@ -105,6 +123,35 @@ const links = [
       setDatosTransporte([...datosTransporte, newTransport]);
     }
   };
+  
+  const handleSubmit = () =>{
+    const allRefs = [refInformacionDocumento, refInformacionTitular]; // Todas las referencias
+    const collectedValues = {}; // Aquí almacenaremos los valores de todos los componentes
+    const errors = []; 
+
+    allRefs.forEach((ref, index) => {
+      try {
+        const values = ref.current.getValues(); // Validar y obtener los valores
+        Object.assign(collectedValues, values); // Acumular valores válidos
+      } catch (error) {
+        // Si ocurre un error, lo agregamos al arreglo `errors`
+        errors.push(`${error.message}`);
+      }
+    });
+  
+    if (errors.length > 0) {
+      // Mostrar todos los errores acumulados
+      Swal.fire({
+        icon: 'error',
+        title: 'Errores en la validación',
+        html: errors.join('<br>'), // Mostrar errores como una lista
+      });
+    } else {
+      console.log("Valores válidos:", collectedValues);
+      // TODO: Continuar con el flujo normal (por ejemplo, enviar los valores al servidor)
+    }
+    console.log("Valores válidos:", collectedValues);
+  };
 
 
   const VistaPrevia = () => {
@@ -133,11 +180,9 @@ const links = [
                     <h2 className='size-font-title' > <span style={{color: 'var(--color-gris)', fontWeight:'bold' }}>FOLIO PROGRESIVO:</span> <span className='size-font-subsubtitle' style={{color: 'var(--color-gris)'}}>3821353</span></h2>
                   </div>
                 </div>
-                <InformacionDocumento 
-                  datos={datosFormulario}
-                  actualizarDatos={setDatosFormulario}>
+                <InformacionDocumento ref={refInformacionDocumento}>
                   </InformacionDocumento>
-                <InformacionTitular></InformacionTitular>
+                <InformacionTitular ref={refInformacionTitular}></InformacionTitular>
                 <FormularioCliente
                   formularioForm={true} 
                   onAdd={guardarDatos} 
@@ -150,8 +195,7 @@ const links = [
                   />
             </div>
             <div className="d-flex justify-content-center align-items-center mt-5 mb-5">
-                 {error && <p style={{ color: 'red' }}>{error}</p>}
-                <Button style={{ backgroundColor: 'var(--color-verde)', color: 'white' }} onClick={handleGuardar}>Guardar</Button>
+                <Button style={{ backgroundColor: 'var(--color-verde)', color: 'white' }} onClick={handleSubmit} >Guardar</Button>
                 <Button style={{ backgroundColor: 'var(--color-verde)', color: 'white', marginLeft: '50px' }}>Guardar e imprimir</Button>
                 <Button style={{ backgroundColor: '#0192C7', color: 'white', marginLeft: '50px' }} onClick={VistaPrevia}>Vista previa</Button>
             </div>

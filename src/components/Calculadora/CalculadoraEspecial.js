@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Swal from 'sweetalert2';
 
-export const CalculadoraEspecial = () => {
+export const CalculadoraEspecial = ({onCalculate}) => {
     const [resultado, setResultado] = useState('');
     const [error, setError] = useState('');
 
@@ -94,6 +94,9 @@ export const CalculadoraEspecial = () => {
         // Actualizar resultado y limpiar error
         setResultado(volumen.toFixed(2)); // Limitar a 2 decimales
         setError('');
+
+        onCalculate(volumen.toFixed(2))
+
     };
 
 
