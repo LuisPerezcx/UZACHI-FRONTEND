@@ -229,7 +229,7 @@ export const InformacionTitular = forwardRef((props, ref) => {
                             size="sm"
                             className="form-control"
                         />
-                        {errors.folios && <span className='text-dangert'>{errors.folios}</span>}
+                        {errors.folios && <span className='text-danger'>{errors.folios}</span>}
                     </div>
                 </div>
                 <div className="row">

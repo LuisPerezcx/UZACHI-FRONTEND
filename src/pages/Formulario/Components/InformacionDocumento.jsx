@@ -102,7 +102,7 @@ export const InformacionDocumento = forwardRef((props, ref) => {
         <h5 className="card-title size-font-title" style={{color:'var(--color-gris)',fontWeight:'bold'}}>Información del documento</h5> <br/>
         <div className='row'>
             <div className='col-md-6 col-lg-3 col-xxl-2 mt-3'>
-                <label className='form-label'>Tipo de documento:</label>
+                <label className='form-label'>Tipo de documento:  <span className="text-danger">*</span></label>
             </div>
             <div className='col-md-6 col-lg-3 col-xxl-4 mt-3'>
             <SelectCombo 
@@ -116,7 +116,7 @@ export const InformacionDocumento = forwardRef((props, ref) => {
             {errors.tipoDocumento && <span className="text-danger">{errors.tipoDocumento}</span>}
             </div>
             <div className='col-md-6 col-lg-3 col-xxl-2 mt-3'>
-                <label className='form-label'>Tipo de producto:</label>
+                <label className='form-label'>Tipo de producto:  <span className="text-danger">*</span></label>
             </div>
             <div className='col-md-6 col-lg-3 col-xxl-4 mt-3'>
                 <SelectCombo 
@@ -130,7 +130,7 @@ export const InformacionDocumento = forwardRef((props, ref) => {
                 {errors.tipoProducto && <span className="text-danger">{errors.tipoProducto}</span>}
             </div>
             <div className='col-md-6 col-lg-3 col-xxl-2 mt-3'>
-                <label className='form-label'>Tipo de género:</label>
+                <label className='form-label'>Tipo de género:  <span className="text-danger">*</span></label>
             </div>
             <div className='col-md-6 col-lg-3 col-xxl-4 mt-3'>
                 <SelectCombo 
@@ -146,7 +146,7 @@ export const InformacionDocumento = forwardRef((props, ref) => {
         </div>
         <div className='row'>
             <div className='col-md-6 col-lg-3  col-xxl-2 mt-3'>
-                <label className='form-label'>Fecha de expedición:</label>
+                <label className='form-label'>Fecha de expedición:  <span className="text-danger">*</span></label>
             </div>
             <div className='col-md-6 col-lg-3  col-xxl-2 mt-3'>
                 <input type="date" 
@@ -159,7 +159,7 @@ export const InformacionDocumento = forwardRef((props, ref) => {
                 {errors.fechaExpedicion && <span className='text-danger'>{errors.fechaExpedicion}</span>}
             </div>
             <div className='col-md-6 col-lg-3  col-xxl-2 mt-3'>
-                <label className='form-label'>Hora expedición:</label>
+                <label className='form-label'>Hora expedición:  <span className="text-danger">*</span></label>
             </div>
             <div className='col-md-6 col-lg-3  col-xxl-1 mt-3'>
                 <input type="time" 
@@ -171,7 +171,7 @@ export const InformacionDocumento = forwardRef((props, ref) => {
                 {errors.horaExpedicion && <span className='text-danger'>{errors.horaExpedicion}</span>}
             </div>
             <div className='col-md-6 col-lg-3  col-xxl-2 mt-3'>
-                <label className='form-label'>Fecha vencimiento:</label>
+                <label className='form-label'>Fecha vencimiento:  <span className="text-danger">*</span></label>
             </div>
             <div className='col-md-6 col-lg-3  col-xxl-3 mt-3'>
                 <input type="date" 
@@ -184,7 +184,7 @@ export const InformacionDocumento = forwardRef((props, ref) => {
                 {errors.fechaVencimiento && <span className='text-danger'>{errors.fechaVencimiento}</span>}
             </div>
             <div className='col-md-6 col-lg-3  col-xxl-2 mt-3'>
-                <label className='form-label'>Hora vencimiento:</label>
+                <label className='form-label'>Hora vencimiento:  <span className="text-danger">*</span></label>
             </div>
             <div className='col-md-6 col-lg-3 col-xxl-1 mt-3'>
                 <input type="time" 
