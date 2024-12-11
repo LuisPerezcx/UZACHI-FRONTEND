@@ -25,6 +25,12 @@ export const InputWithClearButton = ({ onInputChange, value, filter }) => {
                 setInputValue(value);
                 onInputChange(value);
             }
+        } else if (filter === 'tipo') {
+            // Permitir solo caracteres y hasta 10 caracteres
+            if (/^[a-zA-Z\s]{0,10}$/.test(value)) {
+                setInputValue(value);
+                onInputChange(value);
+            }
         } else {
             setInputValue(value);
             onInputChange(value);
@@ -37,7 +43,7 @@ export const InputWithClearButton = ({ onInputChange, value, filter }) => {
     };
 
     // Determinamos el texto del placeholder según el filtro
-    const placeholderText = filter === 'periodo' ? 'periodo' : 'comunidad';
+    const placeholderText = filter === 'periodo' ? 'periodo' : filter === 'comunidad' ? 'comunidad' : 'tipo de informe';
 
     return (
         <div className="input-group mb-3">

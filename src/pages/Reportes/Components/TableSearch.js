@@ -36,7 +36,7 @@ export const TableSearch = ({ endpoint, columnas, filtros, acciones, datos, onDe
             });
         }
     
-        setDatosFiltrados(filtrados); // Asignar el resultado filtrado, aunque esté vacío
+        setDatosFiltrados(filtrados); 
     }, [busqueda, filtro, datosTabla]);
     
 
@@ -49,7 +49,6 @@ export const TableSearch = ({ endpoint, columnas, filtros, acciones, datos, onDe
         }, 2000);
     }, [datos]);
     
-
     // Maneja la eliminación de un ítem
     const handleDelete = (item) => {
         if (onDelete) {

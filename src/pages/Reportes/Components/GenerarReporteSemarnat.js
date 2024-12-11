@@ -18,8 +18,6 @@ export const generarReporteSemarnat = async () => {
     ];
 
    
-
-
     // Títulos principales
     const titulos = [
         ['COMISARIADO DE BIENES COMUNALES'],

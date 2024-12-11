@@ -13,6 +13,7 @@ export const ReportesInternos = () => {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+  const tipoReporte = "interno";
 
   const enlaces = [
     { url: '/PrincipalAdmin', label: 'Inicio' },
@@ -112,6 +113,7 @@ export const ReportesInternos = () => {
         show={show} 
         handleClose={handleClose} 
         agregarReporte={agregarReporte} 
+        tipo={tipoReporte} 
       />
       <Footer />
     </div>
