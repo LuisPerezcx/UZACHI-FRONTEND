@@ -1,9 +1,9 @@
 import React from 'react';
 
-export const SelectCombo = ({ label, para, name, id, options }) => {
+export const SelectCombo = ({ label, para, name, id, options, onChange = null }) => {
   return (
     <div className='d-flex align-items-center ' style={{ width: '100%'}}>
-      <select className='form-select' id={id} name={name}>
+      <select className='form-select' id={id} name={name} onChange={onChange}>
         {options && options.length > 0 ? (
           options.map((option, index) => (
             <option

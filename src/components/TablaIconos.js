@@ -3,7 +3,7 @@ import Table from 'react-bootstrap/Table';
 import Pagination from 'react-bootstrap/Pagination';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-export function CustomTable({ data, columns, onEdit, onDelete, searchPlaceholder = 'Buscar...', edicion, onRowClick }) {
+export function CustomTable({ data, columns, onEdit, onDelete, searchPlaceholder = 'Buscar...', edicion, onRowClick, showActions=true}) {
     // Estado para la búsqueda
     const [searchQuery, setSearchQuery] = useState('');
 
@@ -74,26 +74,32 @@ export function CustomTable({ data, columns, onEdit, onDelete, searchPlaceholder
                                     {columns.map((column, colIndex) => (
                                         <td key={colIndex}>{item[column.accessor]}</td>
                                     ))}
-                                    <td className="celda-icono">
-                                        <button
-                                            className="boton-icono"
-                                            onClick={() => onEdit(item)}
-                                            title="Editar"
-                                        >
-                                            <i className="bi bi-pencil-square icono-editar"></i>
-                                        </button>
-                                    </td>
-                                    <td className="celda-icono">
-                                        {edicion === null && (
-                                            <button
-                                                className="boton-icono"
-                                                onClick={() => onDelete(item)}
-                                                title="Eliminar"
-                                            >
-                                                <i className="bi bi-trash3 icono-basura"></i>
-                                            </button>
-                                        )}
-                                    </td>
+                                    {showActions && (
+                                        <>
+                                            <td className="celda-icono">
+                                                {onEdit && (
+                                                    <button
+                                                        className="boton-icono"
+                                                        onClick={() => onEdit(item)}
+                                                        title="Editar"
+                                                    >
+                                                        <i className="bi bi-pencil-square icono-editar"></i>
+                                                    </button>        
+                                                )}
+                                            </td>
+                                            <td className="celda-icono">
+                                                {edicion === null && onDelete &&(
+                                                    <button
+                                                        className="boton-icono"
+                                                        onClick={() => onDelete(item)}
+                                                        title="Eliminar"
+                                                    >
+                                                        <i className="bi bi-trash3 icono-basura"></i>
+                                                    </button>
+                                                )}
+                                            </td>
+                                        </>
+                                    )}
                                 </tr>
                             ))
                         ) : (
