@@ -3,38 +3,29 @@ import Table from 'react-bootstrap/Table';
 import Pagination from 'react-bootstrap/Pagination';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-export function CustomTable({ data, columns, onEdit, onDelete, searchPlaceholder = 'Buscar...', edicion, onRowClick, showActions=true}) {
-    // Estado para la búsqueda
+export function CustomTable({ data, columns, onEdit, onDelete, searchPlaceholder = 'Buscar...', edicion, onRowClick, showActions=true }) {
     const [searchQuery, setSearchQuery] = useState('');
-
-    // Estado para la paginación
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 4;
 
-    // Filtrado de datos según el criterio de búsqueda
     const filteredData = data.filter(item =>
         columns.some(column =>
             item[column.accessor]?.toString().toLowerCase().includes(searchQuery.toLowerCase())
         )
     );
 
-    // Datos para la página actual
     const indexOfLastItem = currentPage * itemsPerPage;
     const indexOfFirstItem = indexOfLastItem - itemsPerPage;
     const currentData = filteredData.slice(indexOfFirstItem, indexOfLastItem);
-
-    // Calcular total de páginas
     const totalPages = Math.ceil(filteredData.length / itemsPerPage);
 
-    // Manejador de cambio de página
     const handlePageChange = (pageNumber) => {
         setCurrentPage(pageNumber);
     };
 
-    // Manejador de clic en la fila (si se pasa onRowClick)
     const handleRowClick = (item) => {
         if (onRowClick) {
-            onRowClick(item); // Solo se llama si onRowClick está definido
+            onRowClick(item);
         }
     };
 
@@ -52,11 +43,11 @@ export function CustomTable({ data, columns, onEdit, onDelete, searchPlaceholder
                     value={searchQuery}
                     onChange={e => {
                         setSearchQuery(e.target.value);
-                        setCurrentPage(1); // Reiniciar a la primera página al buscar
+                        setCurrentPage(1);
                     }}
                 />
             </div>
-            <div className="d-flex justify-content-center table-responsive">
+            <div className="table-responsive mx-auto">
                 <Table className="table" striped bordered hover>
                     <thead>
                         <tr>
@@ -84,11 +75,11 @@ export function CustomTable({ data, columns, onEdit, onDelete, searchPlaceholder
                                                         title="Editar"
                                                     >
                                                         <i className="bi bi-pencil-square icono-editar"></i>
-                                                    </button>        
+                                                    </button>
                                                 )}
                                             </td>
                                             <td className="celda-icono">
-                                                {edicion === null && onDelete &&(
+                                                {edicion === null && onDelete && (
                                                     <button
                                                         className="boton-icono"
                                                         onClick={() => onDelete(item)}
