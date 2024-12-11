@@ -9,7 +9,7 @@ import FormularioCliente from '../ClientesFrecuentes/Components/FormularioClient
 import { Button } from 'react-bootstrap'
 import { BreadCrumb } from '../../components/BreadCrumb' 
 import { use } from 'react'
-//todo: 
+
 export const Formulario = () => {
   const links = [
     { url: '/PrincipalAdmin', label: 'Inicio' },
@@ -67,6 +67,16 @@ export const Formulario = () => {
     }
   };
 
+  const handleSubmit = () =>{
+    try{
+      const values = refInformacionDocumento.current.getValues();
+      console.log("Valores válidos:", values);
+    } catch (error){
+      //todo: implementar sweet alert
+      alert(error)
+    }
+  }
+
   return (
     <div>
         <NavAdmin></NavAdmin>
@@ -96,7 +106,7 @@ export const Formulario = () => {
                   />
             </div>
             <div className="d-flex justify-content-center align-items-center mt-5 mb-5">
-                <Button style={{ backgroundColor: 'var(--color-verde)', color: 'white' }}>Guardar</Button>
+                <Button style={{ backgroundColor: 'var(--color-verde)', color: 'white' }} onClick={handleSubmit} >Guardar</Button>
                 <Button style={{ backgroundColor: 'var(--color-verde)', color: 'white', marginLeft: '50px' }}>Guardar e imprimir</Button>
                 <Button style={{ backgroundColor: '#0192C7', color: 'white', marginLeft: '50px' }}>Vista previa</Button>
             </div>
