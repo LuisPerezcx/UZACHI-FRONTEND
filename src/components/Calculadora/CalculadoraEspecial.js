@@ -95,6 +95,8 @@ export const CalculadoraEspecial = () => {
         setResultado(volumen.toFixed(2)); // Limitar a 2 decimales
         setError('');
     };
+
+
     
     return (
         <div className="container border rounded p-4" style={{ maxWidth: '400px' }}>
