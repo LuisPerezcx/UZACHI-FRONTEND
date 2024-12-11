@@ -2,25 +2,54 @@ import React, {useState } from 'react';
 import { Col, Form, Row } from 'react-bootstrap';
 import { Button } from '../../../components/Boton';
 import Swal from "sweetalert2"; 
+import { ModalPlantilla } from '../../../components/Modal/ModalPlantilla';
+import { CustomTable } from "../../../components/TablaIconos";
 
 
-export const FormularioTransporte = ({ onAdd, editingTransport, formularioForm }) => {
+export const FormularioTransporte = ({ onAdd, editingTransport, formularioForm, onCancel }) => {
   const [formularioFormatoField, setFormularioFormatoField] = useState(formularioForm);
 
-  const seleccionarCarro = () => {
-    console.log('Seleccionar carro clickeado');
-  };
+  const [showModal, setShowModal] = useState(false);
+  const [modalContent, setModalContent] = useState(null);
+  const [tituloModal, setTitutloModal] = useState(null);
 
-  const [formData, setFormData] = useState({
-    medio: '', 
+  const [carros, setCarros] = useState([
+    {
+      medio: 'Transporte terrestre',
+      marca: 'Toyota',
+      modelo: 'Hilux 2022',
+      propietario: 'Luis David Pérez Cruz',
+      capacidad: '1',
+      placas: 'ABC-1234',
+      tipo: 'Torton'
+    },
+    {
+      medio: 'Transporte terrestre',
+      marca: 'Kenworth',
+      modelo: 'T800',
+      propietario: 'Transporte Forestal López',
+      capacidad: '20',
+      placas: 'XF-3456-TL',
+      tipo: 'Trocero'
+    }
+  ]);
+  const columns = [
+    { header: 'Propietario', accessor: 'propietario' },
+    { header: 'Tipo ', accessor: 'tipo' },
+    { header: 'Capacidad', accessor: 'capacidad' },
+  ];
+  const initialFormState = {
+    medio: '',
     marca: '',
     modelo: '',
     propietario: '',
     capacidad: '',
     placas: '',
-    otro: '',
     tipo: '',
-  });
+    descOtro: '',
+  };
+
+  const [formData, setFormData] = useState(initialFormState);
 
   // Efecto para cargar los datos del transporte en edición
   React.useEffect(() => {
@@ -78,10 +107,55 @@ export const FormularioTransporte = ({ onAdd, editingTransport, formularioForm }
       propietario: '',
       capacidad: '',
       placas: '',
-      otro: '',
       tipo: '',
+      descOtro: '',
     });
   };
+  const seleccionarCarro = () => {
+    setTitutloModal('Selecciona un carro');
+    setModalContent(<CustomTable
+      data={carros}
+      columns={columns}
+      onRowClick={onSelectTransporte}
+      />);
+    setShowModal(true);
+  }
+  const onSelectTransporte = (transporte) => {
+    setFormData({
+      ...formData,
+      medio: transporte.medio,
+      marca: transporte.marca,
+      modelo: transporte.modelo,
+      propietario: transporte.propietario,
+      capacidad: transporte.capacidad,
+      placas: transporte.placas,
+      tipo: transporte.tipo,
+    });
+    setShowModal(false); // Cierra el modal
+  };
+  const handleCancel = () => {
+    setFormData(initialFormState); // Limpia el formulario
+    if (onCancel) {
+      onCancel(); // Notifica al componente padre
+    }
+  };
+
+  const handleTipoChange = (e) => {
+    const { value } = e.target;
+    if (value !== "Otro") {
+      setFormData((prevData) => ({
+        ...prevData,
+        tipo: value,
+        descOtro: '', // Reiniciar el campo "descOtro" si el tipo no es "Otro"
+      }));
+    } else {
+      setFormData((prevData) => ({
+        ...prevData,
+        tipo: value,
+      }));
+    }
+  };
+  
 
   return (
     <div className="mx-auto tarjeta-border mt-5 mx-5 mb-5 p-5">
@@ -155,7 +229,7 @@ export const FormularioTransporte = ({ onAdd, editingTransport, formularioForm }
               />
             </Col>
             <Col md={4}>
-              <Form.Label>Capacidad <span className="text-danger">*</span></Form.Label>
+              <Form.Label>Capacidad/Toneladas <span className="text-danger">*</span></Form.Label>
               <Form.Control
                 type="text"
                 maxLength={5} // Ajusta este valor según sea necesario para el rango permitido (por ejemplo, hasta 5 caracteres incluyendo el punto)
@@ -193,18 +267,31 @@ export const FormularioTransporte = ({ onAdd, editingTransport, formularioForm }
               <Form.Select
                 name="tipo"
                 value={formData.tipo}
-                onChange={handleChange}
+                onChange={handleTipoChange}
                 size="sm"
               >
                 <option value="">Selecciona un tipo</option>
                 <option value="Torton">Torton</option>
-                <option value="Trocer">Trocero</option>
+                <option value="Trocero">Trocero</option>
+                <option value="Otro">Otro</option>
               </Form.Select>
+
             </Col>
+            {formData.tipo === "Otro" && (
+              <Col md={4}>
+              <Form.Label>Otro <span className="text-danger">*</span></Form.Label>
+              <Form.Control
+                type="text"
+                maxLength={26}
+                name="descOtro"
+                value={formData.descOtro}
+                onChange={handleChange}
+                size="sm"
+              />
+              </Col>
+            )}
+           
           </Row>
-
-       
-
 
           <div className="text-center">
 
@@ -214,10 +301,27 @@ export const FormularioTransporte = ({ onAdd, editingTransport, formularioForm }
             <button variant="success" type="submit" size="sm">
               {editingTransport ? 'Actualizar' : 'Agregar'}
             </button> 
+            
+            {editingTransport && (
+            <button
+              style={{backgroundColor: 'red'}}
+              size="sm"
+              onClick={handleCancel}
+              className='ms-5'
+            >
+              Cancelar edicion
+            </button>
+          )}
           </div>
-              
+          <ModalPlantilla
+          show={showModal}
+          onClose={() =>  setShowModal(false)}
+          content={modalContent}
+          title={tituloModal}
+        />
           
         </Form>
+
     </div>
   );
 };

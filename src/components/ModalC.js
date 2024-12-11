@@ -5,11 +5,6 @@ import { Link } from 'react-router-dom';
 export const ModalC = ({ show, onClose, content }) => {
   return (
     <Modal show={show} onHide={onClose} centered>
-      <Modal.Header closeButton>
-        <Modal.Title>
-          <p className='size-font-subtitle' style={{ color: 'var(--color-verde)' }}>INFORMES</p>
-        </Modal.Title>
-      </Modal.Header>
       <Modal.Body>
         <div className='row justify-content-center text-center'>
           {content && Array.isArray(content) && content.map((item, index) => (

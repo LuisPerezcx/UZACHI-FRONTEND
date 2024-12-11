@@ -34,31 +34,28 @@ export const ListaTramites = ({ tramites }) => {
                 <Card.Body>
                   <Card.Title className="text-center" style={{color:"#14C3A2", fontWeight:"bold"}}>Trámite {index + 1}</Card.Title>
                   <Card.Text>
-                    <strong>Anualidad:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong> 
-                    {new Date(tramite.fechaTramite).toLocaleDateString()}
+                  <strong>Folio total: &nbsp;&nbsp;</strong> {tramite.totalFolio}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>Anualidad:</strong>{" "}
+                    {tramite.fechaTramite}
                     <br />
-                    <strong>Folio Pinus:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong> 
+                    <strong>Folio Pinus:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong> 
                     {tramite.folioPinus}
                     <br />
                     <strong>Folio Quercus:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong> 
                     {tramite.folioQuercus}
                     <br />
-                    <strong>Folio Hojosa:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong> 
+                    <strong>Folio Hojosa:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong> 
                     {tramite.folioHojosa}
                     <br />
-                    <strong>Clasificación:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong> 
-                    {tramite.clasificacion}
-                    <br />
-                    <strong>Folio Inicial Pinus:&nbsp; </strong> {tramite.folioInicialPinus}
-                    <strong>&nbsp;&nbsp;&nbsp;Folio Final Pinus:&nbsp;</strong> 
+                    <strong>Folio Inicial Pinus:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </strong> {tramite.folioInicialPinus}
+                    <strong>&nbsp;&nbsp;&nbsp;Folio Final Pinus:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong> 
                     {tramite.folioFinalPinus}
                     <br />
                     <strong>Folio Inicial Quercus:&nbsp; </strong> {tramite.folioInicialQuercus}
                     <strong>&nbsp;&nbsp;&nbsp;Folio Final Quercus:&nbsp;</strong> 
                     {tramite.folioFinalQuercus}
                     <br />
-                    <strong>Folio Inicial Hojosa:&nbsp; </strong> {tramite.folioInicialHojosa}
-                    <strong>&nbsp;&nbsp;&nbsp;Folio Final Hojosa:&nbsp;</strong> 
+                    <strong>Folio Inicial Hojosa:&nbsp;&nbsp;&nbsp; </strong> {tramite.folioInicialHojosa}
+                    <strong>&nbsp;&nbsp;&nbsp;Folio Final Hojosa:&nbsp;&nbsp;&nbsp;</strong> 
                     {tramite.folioFinalHojosa}
                   </Card.Text>
                   <div className="d-flex justify-content-center">

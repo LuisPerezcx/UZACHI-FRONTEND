@@ -8,7 +8,27 @@ import { AlertComponent } from '../../components/AlertComponent';
 
 
 export const GestionTransporte = () => {
-  const [datosTransporte, setDatosTransporte] = useState([]);
+  const [datosTransporte, setDatosTransporte] = useState([
+    {
+      medio: 'Transporte terrestre',
+      marca: 'Toyota',
+      modelo: 'Hilux 2022',
+      propietario: 'Luis David Pérez Cruz',
+      capacidad: '1',
+      placas: 'ABC-1234',
+      tipo: 'Torton'
+    },
+    {
+      medio: 'Transporte terrestre',
+      marca: 'Kenworth',
+      modelo: 'T800',
+      propietario: 'Transporte Forestal López',
+      capacidad: '20',
+      placas: 'XF-3456-TL',
+      tipo: 'Trocero'
+    }
+    
+  ]);
   const [editingTransport, setEditingTransport] = useState(null); // Transporte en edición
 
   const columns = [
@@ -60,6 +80,11 @@ export const GestionTransporte = () => {
     { url: '/GestionTransporte', label: 'Gestion de transportes' }
   ];
 
+  const cancelarEdicion = () => {
+    setEditingTransport(null); // Salir del modo de edición
+  };
+  
+
   return (
     <div>
       <NavAdmin />
@@ -75,11 +100,12 @@ export const GestionTransporte = () => {
         searchPlaceholder="Buscar transporte..."
         edicion={editingTransport}
       />
-      <div className='px-5'>
+      <div className="px-5 container">
         <FormularioTransporte
           onAdd={guardarTransporte}
           editingTransport={editingTransport}
           formularioForm={false}
+          onCancel={cancelarEdicion}
         />
       </div>
       <Footer />

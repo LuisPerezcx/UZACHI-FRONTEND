@@ -4,22 +4,44 @@ import Swal from "sweetalert2";
 import { ModalPlantilla } from "../../../components/Modal/ModalPlantilla";
 import { CustomTable } from "../../../components/TablaIconos";
 
-const FormularioCliente = ({ onAdd, editarClientesFrecuentes,formularioForm }) => {
+const FormularioCliente = ({ onAdd, editarClientesFrecuentes,formularioForm, onCancel }) => {
   const [dentroFormularioForm, setDentroFormularioForm] = useState (formularioForm);
 
   const [showModal, setShowModal] = useState(false);
   const [modalContent, setModalContent] = useState(null);
   const [tituloModal, setTitutloModal] = useState(null);
 
-  const [clientes, setClientes] = useState([]);
   const columns = [
     { header: 'Nombre', accessor: 'nombre' },
     { header: 'Domicilio destinatario', accessor: 'domicilioDestinatario' },
     { header: 'Poblacion', accessor: 'poblacion' },
-    { header: 'Entidad', accessor: 'entidad' },
   ];
+  const [clientes, setClientes] = useState([
+    {
+      nombre: 'Luis David Perez Cruz',
+      domicilioDestinatario: 'Ixtlan de Juarez',
+      poblacion: 'Yahuiche',
+      entidad: 'Oaxaca',
+      curp: 'HJKL020304LKJA2',
+      rfn: '125dfsdgf',
+      municipio: 'Ixtlan de Juarez',
+      domicilio: 'Independencia SN',
+      codigoIdentificacion: '12',
+    },
+    {
+      nombre: 'Maria Lopez Garcia',
+      domicilioDestinatario: 'San Pedro Mixtepec',
+      poblacion: 'Mixtepec',
+      entidad: 'Oaxaca',
+      curp: 'MLG010203HZSGN1',
+      rfn: '786asdhqw',
+      municipio: 'San Pedro Mixtepec',
+      domicilio: 'Centro SN',
+      codigoIdentificacion: '34',
+    },
+  ]);
 
-  const [formData, setFormData] = useState({
+  const initialForm = {
     nombre: '',
     domicilioDestinatario: '',
     poblacion: '',
@@ -29,7 +51,9 @@ const FormularioCliente = ({ onAdd, editarClientesFrecuentes,formularioForm }) =
     municipio: '',
     domicilio: '',
     codigoIdentificacion: ''
-  });
+  }
+
+  const [formData, setFormData] = useState(initialForm);
 
   React.useEffect(() => {
     if (editarClientesFrecuentes) {
@@ -98,12 +122,35 @@ const FormularioCliente = ({ onAdd, editarClientesFrecuentes,formularioForm }) =
     setModalContent(<CustomTable
       data={clientes}
       columns={columns}
+      onRowClick={onSelectCliente}
       />);
     setShowModal(true);
   }
+  const onSelectCliente = (cliente) => {
+    setFormData({
+      ...formData,
+      nombre: cliente.nombre,
+      domicilioDestinatario: cliente.domicilioDestinatario,
+      poblacion: cliente.poblacion,
+      entidad: cliente.entidad,
+      curp: cliente.curp,
+      rfn: cliente.rfn,
+      municipio: cliente.municipio,
+      domicilio: cliente.domicilio,
+      codigoIdentificacion: cliente.codigoIdentificacion,
+    });
+    setShowModal(false); // Cierra el modal
+  };
+
+  const handleCancel = () => {
+    setFormData(initialForm); // Limpia el formulario
+    if (onCancel) {
+      onCancel(); // Notifica al componente padre
+    }
+  };
 
   return (
-    <div className=" mx-auto mt-5 mb-4 tarjeta-border p-5">
+    <div className="mx-auto mt-5 mb-4 tarjeta-border p-5">
         <h5 className="text-center mb-3 size-font-title">Agregar nuevo cliente</h5>
 
         {/* Agregar datos de cliente registrado */}
@@ -273,6 +320,17 @@ const FormularioCliente = ({ onAdd, editarClientesFrecuentes,formularioForm }) =
             <button variant="success" type="submit" size="sm">
               {editarClientesFrecuentes ? 'Actualizar' : 'Agregar'}
             </button>
+
+            {editarClientesFrecuentes && (
+            <button
+              style={{backgroundColor: 'red'}}
+              size="sm"
+              onClick={handleCancel}
+              className='ms-5'
+            >
+              Cancelar edicion
+            </button>
+          )}
           </div>
 
         </form>
@@ -281,6 +339,7 @@ const FormularioCliente = ({ onAdd, editarClientesFrecuentes,formularioForm }) =
           onClose={() =>  setShowModal(false)}
           content={modalContent}
           title={tituloModal}
+          size='lg'
         />
     </div>
   );

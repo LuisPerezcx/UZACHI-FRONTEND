@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import Swal from "sweetalert2"; 
 
-export const  GestionComunidades = ({onAdd, editarComunidades}) => {
+export const  GestionComunidades = ({onAdd, editarComunidades, onCancel }) => {
 
-  const [formData,setFormData] = useState ({
+  const initialFormState = {
     nombreComunidad: '',
     municipio: '',
     entidad: '',
@@ -11,7 +11,9 @@ export const  GestionComunidades = ({onAdd, editarComunidades}) => {
     rfc:'',
     rfn:'',
     domicilioFiscal:''
-  });
+  };
+
+  const [formData,setFormData] = useState (initialFormState);
 
   React.useEffect(() => {
     if (editarComunidades) {
@@ -72,13 +74,18 @@ export const  GestionComunidades = ({onAdd, editarComunidades}) => {
     });
   };
 
-
+  const handleCancel = () => {
+    setFormData(initialFormState); // Limpia el formulario
+    if (onCancel) {
+      onCancel(); // Notifica al componente padre
+    }
+  };
 
 
   return (
     <div className="container mt-5">
       <div className="mx-auto" style={{ maxWidth: "95%", borderRadius: "12px" }}>
-        <div className="tarjeta-border">
+        <div className="tarjeta-border p-4">
           <h4 className="size-font-title text-center mb-4">Agregar comunidad</h4>
           <form onSubmit={agregarComunidades}>
             {/* Nombre de la comunidad */}
@@ -193,6 +200,17 @@ export const  GestionComunidades = ({onAdd, editarComunidades}) => {
               <button variant="success" type="submit" size="sm">
                 {editarComunidades ? 'Actualizar' : 'Agregar'}
               </button>
+
+              {editarComunidades && (
+            <button
+              style={{backgroundColor: 'red'}}
+              size="sm"
+              onClick={handleCancel}
+              className='ms-5'
+            >
+              Cancelar edicion
+            </button>
+          )}
             </div>
           </form>
         </div>

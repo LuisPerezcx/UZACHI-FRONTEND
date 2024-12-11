@@ -1,12 +1,7 @@
-input,
-textarea {
-  padding: 5px;
-}
-
-:is(input, textarea):invalid {
-  background: #dd6a5e;
-}
-
-:is(input, textarea):valid {
-  background: #F8F9FA;
-}
+.scrollable-container {
+    max-height: 370px; 
+    overflow-y: auto;
+    border: none ; 
+    padding: 10px; 
+  }
+  
