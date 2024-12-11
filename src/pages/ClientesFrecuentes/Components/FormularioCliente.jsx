@@ -11,13 +11,35 @@ const FormularioCliente = ({ onAdd, editarClientesFrecuentes,formularioForm, onC
   const [modalContent, setModalContent] = useState(null);
   const [tituloModal, setTitutloModal] = useState(null);
 
-  const [clientes, setClientes] = useState([]);
   const columns = [
     { header: 'Nombre', accessor: 'nombre' },
     { header: 'Domicilio destinatario', accessor: 'domicilioDestinatario' },
     { header: 'Poblacion', accessor: 'poblacion' },
-    { header: 'Entidad', accessor: 'entidad' },
   ];
+  const [clientes, setClientes] = useState([
+    {
+      nombre: 'Luis David Perez Cruz',
+      domicilioDestinatario: 'Ixtlan de Juarez',
+      poblacion: 'Yahuiche',
+      entidad: 'Oaxaca',
+      curp: 'HJKL020304LKJA2',
+      rfn: '125dfsdgf',
+      municipio: 'Ixtlan de Juarez',
+      domicilio: 'Independencia SN',
+      codigoIdentificacion: '12',
+    },
+    {
+      nombre: 'Maria Lopez Garcia',
+      domicilioDestinatario: 'San Pedro Mixtepec',
+      poblacion: 'Mixtepec',
+      entidad: 'Oaxaca',
+      curp: 'MLG010203HZSGN1',
+      rfn: '786asdhqw',
+      municipio: 'San Pedro Mixtepec',
+      domicilio: 'Centro SN',
+      codigoIdentificacion: '34',
+    },
+  ]);
 
   const initialForm = {
     nombre: '',
@@ -100,9 +122,25 @@ const FormularioCliente = ({ onAdd, editarClientesFrecuentes,formularioForm, onC
     setModalContent(<CustomTable
       data={clientes}
       columns={columns}
+      onRowClick={onSelectCliente}
       />);
     setShowModal(true);
   }
+  const onSelectCliente = (cliente) => {
+    setFormData({
+      ...formData,
+      nombre: cliente.nombre,
+      domicilioDestinatario: cliente.domicilioDestinatario,
+      poblacion: cliente.poblacion,
+      entidad: cliente.entidad,
+      curp: cliente.curp,
+      rfn: cliente.rfn,
+      municipio: cliente.municipio,
+      domicilio: cliente.domicilio,
+      codigoIdentificacion: cliente.codigoIdentificacion,
+    });
+    setShowModal(false); // Cierra el modal
+  };
 
   const handleCancel = () => {
     setFormData(initialForm); // Limpia el formulario
@@ -112,7 +150,7 @@ const FormularioCliente = ({ onAdd, editarClientesFrecuentes,formularioForm, onC
   };
 
   return (
-    <div className=" mx-auto mt-5 mb-4 tarjeta-border p-5">
+    <div className="mx-auto mt-5 mb-4 tarjeta-border p-5">
         <h5 className="text-center mb-3 size-font-title">Agregar nuevo cliente</h5>
 
         {/* Agregar datos de cliente registrado */}
@@ -301,6 +339,7 @@ const FormularioCliente = ({ onAdd, editarClientesFrecuentes,formularioForm, onC
           onClose={() =>  setShowModal(false)}
           content={modalContent}
           title={tituloModal}
+          size='lg'
         />
     </div>
   );

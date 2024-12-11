@@ -88,11 +88,11 @@ const ListadoClientes = () => {
       columns={columns}
       onEdit={editarCliente}
       onDelete={eliminarCliente}
-      searchPlaceholder="Buscar nombre..."
+      searchPlaceholder="Buscar cliente..."
       edicion={editarClientesFrecuentes}
       />
  
-    <div className="px-5">
+    <div className="px-5 container">
       <FormularioCliente
         onAdd={guardarDatos}
         editarClientesFrecuentes={editarClientesFrecuentes}

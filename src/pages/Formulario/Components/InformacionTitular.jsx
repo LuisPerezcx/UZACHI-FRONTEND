@@ -19,6 +19,7 @@ export const InformacionTitular = forwardRef((props, ref) => {
     const handleChange = (e) => {
         const {name, value} = e.target;
         //actualizar valores del formulario
+        if(name==='curp') value?.toString().trim().toUpperCase();
         setFormValues({
             ...formValues,
             [name]: value,
@@ -35,7 +36,6 @@ export const InformacionTitular = forwardRef((props, ref) => {
         switch (name) {
             case "nombre":
             case "domicilio":
-            case "curp":
             case "siem":
             case "unidad":
                 // Validar que no contengan números
@@ -47,7 +47,14 @@ export const InformacionTitular = forwardRef((props, ref) => {
                 // Validar solo números positivos
                 if (!/^\d*$/.test(value)) error = 'Este campo solo permite números positivos.';
                 break;
-
+            case "curp": 
+                const curpRegex = /^[A-Z]{4}\d{6}[HM][A-Z]{2}[A-Z]{3}[A-Z\d]{2}$/;
+    
+                if (!curpRegex.test(value.toUpperCase())) {
+                    error = 'Formato de CURP incorrecto. Revisa los caracteres ingresados.';
+                }
+                break;
+            
             default:
                 break;
         }
@@ -102,6 +109,7 @@ export const InformacionTitular = forwardRef((props, ref) => {
                             placeholder="Nombre"
                             size="sm"
                             className="form-control"
+                            maxLength={100}
                         />
                         {errors.nombre && <span className='text-danger'>{errors.nombre}</span>}
                     </div>
@@ -118,6 +126,7 @@ export const InformacionTitular = forwardRef((props, ref) => {
                             placeholder="Domicilio"
                             size="sm"
                             className="form-control"
+                            maxLength={200}
                         />
                         {errors.domicilio && <span className='text-danger'>{errors.domicilio}</span>}
                     </div>
@@ -136,6 +145,7 @@ export const InformacionTitular = forwardRef((props, ref) => {
                             placeholder="CURP"
                             size="sm"
                             className="form-control"
+                            maxLength={18}
                         />
                         {errors.curp && <span className='text-danger'>{errors.curp}</span>}
                     </div>
@@ -152,6 +162,7 @@ export const InformacionTitular = forwardRef((props, ref) => {
                             placeholder="Registro SIEM"
                             size="sm"
                             className="form-control"
+                            maxLength={15}
                         />
                         {errors.siem && <span className='text-danger'>{errors.siem}</span>}
                     </div>

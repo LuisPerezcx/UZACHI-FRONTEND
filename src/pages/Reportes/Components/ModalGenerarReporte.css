@@ -27,11 +27,39 @@
 
 .table-container {
     overflow-x: auto;
-    -webkit-overflow-scrolling: touch; /* Para un desplazamiento más fluido en dispositivos táctiles */
+    -webkit-overflow-scrolling: touch; 
+}
+
+.dropdown-menu {
+    position: absolute !important;
+    z-index: 1050; 
+}
+
+.dropdown-menu.show {
+    display: block;
+}
+
+.dropdown-menu {
+    position: absolute !important;
+    z-index: 1050; 
+}
+
+.dropdown-menu.show {
+    display: block;
+}
+
+
+.excel-icon-informes {
+    width: 40px;
+    height: 40px; 
 }
 
 /* Ajustes para pantallas pequeñas (menos de 768px) */
 @media (max-width: 768px) {
+    .table-container {
+        -ms-overflow-style: scrollbar; 
+        overflow-x: auto; 
+    }
     .table {
         font-size: 0.9rem; /* Reduce el tamaño de fuente para mayor claridad */
     }
@@ -42,12 +70,7 @@
     .table td {
         padding: 0.5rem; /* Reduce el padding en pantallas pequeñas */
     }
-    /* Oculta columnas desde la tercera en adelante, dejando visibles solo No., Nombre del Documento y Acciones */
-    .table th:nth-child(n+3):not(:last-child),
-    .table td:nth-child(n+3):not(:last-child) {
-        display: none; /* Oculta las columnas adicionales */
-    }
-
+    
     .dropdown-menu {
         font-size: 0.8rem; /* Ajusta el tamaño del menú desplegable */
     }
@@ -56,13 +79,13 @@
         font-size: 1rem; /* Ajusta el tamaño del botón */
     }
 
-    .excel-icon {
+    .excel-icon-informes {
         width: 30px;
-        height: 30px; /* Reduce el tamaño del ícono */
+        height: 30px; 
     }
 
     .reporte-btn {
-        font-size: 0.7rem; /* Reduce el tamaño de la fuente */
+        font-size: 0.7rem;
         padding: 0.2rem 0.6rem; 
         margin-bottom: 20px;
     }

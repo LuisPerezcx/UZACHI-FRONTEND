@@ -38,14 +38,14 @@ export const PrincipalAdmin = () => {
     {
       icon: iconInformeSemarnat,
       title: 'Administración de los informes para SEMARNAT',
-      buttonLabel: 'Administrar',
+      buttonLabel: 'Acceder',
       route: '/ReportesSemarnat',
       onClick: () => console.log('Administrar informes SEMARNAT')
     },
     {
       icon: iconInformeInterno,
       title: 'Administración de los informes internos de UZACHI',
-      buttonLabel: 'Administrar',
+      buttonLabel: 'Acceder',
       route: '/ReportesInternos',
       onClick: () => console.log('Administrar informes internos')
     }
@@ -96,9 +96,9 @@ export const PrincipalAdmin = () => {
             <TarjetaAdmin
                 imgSrc={iconInforme}
                 title="Informes"
-                description="Administra los informes internos e informes SEMARNAT"
+                description="Informes internos e informes para SEMARNAT"
                 buttons={[
-                    { label: 'Acceder', onClick: () => { handleShow(); console.log('Informes clicado'); }}
+                    { label: 'Acceder', onClick: () => { handleShow(); }}
                 ]}
             />
 

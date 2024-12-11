@@ -5,15 +5,15 @@ import { Form } from "react-bootstrap";
 import { ListaTramites } from "./ListaTramites";
 
 export const FormularioRemision = () => {
-  
   const getTodayDate = () => {
     const today = new Date();
-    return today.toISOString().split('T')[0]; // Formato YYYY-MM-DD
-  };
+    return today.getFullYear(); 
+  };  
 
 const [formData, setFormData] = useState({
   fechaTramite: getTodayDate(), // Fecha actual al cargar el componente
-  fechaTramite: '', 
+  totalFolio: '', 
+
   folioPinus: '',
   folioQuercus: '',
   folioHojosa: '',
@@ -27,9 +27,24 @@ const [formData, setFormData] = useState({
 
   });
 
-  const [tramites, setTramites] = useState([]);
+  const folioInicialQuercus = Number(formData.folioInicialQuercus);
+  const folioFinalQuercus = Number(formData.folioFinalQuercus);
 
+  const folioInicialPinus = Number(formData.folioInicialPinus);
+  const folioFinalPinus = Number(formData.folioFinalPinus);
+
+  const folioInicialHojosa = Number(formData.folioInicialHojosa);
+  const folioFinalHojosa = Number(formData.folioFinalHojosa);
+
+  const totalFolio = Number(formData.totalFolio);
+
+  const folioQuercus = Number(formData.folioQuercus);
+  const folioPinus = Number(formData.folioPinus);
+  const folioHojosa = Number(formData.folioHojosa);
+
+  const [tramites, setTramites] = useState([]);
   const [formFolio, setFormFolios] = useState({
+    totalFolio: '',
     folioInicialPinus: '',
     folioInicialQuercus: '',
     folioInicialHojosa: '',
@@ -47,7 +62,7 @@ const [formData, setFormData] = useState({
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (!formData.fechaTramite || !formData.folioQuercus || !formData.folioPinus || !formData.folioHojosa ||
+    if (!formData.totalFolio, !formData.fechaTramite || !formData.folioQuercus || !formData.folioPinus || !formData.folioHojosa ||
         !formData.folioFinalHojosa || !formData.folioFinalPinus || !formData.folioFinalQuercus ||
         !formData.folioInicialHojosa || !formData.folioInicialPinus || !formData.folioInicialQuercus
     ) {
@@ -66,11 +81,30 @@ const [formData, setFormData] = useState({
       return;
     }
 
+  // Validacion para que la suma de folios sea igual al total de folios 
+    // Validar suma de folios
+    if (folioPinus + folioQuercus + folioHojosa !== totalFolio) {
+      Swal.fire({
+        title: "Error en los folios totales",
+        text: "La suma de los folios no coincide con el total ingresado.",
+        icon: "error",
+        confirmButtonText: "Aceptar",
+        timer: 3000,
+        timerProgressBar: true,
+
+        didOpen: () => {
+          const confirmButton = Swal.getConfirmButton();
+          confirmButton.style.backgroundColor = 'var(--color-verde)'; // Color verde
+        }
+      });
+      return;
+    }
+
     {/*Validacion de folio inicial sea menor que el final */}
     if (
-      (formFolio.folioInicialPinus) >= (formFolio.folioFinalPinus) ||
-      (formFolio.folioInicialHojosa) >= (formFolio.folioFinalHojosa) ||
-      (formFolio.folioInicialQuercus) >= (formFolio.folioFinalQuercus)
+      (formFolio.folioInicialPinus) > (formFolio.folioFinalPinus) ||
+      (formFolio.folioInicialHojosa) > (formFolio.folioFinalHojosa) ||
+      (formFolio.folioInicialQuercus) > (formFolio.folioFinalQuercus)
     ) {
       Swal.fire({
         title: 'Error en los folios',
@@ -87,35 +121,30 @@ const [formData, setFormData] = useState({
     }
 
     {/*Validar si no coinciden los folios */}
-    const folioInicialQuercus = Number(formData.folioInicialQuercus);
-    const folioFinalQuercus = Number(formData.folioFinalQuercus);
-
-    const folioInicialPinus = Number(formData.folioInicialPinus);
-    const folioFinalPinus = Number(formData.folioFinalPinus);
-
-    const folioInicialHojosa = Number(formData.folioInicialHojosa);
-    const folioFinalHojosa = Number(formData.folioFinalHojosa);
-    const folioQuercus = Number(formData.folioQuercus);
-    const folioPinus = Number(formData.folioPinus);
-    const folioHojosa = Number(formData.folioHojosa);
 
     if (folioFinalQuercus - folioInicialQuercus + 1 !== folioQuercus || folioFinalPinus - folioInicialPinus + 1 !== folioPinus || folioFinalHojosa - folioInicialHojosa + 1 !== folioHojosa) {
       Swal.fire({
-        title: "Error en la cantidad de folios",
+        title: "Error de asignación del folios inicial y final",
         text: "El rango de folios no coincide con los folios autorizados.",
         icon: "error",
         confirmButtonText: "Aceptar",
-        timer: 3000,
+        timer: 4000,
         timerProgressBar: true,
+        didOpen: () => {
+          const confirmButton = Swal.getConfirmButton();
+          confirmButton.style.backgroundColor = 'var(--color-verde)'; // Color verde
+        }
       });
       return;
     }
-
     {/*Guardar tramite */}
-    setTramites([...tramites, {...formData,fecha: formData.fechaTramite} ]);
+    setTramites([...tramites, { ...formData, fechaTramite: formData.fechaTramite }]);
+    
     // Limpiar formulario
     setFormData({
-      fechaTramite: getTodayDate(), // Reestablece la fecha actual después de enviar el formulario
+      fechaTramite: '', // Reestablece la fecha actual después de enviar el formulario
+      totalFolio: '',
+
       folioPinus: '',
       folioQuercus: '',
       folioHojosa: '',
@@ -127,6 +156,7 @@ const [formData, setFormData] = useState({
       folioFinalQuercus: '',
       folioFinalHojosa: '',  
     });
+
     setFormFolios(
       {
         folioInicialPinus: '',
@@ -139,7 +169,7 @@ const [formData, setFormData] = useState({
     )
 
     Swal.fire({
-      title: "Tramite Agregado",
+      title: "Trámite agregado",
       text: "Los datos son correctos.",
       icon: "success",
       confirmButtonText: "Aceptar",
@@ -160,13 +190,38 @@ const [formData, setFormData] = useState({
         {/* Columna 1: Anualidad */}
         <div className="col-md-6">
           <form>
-          <div className="mb-4 d-flex">
-            <Form.Label htmlFor="fechaTramite" style={{ width: "350px" }}>A n u a l i d a d</Form.Label>
+          <div className="d-flex">
+          <Form.Label htmlFor="totalFolio" style={{ width: "530px", alignItems:"flex-start"}}>Total de folios <span className="text-danger"> *</span></Form.Label>
             <Form.Control
-              type="date"
+              type="text"
+              className="me-4 mb-4"
+              style={{height:"40px",width:"50%"}}
+              name="totalFolio"
+              value={formData.totalFolio}
+              maxLength={5}
+                onChange={(e) => {
+                  const value = e.target.value;
+                  // Permitir solo números enteros o decimales
+                  if (/^\d*$/.test(value)) {
+                    handleChange({ target: { name: "totalFolio", value } });
+                  }
+                }}
+            
+            />
+            <Form.Label className="ms-2 me-2" htmlFor="fechaTramite" style={{ width: "380px"}}>Anualidad <span className="text-danger"> *</span></Form.Label>
+            <Form.Control
+              type="text"
+              style={{height:"40px", width:"50%"}}
               name="fechaTramite"
               value={formData.fechaTramite}
-              onChange={handleChange}
+              maxLength={4}
+                onChange={(e) => {
+                  const value = e.target.value;
+                  // Permitir solo números enteros o decimales
+                  if (/^\d*$/.test(value)) {
+                    handleChange({ target: { name: "fechaTramite", value } });
+                  }
+                }}
             />
           </div>
             <div className="mb-3 d-flex">
@@ -179,7 +234,7 @@ const [formData, setFormData] = useState({
                 onChange={(e) => {
                   const value = e.target.value;
                   // Permitir solo números enteros o decimales
-                  if (/^\d*\.?\d*$/.test(value)) {
+                  if (/^\d*$/.test(value)) {
                     handleChange({ target: { name: "folioPinus", value } });
                   }
                 }}
@@ -195,7 +250,7 @@ const [formData, setFormData] = useState({
                 onChange={(e) => {
                 const value = e.target.value;
                   // Permitir solo números enteros o decimales
-                  if (/^\d*\.?\d*$/.test(value)) {
+                  if (/^\d*$/.test(value)) {
                     handleChange({ target: { name: "folioQuercus", value } });
                 }
                 }}
@@ -211,7 +266,7 @@ const [formData, setFormData] = useState({
                 onChange={(e) => {
                   const value = e.target.value;
                   // Permitir solo números enteros o decimales
-                  if (/^\d*\.?\d*$/.test(value)) {
+                  if (/^\d*$/.test(value)) {
                     handleChange({ target: { name: "folioHojosa", value } });
                   }
                 }}
@@ -242,7 +297,7 @@ const [formData, setFormData] = useState({
                 onChange={(e) => {
                   const value = e.target.value;
                   // Permitir solo números enteros o decimales
-                  if (/^\d*\.?\d*$/.test(value)) {
+                  if (/^\d*$/.test(value)) {
                     handleChange({ target: { name: "folioInicialPinus", value } });
                   }
                 }}
@@ -257,7 +312,7 @@ const [formData, setFormData] = useState({
                 onChange={(e) => {
                   const value = e.target.value;
                   // Permitir solo números enteros o decimales
-                  if (/^\d*\.?\d*$/.test(value)) {
+                  if (/^\d*$/.test(value)) {
                     handleChange({ target: { name: "folioFinalPinus", value } });
                   }
                 }}
@@ -275,7 +330,7 @@ const [formData, setFormData] = useState({
                 onChange={(e) => {
                   const value = e.target.value;
                   // Permitir solo números enteros o decimales
-                  if (/^\d*\.?\d*$/.test(value)) {
+                  if (/^\d*$/.test(value)) {
                     handleChange({ target: { name: "folioInicialQuercus", value } });
                   }
                 }}
@@ -290,7 +345,7 @@ const [formData, setFormData] = useState({
                 onChange={(e) => {
                   const value = e.target.value;
                   // Permitir solo números enteros o decimales
-                  if (/^\d*\.?\d*$/.test(value)) {
+                  if (/^\d*$/.test(value)) {
                     handleChange({ target: { name: "folioFinalQuercus", value } });
                   }
                 }}
@@ -308,7 +363,7 @@ const [formData, setFormData] = useState({
                 onChange={(e) => {
                   const value = e.target.value;
                   // Permitir solo números enteros o decimales
-                  if (/^\d*\.?\d*$/.test(value)) {
+                  if (/^\d*$/.test(value)) {
                     handleChange({ target: { name: "folioInicialHojosa", value } });
                   }
                 }}
@@ -323,7 +378,7 @@ const [formData, setFormData] = useState({
                 onChange={(e) => {
                   const value = e.target.value;
                   // Permitir solo números enteros o decimales
-                  if (/^\d*\.?\d*$/.test(value)) {
+                  if (/^\d*$/.test(value)) {
                     handleChange({ target: { name: "folioFinalHojosa", value } });
                   }
                 }}

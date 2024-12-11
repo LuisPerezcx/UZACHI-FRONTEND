@@ -4,6 +4,7 @@ import { TableSearch } from './Components/TableSearch';
 import { GenerarReporteModal } from './Components/ModalGenerarReporte';
 import { BreadCrumb } from '../../components/BreadCrumb';
 import { Footer } from '../../components/Footer';
+import { AlertComponent } from '../../components/AlertComponent'; 
 
 import excel from '../../assets/excel.png';
 
@@ -11,82 +12,89 @@ export const ReportesSemarnat = () => {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+  const tipoReporte = "semarnat";
 
-  const [reportes, setReportes] = useState([  // Agregar estado para los reportes
-    { id: 1, nombre: "MOVIMIENTO DE MADERA ENE-JUN 2024", comunidad: "Santiago Xiacuí", periodo: "2019 - 2020" },
-    { id: 2, nombre: "MOVIMIENTO DE MADERA JUL-DIC 2024", comunidad: "San Juan Bautista", periodo: "2020 - 2021" },
-    { id: 3, nombre: "REPORTE DE ACTIVIDADES 2023", comunidad: "Santa María Yolotepec", periodo: "2022 - 2023" },
-    ]);
-
-  const linksLabel = [
-    { url: '/', label: 'Inicio' },
+  const enlacesLabel = [
+    { url: '/PrincipalAdmin', label: 'Inicio' },
     { url: '/ReportesSemarnat', label: 'Reportes SEMARNAT' }
   ];
 
-  const columnsLabel = [
-    { label: 'No.', key: 'id' },
+  const [reportes, setReportes] = useState([  
+    { id: 1, nombre: "REPORTE 2019 - 2020", comunidad: "Santiago Xiacuí", tipo: "Remisión", periodo: "2019-01-01 - 2020-01-01" },
+    { id: 2, nombre: "REPORTE 2020 - 2021", comunidad: "San Juan Bautista", tipo: "Remisión", periodo: "2020-01-01 - 2021-01-01" },
+    { id: 3, nombre: "REPORTE 2022 - 2023", comunidad: "Santa María Yolotepec", tipo: "Rembarque", periodo: "2022-01-01 - 2023-01-01" },
+  ]);
+
+  const columnasLabel = [
     { label: 'Nombre documento', key: 'nombre' },
     { label: 'Comunidad', key: 'comunidad' },
+    { label: 'Tipo', key: 'tipo' },
     { label: 'Periodo', key: 'periodo' },
   ];
 
-  const filtersLabel = [
-    { label: 'Comunidad', value: 'filtroComunidad' },
-    { label: 'Periodo inicio', value: 'filtropInicio' }
+  const filtrosLabel = [
+    { label: 'Comunidad', value: 'comunidad' },
+    { label: 'Periodo', value: 'periodo' },
+    { label: 'Tipo informe', value: 'tipo' }
   ];
 
-  const actionsLabel = [
+  const accionesLabel = [
     {
       label: 'Descargar',
       handler: (item) => console.log('Editar elemento:', item),
     },
     {
       label: 'Eliminar',
-      handler: (item) => console.log('Eliminar elemento:', item),
+      handler: (item) => handleDelete(item), 
     }
   ];
 
-  const simulatedDataLabel = reportes;  
-  // Usar el estado de los reportes en lugar de los datos simulados
-
-  const agregarReporte = (nombreReporte) => {
-    const nuevoReporte = {
-      id: reportes.length + 1,  // Nuevo ID para el reporte
-      nombre: nombreReporte,
-      comunidad: "Comunidad Ejemplo",  
-      periodo: "2023 - 2024",
-    };
-
-    setReportes([...reportes, nuevoReporte]);  // Agregar el nuevo reporte a la lista
+  const agregarReporte = (nuevoReporte) => {
+    setReportes([...reportes, nuevoReporte]);  
   };
 
-  const eliminarReporte = (item) => {
-    setReportes(reportes.filter(reporte => reporte.id !== item.id));
-};
+  const handleDelete = (item) => {
+    AlertComponent.confirm({
+      title: '¿Estás seguro de eliminar este reporte?',
+      text: `Se eliminará el reporte: ${item.nombre}`,
+      onConfirm: () => {
+        eliminarReporte(item); 
+        AlertComponent.success({
+          title: 'Eliminado',
+          text: `El reporte ${item.nombre} ha sido eliminado de manera exitosa.`,  // Mensaje actualizado
+        });
+      },
+    });
+  };
+  
+   const eliminarReporte = (item) => {
+    const nuevosReportes = reportes.filter((reporte) => reporte.id !== item.id);
+    setReportes(nuevosReportes);
+  };
 
-return (
+  return (
     <div>
       <NavAdmin />
-      <BreadCrumb links={linksLabel} />
+      <BreadCrumb links={enlacesLabel} />
       <div className='justify-content-center container'>
         <h2 className='text-center mb-5'>REPORTES SEMARNAT</h2>
         <div className='d-flex justify-content-end'>
           <button className='btn btn-success me-3 reporte-btn' onClick={handleShow}>Generar reporte</button>
-          <img className='excel-icon' src={excel} alt='excel' />
+          <img className='excel-icon-informes' src={excel} alt='excel' />
         </div>
         <div className="d-flex justify-content-center">
           <TableSearch
             endpoint={null}
-            columns={columnsLabel}
-            filters={filtersLabel}
-            actions={actionsLabel}
-            data={simulatedDataLabel}
-            onDelete={eliminarReporte}  // Pasamos la función onDelete
+            columnas={columnasLabel}
+            filtros={filtrosLabel}
+            acciones={accionesLabel}
+            datos={reportes}
+            onDelete={handleDelete} 
           />
         </div>
       </div>
-      <GenerarReporteModal show={show} handleClose={handleClose} agregarReporte={agregarReporte} />
+      <GenerarReporteModal show={show} handleClose={handleClose} agregarReporte={agregarReporte}  tipo={tipoReporte}  />
       <Footer />
     </div>
-);
-}
+  );
+};

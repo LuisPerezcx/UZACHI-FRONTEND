@@ -13,6 +13,7 @@ import { Login } from './pages/Login';
 import { Calculadoras } from './pages/Calculadoras';
 import FolioReembarque from './pages/FoliosAsignados/FolioReembarque';
 import FolioRemision from './pages/FoliosAsignados/FolioRemision';
+import { PlantillaDocumento } from './components/PlantillaDocumento/PlantillaDocumento';
 
 
 const AppRoutes = () => {
@@ -30,6 +31,7 @@ const AppRoutes = () => {
       <Route path='/AgregarComunidades' element={<AgregarComunidades/>} />
       <Route path='/FolioReembarque' element={<FolioReembarque/>} />
       <Route path='/FolioRemision' element={<FolioRemision/>} />
+      <Route path='/prueba' element={<PlantillaDocumento/>} />
 
     </Routes>
   );
