@@ -18,8 +18,13 @@ export const FormularioReembarque = () => {
     folioFinal: '',
   });
 
-  const [tramites, setTramites] = useState([]); // Lista de trámites
-  const [contador, setContador] = useState(1); // Contador de trámites
+  const [tramites, setTramites] = useState([
+    { id: 1, volumenAutorizado: "10", foliosAutorizados: "100", folioInicial: "1", folioFinal: "100" },
+    { id: 2, volumenAutorizado: "15", foliosAutorizados: "150", folioInicial: "101", folioFinal: "250" },
+    { id: 3, volumenAutorizado: "20", foliosAutorizados: "200", folioInicial: "251", folioFinal: "450" },
+  ]); // Lista de trámites con valores predeterminados
+
+  const [contador, setContador] = useState(4); // Contador de trámites
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -233,7 +238,8 @@ export const FormularioReembarque = () => {
                 {tramites.map((tramite) => (
                   <li key={tramite.id} className="list-group-item ">
                     <strong  style={{color:"#14C3A2"}}> Trámite # {tramite.id}<br /></strong>
-                    Volumen autoriazado {tramite.volumenAutorizado} Folio autorizado {tramite.foliosAutorizados}, <br></br>Folio inicial {tramite.folioInicial}, Folio final {tramite.folioFinal}.
+                    Volumen autorizado = <b>{tramite.volumenAutorizado}</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    Folio autorizado = <b>{tramite.foliosAutorizados}</b> <br></br>
+                    Folio inicial = <b>{tramite.folioInicial}</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Folio final = <b>{tramite.folioFinal}</b>
                   </li>
                 ))}
               </ul>
