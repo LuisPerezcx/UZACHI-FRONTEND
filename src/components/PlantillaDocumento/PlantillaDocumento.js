@@ -1,145 +1,148 @@
 import React from 'react';
-import './PlantillaDocumento.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 export const PlantillaDocumento = () => {
   return (
-    <div className="mi-container my-4">
+    <div className="container my-4">
       <h5 className="text-center">
         SEMARNAT DOCUMENTO ÚNICO DE REMISIÓN Y REEMBARQUE FORESTAL PARA ACREDITAR LA LEGAL PROCEDENCIA DE MATERIAS PRIMAS, PRODUCTOS,
         <br />
         SUBPRODUCTOS FORESTALES DURANTE SU TRANSPORTE, ALMACENAMIENTO Y/O TRANSFORMACIÓN
       </h5>
-      <table className="mi-table mi-table-bordered">
-        <tbody>
-          <tr>
-            <td colSpan="2" className="mi-bordered-cell dark-cell">
-              Tipo de Documento(2): <strong>Reembarque Forestal</strong>
-            </td>
-            <td className="mi-bordered-cell dark-cell">
-              Folio Autorizado: <strong>315 / 317</strong>
-            </td>
-          </tr>
-          {/*PRIMERA PARTE DATOS DEL TITULAR*/}
-          <tr>
-            <td  colSpan="2" className=" large-row"></td>
-            
-            <tr>
-              <td colSpan="6" className="mi-bordered-cell">Nombre: <strong>Procesadora Maderera La Trinidad Ixtlan, S.P.R de R.L.</strong></td>
-            </tr>
-            <tr>
-              <td colSpan="6" className="mi-bordered-cell">Domicilio: <strong>Carretera Ixtlan-Zoogocho, Km 22.5 La Trinidad Ixtlan 68701 Santiago Xiacuí Oaxaca</strong></td>
-            </tr>
-            <tr>
-              <td colSpan="2" className="mi-bordered-cell">CURP:</td>
-              <td colSpan="2" className="mi-bordered-cell">Registro SIEM:</td>
-              <td colSpan="2" className="mi-bordered-cell">Número de Oficio: <strong>SEMARNAT-AR-1012-2020</strong></td>
-            </tr>
-            <tr>
-              <td className="mi-bordered-cell">Cantidad que Ampara:</td>
-              <td colSpan="2" className="mi-bordered-cell">Folios autorizados del (12) al (13)</td>
-              <td colSpan="3" className="mi-bordered-cell">Fecha de Vencimiento: <strong>6 de Agosto de 2021</strong></td>
-            </tr>
-          </tr>
-          {/*DATOS DEL REMITENTE */}
-          <tr>
-            <td  colSpan="2" className=" large-row"></td>
-            <tr>
-              <td colSpan="6" className="mi-bordered-cell dark-cell">
-                Ubicación del Lugar de Origen: <strong>Carretera Ixtlan-Zoogocho Km 22.5 68701</strong>
-              </td>
-            </tr>
-            <tr>
-              <td colSpan="3" className="mi-bordered-cell">Municipio: <strong>Santiago Xiacuí</strong></td>
-              <td colSpan="3" className="mi-bordered-cell">Entidad: <strong>Oaxaca</strong></td>
-            </tr>
-            <tr>
-              <td className="mi-bordered-cell">Vigencia:</td>
-              <td colSpan="2" className="mi-bordered-cell">No Aplica</td>
-              <td className="mi-bordered-cell">Anualidad:</td>
-              <td colSpan="2" className="mi-bordered-cell">No Aplica</td>
-            </tr>
-          </tr>
 
-          {/*INFORMACION DEL DESTINATARIO */}
-          <tr>
-            <td  colSpan="2" className=" large-row"></td>
-            <tr>
-              <td colSpan="6" className="mi-bordered-cell">Nombre:</td>
-            </tr>
-            <tr>
-              <td className="mi-bordered-cell">CURP:</td>
-              <td colSpan="2" className="mi-bordered-cell">Código de Identificación:</td>
-              <td colSpan="3" className="mi-bordered-cell">Domicilio del Destino:</td>
-            </tr>
-            <tr>
-              <td colSpan="6" className="mi-bordered-cell">Domicilio del destino:</td>
-            </tr>
-            <tr>
-              <td className="mi-bordered-cell">Población:</td>
-              <td colSpan="2" className="mi-bordered-cell">Municipio:</td>
-              <td colSpan="3" className="mi-bordered-cell">Entidad:</td>
-            </tr>
-            <tr>
-              <td colSpan="6" className="mi-bordered-cell">Domicilio:</td>
-            </tr>
-          </tr>
-          
-          {/*INFORMACION SOBRE DEL SUBPRODUCTO */}
-          <tr>
-            <td  colSpan="2" className=" large-row"></td>
-            <tr>
-              <td colSpan="3" className="mi-bordered-cell">Número y/o Cantidad:</td>
-              <td colSpan="3" className="mi-bordered-cell">Descripción:</td>
-              <td colSpan="3" className="mi-bordered-cell">Volumen y/o peso amparado:</td>
-              <td colSpan="3" className="mi-bordered-cell">Unidad de medida:</td>
-            </tr>
-            <tr>
-              <td colSpan="3" className="mi-bordered-cell"></td>
-              <td colSpan="3" className="mi-bordered-cell"></td>
-              <td colSpan="3" className="mi-bordered-cell"></td>
-              <td colSpan="3" className="mi-bordered-cell"></td>
-            </tr>
-            <tr>
-              <td colSpan="6" className="mi-bordered-cell">Cantidad que ampara este documento con letra:</td>
-            </tr>
-          </tr>
-         
-          {/*INFORMACION SOBRE SALDOS y medios de transporte*/}
-          <tr>
-            <td  colSpan="2" className=" large-row"></td>
-            <tr>
-              <td colSpan="2" className="mi-bordered-cell dark-cell">
-                Saldo disponible según documento anterior: 
-              </td>
-              <td className="mi-bordered-cell dark-cell">
-              </td>
-            </tr>
-            <tr>
-              <td colSpan="2" className="mi-bordered-cell dark-cell">
-                Cantidad que ampara este documento: 
-              </td>
-              <td className="mi-bordered-cell dark-cell">
-              </td>
-            </tr>
-            <tr>
-              <td colSpan="2" className="mi-bordered-cell dark-cell">
-                Saldo que pasa al siguiente documento: 
-              </td>
-              <td className="mi-bordered-cell dark-cell">
-              </td>
-            </tr>
-            <td  colSpan="2" className=" large-row"></td>
-            <tr>
-            <td colSpan="2" className="mi-bordered-cell dark-cell">Medio de Transporte:</td>
-            <td className="mi-bordered-cell">Capacidad:</td>
-            <td className="mi-bordered-cell">Propietario:</td>
-            <td className="mi-bordered-cell">Placas:</td>
-            <td className="mi-bordered-cell">Modelo:</td>
-          </tr>
-          </tr>
-        </tbody>
-      </table>
+      {/* Tipo de documento */}
+      <div className="row">
+        <div className="col-md-8  border p-2">
+          Tipo de Documento(2): <strong>Reembarque Forestal</strong>
+        </div>
+        <div className="col-md-4 border p-2">
+          Folio Autorizado: <strong>315 / 317</strong>
+        </div>
+      </div>
 
+      {/* Datos del titular */}
+      <div className="row">
+        <div className="col-12 border p-2">
+          Nombre: <strong>Procesadora Maderera La Trinidad Ixtlan, S.P.R de R.L.</strong>
+        </div>
+      </div>
+      <div className="row">
+        <div className="col-12 border p-2">
+          Domicilio: <strong>Carretera Ixtlan-Zoogocho, Km 22.5 La Trinidad Ixtlan 68701 Santiago Xiacuí Oaxaca</strong>
+        </div>
+      </div>
+      <div className="row">
+        <div className="col-md-3 border p-2">CURP:</div>
+        <div className="col-md-3 border p-2">Registro SIEM:</div>
+        <div className="col-md-3 border p-2">
+          Número de Oficio: <strong>SEMARNAT-AR-1012-2020</strong>
+        </div>
+        <div className="col-md-3 border p-2">
+          Fecha: <strong>06/08/2020</strong>
+        </div>
+      </div>
+      <div className="row">
+        <div className="col-md-3 border p-2">Cantidad que Ampara:</div>
+        <div className="col-md-3 border p-2">Folios autorizados del (12) al (13):</div>
+        <div className="col-md-3 border p-2">Unidad de medida:</div>
+        <div className="col-md-3 border p-2">
+          Fecha de Vencimiento de autorización de documentos: <strong>6 de Agosto de 2021</strong>
+        </div>
+      </div>
+
+      {/* Datos del remitente */}
+      <div className="row">
+        <div className="col-12 border p-2">
+          Ubicación del Lugar de Origen: <strong>Carretera Ixtlan-Zoogocho Km 22.5 68701</strong>
+        </div>
+      </div>
+      <div className="row">
+      <div className="col-md-4 border p-2">
+          RFN: <strong>Santiago Xiacuí</strong>
+        </div>
+        <div className="col-md-4 border p-2">
+          Municipio: <strong>Santiago Xiacuí</strong>
+        </div>
+        <div className="col-md-4 border p-2">
+          Entidad: <strong>Oaxaca</strong>
+        </div>
+      </div>
+      <div className="row">
+        <div className="col-md-6 border p-2">Tipo de resolución: </div>
+        <div className="col-md-3 border p-2">N°:</div>
+        <div className="col-md-3 border p-2">Fecha:</div>
+      </div>
+      <div className="row">
+        <div className="col-md-2 border p-2">Vigencia: </div>
+        <div className="col-md-3 border p-2">Volumen autorizado para esta anualidad:</div>
+        <div className="col-md-2 border p-2">Anualidad:</div>
+        <div className="col-md-5 border p-2">Género y/o producto:</div>
+      </div>
+
+      {/* Información del destinatario */}
+      <div className="row">
+        <div className="col-12 border p-2">Nombre:</div>
+      </div>
+      <div className="row">
+        <div className="col-md-3 border p-2">CURP:</div>
+        <div className="col-md-3 border p-2">Código de Identificación:</div>
+        <div className="col-md-6 border p-2">RFN:</div>
+      </div>
+      <div className="row">
+        <div className="col-12 border p-2">Domicilio del destino:</div>
+      </div>
+      <div className="row">
+        <div className="col-md-4 border p-2">Población:</div>
+        <div className="col-md-4 border p-2">Municipio:</div>
+        <div className="col-md-4 border p-2">Entidad:</div>
+      </div>
+      <div className="row">
+        <div className="col-12 border p-2">Domicilio:</div>
+      </div>
+
+      {/* Información sobre el subproducto */}
+      <div className="row">
+        <div className="col-md-3 border p-2">Número y/o Cantidad:</div>
+        <div className="col-md-3 border p-2">Descripción:</div>
+        <div className="col-md-3 border p-2">Volumen y/o peso amparado:</div>
+        <div className="col-md-3 border p-2">Unidad de medida:</div>
+      </div>
+      <div className="row">
+        <div className="col-md-3 border p-2"></div>
+        <div className="col-md-3 border p-2"></div>
+        <div className="col-md-3 border p-2"></div>
+        <div className="col-md-3 border p-2"></div>
+      </div>
+      <div className="row">
+        <div className="col-12 border p-2">Cantidad que ampra este documento con letra:</div>
+      </div>
+
+      {/* Saldos y transporte */}
+      <div className="row">
+        <div className="col-md-6 border p-2">Saldo disponible según documento anterior:</div>
+        <div className="col-md-6 border p-2"></div>
+      </div>
+      <div className="row">
+        <div className="col-md-6 border p-2">Cantidad que ampara este documento:</div>
+        <div className="col-md-6 border p-2"></div>
+      </div>
+      <div className="row">
+        <div className="col-md-6 border p-2">Saldo que pasa al siguiente documento:</div>
+        <div className="col-md-6 border p-2"></div>
+      </div>
+      <div className="row">
+        <div className="col-md-6 border p-2">Saldo que pasa al siguiente documento:</div>
+        <div className="col-md-6 border p-2">Medio de Transporte:</div>
+      </div>
+      <div className="row">
+        <div className="col-md-3 border p-2">Marca:</div>
+        <div className="col-md-3 border p-2">Tipo:</div>
+        <div className="col-md-3 border p-2">Modelo:</div>
+        <div className="col-md-3 border p-2">Placas o matrícula:</div>
+      </div>
+
+      {/* Firmas */}
       <div className="d-flex justify-content-between mt-4">
         <div>
           <p>Nombre y Firma de quien Expide</p>
