@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Swal from 'sweetalert2';
 
 export const CalculadoraEspecial = () => {
     const [resultado, setResultado] = useState('');
@@ -16,7 +17,19 @@ export const CalculadoraEspecial = () => {
     });
 
     const handleNumericInput = (value) => {
-        return value.replace(/[^0-9.]/g, '').replace(/(\..*?)\./g, '$1');
+        // Permite solo números y un punto decimal, evita múltiples puntos
+        let sanitizedValue = value.replace(/[^0-9.]/g, '').replace(/(\..*?)\./g, '$1');
+    
+        // Limitar a un formato de hasta 5 enteros y 2 decimales
+        const decimalMatch = sanitizedValue.match(/^(\d{1,5})(\.\d{0,2})?/);
+        if (decimalMatch) {
+            sanitizedValue = decimalMatch[0]; // Retener solo la parte válida
+        } else {
+            // En caso de no coincidir, limitar a los primeros 5 caracteres como fallback
+            sanitizedValue = sanitizedValue.slice(0, 5);
+        }
+    
+        return sanitizedValue;
     };
     
 
@@ -33,11 +46,39 @@ export const CalculadoraEspecial = () => {
 
         // Validar que los campos no estén vacíos
         if (!altura1 || !altura2 || !altura3 || !ancho || !longitud || !coeficiente) {
-            setError('Todos los campos deben estar llenos y ser números válidos.');
+            Swal.fire({
+                title: 'Error, campos bacios',
+                text: 'Todos los campos deben de estar llenos',
+                icon: 'error',
+                confirmButtonText: 'Aceptar',
+                timer: 3000,
+                timerProgressBar: true,
+                didOpen: () => {
+                  const confirmButton = Swal.getConfirmButton();
+                  confirmButton.style.backgroundColor = 'var(--color-verde)'; // Color verde
+                }
+              });  
+            //setError('Todos los campos deben estar llenos y ser números válidos.');
             return;
         }
 
-        // Convertir valores a números
+        if ([altura1, altura2, altura3, ancho, longitud, coeficiente].some(value => parseFloat(value) === 0)) {
+            Swal.fire({
+                title: 'Error, campos invalidos',
+                text: 'Los campos no pueden contener numeros con valor "0"',
+                icon: 'error',
+                confirmButtonText: 'Aceptar',
+                timer: 3000,
+                timerProgressBar: true,
+                didOpen: () => {
+                  const confirmButton = Swal.getConfirmButton();
+                  confirmButton.style.backgroundColor = 'var(--color-verde)'; // Color verde
+                }
+              }); 
+            //setError('Los valores no pueden ser solo ceros.');
+            return;
+        }
+
         const numAltura1 = parseFloat(altura1);
         const numAltura2 = parseFloat(altura2);
         const numAltura3 = parseFloat(altura3);
@@ -74,7 +115,7 @@ export const CalculadoraEspecial = () => {
                     <input
                         type="text"
                         className="form-control"
-                        placeholder="Altura 1"
+                        placeholder="M"
                         name="altura1"
                         value={inputs.altura1}
                         onChange={handleInputChange}
@@ -85,7 +126,7 @@ export const CalculadoraEspecial = () => {
                     <input
                         type="text"
                         className="form-control"
-                        placeholder="Altura 2"
+                        placeholder="M"
                         name="altura2"
                         value={inputs.altura2}
                         onChange={handleInputChange}
@@ -96,7 +137,7 @@ export const CalculadoraEspecial = () => {
                     <input
                         type="text"
                         className="form-control"
-                        placeholder="Altura 3"
+                        placeholder="M"
                         name="altura3"
                         value={inputs.altura3}
                         onChange={handleInputChange}
@@ -110,7 +151,7 @@ export const CalculadoraEspecial = () => {
                     <input
                         type="text"
                         className="form-control"
-                        placeholder="Ancho"
+                        placeholder="M"
                         name="ancho"
                         value={inputs.ancho}
                         onChange={handleInputChange}
@@ -121,7 +162,7 @@ export const CalculadoraEspecial = () => {
                     <input
                         type="text"
                         className="form-control"
-                        placeholder="Longitud"
+                        placeholder="M"
                         name="longitud"
                         value={inputs.longitud}
                         onChange={handleInputChange}
