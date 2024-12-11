@@ -8,7 +8,7 @@ import { FormularioTransporte } from './Components/FormularioTransporte'
 import FormularioCliente from '../ClientesFrecuentes/Components/FormularioCliente'
 import { Button } from 'react-bootstrap'
 import { BreadCrumb } from '../../components/BreadCrumb' 
-import { use } from 'react'
+import Swal from "sweetalert2";
 
 export const Formulario = () => {
   const links = [
@@ -25,11 +25,11 @@ export const Formulario = () => {
   });
 
   const refInformacionDocumento = useRef();
-  /*
   const refInformacionTitular = useRef();
+  /*
+  const refFormularioCliente = useRef();
   const refInformacionSubproductosYSaldos = useRef();
   const refFormularioTransporte = useRef();
-  const refFormularioCliente = useRef();
   */
 
 
@@ -68,14 +68,33 @@ export const Formulario = () => {
   };
 
   const handleSubmit = () =>{
-    try{
-      const values = refInformacionDocumento.current.getValues();
-      console.log("Valores válidos:", values);
-    } catch (error){
-      //todo: implementar sweet alert
-      alert(error)
+    const allRefs = [refInformacionDocumento, refInformacionTitular]; // Todas las referencias
+    const collectedValues = {}; // Aquí almacenaremos los valores de todos los componentes
+    const errors = []; 
+
+    allRefs.forEach((ref, index) => {
+      try {
+        const values = ref.current.getValues(); // Validar y obtener los valores
+        Object.assign(collectedValues, values); // Acumular valores válidos
+      } catch (error) {
+        // Si ocurre un error, lo agregamos al arreglo `errors`
+        errors.push(`${error.message}`);
+      }
+    });
+  
+    if (errors.length > 0) {
+      // Mostrar todos los errores acumulados
+      Swal.fire({
+        icon: 'error',
+        title: 'Errores en la validación',
+        html: errors.join('<br>'), // Mostrar errores como una lista
+      });
+    } else {
+      console.log("Valores válidos:", collectedValues);
+      // TODO: Continuar con el flujo normal (por ejemplo, enviar los valores al servidor)
     }
-  }
+    console.log("Valores válidos:", collectedValues);
+  };
 
   return (
     <div>
@@ -93,7 +112,7 @@ export const Formulario = () => {
                 </div>
                 <InformacionDocumento ref={refInformacionDocumento}>
                   </InformacionDocumento>
-                <InformacionTitular></InformacionTitular>
+                <InformacionTitular ref={refInformacionTitular}></InformacionTitular>
                 <FormularioCliente
                   formularioForm={true} 
                   onAdd={guardarDatos} 

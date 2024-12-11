@@ -1,5 +1,6 @@
 import React, { forwardRef, useState , useImperativeHandle} from 'react'
 import { SelectCombo } from '../../../components/SelectCombo'
+
 export const InformacionDocumento = forwardRef((props, ref) => {
     const [formValues, setFormValues] = useState({
         tipoDocumento: '',
@@ -39,13 +40,11 @@ export const InformacionDocumento = forwardRef((props, ref) => {
         });
         // Validar el campo dinámicamente
         validateField(name, value);
-      };
+    };
   
       
     const validateField = (name, value) => {
         let error = '';        
-        console.log(name);
-        console.log(value);
         if(!value || value==='') error = 'Este campo es obligatorio.';
         
         // Agregar reglas de validación según el campo
@@ -64,7 +63,7 @@ export const InformacionDocumento = forwardRef((props, ref) => {
                 break;
             //todo: hora vencimiento y hora expedicion
             default : 
-                console.log(name);
+                //console.log(name);
                 break;
         }
         // Actualizar los errores
@@ -87,16 +86,16 @@ export const InformacionDocumento = forwardRef((props, ref) => {
         return Object.keys(newErrors).length === 0; // Retorna si no hay errores
       };
 
-  // Exponiendo la función de validación al padre
-  useImperativeHandle(ref, () => ({
-    getValues: () => {
-      const isValid = validateAllFields();
-      if (!isValid) {
-        throw new Error("Hay errores en la sección información del documento.");
-      }
-      return formValues;
-    },
-  }));
+    // Exponiendo la función de validación al padre
+    useImperativeHandle(ref, () => ({
+        getValues: () => {
+        const isValid = validateAllFields();
+        if (!isValid) {
+            throw new Error("Hay errores en la sección información del documento.");
+        }
+        return formValues;
+        },
+    }));
 
   return (
     <div className='tarjeta-border px-5'> 
