@@ -13,7 +13,6 @@ export const GenerarReporteModal = ({ show, handleClose, agregarReporte, tipoRep
   const [nombreInforma, setNombreInforma] = useState('');
   const [mensajeError, setMensajeError] = useState('');
 
-  // Limpia los campos cada vez que se abra el modal
   useEffect(() => {
     if (show) {
       setFechaInicio('');
