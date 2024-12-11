@@ -8,7 +8,6 @@ const FormularioUsuarios = ({ onAdd, editarUsuario }) => {
     tipoUsuario: "Seleccione una opción",
   });
 
-  
   const [errors, setErrors] = useState({});
 
   // Actualizar formulario si editarUsuario cambia
@@ -35,15 +34,15 @@ const FormularioUsuarios = ({ onAdd, editarUsuario }) => {
   const validate = () => {
     const validationErrors = {};
     if (!formData.nombreUsuario.trim()) {
-      validationErrors.nombreUsuario = "";
+      validationErrors.nombreUsuario = "Este campo es obligatorio.";
     }
     if (!formData.contrasena.trim()) {
-      validationErrors.contrasena = "";
+      validationErrors.contrasena = "Este campo es obligatorio.";
     } else if (formData.contrasena.length < 6) {
-      validationErrors.contrasena = "";
+      validationErrors.contrasena = "Debe tener al menos 6 caracteres.";
     }
     if (formData.tipoUsuario === "Seleccione una opción") {
-      validationErrors.tipoUsuario = "";
+      validationErrors.tipoUsuario = "Selecciona un tipo de usuario.";
     }
     return validationErrors;
   };
@@ -54,8 +53,8 @@ const FormularioUsuarios = ({ onAdd, editarUsuario }) => {
     if (Object.keys(validationErrors).length > 0) {
       setErrors(validationErrors);
       Swal.fire({
-        title: "Error en el formulario",
-        text: "Por favor, corrige los campos indicados.",
+        title: "Datos incompletos",
+        text: "Por favor, llena todos los campos requeridos.",
         icon: "error",
         confirmButtonText: "Aceptar",
       });
@@ -83,10 +82,10 @@ const FormularioUsuarios = ({ onAdd, editarUsuario }) => {
 
   return (
     <form className="gx-2 align-items-center" onSubmit={handleSubmit}>
-      <div className="row">
-        <div className="col-md-4 d-flex align-items-center p-0">
-          <label htmlFor="nombreUsuario" className="form-label2 me-2 mb-0">
-            Nombre usuario: <span className="text-danger">*</span>
+      <div className="row mb-3">
+        <div className="col-md-4">
+          <label htmlFor="nombreUsuario" className="form-label">
+            Nombre Usuario: <span className="text-danger">*</span>
           </label>
           <input
             type="text"
@@ -97,11 +96,11 @@ const FormularioUsuarios = ({ onAdd, editarUsuario }) => {
             onChange={handleChange}
           />
           {errors.nombreUsuario && (
-            <div className="text-danger ms-2">{errors.nombreUsuario}</div>
+            <div className="text-danger">{errors.nombreUsuario}</div>
           )}
         </div>
-        <div className="col-md-4 d-flex align-items-center p-0">
-          <label htmlFor="contrasena" className="form-label2 me-2 mb-0">
+        <div className="col-md-4">
+          <label htmlFor="contrasena" className="form-label">
             Contraseña: <span className="text-danger">*</span>
           </label>
           <input
@@ -113,12 +112,12 @@ const FormularioUsuarios = ({ onAdd, editarUsuario }) => {
             onChange={handleChange}
           />
           {errors.contrasena && (
-            <div className="text-danger ms-2">{errors.contrasena}</div>
+            <div className="text-danger">{errors.contrasena}</div>
           )}
         </div>
-        <div className="col-md-4 d-flex align-items-center p-0">
-          <label htmlFor="tipoUsuario" className="form-label2 me-2 mb-0">
-            Tipo de usuario: <span className="text-danger">*</span>
+        <div className="col-md-4">
+          <label htmlFor="tipoUsuario" className="form-label">
+            Tipo de Usuario: <span className="text-danger">*</span>
           </label>
           <select
             id="tipoUsuario"
@@ -132,7 +131,7 @@ const FormularioUsuarios = ({ onAdd, editarUsuario }) => {
             <option value="Administrador">Administrador</option>
           </select>
           {errors.tipoUsuario && (
-            <div className="text-danger ms-2">{errors.tipoUsuario}</div>
+            <div className="text-danger">{errors.tipoUsuario}</div>
           )}
         </div>
       </div>

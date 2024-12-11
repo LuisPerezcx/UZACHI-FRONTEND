@@ -5,8 +5,24 @@ import Swal from "sweetalert2";
 import { AlertComponent } from "../../../components/AlertComponent";
 
 const TablaUsuarios = () => {
-  // Estados para usuarios
-  const [usuarios, setUsuarios] = useState([]);
+  // Usuarios Definidos
+  const [usuarios, setUsuarios] = useState([
+    {
+      nombreUsuario: "LuisDavid",
+      contrasena: "loboSolitario",
+      tipoUsuario: "Usuario",
+    },
+    {
+      nombreUsuario: "LuisHernandez",
+      contrasena: "12345678",
+      tipoUsuario: "Administrador",
+    },
+    {
+      nombreUsuario: "Efren David",
+      contrasena: "87654321",
+      tipoUsuario: "Usuario",
+    },
+  ]);
   const [usuarioEnEdicion, setUsuarioEnEdicion] = useState(null);
 
   const columns = [
@@ -19,7 +35,7 @@ const TablaUsuarios = () => {
   const eliminarUsuario = (item) => {
     AlertComponent.confirm({
       title: "¿Estás seguro?",
-      text: `¿Deseas eliminar al usuario `,
+      text: `¿Deseas eliminar al usuario ${item.nombreUsuario}?`,
       onConfirm: () => {
         const nuevosUsuarios = usuarios.filter((data) => data !== item);
         setUsuarios(nuevosUsuarios);
@@ -33,33 +49,26 @@ const TablaUsuarios = () => {
   };
 
   // Editar usuario
-  const editarUsuario = (usuario) => {
-    setUsuarioEnEdicion(usuario);
+  const editarUsuario = (item) => {
+    setUsuarioEnEdicion(item);
   };
 
-  // Guardar o actualizar usuario
   const guardarUsuario = (nuevoUsuario) => {
     if (usuarioEnEdicion) {
-      // Actualizar usuario existente
+      // Se actualizar usuario existente
       const usuariosActualizados = usuarios.map((data) =>
         data === usuarioEnEdicion ? nuevoUsuario : data
       );
       setUsuarios(usuariosActualizados);
-      setUsuarioEnEdicion(null); // Salir del modo edición
-
-      AlertComponent.success({
-        title: "Actualizado",
-        text: "Usuario actualizado correctamente",
-      });
+      setUsuarioEnEdicion(null); // Salir del modo de edición
     } else {
-      // Agregar nuevo usuario
+      // Se a nuevo usuario
       setUsuarios([...usuarios, { ...nuevoUsuario, id: Date.now() }]);
-
-      AlertComponent.success({
-        title: "Agregado",
-        text: "Usuario agregado correctamente",
-      });
     }
+  };
+
+  const cancelarEdicion = () => {
+    setUsuarioEnEdicion(null); // Salir del modo edición
   };
 
   return (
@@ -78,6 +87,7 @@ const TablaUsuarios = () => {
           onAdd={guardarUsuario}
           editarUsuario={usuarioEnEdicion}
           formularioForm={false}
+          onCancel={cancelarEdicion}
         />
       </div>
     </div>
@@ -85,3 +95,4 @@ const TablaUsuarios = () => {
 };
 
 export default TablaUsuarios;
+
