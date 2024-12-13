@@ -75,47 +75,48 @@ export const PrincipalAdmin = () => {
       <h1 className='size-font-title text-center mb-4'>ADMINISTRADOR</h1>
       <div className='container align-items-center justify-content-center text-center'>
         <div className='row'>
-            <TarjetaAdmin
-                imgSrc={iconFormulario}
-                title="Formulario"
-                description="Registro de Remisión y Reembarque: Formulario"
-                buttons={[
-                { label: 'Acceder', link: '/Formulario'}
-                ]}
-            />
+          <TarjetaAdmin
+            imgSrc={iconUsuarioAdd}
+            title="Usuario"
+            description="Agrega y administra los usuarios que pueden acceder"
+            buttons={[
+              { label: 'Acceder', link: '/Usuarios' }
+            ]}
+          />
 
-            <TarjetaAdmin
-                imgSrc={iconUsuarioAdd}
-                title="Usuario"
-                description="Agrega y administra los usuarios que pueden acceder"
-                buttons={[
-                { label: 'Acceder', link: '/Usuarios' }
-                ]}
-            />
+          <TarjetaAdmin
+            imgSrc={iconFolios}
+            title="Folios"
+            description="Administra y asigna los folios asignado para cada comunidad"
+            buttons={[
+              { label: 'Acceder', onClick: handleShowFolios }
+            ]}
+          />
+          
+          <TarjetaAdmin
+            imgSrc={iconFormulario}
+            title="Formulario"
+            description="Registro de Remisión y Reembarque: Formulario"
+            buttons={[
+              { label: 'Acceder', link: '/Formulario' }
+            ]}
+          />
 
-            <TarjetaAdmin
-                imgSrc={iconInforme}
-                title="Informes"
-                description="Informes internos e informes para SEMARNAT"
-                buttons={[
-                    { label: 'Acceder', onClick: () => { handleShow(); }}
-                ]}
-            />
+          <TarjetaAdmin
+            imgSrc={iconInforme}
+            title="Informes"
+            description="Informes internos e informes para SEMARNAT"
+            buttons={[
+              { label: 'Acceder', onClick: () => { handleShow(); } }
+            ]}
+          />
 
-            <TarjetaAdmin
-                imgSrc={iconFolios}
-                title="Folios"
-                description="Administra y asigna los folios asignado para cada comunidad"
-                buttons={[
-                { label: 'Acceder', onClick: handleShowFolios}
-                ]}
-            />
         </div>
       </div>
       <ModalC show={show} onClose={handleClose} content={modalContent} />
       <ModalFolio show={showFoliosModal} onClose={handleCloseFolios} content={modalContentFolio} />
       <div className='mt-5'>
-      <Footer></Footer>
+        <Footer></Footer>
 
       </div>
     </div>

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './ModalGenerarReporte.css';
-import { Modal, Alert } from 'react-bootstrap';
+import { Modal } from 'react-bootstrap';
+import Swal from 'sweetalert2';
 import { generarReporteSemarnat } from './GenerarReporteSemarnat';
 import { generarReporteInterno } from './GenerarReporteInterno';
 
@@ -9,30 +10,41 @@ export const GenerarReporteModal = ({ show, handleClose, agregarReporte, tipoRep
   const [fechaFinal, setFechaFinal] = useState('');
   const [comunidad, setComunidad] = useState('');
   const [tipoFormato, setTipoFormato] = useState('');
-  const [mensajeError, setMensajeError] = useState('');
+  const [nombreInforma, setNombreInforma] = useState('');
 
-  // Limpia los campos cada vez que se abra el modal
   useEffect(() => {
     if (show) {
       setFechaInicio('');
       setFechaFinal('');
       setComunidad('');
       setTipoFormato('');
-      setMensajeError('');
+      setNombreInforma('');
     }
   }, [show]);
 
   const manejarGenerarReporte = async () => {
-    setMensajeError('');
-
-    // Validación
+    // Validación inicial
     if (!fechaInicio || !fechaFinal || (!comunidad && tipoReporte !== 'interno') || !tipoFormato) {
-      setMensajeError('Por favor, completa todos los campos requeridos.');
+      Swal.fire({
+        title: 'Datos incompletos',
+        text: 'Por favor, completa todos los campos requeridos.',
+        icon: 'warning',
+        confirmButtonText: 'Aceptar',
+        timer: 3000,
+        timerProgressBar: true,
+      });
       return;
     }
 
     if (new Date(fechaFinal) < new Date(fechaInicio)) {
-      setMensajeError('La fecha final no puede ser antes de la fecha de inicio.');
+      Swal.fire({
+        title: 'Error en fechas',
+        text: 'La fecha final no puede ser antes de la fecha de inicio.',
+        icon: 'error',
+        confirmButtonText: 'Aceptar',
+        timer: 3000,
+        timerProgressBar: true,
+      });
       return;
     }
 
@@ -43,17 +55,24 @@ export const GenerarReporteModal = ({ show, handleClose, agregarReporte, tipoRep
     const diferenciaTiempo = (fechaFinalDate - fechaInicioDate) / (1000 * 3600 * 24);
 
     if (diferenciaTiempo > 365) {
-      setMensajeError('El período no puede ser mayor a un año.');
+      Swal.fire({
+        title: 'Período no válido',
+        text: 'El período no puede ser mayor a un año.',
+        icon: 'warning',
+        confirmButtonText: 'Aceptar',
+        timer: 3000,
+        timerProgressBar: true,
+      });
       return;
     }
 
-    const anioInicio = new Date(fechaInicio).getFullYear();
-    const anioFinal = new Date(fechaFinal).getFullYear();
+    const anioInicio = fechaInicioDate.getFullYear();
+    const anioFinal = fechaFinalDate.getFullYear();
 
     const nuevoReporte =
       tipoReporte === 'interno'
         ? {
-            id: Date.now(), // Genera un ID único usando la marca de tiempo
+            id: Date.now(),
             nombre: `TransporteMadera ${anioInicio}-${anioFinal}`,
             tipo: tipoFormato,
             pInicio: fechaInicio,
@@ -69,22 +88,32 @@ export const GenerarReporteModal = ({ show, handleClose, agregarReporte, tipoRep
 
     agregarReporte(nuevoReporte);
 
-
-    // Decidir qué tipo de reporte generar
+    // Generar el reporte correspondiente
     if (tipoReporte === 'semarnat') {
-        await generarReporteSemarnat(); 
+      await generarReporteSemarnat();
     } else if (tipoReporte === 'interno') {
-        await generarReporteInterno(); 
+      await generarReporteInterno();
     }
+
+    Swal.fire({
+      title: 'Reporte generado',
+      text: 'El reporte se ha generado exitosamente.',
+      icon: 'success',
+      confirmButtonText: 'Aceptar',
+      timer: 3000,
+      timerProgressBar: true,
+    });
+
     handleClose();
   };
 
   return (
     <Modal show={show} onHide={handleClose} centered>
-      <Modal.Title className="modal-title">Generar reporte</Modal.Title>
+      <Modal.Header closeButton className="d-flex justify-content-center">
+        <Modal.Title className="modal-title text-center w-100">Generar reporte</Modal.Title>
+      </Modal.Header>
       <Modal.Body>
         <div className="container">
-          {mensajeError && <Alert variant="danger">{mensajeError}</Alert>}
           <div className="row mb-3">
             <div className="col">
               <label htmlFor="fechaInicio" className="form-label">Fecha Inicio</label>
@@ -109,26 +138,43 @@ export const GenerarReporteModal = ({ show, handleClose, agregarReporte, tipoRep
           </div>
 
           {tipoReporte !== 'interno' && (
-            <div className="row mb-3">
-              <div className="col-4 text-start">
-                <label htmlFor="comunidad" className="form-label">Comunidad:</label>
+            <>
+              <div className="row mb-3">
+                <div className="col-4 text-start">
+                  <label htmlFor="comunidad" className="form-label">Comunidad:</label>
+                </div>
+                <div className="col-8">
+                  <input
+                    type="text"
+                    id="comunidad"
+                    className="form-control"
+                    value={comunidad}
+                    onChange={(e) => setComunidad(e.target.value)}
+                    placeholder="Ingresa la comunidad"
+                  />
+                </div>
               </div>
-              <div className="col-8">
-                <input
-                  type="text"
-                  id="comunidad"
-                  className="form-control"
-                  value={comunidad}
-                  onChange={(e) => setComunidad(e.target.value)}
-                  placeholder="Ingresa la comunidad"
-                />
+              <div className="row mb-3">
+                <div className="col-4 text-start">
+                  <label htmlFor="nombreInforma" className="form-label">Informe por:</label>
+                </div>
+                <div className="col-8">
+                  <input
+                    type="text"
+                    id="nombreInforma"
+                    className="form-control"
+                    value={nombreInforma}
+                    onChange={(e) => setNombreInforma(e.target.value)}
+                    placeholder="Ingresa el nombre de quien informa"
+                  />
+                </div>
               </div>
-            </div>
+            </>
           )}
 
           <div className="row mb-3">
             <div className="col-4 text-start">
-              <label htmlFor="tipoFormato" className="form-label">Tipo:</label>
+              <label htmlFor="tipoFormato" className="form-label">Operación:</label>
             </div>
             <div className="col-8">
               <select
@@ -137,9 +183,9 @@ export const GenerarReporteModal = ({ show, handleClose, agregarReporte, tipoRep
                 value={tipoFormato}
                 onChange={(e) => setTipoFormato(e.target.value)}
               >
-                <option value="">Seleccione una opcion</option>
+                <option value="">Seleccione una opción</option>
                 <option value="Remisión">Remisión</option>
-                <option value="Rembarque">Rembarque</option>
+                <option value="Reembarque">Reembarque</option>
               </select>
             </div>
           </div>

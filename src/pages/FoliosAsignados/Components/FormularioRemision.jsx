@@ -85,13 +85,12 @@ const [formData, setFormData] = useState({
     // Validar suma de folios
     if (folioPinus + folioQuercus + folioHojosa !== totalFolio) {
       Swal.fire({
-        title: "Error en los folios totales",
-        text: "La suma de los folios no coincide con el total ingresado.",
+        title: "Error en los folios asignados",
+        text: "La suma de los folios no coincide con el total autorizado.",
         icon: "error",
         confirmButtonText: "Aceptar",
-        timer: 3000,
+        timer: 4000,
         timerProgressBar: true,
-
         didOpen: () => {
           const confirmButton = Swal.getConfirmButton();
           confirmButton.style.backgroundColor = 'var(--color-verde)'; // Color verde
@@ -102,16 +101,16 @@ const [formData, setFormData] = useState({
 
     {/*Validacion de folio inicial sea menor que el final */}
     if (
-      (formFolio.folioInicialPinus) > (formFolio.folioFinalPinus) ||
-      (formFolio.folioInicialHojosa) > (formFolio.folioFinalHojosa) ||
-      (formFolio.folioInicialQuercus) > (formFolio.folioFinalQuercus)
+      (folioPinus > 0 && folioInicialPinus > folioFinalPinus) ||
+      (folioQuercus > 0 && folioInicialQuercus > folioFinalQuercus) ||
+      (folioHojosa > 0 && folioInicialHojosa > folioFinalHojosa)
     ) {
       Swal.fire({
-        title: 'Error en los folios',
-        text: 'El folio inicial debe ser menor que el folio final en todos los campos.',
+        title: 'Error en los rangos de folios',
+        text: "El folio inicial debe ser menor que el folio final para los campos con folios asignados.",
         icon: 'error',
         confirmButtonText: 'Aceptar',
-        timer: 3000,
+        timer: 4000,
         timerProgressBar: true,
         didOpen: () => {
           Swal.getConfirmButton().style.backgroundColor = 'var(--color-verde)';
@@ -120,12 +119,34 @@ const [formData, setFormData] = useState({
       return;
     }
 
+  // Validar que si total asignado es 0, no se asignen rangos inicial y final
+  if (
+    (folioPinus === 0 && (folioInicialPinus !== 0 || folioFinalPinus !== 0)) ||
+    (folioQuercus === 0 && (folioInicialQuercus !== 0 || folioFinalQuercus !== 0)) ||
+    (folioHojosa === 0 && (folioInicialHojosa !== 0 || folioFinalHojosa !== 0))
+  ) {
+    Swal.fire({
+      title: 'Error en los rangos de folios',
+      text: 'No se pueden asignar folio inicial y final si el total de folios asignados es 0.',
+      icon: 'error',
+      confirmButtonText: 'Aceptar',
+      timer: 4000,
+      timerProgressBar: true,
+      didOpen: () => {
+        Swal.getConfirmButton().style.backgroundColor = 'var(--color-verde)';
+      },
+    });
+    return;
+  }
     {/*Validar si no coinciden los folios */}
-
-    if (folioFinalQuercus - folioInicialQuercus + 1 !== folioQuercus || folioFinalPinus - folioInicialPinus + 1 !== folioPinus || folioFinalHojosa - folioInicialHojosa + 1 !== folioHojosa) {
+    if (
+      (folioPinus > 0 && folioFinalPinus - folioInicialPinus + 1 !== folioPinus) ||
+      (folioQuercus > 0 && folioFinalQuercus - folioInicialQuercus + 1 !== folioQuercus) ||
+      (folioHojosa > 0 && folioFinalHojosa - folioInicialHojosa + 1 !== folioHojosa)
+    ) {
       Swal.fire({
-        title: "Error de asignación del folios inicial y final",
-        text: "El rango de folios no coincide con los folios autorizados.",
+        title: "Error en el folio inicial y final",
+        text: "El rango de folios no coincide con los folios asignados.",
         icon: "error",
         confirmButtonText: "Aceptar",
         timer: 4000,
@@ -191,7 +212,7 @@ const [formData, setFormData] = useState({
         <div className="col-md-6">
           <form>
           <div className="d-flex">
-          <Form.Label htmlFor="totalFolio" style={{ width: "530px", alignItems:"flex-start"}}>Total de folios <span className="text-danger"> *</span></Form.Label>
+          <Form.Label htmlFor="totalFolio" style={{ width: "530px", alignItems:"flex-start"}}>Folios Autorizados <span className="text-danger"> *</span></Form.Label>
             <Form.Control
               type="text"
               className="me-4 mb-4"

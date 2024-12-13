@@ -23,6 +23,8 @@ export const InformacionSubproductosYSaldos = () => {
   const [errors, setErrors] = useState({});
   
 
+  const [isActive, setIsActive] = useState(false);
+
 
   const opcionesUnidadMedida = [
     { value: 'seleccion', label: 'Selecciona la unidad de medida' },
@@ -38,13 +40,14 @@ export const InformacionSubproductosYSaldos = () => {
       setModalContent(<CalculadoraEspecial onCalculate={handleCalculation}/>);
     } else {
       setCalculatorType('Calculadora estándar');
-      setModalContent(<CalculadoraEstandar onCalculate={handleCalculation} />);
+      setModalContent(<CalculadoraEstandar onCalculate={handleCalculation}/> );
     }
     setShowModal(true);
   };
   
-  const handleCalculation = (resultado) => {
+  const handleCalculation = (resultado,estado) => {
     setCantidadAmpara(resultado.toString());
+    setShowModal(estado);
   };
 
   const calcularSaldoSiguiente = () => {
@@ -204,7 +207,7 @@ export const InformacionSubproductosYSaldos = () => {
                   </button>
                   <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton">
                     <li className="dropdown-item" onClick={() => handleSeleccionTipo("Especial")}>Especial</li>
-                    <li className="dropdown-item" onClick={() => handleSeleccionTipo("Volumen A & B")}>Volumen A & B</li>
+                    <li className="dropdown-item" isActive={isActive} onClick={() =>  handleSeleccionTipo("Volumen A & B")}>Volumen A & B</li>
                   </ul>
                 </div>
               </div>

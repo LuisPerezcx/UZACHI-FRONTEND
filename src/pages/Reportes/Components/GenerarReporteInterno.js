@@ -8,24 +8,42 @@ export const generarReporteInterno = async () => {
     // Configurar estilos generales para el reporte
     worksheet.properties.defaultRowHeight = 20;
     worksheet.columns = [
-        { width: 10 }, // Columna A (Nº)
-        { width: 20 }, // Columna B (Documento)
-        { width: 20 }, // Columna C (Número)
-        { width: 35 }, // Columna D (Género/Producto)
-        { width: 10 }, // Columna E (Unidad)
-        { width: 15 }, // Columna F (Fecha)
-        { width: 15 }, // Columna G (Paraje)
-        { width: 15 }, // Columna H (Remisión)
-        { width: 40 }, // Columna I (Transportista)
-        { width: 35 }, // Columna J (Camión)
-        { width: 40 }, // Columna K (Comprador)
-        { width: 10 }, // Columna L (No.)
-        { width: 15 }, // Columna M (Prima)
-        { width: 15 }, // Columna N (Secundario)
-        { width: 15 }, // Columna O (Tercio)
-        { width: 15 }, // Columna P (Seco)
-        { width: 15 }, // Columna Q (Bolo)
-        { width: 15 }, // Columna R (Total)
+        { width: 10 }, 
+        // Columna A (Nº)
+        { width: 20 }, 
+        // Columna B (Documento)
+        { width: 20 }, 
+        // Columna C (Número)
+        { width: 35 }, 
+        // Columna D (Género/Producto)
+        { width: 10 }, 
+        // Columna E (Unidad)
+        { width: 15 }, 
+        // Columna F (Fecha)
+        { width: 15 }, 
+        // Columna G (Paraje)
+        { width: 15 }, 
+        // Columna H (Remisión)
+        { width: 40 }, 
+        // Columna I (Transportista)
+        { width: 35 }, 
+        // Columna J (Camión)
+        { width: 40 }, 
+        // Columna K (Comprador)
+        { width: 10 }, 
+        // Columna L (No.)
+        { width: 15 }, 
+        // Columna M (Prima)
+        { width: 15 }, 
+        // Columna N (Secundario)
+        { width: 15 }, 
+        // Columna O (Tercio)
+        { width: 15 }, 
+        // Columna P (Seco)
+        { width: 15 }, 
+        // Columna Q (Bolo)
+        { width: 15 }, 
+        // Columna R (Total)
     ];
 
     // Títulos de la tabla
@@ -62,7 +80,8 @@ export const generarReporteInterno = async () => {
         [3, 'Rem. Ftal.', '35/2537330', 'Pinus spp/ aserrío de 2.62 mts.', 'm3', '28/11/2022', 
          'Grúa Vieja', '27/200', 'Ángel Norberto Barón López', 'Freightliner', 'Forestal Pasam S.A DE C.V', 
          46, 15_483, 1_904, 2_417, 19_773, 22_779_057],
-        // ... más filas de datos según sea necesario
+        
+         
     ];
 
     // Agregar los datos de la tabla

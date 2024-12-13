@@ -299,7 +299,7 @@ export const FormularioTransporte = ({ onAdd, editingTransport, formularioForm, 
           {formularioForm && (
               <span className="me-3">Agregar como transporte nuevo</span>
           )}
-            <button variant="success" type="submit" size="sm">
+            <button variant="success" type="submit" size="sm" className='ms-2 me-2'>
               {editingTransport ? 'Actualizar' : 'Agregar'}
             </button> 
             
@@ -308,9 +308,9 @@ export const FormularioTransporte = ({ onAdd, editingTransport, formularioForm, 
               style={{backgroundColor: 'red'}}
               size="sm"
               onClick={handleCancel}
-              className='ms-5'
+              className='me-2 ms-2'
             >
-              Cancelar edicion
+              Cancelar
             </button>
           )}
           </div>

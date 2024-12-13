@@ -41,8 +41,8 @@ export const GestionTransporte = () => {
   ];
 
   const handleEdit = (item) => {
-    setEditingTransport(item); // Establecer el transporte en edición
-  };
+    setEditingTransport(item); 
+    };
 
   const handleDelete = (item) => {
     

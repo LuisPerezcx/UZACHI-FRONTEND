@@ -102,6 +102,8 @@ export const AgregarComunidades = () => {
         <div className="container my-5">
             <h2 className="size-font-title text-center mb-4">Gestion de comunidades</h2>
         </div>
+
+
         <CustomTable
             data={listaComunidades}
             columns={columns}
@@ -109,7 +111,7 @@ export const AgregarComunidades = () => {
             onDelete={eliminarComunidades}
             searchPlaceholder='Buscar comunidad...'
             edicion={editarComunidades}
-        />
+        />        
         
           <GestionComunidades
             onAdd={guardarDatosComunidades}

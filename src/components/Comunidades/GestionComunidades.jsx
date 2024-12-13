@@ -106,7 +106,7 @@ export const  GestionComunidades = ({onAdd, editarComunidades, onCancel }) => {
 
               <div className="col-sm-6 col-md-4">
                 <label htmlFor="codigoPostal" className="form-label me-2 " >
-                  Codiogo postal: <span className="text-danger">*</span>
+                  Codigo postal: <span className="text-danger">*</span>
                 </label>
                 <input
                   type="text"
@@ -197,7 +197,7 @@ export const  GestionComunidades = ({onAdd, editarComunidades, onCancel }) => {
 
             {/* Botón Agregar centrado */}
             <div className="text-center">
-              <button variant="success" type="submit" size="sm">
+              <button variant="success" type="submit" size="sm" className='ms-2 me-2'>
                 {editarComunidades ? 'Actualizar' : 'Agregar'}
               </button>
 
@@ -206,9 +206,9 @@ export const  GestionComunidades = ({onAdd, editarComunidades, onCancel }) => {
               style={{backgroundColor: 'red'}}
               size="sm"
               onClick={handleCancel}
-              className='ms-5'
+              className='me-2 ms-2'
             >
-              Cancelar edicion
+              Cancelar
             </button>
           )}
             </div>
