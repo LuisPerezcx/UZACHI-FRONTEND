@@ -24,19 +24,7 @@ export const ReportesSemarnat = () => {
     { id: 1, nombre: "REPORTE 2019 - 2020", comunidad: "Santiago Xiacuí", tipo: "Remisión", periodo: "2019-01-01 - 2020-01-01" },
     { id: 2, nombre: "REPORTE 2020 - 2021", comunidad: "San Juan Bautista", tipo: "Remisión", periodo: "2020-01-01 - 2021-01-01" },
     { id: 3, nombre: "REPORTE 2022 - 2023", comunidad: "Santa María Yolotepec", tipo: "Rembarque", periodo: "2022-01-01 - 2023-01-01" },
-  
-    { id: 1, nombre: "REPORTE 2019 - 2020", comunidad: "Santiago Xiacuí", tipo: "Remisión", periodo: "2019-01-01 - 2020-01-01" },
-    { id: 2, nombre: "REPORTE 2020 - 2021", comunidad: "San Juan Bautista", tipo: "Remisión", periodo: "2020-01-01 - 2021-01-01" },
-    { id: 3, nombre: "REPORTE 2022 - 2023", comunidad: "Santa María Yolotepec", tipo: "Rembarque", periodo: "2022-01-01 - 2023-01-01" },
-  
-    { id: 1, nombre: "REPORTE 2019 - 2020", comunidad: "Santiago Xiacuí", tipo: "Remisión", periodo: "2019-01-01 - 2020-01-01" },
-    { id: 2, nombre: "REPORTE 2020 - 2021", comunidad: "San Juan Bautista", tipo: "Remisión", periodo: "2020-01-01 - 2021-01-01" },
-    { id: 3, nombre: "REPORTE 2022 - 2023", comunidad: "Santa María Yolotepec", tipo: "Rembarque", periodo: "2022-01-01 - 2023-01-01" },
-  
-    { id: 1, nombre: "REPORTE 2019 - 2020", comunidad: "Santiago Xiacuí", tipo: "Remisión", periodo: "2019-01-01 - 2020-01-01" },
-    { id: 2, nombre: "REPORTE 2020 - 2021", comunidad: "San Juan Bautista", tipo: "Remisión", periodo: "2020-01-01 - 2021-01-01" },
-    { id: 3, nombre: "REPORTE 2022 - 2023", comunidad: "Santa María Yolotepec", tipo: "Rembarque", periodo: "2022-01-01 - 2023-01-01" },
-  ]);
+   ]);
 
   const columnasLabel = [
     { label: 'Nombre documento', key: 'nombre' },

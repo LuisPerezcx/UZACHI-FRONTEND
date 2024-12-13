@@ -131,13 +131,13 @@ export const TableSearch = ({ endpoint, columnas, filtros, acciones, datos, onDe
                                                     >
                                                         <i className="bi icono-puntos-vertical bi-three-dots-vertical"></i>
                                                     </button>
-                                                    <ul className="dropdown-menu dropdown-menu-end" aria-labelledby={`dropdownMenuButton-${index}`}>
+                                                    <ul className="dropdown-menu dropdown-menu-end no-scroll" aria-labelledby={`dropdownMenuButton-${index}`}>
                                                         {acciones.map((accion, indexAccion) => (
                                                             <li key={indexAccion}>
                                                                 <button
                                                                     onClick={() => {
                                                                         if (accion.label === 'Eliminar') {
-                                                                            handleDelete(item);  // Llama la función handleDelete
+                                                                            handleDelete(item);
                                                                         } else {
                                                                             accion.handler(item);
                                                                         }
@@ -149,6 +149,7 @@ export const TableSearch = ({ endpoint, columnas, filtros, acciones, datos, onDe
                                                             </li>
                                                         ))}
                                                     </ul>
+
                                                 </div>
                                             </td>
                                         )}
