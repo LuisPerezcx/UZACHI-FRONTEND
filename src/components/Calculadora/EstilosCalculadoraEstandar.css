@@ -1,0 +1,109 @@
+.calculatorAB-container {
+    padding: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+  }
+  
+  .calculatorAB-row {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .calculatorAB-col {
+    flex: 1;
+    margin: 0 0.5rem;
+    text-align: center;
+  }
+  
+  .calculatorAB-title {
+    font-weight: bold;
+    margin-bottom: 1rem;
+  }
+  
+  .calculatorAB-input-container {
+    margin-bottom: 0.5rem;
+  }
+  
+  .calculatorAB-input {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .calculatorAB-button-container {
+    margin-bottom: 1rem;
+  }
+  
+  .calculatorAB-add-button {
+    background-color: #14C3A2;
+    color: #fff;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .calculatorAB-add-button:hover {
+    background-color: #14C3A2;
+  }
+  
+  .calculatorAB-list-container {
+    margin-top: 1rem;
+    border: 1px solid #ddd;
+    padding: 0.5rem;
+    border-radius: 4px;
+    height: 150px;
+    overflow: hidden;
+  }
+  
+  .calculatorAB-scrollable-list {
+    max-height: 120px;
+    overflow-y: auto;
+  }
+  
+  .calculatorAB-list-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+  }
+  
+  .calculatorAB-delete-button {
+    background-color: #dc3545;
+    color: #fff;
+    border: none;
+    font-size: 0.75rem;
+    height: 30px;
+    width: 80px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .calculatorAB-delete-button:hover {
+    background-color: #c82333;
+  }
+  
+  .calculatorAB-footer {
+    text-align: center;
+    margin-top: 1rem;
+  }
+  
+  .calculatorAB-calculate-button {
+    background-color: #14C3A2;
+    color: #fff;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .calculatorAB-calculate-button:hover {
+    background-color: #218838;
+  }
+  
+  .calculatorAB-error {
+    color: #dc3545;
+    margin-top: 0.5rem;
+  }
+  

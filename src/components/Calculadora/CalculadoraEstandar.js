@@ -1,5 +1,6 @@
-import React, { showModal,useState } from 'react';
+import React, {useState } from 'react';
 import Swal from 'sweetalert2';
+import '../Calculadora/EstilosCalculadoraEstandar.css';
 
 export const CalculadoraEstandar = ({onCalculate}) => {
     const [ladoA, setLadoA] = useState([]);
@@ -120,7 +121,8 @@ export const CalculadoraEstandar = ({onCalculate}) => {
         // Reinicia los datos de Lado B
         setLadoB([]);
       });
-    onCalculate(resultado);
+    onCalculate(resultado,false);
+    
 };
 
   const eliminarElemento = (lado, index) => {
@@ -132,105 +134,118 @@ export const CalculadoraEstandar = ({onCalculate}) => {
 };
   
   return (
-    <div className="container p-4 border rounded">
-      <div className="row">
-        {/* Lado A */}
-        <div className="col-md-6 text-center">
-        <h6>Lado A del vehículo <hr/>({ladoA.length} elementos)</h6>
-          <div className="mb-2">
-            <input
-              type="text"
-              placeholder="Ingresa Volumen A"
-              value={volumenA}
-              onChange={(e) => setVolumenA(handleNumericInput(e.target.value))}
-              className="form-control"
-            />
-          </div>
-          <div className="mb-2">
-            <button onClick={agregarVolumenA} className="btn btn-success me-2">Agregar</button>
-          </div>
-          <div className="mt-3 border p-2 rounded">
-            {ladoA.length > 3 ? (
-              <div className="overflow-auto" style={{ maxHeight: '120px' }}>
-                {ladoA.map((vol, index) => (
-                  <div key={index} className="d-flex justify-content-between mb-2">{vol}
-                    <button
-                      className="btn btn-danger btn-sm"
-                      onClick={() => eliminarElemento('A', index)}
-                      style={{ fontSize: '0.75rem' }}
-                    > Eliminar </button>
-                  </div>
-                ))}
-              </div>
-            ) : (
-              ladoA.map((vol, index) => (
-                <div key={index} className="d-flex justify-content-between mb-2">{vol}
-                  <button
-                    className="btn btn-danger btn-sm"
-                    onClick={() => eliminarElemento('A', index)}
-                    style={{ fontSize: '0.75rem' }}
-                  >
-                    Eliminar
-                  </button>
-                </div>
-              ))
-            )}
-          </div>
-        </div>
-
-        {/* Lado B */}
-        <div className="col-md-6 text-center">
-        <h6>Lado B del vehículo <hr/>({ladoB.length} elementos)</h6>          
-        <div className="mb-2">
-            <input
-              type="text"
-              placeholder="Agrega el volumen B"
-              value={volumenB}
-              onChange={(e) => setVolumenB(handleNumericInput(e.target.value))}
-              className="form-control"
-            />
-          </div>
-          <div className="mb-2">
-            <button onClick={agregarVolumenB} className="btn btn-success">Agregar</button>
-          </div>
-          <div className="mt-3 border p-2 rounded">
-            {ladoB.length > 3 ? (
-              <div className="overflow-auto" style={{ maxHeight: '120px' }}>
-                {ladoB.map((vol, index) => (
-                  <div key={index} className="d-flex justify-content-between mb-2">{vol}
-                    <button
-                      className="btn btn-danger btn-sm"
-                      onClick={() => eliminarElemento('B', index)}
-                      style={{ fontSize: '0.75rem' }}
-                    >
-                      Eliminar
-                    </button>
-                  </div>
-                ))}
-              </div>
-            ) : (
-              ladoB.map((vol, index) => (
-                <div key={index} className="d-flex justify-content-between mb-2">{vol}
-                  <button
-                    className="btn btn-danger btn-sm"
-                    onClick={() => eliminarElemento('B', index)}
-                    style={{ fontSize: '0.75rem' }}
-                  >
-                    Eliminar
-                  </button>
-                </div>
-              ))
-            )}
-          </div>
-        </div>
+    <div className="calculatorAB-container">
+  <div className="calculatorAB-row">
+    {/* Lado A */}
+    <div className="calculatorAB-col">
+      <h6 className="calculatorAB-title">
+        Lado A del vehículo <br />({ladoA.length} elementos)
+      </h6>
+      <div className="calculatorAB-input-container">
+        <input
+          type="text"
+          placeholder="Ingresa Volumen A"
+          value={volumenA}
+          onChange={(e) => setVolumenA(handleNumericInput(e.target.value))}
+          className="calculatorAB-input"
+        />
       </div>
-
-      <div className="text-center mt-3">
-        <button onClick={calcularPromedio} className="btn btn-success">
-          Calcular promedio
+      <div className="calculatorAB-button-container">
+        <button onClick={agregarVolumenA} className="calculatorAB-add-button">
+          Agregar
         </button>
-        {<div className="text-danger mt-2"></div>}
+      </div>
+      <div className="calculatorAB-list-container">
+        {ladoA.length > 3 ? (
+          <div className="calculatorAB-scrollable-list">
+            {ladoA.map((vol, index) => (
+              <div key={index} className="calculatorAB-list-item">
+                <span>{vol}</span>
+                <button
+                  className="calculatorAB-delete-button"
+                  onClick={() => eliminarElemento('A', index)}
+                >
+                  Eliminar
+                </button>
+              </div>
+            ))}
+          </div>
+        ) : (
+          ladoA.map((vol, index) => (
+            <div key={index} className="calculatorAB-list-item">
+              <span>{vol}</span>
+              <button
+                className="calculatorAB-delete-button"
+                onClick={() => eliminarElemento('A', index)}
+              >
+                Eliminar
+              </button>
+            </div>
+          ))
+        )
+        
+        }
       </div>
     </div>
+
+    {/* Lado B */}
+    <div className="calculatorAB-col">
+      <h6 className="calculatorAB-title">
+        Lado B del vehículo <br />({ladoB.length} elementos)
+      </h6>
+      <div className="calculatorAB-input-container">
+        <input
+          type="text"
+          placeholder="Agrega el volumen B"
+          value={volumenB}
+          onChange={(e) => setVolumenB(handleNumericInput(e.target.value))}
+          className="calculatorAB-input"
+        />
+      </div>
+      <div className="calculatorAB-button-container">
+        <button onClick={agregarVolumenB} className="calculatorAB-add-button">
+          Agregar
+        </button>
+      </div>
+      <div className="calculatorAB-list-container">
+        {ladoB.length > 3 ? (
+          <div className="calculatorAB-scrollable-list">
+            {ladoB.map((vol, index) => (
+              <div key={index} className="calculatorAB-list-item">
+                <span>{vol}</span>
+                <button
+                  className="calculatorAB-delete-button"
+                  onClick={() => eliminarElemento('B', index)}
+                >
+                  Eliminar
+                </button>
+              </div>
+            ))}
+          </div>
+        ) : (
+          ladoB.map((vol, index) => (
+            <div key={index} className="calculatorAB-list-item">
+              <span>{vol}</span>
+              <button
+                className="calculatorAB-delete-button"
+                onClick={() => eliminarElemento('B', index)}
+              >
+                Eliminar
+              </button>
+            </div>
+          ))
+        )}
+      </div>
+    </div>
+  </div>
+
+  <div className="calculatorAB-footer">
+    <button onClick={calcularPromedio} className="calculatorAB-calculate-button">
+      Calcular promedio
+    </button>
+    <div className="calculatorAB-error"></div>
+  </div>
+</div>
+
   )
 }

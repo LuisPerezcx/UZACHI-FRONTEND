@@ -87,6 +87,11 @@ export const LoginForm = () => {
               className="form-control form-control-login"
               value={usuario}
               onChange={(e) => setUsuario(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter') {
+                  handleLogin();
+                }
+              }}
             />
           </div>
           <div className="mb-3">
@@ -99,6 +104,11 @@ export const LoginForm = () => {
               className="form-control form-control-login"
               value={contrasena}
               onChange={(e) => setContrasena(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter') {
+                  handleLogin();
+                }
+              }}
             />
           </div>
           <div className="form-check mb-3 text-start">

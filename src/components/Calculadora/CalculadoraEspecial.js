@@ -47,7 +47,7 @@ export const CalculadoraEspecial = ({onCalculate}) => {
         // Validar que los campos no estén vacíos
         if (!altura1 || !altura2 || !altura3 || !ancho || !longitud || !coeficiente) {
             Swal.fire({
-                title: 'Error, campos bacios',
+                title: 'Error, campos vacios',
                 text: 'Todos los campos deben de estar llenos',
                 icon: 'error',
                 confirmButtonText: 'Aceptar',
@@ -94,8 +94,19 @@ export const CalculadoraEspecial = ({onCalculate}) => {
         // Actualizar resultado y limpiar error
         setResultado(volumen.toFixed(2)); // Limitar a 2 decimales
         setError('');
-
-        onCalculate(volumen.toFixed(2))
+        Swal.fire({
+            title: 'CALCULO REALIZADO',
+            text: 'El calculo se realizo de forma correcta',
+            icon: 'success',
+            confirmButtonText: 'Aceptar',
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: () => {
+            const confirmButton = Swal.getConfirmButton();
+            confirmButton.style.backgroundColor = 'var(--color-verde)';
+            }
+        })
+        onCalculate(volumen.toFixed(2),false)
 
     };
 
